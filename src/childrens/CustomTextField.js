@@ -7,28 +7,15 @@ import { camelToTitle, sumClasses } from '../helpers/utils';
 
 class CustomTextField extends React.Component<any, any> {
 
-	static defaultProps = {
-		placeholder: null,
-		name: null,
-		type: null,
-		disabled: false,
-		label: null,
-		textAfter: null,
-		onUpdate: null,
-		errorMessage: null,
-		className: null,
-		style: null,
-		isRequired: false,
-		onlyNumber: false,
-		isValid: true,
-		value: null,
-	};
+	constructor(props) {
+		super(props);
 
-	state = {
-		value: `${this.props.value}`,
-		isValid: this.props.isValid,
-		editing: false,
-	};
+		this.state = {
+			value: `${this.props.value}`,
+			isValid: this.props.isValid,
+			editing: false,
+		};
+	}
 
 	shouldComponentUpdate(nextProps, nextState) {
 		if (this.props.value !== nextProps.value) return true;

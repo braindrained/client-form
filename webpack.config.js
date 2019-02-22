@@ -4,6 +4,7 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
     template: path.join(__dirname, "examples/src/index.html"),
     filename: "./index.html"
 });
+
 module.exports = {
     entry: path.join(__dirname, "examples/src/index.js"),
 		output: {
@@ -12,18 +13,25 @@ module.exports = {
     },
     module: {
         rules: [
+						{
+		          loader: 'url-loader',
+		          test: /\.(gif|jpg|png|svg)(\?.*)?$/,
+		          options: {
+		            limit: 10000,
+		          },
+		        },
             {
                 test: /\.(js|jsx)$/,
                 use: "babel-loader",
                 exclude: /node_modules/
             },
 						{
-							test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+							test: /\.(ttf|otf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
       				loader: 'file-loader?name=fonts/[name].[ext]'
 		        },
-            {
-                test: /\.css$/,
-                use: ["style-loader", "css-loader"]
+						{
+                test: /\.(css|scss)$/,
+                use: ["style-loader", "css-loader", "sass-loader"]
             }
         ]
     },
@@ -32,6 +40,6 @@ module.exports = {
         extensions: [".js", ".jsx"]
     },
     devServer: {
-        port: 3001
+        port: 3007
     }
 };

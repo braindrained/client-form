@@ -9,7 +9,6 @@ import CustomRadio from './childrens/CustomRadio';
 import CustomLabel from './childrens/CustomLabel';
 import CustomTextAreaTab from './childrens/CustomTextAreaTab';
 import DatePickerField from './childrens/DatePickerField';
-import CustomMap from './childrens/CustomMap';
 import CustomPlusMinus from './childrens/CustomPlusMinus';
 import FakeSelect from './childrens/FakeSelect';
 import './Form.scss';
@@ -17,16 +16,6 @@ import './Form.scss';
 import { notEmpty, sumClasses } from './helpers/utils';
 
 const Form = class extends React.Component<any, any> {
-
-	static defaultProps = {
-		textBeforeButton: null,
-		textAfterButton: null,
-		sendButton: null,
-		style: null,
-		sendForm: null,
-		succeed: null,
-		isSent: null,
-	};
 
 	constructor(props) {
 		super(props);

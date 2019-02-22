@@ -4,18 +4,15 @@ import PropTypes from 'prop-types';
 
 class CustomTextareaWithTab extends React.Component<any, any> {
 
-	static defaultProps = {
-		value: [],
-		errorMessage: null,
-		isRequired: false,
-		onUpdate: null
-	};
+	constructor(props) {
+		super(props);
 
-	state = {
-		tabs: this.props.tabs,
-		value: this.props.value,
-		selected: 0,
-	};
+		this.state = {
+			tabs: this.props.tabs,
+			value: this.props.value,
+			selected: 0,
+		};
+	}
 
 	filterTabs(obj: Object) {
 		if (this === obj.name) {

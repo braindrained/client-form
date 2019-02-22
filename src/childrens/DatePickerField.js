@@ -10,9 +10,13 @@ moment.locale('it');
 
 class DatePickerField extends React.Component<any, any> {
 
-	state = {
-		value: this.props.value ? moment(this.props.value, 'DD/MM/YYYY') : moment(),
-	};
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			value: this.props.value ? moment(this.props.value, 'DD/MM/YYYY') : moment()
+		};
+	}
 
 	handleChange(date: string) {
 		this.setState({

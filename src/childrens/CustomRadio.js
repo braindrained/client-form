@@ -8,19 +8,13 @@ import './CustomRadio.scss';
 
 class CustomRadio extends React.Component<any, any> {
 
-	static defaultProps = {
-		className: null,
-		textBefore: null,
-		hideRadio: null,
-		css: null,
-		label: null,
-		uncheck: false,
-		value: null,
-	};
+	constructor(props) {
+		super(props);
 
-	state = {
-		value: this.props.value !== null ? this.props.value : '',
-	};
+		this.state = {
+			value: this.props.value !== null ? this.props.value : '',
+		};
+	}
 
 	shouldComponentUpdate(nextProps, nextState) {
 		if (this.props.value !== nextProps.value) return true;

@@ -11,22 +11,13 @@ import './FakeSelect.scss';
 
 class FakeSelect extends React.Component<any, any> {
 
-	static defaultProps = {
-		value: null,
-		onUpdate: null,
-		name: '',
-		className: '',
-		style: {},
-		label: {},
-		text: '',
-		firstRange: null,
-		secondRange: null,
-		rangesStyle: null
-	};
+	constructor(props) {
+		super(props);
 
-	state = {
-		value: this.props.value,
-		displaySelect: true
+		this.state = {
+			value: this.props.value,
+			displaySelect: true
+		};
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {

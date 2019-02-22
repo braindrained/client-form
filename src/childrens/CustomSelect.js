@@ -7,23 +7,13 @@ import { sumClasses } from '../helpers/utils';
 
 class CustomSelect extends React.Component<any, any> {
 
-	static defaultProps = {
-		options: null,
-		onUpdate: null,
-		name: '',
-		value: '',
-		default: null,
-		className: '',
-		style: null,
-		label: null,
-		isValid: true,
-		isRequired: false,
-		errorMessage: ''
-	};
+	constructor(props) {
+		super(props);
 
-	state = {
-		options: this.props.options,
-	};
+		this.state = {
+			options: this.props.options,
+		};
+	}
 
 	shouldComponentUpdate(nextProps, nextState) {
 		if (this.props.value !== nextProps.value) return true;

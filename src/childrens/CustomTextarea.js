@@ -7,24 +7,14 @@ import { camelToTitle, sumClasses } from '../helpers/utils';
 
 class CustomTextarea extends React.Component<any, any> {
 
-	static defaultProps = {
-		placeholder: null,
-		name: null,
-		label: null,
-		onUpdate: null,
-		errorMessage: null,
-		className: null,
-		style: null,
-		equalTo: null,
-		isRequired: false,
-		isValid: true,
-		value: null,
-	};
+	constructor(props) {
+		super(props);
 
-	state = {
-		value: this.props.value,
-		error: false,
-	};
+		this.state = {
+			value: this.props.value,
+			error: false,
+		};
+	}
 
 	onChange(event: Object) {
 		this.setState({ value: event.target.value });

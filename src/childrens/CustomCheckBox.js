@@ -6,9 +6,13 @@ import './CustomCheckBox.scss';
 
 export default class CustomCheckBox extends React.Component<any, any> {
 
-	state = {
-		value: this.props.value
-	};
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			value: this.props.value
+		};
+	}
 
 	shouldComponentUpdate(nextProps, nextState) {
 		if (this.props.value !== nextProps.value) return true;
@@ -39,7 +43,6 @@ export default class CustomCheckBox extends React.Component<any, any> {
 					<div>
 						<input {...{
 							type: 'checkbox',
-							ref: name,
 							name,
 							id: name,
 							checked: this.state.value,

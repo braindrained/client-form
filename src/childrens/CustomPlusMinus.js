@@ -7,29 +7,14 @@ import { sumClasses } from '../helpers/utils';
 
 class CustomPlusMinus extends React.Component<any, any> {
 
-	static defaultProps = {
-		placeholder: null,
-		name: null,
-		type: null,
-		disabled: false,
-		label: null,
-		textAfter: null,
-		onUpdate: null,
-		errorMessage: null,
-		className: null,
-		style: null,
-		regEx: null,
-		equalTo: null,
-		isRequired: false,
-		isValid: true,
-		value: null,
-	};
+	constructor(props) {
+		super(props);
 
-
-	state = {
-		value: this.props.value === '' ? 0 : parseFloat(this.props.value),
-		error: !this.props.isValid
-	};
+		this.state = {
+			value: this.props.value === '' ? 0 : parseFloat(this.props.value),
+			error: !this.props.isValid
+		};
+	}
 
 	shouldComponentUpdate(nextProps, nextState) {
 		if (this.props.value !== nextProps.value) return true;
