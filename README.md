@@ -30,7 +30,8 @@ Import
 
 Use it
 
-`<Form {...{
+```sh
+<Form {...{
 	controls: [
 		{
 			control: 'text',
@@ -49,7 +50,8 @@ Use it
 	key: 'randomKey',
 	succeed: editSucceed, // get it from the state
 	isSent: editDataSpin, // get it from the state
-}}/>`
+}}/>
+```
 #### Build to every page
 Builds the component for production to the `examples/dist` folder.
 ```sh
