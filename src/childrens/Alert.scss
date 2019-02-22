@@ -1,0 +1,84 @@
+.alert {
+	.alert-head {
+		background-color: #f0f2f5;
+		display: inline-block;
+		height: 120px;
+		.alert-close {
+			width: 25px;
+			cursor: pointer;
+			font-size: 25px;
+			height: 40px;
+			line-height: 35px;
+			float: right;
+			&::after {
+				content: "\D7";
+			}
+		}
+		.alert-title {
+			width: 450px;
+			clear: both;
+			text-align: center;
+			font-size: 18px;
+			font-weight: 700;
+			line-height: normal;
+		}
+	}
+	.alert-icon {
+		position: absolute;
+		width: 67px;
+		height: 67px;
+		border-radius: 33px;
+		box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+		background-color: #ffffff;
+		left: -webkit-calc((100% - 67px)/2);
+		left: -moz-calc((100% - 67px)/2);
+		left: calc((100% - 67px)/2);
+		top: 87px;
+		text-align: center;
+		padding-top: 15px;
+	}
+	.alert-text-red {
+		color: #e4002b;
+		width: 100%;
+		float: left;
+		clear: both;
+		margin-bottom: 13px;
+		display: inline-block;
+		margin-top: 58px;
+		font-size: 14px;
+		text-align: center;
+		font-weight: 500;
+		line-height: normal;
+	}
+	.alert-text-black {
+		width: 100%;
+		float: left;
+		clear: both;
+		margin-bottom: 27px;
+		display: inline-block;
+		text-align: center;
+		line-height: normal;
+	}
+	.alert-actions {
+		display: inline-block;
+		position: relative;
+		width: 420px;
+		text-align: center;
+		line-height: normal;
+		.btn {
+			margin: 0 auto;
+			clear: both;
+			width: 190px;
+			float: none!important;
+			font-size: 15px!important;
+		}
+		.alert-actions-cancel {
+			cursor: pointer;
+			border-color: #fff!important;
+			margin: 0 auto;
+			width: 100px;
+			margin-top: 17px;
+			font-size: 15px!important;
+		}
+	}
+}
