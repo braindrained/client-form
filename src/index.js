@@ -215,26 +215,6 @@ const Form = class extends React.Component<any, any> {
 								{item.component}
 							</div>
 						);
-					case 'map':
-						if (item.hide) return (null);
-						return (
-							<CustomMap {...{
-								value: item.value,
-								key: item.name,
-								name: item.name,
-								google: this.props.google,
-								actions: item.actions,
-								jwt: item.jwt,
-								onUpdate: (e) => { this.onUpdate(e) },
-								className: item.className ? item.className : '',
-								device: this.props.device,
-								isRequired: item.isRequired,
-								isValid: item.isValid,
-								valueAsObject: item.valueAsObject,
-								viewport,
-								mapTexts: item.mapTexts,
-							}} />
-						);
 					case 'text':
 						if (item.hide) return (null);
 						return (
@@ -372,7 +352,7 @@ const Form = class extends React.Component<any, any> {
 								tabs: item.tabs,
 								onUpdate: (e) => { this.onUpdate(e) },
 								style: item.style,
-								device: this.props.device,
+								device: device,
 								className: item.className ? item.className : '',
 								isRequired: item.isRequired,
 								isValid: item.isValid,
