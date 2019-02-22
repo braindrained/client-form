@@ -46,7 +46,7 @@ Use it
 		succeedText: 'Saved!',
 		style: { minWidth: 250, margin: '0 auto', float: 'none' }
 	},
-	sendForm: (e) => { this.sendForm(e); }, // your save function
+	sendForm: (e) => { this.sendForm(e); }, // your function that fetch data
 	key: 'randomKey',
 	succeed: editSucceed, // get it from the state
 	isSent: editDataSpin, // get it from the state
