@@ -59,6 +59,7 @@ Builds the component for production to the `examples/dist` folder.
 ```
 Use it
 
-`<div id="root"></div>`
-
-`<script type="text/javascript" src="bundle.js"></script>`
+```sh
+<div id="root"></div>
+<script type="text/javascript" src="bundle.js"></script>
+```
