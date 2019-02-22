@@ -12,7 +12,7 @@ Open http://localhost:3007 to view it in the browser.
 #### Export the component
 ```sh
 > yarn transpile
-> git tag 0.0.5
+> git tag 0.0.4
 > git push origin --tag
 ```
 #### Import the component
