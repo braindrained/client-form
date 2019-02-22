@@ -60,6 +60,6 @@ Builds the component for production to the `examples/dist` folder.
 Use it
 
 ```sh
-<div id="root"></div>
+<div id="client-form"></div>
 <script type="text/javascript" src="bundle.js"></script>
 ```
