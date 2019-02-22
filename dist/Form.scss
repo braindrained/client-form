@@ -76,7 +76,7 @@
 	background-color: #00c694!important;
 	border: 1px solid #00c694!important;
 	color: #fff!important;
-	background-image: url('assets/img/check.svg');
+	background-image: url('assets/img/check.png');
 	background-repeat: no-repeat;
 	background-position: 10px 10px;
 	line-height: 38px!important;
@@ -86,7 +86,7 @@
 	background-color: #00c694!important;
 	border: 1px solid #00c694!important;
 	color: #fff!important;
-	background-image: url('assets/img/check.svg');
+	background-image: url('assets/img/check.png');
 	background-repeat: no-repeat;
 	background-position: 5px center;
 	background-size: 20px;
@@ -108,7 +108,7 @@
 	background-color: #e4002b!important;
 	border: 1px solid #e4002b!important;
 	color: #fff!important;
-	background-image: url('assets/img/x.svg')!important;
+	background-image: url('assets/img/x.png')!important;
 	background-repeat: no-repeat;
 	background-position: 10px 10px;
 	font-size: 13px;
@@ -122,7 +122,7 @@
 	border: 1px solid #e4002b!important;
 	color: #fff!important;
 	padding-left: 35px;
-	background-image: url('assets/img/x.svg');
+	background-image: url('assets/img/x.png');
 	background-repeat: no-repeat;
 	background-position: 10px center;
 	background-size: 12px;
@@ -170,32 +170,6 @@
 	}
 }
 
-.btn-activate {
-	background-color: #697684;
-	color: #fff;
-	background-image: url(assets/img/active.svg)!important;
-	background-repeat: no-repeat;
-	background-position: 10px center;
-	padding-left: 35px;
-	&:hover {
-		background-color: #697684;
-		color: #fff;
-	}
-}
-
-.btn-deactivate {
-	background-color: #697684;
-	color: #fff;
-	background-image: url(assets/img/inactive.svg)!important;
-	background-repeat: no-repeat;
-	background-position: 10px center;
-	padding-left: 35px;
-	&:hover {
-		background-color: #697684;
-		color: #fff;
-	}
-}
-
 .btn-red {
 	background: #e4002b;
 	&:hover {
@@ -205,14 +179,14 @@
 }
 
 .spinner {
-	background-image: url('assets/img/default.svg')!important;
+	background-image: url('assets/img/default.gif')!important;
 	background-repeat: no-repeat!important;
 	background-position: 0px 0px!important;
 	background-size: 40px!important;
 }
 
 .spinner-small {
-	background-image: url('assets/img/default.svg')!important;
+	background-image: url('assets/img/default.gif')!important;
 	background-repeat: no-repeat;
 	background-position: 5px center!important;
 	background-size: 25px!important;
@@ -642,7 +616,7 @@ input {
 	}
 
 	.react-datepicker__input-container input[type="text"] {
-		background-image: url(assets/img/baseline-date_range-24px.svg);
+		background-image: url(assets/img/baseline-date_range-24px.png);
 		background-position: -webkit-calc(100% - 5px) center;
 		background-position: -moz-calc(100% - 5px) center;
 		background-position: calc(100% - 5px) center;
