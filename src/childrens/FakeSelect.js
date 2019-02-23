@@ -28,6 +28,7 @@ class FakeSelect extends React.Component<any, any> {
 	}
 
 	onClick(val: boolean) {
+		console.log(val);
 		if (val !== this.state.displaySelect) {
 			this.setState({
 				displaySelect: val
@@ -60,29 +61,30 @@ class FakeSelect extends React.Component<any, any> {
 		return (
 			<div className={sumClasses(['field-container', className])} style={style}>
 				<FieldLabel {...{ label, name, isRequired, isValid }}/>
-				<div {...{
-					className: 'select-style noselect',
-					onClick: () => { this.onClick(false); },
-					style: { zIndex: displaySelect ? 1 : 0, paddingLeft: 8 }
-				}}>
-
-						{
-							value.min !== '' && value.max !== '' ?
-								`${value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')} -
-								${value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`
-								:
-								value.min !== '' && value.max === '' ?
-									`da ${value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`
-									:
-									value.min === '' && value.max !== '' ?
-										`fino a ${value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`
-										:
-										text
-						}
-
-				</div>
-				<FieldError {...{ isValid, errorMessage }} />
 				<ClickOutHandler onClickOut={() => { this.onClick(true); }} style={{ maxHeight: 57 }}>
+					<div {...{
+						className: 'select-style noselect',
+						onClick: () => { this.onClick(false); },
+						style: { zIndex: displaySelect ? 1 : 0, paddingLeft: 8 }
+					}}>
+
+							{
+								value.min !== '' && value.max !== '' ?
+									`${value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')} -
+									${value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`
+									:
+									value.min !== '' && value.max === '' ?
+										`da ${value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`
+										:
+										value.min === '' && value.max !== '' ?
+											`fino a ${value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`
+											:
+											text
+							}
+
+					</div>
+					<FieldError {...{ isValid, errorMessage }} />
+
 					<div className="fake-cont" style={{ width: style.maxWidth, opacity: displaySelect ? '0' : '1', zIndex: displaySelect ? -1 : 1, background: overlayBg }}>
 						<div className="min-max">Min</div>
 						<div className="select-style" style={Object.assign({}, rangesStyle, { marginBottom: 15, float: 'right' })}>

@@ -67,6 +67,7 @@ var FakeSelect = function (_React$Component) {
 	}, {
 		key: 'onClick',
 		value: function onClick(val) {
+			console.log(val);
 			if (val !== this.state.displaySelect) {
 				this.setState({
 					displaySelect: val
@@ -122,22 +123,22 @@ var FakeSelect = function (_React$Component) {
 				{ className: (0, _utils.sumClasses)(['field-container', className]), style: style },
 				_react2.default.createElement(_FieldLabel2.default, { label: label, name: name, isRequired: isRequired, isValid: isValid }),
 				_react2.default.createElement(
-					'div',
-					{
-						className: 'select-style noselect',
-						onClick: function onClick() {
-							_this2.onClick(false);
-						},
-						style: { zIndex: displaySelect ? 1 : 0, paddingLeft: 8 }
-					},
-					value.min !== '' && value.max !== '' ? value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') + ' -\n\t\t\t\t\t\t\t\t' + value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : value.min !== '' && value.max === '' ? 'da ' + value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : value.min === '' && value.max !== '' ? 'fino a ' + value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : text
-				),
-				_react2.default.createElement(_FieldError2.default, { isValid: isValid, errorMessage: errorMessage }),
-				_react2.default.createElement(
 					_reactOnclickout2.default,
 					{ onClickOut: function onClickOut() {
 							_this2.onClick(true);
 						}, style: { maxHeight: 57 } },
+					_react2.default.createElement(
+						'div',
+						{
+							className: 'select-style noselect',
+							onClick: function onClick() {
+								_this2.onClick(false);
+							},
+							style: { zIndex: displaySelect ? 1 : 0, paddingLeft: 8 }
+						},
+						value.min !== '' && value.max !== '' ? value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') + ' -\n\t\t\t\t\t\t\t\t\t' + value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : value.min !== '' && value.max === '' ? 'da ' + value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : value.min === '' && value.max !== '' ? 'fino a ' + value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : text
+					),
+					_react2.default.createElement(_FieldError2.default, { isValid: isValid, errorMessage: errorMessage }),
 					_react2.default.createElement(
 						'div',
 						{ className: 'fake-cont', style: { width: style.maxWidth, opacity: displaySelect ? '0' : '1', zIndex: displaySelect ? -1 : 1, background: overlayBg } },
