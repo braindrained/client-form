@@ -24,7 +24,7 @@
 	transition-duration: 0.2s, 0.2s;
 	transition-timing-function: ease-in, ease-out;
 	outline: none;
-	font-family: 'MuseoSans_500';
+	font-family: 'Museo-Sans-500';
 	font-weight: 500;
 	-webkit-touch-callout: none; /* iOS Safari */
 		-webkit-user-select: none; /* Safari */
@@ -230,7 +230,7 @@
 }
 
 input {
-	font-family: 'MuseoSans_300', helvetica, arial;
+	font-family: 'Museo-Sans-300', helvetica, arial;
 }
 
 .clear {
@@ -340,7 +340,7 @@ input {
 			text-align: left;
 			height: 24px;
 			font-size: 13px;
-			font-family: 'MuseoSans_500';
+			font-family: 'Museo-Sans-500';
 		}
 		.field-container-tabs {
 			width: 100%;
@@ -466,7 +466,7 @@ input {
 			cursor: pointer;
 			outline: none;
 			z-index: 1;
-			font-family: 'MuseoSans_300', helvetica, arial;
+			font-family: 'Museo-Sans-300', helvetica, arial;
 			@media screen and (max-width: 459px) {
 				height: 47px;
 			}

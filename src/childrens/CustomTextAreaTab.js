@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import PropTypes from 'prop-types';
+import { sumClasses } from '../helpers/utils';
 
 import FieldError from './childrenComponents/FieldError';
 
@@ -57,7 +58,7 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 		const { className, style, name, isValid, tabs, value, limitChar, errorMessage } = this.props;
 
 		return (
-			<div className={`field-container ${className}`} style={style}>
+			<div className={sumClasses(['field-container', className])} style={style}>
 				<div className="field-container-tabs" id={name}>
 					{ this.state.tabs.map((item, i) => (
 						<div {...{

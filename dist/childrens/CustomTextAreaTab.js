@@ -14,6 +14,8 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _utils = require('../helpers/utils');
+
 var _FieldError = require('./childrenComponents/FieldError');
 
 var _FieldError2 = _interopRequireDefault(_FieldError);
@@ -102,7 +104,7 @@ var CustomTextareaWithTab = function (_React$Component) {
 
 			return _react2.default.createElement(
 				'div',
-				{ className: 'field-container ' + className, style: style },
+				{ className: (0, _utils.sumClasses)(['field-container', className]), style: style },
 				_react2.default.createElement(
 					'div',
 					{ className: 'field-container-tabs', id: name },

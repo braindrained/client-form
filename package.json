@@ -1,6 +1,6 @@
 {
   "name": "client-form",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "Paolo Senese",
   "license": "ISC",
   "main": "dist/index.js",
