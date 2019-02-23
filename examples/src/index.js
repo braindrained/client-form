@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 
 import Form from '../../src';
 import { makeId } from '../../src/helpers/utils';
-import { tipologies, priceRanges } from  '../../src/helpers/var';
+import { tipologies, priceRanges } from  './var';
 
 class App extends React.Component {
 
@@ -84,7 +84,8 @@ class App extends React.Component {
 								rangesStyle: { width: 200, maxWidth: 200 },
 								value: { min: '', max: '' },
 								firstRange: priceRanges,
-								secondRange: priceRanges
+								secondRange: priceRanges,
+								overlayBg: '#fff'
 							},
 							{
 								control: 'text',
@@ -197,7 +198,32 @@ class App extends React.Component {
 								name: 'correncyField',
 								currency: true,
 								onlyNumber: true,
-							}
+							},
+							{
+								control: 'tabTextArea',
+								name: 'description',
+								value: [
+									{ name: 'listingDescIt', value: '', isRequired: true, isValid: true },
+									{ name: 'listingDescEn', value: '', isRequired: false, isValid: true },
+									{ name: 'listingDescFr', value: '', isRequired: false, isValid: true },
+									{ name: 'listingDescEs', value: '', isRequired: false, isValid: true },
+									{ name: 'listingDescDe', value: '', isRequired: false, isValid: true }
+								],
+								tabs: [
+									{ name: 'listingDescIt', label: 'Italiano', abbr: 'IT', placeholder: 'Inserisci qui la descrizione' },
+									{ name: 'listingDescEn', label: 'Inglese', abbr: 'EN', placeholder: 'Descrizione inglese' },
+									{ name: 'listingDescFr', label: 'Francese', abbr: 'FR', placeholder: 'Descrizione francese' },
+									{ name: 'listingDescEs', label: 'Spagnolo', abbr: 'ES', placeholder: 'Descrizione spagnolo' },
+									{ name: 'listingDescDe', label: 'Tedesco', abbr: 'DE', placeholder: 'Descrizione tedesco' },
+								],
+								style: { width: 'calc(100% - 30px)' },
+								isRequired: true,
+								isValid: true,
+								errorMessage: 'La descrizione in italiano è obbligatoria',
+								fieldClassName: 'tabTextArea',
+								valueAsObject: true,
+								limitChar: 4000
+							},
 						],
 						textBeforeButton: <div style={{ clear: 'both', fontSize: 11, lineHeight: '30px', textAlign: 'center' }}>This is a text before button</div>,
 						sendButton: {

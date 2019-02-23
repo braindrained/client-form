@@ -2,10 +2,10 @@
 import React from 'react';
 
 const FieldError = (props: Object) => {
-	const { isValid, errorMessage } = props;
+	const { isValid, errorMessage, style } = props;
 
 	return (
-		<div className="validation-error noselect">
+		<div className="validation-error noselect" style={style}>
 			&nbsp;{isValid === false ? errorMessage : '' }
 		</div>
 	)

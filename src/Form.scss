@@ -346,6 +346,20 @@ input {
 			width: 100%;
 			clear: both;
 			float: left;
+			.tab-label {
+				display: block;
+			}
+			.tab-abbr {
+				display: none;
+			}
+			@media screen and (max-width: 459px) {
+				.tab-label {
+					display: none;
+				}
+				.tab-abbr {
+					display: block;
+				}
+			}
 			.field-container-tabs-item {
 				transition-duration: 0.2s, 0.2s;
 				transition-timing-function: ease-in, ease-out;
@@ -362,11 +376,7 @@ input {
 					color: #fff;
 				}
 				@media screen and (max-width: 459px) {
-					//width: 19%;
 					min-width: 40px;
-					/*white-space: nowrap;
-					overflow: hidden;
-					text-overflow: ellipsis;*/
 				}
 			}
 			.field-container-tabs-item-selected {
@@ -431,6 +441,7 @@ input {
 		border-radius: 2px;
 		position: relative;
 		z-index: 1;
+		font-size: 13px;
 		label {
 			position: absolute;
 			top: -21px;
@@ -462,6 +473,7 @@ input {
 		}
 		@media screen and (max-width: 459px) {
 			height: 47px;
+			line-height: 47px;
 		}
 	}
 

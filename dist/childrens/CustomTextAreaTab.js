@@ -14,6 +14,10 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _FieldError = require('./childrenComponents/FieldError');
+
+var _FieldError2 = _interopRequireDefault(_FieldError);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -88,12 +92,12 @@ var CustomTextareaWithTab = function (_React$Component) {
 			var _props = this.props,
 			    className = _props.className,
 			    style = _props.style,
-			    device = _props.device,
 			    name = _props.name,
 			    isValid = _props.isValid,
 			    tabs = _props.tabs,
 			    value = _props.value,
-			    limitChar = _props.limitChar;
+			    limitChar = _props.limitChar,
+			    errorMessage = _props.errorMessage;
 
 
 			return _react2.default.createElement(
@@ -109,7 +113,7 @@ var CustomTextareaWithTab = function (_React$Component) {
 								key: item.name,
 								style: {
 									borderRadius: i === 0 ? '4px 0px 0px 0px' : i === 4 ? '0px 4px 0px 0px' : '0px',
-									textAlign: device === 'desktop' ? 'left' : 'center'
+									textAlign: 'left'
 								},
 								className: _this3.state.selected === i ? 'field-container-tabs-item field-container-tabs-item-selected' : 'field-container-tabs-item',
 								onClick: _this3.selectTab.bind(_this3, i),
@@ -118,7 +122,16 @@ var CustomTextareaWithTab = function (_React$Component) {
 							_react2.default.createElement(
 								'div',
 								{ className: 'noselect' },
-								device === 'desktop' ? item.label : item.abbr
+								_react2.default.createElement(
+									'span',
+									{ className: 'tab-label' },
+									item.label
+								),
+								_react2.default.createElement(
+									'span',
+									{ className: 'tab-abbr' },
+									item.abbr
+								)
 							)
 						);
 					})
@@ -169,11 +182,7 @@ var CustomTextareaWithTab = function (_React$Component) {
 						)
 					);
 				}),
-				_react2.default.createElement(
-					'span',
-					{ className: 'validation-error' },
-					!isValid ? this.props.errorMessage : ''
-				)
+				_react2.default.createElement(_FieldError2.default, { isValid: isValid, errorMessage: errorMessage, style: { paddingRight: 60 } })
 			);
 		}
 	}]);

@@ -52,7 +52,7 @@ class FakeSelect extends React.Component<any, any> {
 	}
 
 	render() {
-		const { className, style, label, text, firstRange, secondRange, rangesStyle, isRequired, name, errorMessage } = this.props;
+		const { className, style, label, text, firstRange, secondRange, rangesStyle, isRequired, name, errorMessage, overlayBg } = this.props;
 		const { displaySelect, value } = this.state;
 		const maxRange = this.props.value.min === '' ? secondRange : secondRange.filter(o => o.value > this.props.value.min || o.value === '');
 		const { isValid } = this.state;
@@ -83,7 +83,7 @@ class FakeSelect extends React.Component<any, any> {
 				</div>
 				<FieldError {...{ isValid, errorMessage }} />
 				<ClickOutHandler onClickOut={() => { this.onClick(true); }} style={{ maxHeight: 57 }}>
-					<div className="fake-cont" style={{ width: style.maxWidth, opacity: displaySelect ? '0' : '1', zIndex: displaySelect ? -1 : 1 }}>
+					<div className="fake-cont" style={{ width: style.maxWidth, opacity: displaySelect ? '0' : '1', zIndex: displaySelect ? -1 : 1, background: overlayBg }}>
 						<div className="min-max">Min</div>
 						<div className="select-style" style={Object.assign({}, rangesStyle, { marginBottom: 15, float: 'right' })}>
 							<select name="min" id="min" value={this.props.value.min} onChange={(o) => { this.onChange(o); }}>

@@ -12,12 +12,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var FieldError = function FieldError(props) {
 	var isValid = props.isValid,
-	    errorMessage = props.errorMessage;
+	    errorMessage = props.errorMessage,
+	    style = props.style;
 
 
 	return _react2.default.createElement(
 		'div',
-		{ className: 'validation-error noselect' },
+		{ className: 'validation-error noselect', style: style },
 		'\xA0',
 		isValid === false ? errorMessage : ''
 	);

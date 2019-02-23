@@ -1,44 +1,65 @@
 const path = require('path');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
     template: path.join(__dirname, "examples/src/index.html"),
     filename: "./index.html"
 });
+const devMode = process.env.NODE_ENV !== 'production'
 
 module.exports = {
+		devtool: 'cheap-module-source-map',
     entry: path.join(__dirname, "examples/src/index.js"),
 		output: {
-        path: path.join(__dirname, "examples/dist"),
-        filename: "bundle.js"
+        path: path.join(__dirname, "build"),
+				chunkFilename: '[name].bundle.js',
+        filename: "[name].bundle.js"
     },
     module: {
         rules: [
 						{
-		          loader: 'url-loader',
 		          test: /\.(gif|jpg|png|svg)(\?.*)?$/,
-		          options: {
-		            limit: 10000,
-		          },
+							use: [
+									{
+											loader: 'url-loader',
+											options:{
+													fallback: "file-loader",
+													name: "[name][md5:hash].[ext]",
+													outputPath: 'assets/',
+													publicPath: '/assets/'
+											}
+									}
+							]
 		        },
             {
                 test: /\.(js|jsx)$/,
-                use: "babel-loader",
-                exclude: /node_modules/
+                loader: "babel-loader",
+                exclude: /node_modules/,
             },
 						{
 							test: /\.(ttf|otf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
       				loader: 'file-loader?name=fonts/[name].[ext]'
 		        },
 						{
-                test: /\.(css|scss)$/,
-                use: ["style-loader", "css-loader", "sass-loader"]
+                test: /\.(scss)$/,
+                use: [
+									devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+									"style-loader",
+									"css-loader",
+									"sass-loader"
+								]
             }
         ]
     },
-    plugins: [htmlWebpackPlugin],
-    resolve: {
-        extensions: [".js", ".jsx"]
-    },
+    plugins: [
+			htmlWebpackPlugin,
+			new MiniCssExtractPlugin({
+				filename: devMode ? '[name].css' : '[name].[hash].css',
+	      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+			})
+		],
     devServer: {
         port: 3007
     }

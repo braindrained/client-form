@@ -105,7 +105,8 @@ var FakeSelect = function (_React$Component) {
 			    rangesStyle = _props.rangesStyle,
 			    isRequired = _props.isRequired,
 			    name = _props.name,
-			    errorMessage = _props.errorMessage;
+			    errorMessage = _props.errorMessage,
+			    overlayBg = _props.overlayBg;
 			var _state = this.state,
 			    displaySelect = _state.displaySelect,
 			    value = _state.value;
@@ -139,7 +140,7 @@ var FakeSelect = function (_React$Component) {
 						}, style: { maxHeight: 57 } },
 					_react2.default.createElement(
 						'div',
-						{ className: 'fake-cont', style: { width: style.maxWidth, opacity: displaySelect ? '0' : '1', zIndex: displaySelect ? -1 : 1 } },
+						{ className: 'fake-cont', style: { width: style.maxWidth, opacity: displaySelect ? '0' : '1', zIndex: displaySelect ? -1 : 1, background: overlayBg } },
 						_react2.default.createElement(
 							'div',
 							{ className: 'min-max' },

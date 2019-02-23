@@ -1,12 +1,14 @@
 .fake-cont {
 	position: absolute;
 	margin-top: -52px;
-	background: #f1f1f1;
 	opacity: 0;
 	z-index: -1;
 	transition-duration: 0.3s, 0.3s;
 	transition-timing-function: ease-in, ease-out;
 	width: 100%;
+	@media screen and (max-width: 459px) {
+		margin-top: -66px;
+	}
 	.min-max {
 		float: left;
 		line-height: 33px;

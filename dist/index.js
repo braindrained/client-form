@@ -77,37 +77,12 @@ var Form = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this, props));
 
 		_this.state = {
-			device: null,
 			controls: _this.props.controls
 		};
 		return _this;
 	}
 
 	_createClass(Form, [{
-		key: 'onWindowResize',
-		value: function onWindowResize() {
-			var sw = document.documentElement.clientWidth;
-			var device = sw < 768 ? 'smartphone' : sw >= 768 && sw < 1000 ? 'tablet' : 'desktop';
-			this.setState({
-				device: device
-			});
-		}
-	}, {
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			var sw = document.documentElement.clientWidth;
-			var device = sw < 768 ? 'smartphone' : sw >= 768 && sw < 1000 ? 'tablet' : 'desktop';
-			this.setState({
-				device: device
-			});
-			window.addEventListener('resize', this.onWindowResize.bind(this));
-		}
-	}, {
-		key: 'componentWillUnmount',
-		value: function componentWillUnmount() {
-			window.removeEventListener('resize', this.onWindowResize);
-		}
-	}, {
 		key: 'onUpdate',
 		value: function onUpdate(e, hasError) {
 			var _this2 = this;
@@ -214,7 +189,7 @@ var Form = function (_React$Component) {
 									formIsValid = false;
 								}
 							}
-							return null;
+							return itemS;
 						});
 						item.value = updatedValues;
 					}
@@ -290,9 +265,7 @@ var Form = function (_React$Component) {
 			    textBeforeButton = _props.textBeforeButton,
 			    buttonContainerStyle = _props.buttonContainerStyle,
 			    textAfterButton = _props.textAfterButton;
-			var _state = this.state,
-			    controls = _state.controls,
-			    device = _state.device;
+			var controls = this.state.controls;
 
 			var sendButtonClass = (0, _utils.sumClasses)([succeed !== null ? succeed ? 'btn btn-succeed' : 'btn btn-error' : 'btn', isSent ? 'spinner' : '', sendButton.disabled ? 'btn-disabled' : '']);
 			var sendButtonValue = succeed === null ? sendButton.text : succeed === false ? sendButton.errorText : sendButton.succeedText;
@@ -446,7 +419,6 @@ var Form = function (_React$Component) {
 									_this4.onUpdate(e);
 								},
 								style: item.style,
-								device: device,
 								className: item.className ? item.className : '',
 								isRequired: item.isRequired,
 								isValid: item.isValid,
@@ -486,7 +458,8 @@ var Form = function (_React$Component) {
 								firstRange: item.firstRange,
 								secondRange: item.secondRange,
 								rangesStyle: item.rangesStyle,
-								className: item.className ? item.className : ''
+								className: item.className ? item.className : '',
+								overlayBg: item.overlayBg
 							});
 					}
 				}),

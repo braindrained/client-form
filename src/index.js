@@ -21,30 +21,8 @@ const Form = class extends React.Component<any, any> {
 		super(props);
 
 		this.state = {
-			device: null,
 			controls: this.props.controls
 		};
-	}
-
-	onWindowResize() {
-		const sw = document.documentElement.clientWidth;
-		const device = sw < 768 ? 'smartphone' : sw >= 768 && sw < 1000 ? 'tablet' : 'desktop';
-		this.setState({
-			device
-		});
-	}
-
-	componentDidMount() {
-		const sw = document.documentElement.clientWidth;
-		const device = sw < 768 ? 'smartphone' : sw >= 768 && sw < 1000 ? 'tablet' : 'desktop';
-		this.setState({
-			device
-		});
-		window.addEventListener('resize', this.onWindowResize.bind(this));
-	}
-
-	componentWillUnmount() {
-		window.removeEventListener('resize', this.onWindowResize);
 	}
 
 	onUpdate(e: Object, hasError: boolean) {
@@ -135,7 +113,7 @@ const Form = class extends React.Component<any, any> {
 								formIsValid = false;
 							}
 						}
-						return null;
+						return itemS;
 					});
 					item.value = updatedValues;
 				}
@@ -195,7 +173,7 @@ const Form = class extends React.Component<any, any> {
 			sendButton, textBeforeButton, buttonContainerStyle,
 			textAfterButton
 		} = this.props;
-		const { controls, device } = this.state;
+		const { controls } = this.state;
 		const sendButtonClass = sumClasses([
 			succeed !== null ? (succeed ? 'btn btn-succeed' : 'btn btn-error') : 'btn',
 			isSent ? 'spinner' : '',
@@ -352,7 +330,6 @@ const Form = class extends React.Component<any, any> {
 								tabs: item.tabs,
 								onUpdate: (e) => { this.onUpdate(e) },
 								style: item.style,
-								device: device,
 								className: item.className ? item.className : '',
 								isRequired: item.isRequired,
 								isValid: item.isValid,
@@ -393,6 +370,7 @@ const Form = class extends React.Component<any, any> {
 								secondRange: item.secondRange,
 								rangesStyle: item.rangesStyle,
 								className: item.className ? item.className : '',
+								overlayBg: item.overlayBg
 							}} />
 						);
 					}

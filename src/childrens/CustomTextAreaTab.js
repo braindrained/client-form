@@ -2,6 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import FieldError from './childrenComponents/FieldError';
+
 class CustomTextareaWithTab extends React.Component<any, any> {
 
 	constructor(props) {
@@ -52,7 +54,7 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 	}
 
 	render() {
-		const { className, style, device, name, isValid, tabs, value, limitChar } = this.props;
+		const { className, style, name, isValid, tabs, value, limitChar, errorMessage } = this.props;
 
 		return (
 			<div className={`field-container ${className}`} style={style}>
@@ -62,14 +64,15 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 							key: item.name,
 							style: {
 								borderRadius: i === 0 ? '4px 0px 0px 0px' : i === 4 ? '0px 4px 0px 0px' : '0px',
-								textAlign: device === 'desktop' ? 'left' : 'center',
+								textAlign: 'left',
 							},
 							className: this.state.selected === i ? 'field-container-tabs-item field-container-tabs-item-selected' : 'field-container-tabs-item',
 							onClick: this.selectTab.bind(this, i),
 							role: 'button'
 						}}>
 							<div className="noselect">
-								{device === 'desktop' ? item.label : item.abbr}
+								<span className="tab-label">{item.label}</span>
+								<span className="tab-abbr">{item.abbr}</span>
 							</div>
 						</div>
 					))}
@@ -110,9 +113,7 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 						</div>
 					</div>
 				))}
-				<span className="validation-error">
-					{ !isValid ? this.props.errorMessage : '' }
-				</span>
+				<FieldError {...{ isValid, errorMessage, style: { paddingRight: 60 } }} />
 			</div>
 		);
 	}
