@@ -188,7 +188,7 @@ const Form = class extends React.Component<any, any> {
 		const sendButtonValue = sendButton ? (succeed === null ? sendButton.text : succeed === false ? sendButton.errorText : sendButton.succeedText) : null;
 
 		return (
-			<div className={sumClasses(['form-container', className !== null && className !== undefined ? className : ''])} style={style}>
+			<div className={sumClasses(['client-form', className !== null && className !== undefined ? className : ''])} style={style}>
 				{ controls.map((item) => {
 					switch (item.control) {
 					default:

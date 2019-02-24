@@ -100,10 +100,10 @@ var CustomTextareaWithTab = function (_React$Component) {
 
 			return _react2.default.createElement(
 				'div',
-				{ className: (0, _utils.sumClasses)(['field-container', className]), style: style },
+				{ className: (0, _utils.sumClasses)(['container-field', className]), style: style },
 				_react2.default.createElement(
 					'div',
-					{ className: 'field-container-tabs', id: name },
+					{ className: 'container-field-tabs', id: name },
 					this.state.tabs.map(function (item, i) {
 						return _react2.default.createElement(
 							'div',
@@ -113,7 +113,7 @@ var CustomTextareaWithTab = function (_React$Component) {
 									borderRadius: i === 0 ? '4px 0px 0px 0px' : i === 4 ? '0px 4px 0px 0px' : '0px',
 									textAlign: 'left'
 								},
-								className: _this3.state.selected === i ? 'field-container-tabs-item field-container-tabs-item-selected' : 'field-container-tabs-item',
+								className: _this3.state.selected === i ? 'container-field-tabs-item container-field-tabs-item-selected' : 'container-field-tabs-item',
 								onClick: _this3.selectTab.bind(_this3, i),
 								role: 'button'
 							},

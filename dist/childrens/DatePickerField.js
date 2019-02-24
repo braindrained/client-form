@@ -84,7 +84,7 @@ var DatePickerField = function (_React$Component) {
 
 			return _react2.default.createElement(
 				'div',
-				{ className: 'field-container ' + className, style: this.props.style },
+				{ className: 'container-field ' + className, style: this.props.style },
 				_react2.default.createElement('input', { type: 'text', id: name, style: { opacity: 0, height: 0 } }),
 				_react2.default.createElement(
 					'div',

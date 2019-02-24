@@ -66,7 +66,7 @@ class CustomPlusMinus extends React.Component<any, any> {
 		} = this.props;
 
 		return (
-			<div className={sumClasses(['field-container cutom-plus-minus', className])} style={style}>
+			<div className={sumClasses(['container-field cutom-plus-minus', className])} style={style}>
 				<FieldLabel {...{ label, name, isRequired, isValid }} />
 				<div style={{ float: 'left' }}>
 					<div {...{

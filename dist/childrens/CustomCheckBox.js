@@ -76,7 +76,7 @@ var CustomCheckBox = function (_React$Component) {
 
 			return _react2.default.createElement(
 				'div',
-				{ className: (0, _utils.sumClasses)(['field-container', className !== undefined ? className : 'check']), style: style },
+				{ className: (0, _utils.sumClasses)(['container-field', className !== undefined ? className : 'check']), style: style },
 				textBefore !== null && textBefore !== undefined ? textBefore : '',
 				_react2.default.createElement(
 					'div',

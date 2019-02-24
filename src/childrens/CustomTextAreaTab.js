@@ -57,8 +57,8 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 		const { className, style, name, isValid, tabs, value, limitChar, errorMessage } = this.props;
 
 		return (
-			<div className={sumClasses(['field-container', className])} style={style}>
-				<div className="field-container-tabs" id={name}>
+			<div className={sumClasses(['container-field', className])} style={style}>
+				<div className="container-field-tabs" id={name}>
 					{ this.state.tabs.map((item, i) => (
 						<div {...{
 							key: item.name,
@@ -66,7 +66,7 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 								borderRadius: i === 0 ? '4px 0px 0px 0px' : i === 4 ? '0px 4px 0px 0px' : '0px',
 								textAlign: 'left',
 							},
-							className: this.state.selected === i ? 'field-container-tabs-item field-container-tabs-item-selected' : 'field-container-tabs-item',
+							className: this.state.selected === i ? 'container-field-tabs-item container-field-tabs-item-selected' : 'container-field-tabs-item',
 							onClick: this.selectTab.bind(this, i),
 							role: 'button'
 						}}>

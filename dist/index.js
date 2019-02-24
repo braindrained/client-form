@@ -276,7 +276,7 @@ var Form = function (_React$Component) {
 
 			return _react2.default.createElement(
 				'div',
-				{ className: (0, _utils.sumClasses)(['form-container', className !== null && className !== undefined ? className : '']), style: style },
+				{ className: (0, _utils.sumClasses)(['client-form', className !== null && className !== undefined ? className : '']), style: style },
 				controls.map(function (item) {
 					switch (item.control) {
 						default:

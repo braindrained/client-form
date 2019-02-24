@@ -38,7 +38,7 @@ export default class CustomCheckBox extends React.Component<any, any> {
 		const { value } = this.state;
 
 		return (
-			<div className={sumClasses(['field-container', className !== undefined ? className : 'check'])} style={style}>
+			<div className={sumClasses(['container-field', className !== undefined ? className : 'check'])} style={style}>
 				{textBefore !== null && textBefore !== undefined ? textBefore : ''}
 				<div className="check-filters">
 					<div className="separator" />

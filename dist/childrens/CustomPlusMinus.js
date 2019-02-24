@@ -109,7 +109,7 @@ var CustomPlusMinus = function (_React$Component) {
 
 			return _react2.default.createElement(
 				'div',
-				{ className: (0, _utils.sumClasses)(['field-container cutom-plus-minus', className]), style: style },
+				{ className: (0, _utils.sumClasses)(['container-field cutom-plus-minus', className]), style: style },
 				_react2.default.createElement(_FieldLabel2.default, { label: label, name: name, isRequired: isRequired, isValid: isValid }),
 				_react2.default.createElement(
 					'div',

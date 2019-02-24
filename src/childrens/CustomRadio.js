@@ -55,7 +55,7 @@ class CustomRadio extends React.Component<any, any> {
 		const { className, style, label, name, hideRadio, textBefore, options, css, isRequired, isValid } = this.props;
 
 		return (
-			<div className={sumClasses([hideRadio ? 'field-container toggle-format' : 'field-container regular-radio', className])} style={style}>
+			<div className={sumClasses([hideRadio ? 'container-field toggle-format' : 'container-field regular-radio', className])} style={style}>
 				{ textBefore ? (
 					<div style={textBefore.style}>
 						{textBefore.text}

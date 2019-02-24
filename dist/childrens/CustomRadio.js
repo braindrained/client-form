@@ -103,7 +103,7 @@ var CustomRadio = function (_React$Component) {
 
 			return _react2.default.createElement(
 				'div',
-				{ className: (0, _utils.sumClasses)([hideRadio ? 'field-container toggle-format' : 'field-container regular-radio', className]), style: style },
+				{ className: (0, _utils.sumClasses)([hideRadio ? 'container-field toggle-format' : 'container-field regular-radio', className]), style: style },
 				textBefore ? _react2.default.createElement(
 					'div',
 					{ style: textBefore.style },

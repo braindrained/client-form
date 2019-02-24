@@ -57,7 +57,7 @@ class FakeSelect extends React.Component<any, any> {
 		const { isValid } = this.state;
 
 		return (
-			<div className={sumClasses(['field-container', className])} style={style}>
+			<div className={sumClasses(['container-field', className])} style={style}>
 				<FieldLabel {...{ label, name, isRequired, isValid }} />
 				<ClickOutHandler onClickOut={() => { this.onClick(true); }} style={{ maxHeight: 57 }}>
 					<div {...{

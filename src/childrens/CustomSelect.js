@@ -46,7 +46,7 @@ class CustomSelect extends React.Component<any, any> {
 		const { isValid } = this.state;
 
 		return (
-			<div className={sumClasses(['field-container', className])} style={style}>
+			<div className={sumClasses(['container-field', className])} style={style}>
 				<FieldLabel {...{ label, name, isRequired, isValid }} />
 				<div className="select-style" style={isValid === false ? { borderColor: '#e4002b' } : {}}>
 					<select name={name} id={name} value={value} onChange={this.onChange.bind(this)}>

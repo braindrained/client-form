@@ -40,7 +40,7 @@ class DatePickerField extends React.Component<any, any> {
 		const { label, name, className, isRequired, greaterThan, errorMessage, isValid } = this.props;
 
 		return (
-			<div className={`field-container ${className}`} style={this.props.style}>
+			<div className={`container-field ${className}`} style={this.props.style}>
 				<input type="text" id={name} style={{ opacity: 0, height: 0 }} />
 				<div className="field-label noselect" style={Object.assign({}, label.style, !isValid ? { color: '#e4002b' } : {})}>{label.text}</div>
 				<div className="field-picker-container">
