@@ -27,8 +27,7 @@
     "uglifyjs-webpack-plugin": "^2.1.1",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.0",
-    "webpack-isomorphic-tools": "^3.0.6"
+    "webpack-dev-server": "^3.2.0"
   },
   "scripts": {
     "start": "webpack-dev-server --mode development",
@@ -36,8 +35,8 @@
     "build": "webpack --mode production"
   },
   "dependencies": {
+    "file-loader": "^3.0.1",
     "postcss-loader": "^3.0.0",
-    "url-loader": "^1.1.2",
-    "file-loader": "^3.0.1"
+    "url-loader": "^1.1.2"
   }
 }

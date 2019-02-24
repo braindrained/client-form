@@ -15,18 +15,11 @@ module.exports = {
     module: {
         rules: [
 						{
+							loader: 'url-loader',
 		          test: /\.(gif|jpg|png|svg)(\?.*)?$/,
-							use: [
-									{
-											loader: 'url-loader',
-											options:{
-													fallback: "file-loader",
-													name: "[name][md5:hash].[ext]",
-													outputPath: 'assets/',
-													publicPath: '/assets/'
-											}
-									}
-							]
+							options: {
+		            limit: 10000,
+		          },
 		        },
             {
                 test: /\.(js|jsx)$/,
