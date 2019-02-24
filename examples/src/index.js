@@ -216,7 +216,7 @@ class App extends React.Component {
 									{ name: 'listingDescEs', label: 'Spagnolo', abbr: 'ES', placeholder: 'Descrizione spagnolo' },
 									{ name: 'listingDescDe', label: 'Tedesco', abbr: 'DE', placeholder: 'Descrizione tedesco' },
 								],
-								style: { width: 'calc(100% - 30px)' },
+								style: { width: 'calc(100% - 20px)' },
 								isRequired: true,
 								isValid: true,
 								errorMessage: 'La descrizione in italiano è obbligatoria',
@@ -239,7 +239,8 @@ class App extends React.Component {
 						succeed: editSucceed,
 						isSent: editDataSpin,
 						style: {
-							maxWidth: 560
+							maxWidth: 560,
+							margin: '0 auto'
 						},
 					}}/>
 				</div>
