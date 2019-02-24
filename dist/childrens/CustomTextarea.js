@@ -10,10 +10,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _FieldLabel = require('./childrenComponents/FieldLabel');
 
 var _FieldLabel2 = _interopRequireDefault(_FieldLabel);
@@ -42,29 +38,34 @@ var CustomTextarea = function (_React$Component) {
 
 		_this.state = {
 			value: _this.props.value,
-			error: false
+			isValid: _this.props.isValid
 		};
 		return _this;
 	}
 
 	_createClass(CustomTextarea, [{
+		key: 'shouldComponentUpdate',
+		value: function shouldComponentUpdate(nextProps, nextState) {
+			if (this.props.value !== nextProps.value) return true;
+			if (this.state.value !== nextState.value) return true;
+			if (this.props.isValid !== nextProps.isValid) return true;
+			return false;
+		}
+	}, {
 		key: 'onChange',
 		value: function onChange(event) {
-			this.setState({ value: event.target.value });
-			this.props.onUpdate(event);
-		}
-	}, {
-		key: 'onBlur',
-		value: function onBlur() {
-			this.validation();
-		}
-	}, {
-		key: 'validation',
-		value: function validation() {
-			if (this.props.isRequired) {
-				var value = this.state.value;
-
-				this.setState({ error: !value });
+			var value = this.props.limitChar ? event.target.value.substring(0, this.props.limitChar) : event.target.value;
+			this.setState({
+				value: value,
+				isValid: true
+			});
+			if (this.props.updateOnChange === true) {
+				this.props.onUpdate({
+					target: {
+						name: this.props.name,
+						value: this.props.onlyNumber ? value.replace(/\D/g, '') : value
+					}
+				}, false);
 			}
 		}
 	}, {
@@ -78,8 +79,9 @@ var CustomTextarea = function (_React$Component) {
 			    isRequired = _props.isRequired,
 			    name = _props.name,
 			    value = _props.value,
-			    isValid = _props.isValid,
-			    errorMessage = _props.errorMessage;
+			    errorMessage = _props.errorMessage,
+			    limitChar = _props.limitChar;
+			var isValid = this.state.isValid;
 
 
 			return _react2.default.createElement(
@@ -92,9 +94,15 @@ var CustomTextarea = function (_React$Component) {
 					name: name,
 					id: name,
 					onChange: this.onChange.bind(this),
-					onBlur: this.onBlur.bind(this),
 					value: value
 				}),
+				limitChar ? _react2.default.createElement(
+					'div',
+					{ style: { textAlign: 'right', position: 'absolute', width: '100%' } },
+					value.length,
+					'/',
+					limitChar
+				) : null,
 				_react2.default.createElement(_FieldError2.default, { isValid: isValid, errorMessage: errorMessage })
 			);
 		}
@@ -102,31 +110,5 @@ var CustomTextarea = function (_React$Component) {
 
 	return CustomTextarea;
 }(_react2.default.Component);
-
-CustomTextarea.propTypes = {
-	placeholder: _propTypes2.default.string,
-	name: _propTypes2.default.string,
-	label: _propTypes2.default.instanceOf(Object),
-	onUpdate: _propTypes2.default.func,
-	errorMessage: _propTypes2.default.string,
-	className: _propTypes2.default.string,
-	style: _propTypes2.default.instanceOf(Object),
-	isRequired: _propTypes2.default.bool,
-	isValid: _propTypes2.default.bool,
-	value: _propTypes2.default.string
-};
-
-CustomTextarea.defaultProps = {
-	placeholder: null,
-	name: null,
-	label: null,
-	onUpdate: null,
-	errorMessage: null,
-	className: null,
-	style: null,
-	isRequired: false,
-	isValid: true,
-	value: null
-};
 
 exports.default = CustomTextarea;

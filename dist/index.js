@@ -12,10 +12,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _CustomTextField = require('./childrens/CustomTextField');
 
 var _CustomTextField2 = _interopRequireDefault(_CustomTextField);
@@ -67,6 +63,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// flow-disable-next-line
+
 
 var Form = function (_React$Component) {
 	_inherits(Form, _React$Component);
@@ -87,7 +85,10 @@ var Form = function (_React$Component) {
 		value: function onUpdate(e, hasError) {
 			var _this2 = this;
 
-			var updatedControls = this.state.controls.map(function (item) {
+			var controls = this.state.controls;
+
+
+			var updatedControls = controls.map(function (item) {
 				if (e.target.name === item.name) {
 					item.isValid = !hasError;
 					item.value = e.target.value;
@@ -165,8 +166,10 @@ var Form = function (_React$Component) {
 			var _this3 = this;
 
 			var formIsValid = true;
+			var controls = this.state.controls;
 
-			var updatedControls = this.state.controls.map(function (item) {
+
+			var updatedControls = controls.map(function (item) {
 				if (item.isRequired && !item.hide) {
 					if (item.control !== 'select' && (item.value === '' || !item.value)) {
 						item.isValid = false;
@@ -244,8 +247,10 @@ var Form = function (_React$Component) {
 					var subFieldRequired = firstRequired.value.filter(function (o) {
 						return o.isRequired && !o.isValid || o.greaterThan && !o.isValid || o.regEx && !o.isValid || o.equalTo && !o.isValid;
 					})[0];
+					/* eslint-disable-next-line */ /* flow-disable-next-line */
 					document.getElementById(subFieldRequired.name).focus();
 				} else {
+					/* eslint-disable-next-line */ /* flow-disable-next-line */
 					document.getElementById(firstRequired.name).focus();
 				}
 			}
@@ -258,7 +263,6 @@ var Form = function (_React$Component) {
 			var _props = this.props,
 			    className = _props.className,
 			    style = _props.style,
-			    viewport = _props.viewport,
 			    succeed = _props.succeed,
 			    isSent = _props.isSent,
 			    sendButton = _props.sendButton,
@@ -293,8 +297,8 @@ var Form = function (_React$Component) {
 								name: item.name,
 								label: item.label,
 								value: item.value ? item.value : '',
-								onUpdate: function onUpdate(e) {
-									_this4.onUpdate(e);
+								onUpdate: function onUpdate(e, h) {
+									_this4.onUpdate(e, h);
 								},
 								isRequired: item.isRequired,
 								isValid: item.isValid,
@@ -317,8 +321,8 @@ var Form = function (_React$Component) {
 								name: item.name,
 								label: item.label,
 								value: parseFloat(item.value),
-								onUpdate: function onUpdate(e) {
-									_this4.onUpdate(e);
+								onUpdate: function onUpdate(e, h) {
+									_this4.onUpdate(e, h);
 								},
 								isRequired: item.isRequired,
 								isValid: item.isValid,
@@ -336,14 +340,15 @@ var Form = function (_React$Component) {
 								name: item.name,
 								label: item.label,
 								value: item.value ? item.value : '',
-								onUpdate: function onUpdate(e) {
-									_this4.onUpdate(e);
+								onUpdate: function onUpdate(e, h) {
+									_this4.onUpdate(e, h);
 								},
 								isRequired: item.isRequired,
 								isValid: item.isValid,
 								errorMessage: item.errorMessage,
 								style: item.style,
-								className: item.className ? item.className : ''
+								className: item.className ? item.className : '',
+								limitChar: item.limitChar
 							});
 						case 'select':
 							if (item.hide) return null;
@@ -353,8 +358,8 @@ var Form = function (_React$Component) {
 								label: item.label,
 								disabled: item.disabled,
 								options: item.options,
-								onUpdate: function onUpdate(e) {
-									_this4.onUpdate(e);
+								onUpdate: function onUpdate(e, h) {
+									_this4.onUpdate(e, h);
 								},
 								value: item.value,
 								style: item.style,
@@ -376,8 +381,8 @@ var Form = function (_React$Component) {
 								textAfter: item.textAfter,
 								hideCheck: item.hideCheck,
 								className: item.className ? item.className : '',
-								onUpdate: function onUpdate(e) {
-									_this4.onUpdate(e);
+								onUpdate: function onUpdate(e, h) {
+									_this4.onUpdate(e, h);
 								}
 							});
 						case 'radio':
@@ -387,8 +392,8 @@ var Form = function (_React$Component) {
 								name: item.name,
 								label: item.label,
 								options: item.options,
-								onUpdate: function onUpdate(e) {
-									_this4.onUpdate(e);
+								onUpdate: function onUpdate(e, h) {
+									_this4.onUpdate(e, h);
 								},
 								value: (0, _utils.notEmpty)(item.value) ? item.value : item.default,
 								hideRadio: item.hideRadio,
@@ -415,8 +420,8 @@ var Form = function (_React$Component) {
 								name: item.name,
 								value: item.value,
 								tabs: item.tabs,
-								onUpdate: function onUpdate(e) {
-									_this4.onUpdate(e);
+								onUpdate: function onUpdate(e, h) {
+									_this4.onUpdate(e, h);
 								},
 								style: item.style,
 								className: item.className ? item.className : '',
@@ -434,8 +439,8 @@ var Form = function (_React$Component) {
 								name: item.name,
 								label: item.label,
 								value: item.value,
-								onUpdate: function onUpdate(e) {
-									_this4.onUpdate(e);
+								onUpdate: function onUpdate(e, h) {
+									_this4.onUpdate(e, h);
 								},
 								style: item.style,
 								className: item.className ? item.className : '',
@@ -451,8 +456,8 @@ var Form = function (_React$Component) {
 								label: item.label,
 								value: item.value,
 								text: item.text,
-								onUpdate: function onUpdate(e) {
-									_this4.onUpdate(e);
+								onUpdate: function onUpdate(e, h) {
+									_this4.onUpdate(e, h);
 								},
 								style: item.style,
 								firstRange: item.firstRange,
@@ -489,28 +494,5 @@ var Form = function (_React$Component) {
 
 	return Form;
 }(_react2.default.Component);
-
-Form.propTypes = {
-	textBeforeButton: _propTypes2.default.element,
-	textAfterButton: _propTypes2.default.element,
-	controls: _propTypes2.default.instanceOf(Object).isRequired,
-	sendForm: _propTypes2.default.func,
-	sendButton: _propTypes2.default.instanceOf(Object),
-	style: _propTypes2.default.instanceOf(Object),
-	onUpdate: _propTypes2.default.func,
-	succeed: _propTypes2.default.bool,
-	isSent: _propTypes2.default.bool
-};
-
-Form.defaultProps = {
-	textBeforeButton: null,
-	textAfterButton: null,
-	sendButton: null,
-	style: null,
-	onUpdate: null,
-	sendForm: null,
-	succeed: null,
-	isSent: null
-};
 
 exports.default = Form;

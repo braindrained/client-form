@@ -10,10 +10,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _reactOnclickout = require('react-onclickout');
 
 var _reactOnclickout2 = _interopRequireDefault(_reactOnclickout);
@@ -135,7 +131,7 @@ var FakeSelect = function (_React$Component) {
 							},
 							style: { zIndex: displaySelect ? 1 : 0, paddingLeft: 8 }
 						},
-						value.min !== '' && value.max !== '' ? value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') + ' -\n\t\t\t\t\t\t\t\t\t' + value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : value.min !== '' && value.max === '' ? 'da ' + value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : value.min === '' && value.max !== '' ? 'fino a ' + value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : text
+						value.min !== '' && value.max !== '' ? value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') + ' -\n\t\t\t\t\t\t\t\t' + value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : value.min !== '' && value.max === '' ? 'da ' + value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : value.min === '' && value.max !== '' ? 'fino a ' + value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : text
 					),
 					_react2.default.createElement(_FieldError2.default, { isValid: isValid, errorMessage: errorMessage }),
 					_react2.default.createElement(
@@ -194,31 +190,5 @@ var FakeSelect = function (_React$Component) {
 
 	return FakeSelect;
 }(_react2.default.Component);
-
-FakeSelect.propTypes = {
-	value: _propTypes2.default.instanceOf(Object),
-	onUpdate: _propTypes2.default.func,
-	name: _propTypes2.default.string,
-	className: _propTypes2.default.string,
-	style: _propTypes2.default.instanceOf(Object),
-	label: _propTypes2.default.instanceOf(Object),
-	text: _propTypes2.default.string,
-	firstRange: _propTypes2.default.instanceOf(Object),
-	secondRange: _propTypes2.default.instanceOf(Object),
-	rangesStyle: _propTypes2.default.instanceOf(Object)
-};
-
-FakeSelect.defaultProps = {
-	value: null,
-	onUpdate: null,
-	name: '',
-	className: '',
-	style: {},
-	label: {},
-	text: '',
-	firstRange: null,
-	secondRange: null,
-	rangesStyle: null
-};
 
 exports.default = FakeSelect;

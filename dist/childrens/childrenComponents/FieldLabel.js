@@ -21,7 +21,7 @@ var FieldLabel = function FieldLabel(props) {
 
 	return _react2.default.createElement(
 		'label',
-		{ className: 'field-label noselect', style: Object.assign({}, label && label.style ? label.style : {}, isValid === false ? { color: '#e4002b' } : {}) },
+		{ htmlFor: name, className: 'field-label noselect', style: Object.assign({}, label && label.style ? label.style : {}, isValid === false ? { color: '#e4002b' } : {}) },
 		(0, _utils.camelToTitle)(label && label.text, name),
 		' ',
 		isRequired ? '*' : null,

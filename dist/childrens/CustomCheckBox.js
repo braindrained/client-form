@@ -22,6 +22,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// flow-disable-next-line
+
+
 var CustomCheckBox = function (_React$Component) {
 	_inherits(CustomCheckBox, _React$Component);
 
@@ -31,7 +34,7 @@ var CustomCheckBox = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (CustomCheckBox.__proto__ || Object.getPrototypeOf(CustomCheckBox)).call(this, props));
 
 		_this.state = {
-			value: _this.props.value === 'false' || _this.props.value === null || _this.props.value === false || _this.props.value === undefined ? false : true
+			value: _this.props.value === 'true' || _this.props.value === true
 		};
 		return _this;
 	}

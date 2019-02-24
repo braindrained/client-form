@@ -10,10 +10,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _FieldLabel = require('./childrenComponents/FieldLabel');
 
 var _FieldLabel2 = _interopRequireDefault(_FieldLabel);
@@ -56,22 +52,24 @@ var CustomTextField = function (_React$Component) {
 			if (this.props.isValid !== nextProps.isValid) return true;
 			return false;
 		}
-	}, {
-		key: 'componentWillReceiveProps',
-		value: function componentWillReceiveProps(nextProps) {
-			if (this.state.value !== nextProps.value) {
-				this.setState({
-					value: nextProps.value
-				});
-			}
 
-			if (!nextProps.isValid) {
-				this.setState({
-					value: nextProps.value,
-					isValid: nextProps.isValid
-				});
-			}
-		}
+		/*
+  componentWillReceiveProps(nextProps: Object) {
+  	if (this.state.value !== nextProps.value) {
+  		this.setState({
+  			value: nextProps.value,
+  		});
+  	}
+  
+  	if (!nextProps.isValid) {
+  		this.setState({
+  			value: nextProps.value,
+  			isValid: nextProps.isValid,
+  		});
+  	}
+  }
+  */
+
 	}, {
 		key: 'onChange',
 		value: function onChange(event) {
@@ -176,39 +174,5 @@ var CustomTextField = function (_React$Component) {
 
 	return CustomTextField;
 }(_react2.default.Component);
-
-CustomTextField.propTypes = {
-	placeholder: _propTypes2.default.string,
-	name: _propTypes2.default.string,
-	type: _propTypes2.default.string,
-	disabled: _propTypes2.default.bool,
-	label: _propTypes2.default.instanceOf(Object),
-	textAfter: _propTypes2.default.instanceOf(Object),
-	onUpdate: _propTypes2.default.func,
-	errorMessage: _propTypes2.default.string,
-	className: _propTypes2.default.string,
-	style: _propTypes2.default.instanceOf(Object),
-	isRequired: _propTypes2.default.bool,
-	onlyNumber: _propTypes2.default.bool,
-	isValid: _propTypes2.default.bool,
-	value: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
-};
-
-CustomTextField.defaultProps = {
-	placeholder: null,
-	name: null,
-	type: null,
-	disabled: false,
-	label: null,
-	textAfter: null,
-	onUpdate: null,
-	errorMessage: null,
-	className: null,
-	style: null,
-	isRequired: false,
-	onlyNumber: false,
-	isValid: true,
-	value: null
-};
 
 exports.default = CustomTextField;

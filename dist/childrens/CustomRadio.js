@@ -10,10 +10,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _FieldLabel = require('./childrenComponents/FieldLabel');
 
 var _FieldLabel2 = _interopRequireDefault(_FieldLabel);
@@ -29,6 +25,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// flow-disable-next-line
+
 
 var CustomRadio = function (_React$Component) {
 	_inherits(CustomRadio, _React$Component);
@@ -68,7 +67,7 @@ var CustomRadio = function (_React$Component) {
 				// eslint-disable-next-line
 				if (this.state.value == event.target.value) {
 					this.props.options.map(function (item) {
-						// flow-disable-next-line
+						/* eslint-disable-next-line */ /* flow-disable-next-line */
 						document.getElementById(_this2.props.name + item.value).checked = false;
 						return null;
 					});
@@ -156,28 +155,5 @@ var CustomRadio = function (_React$Component) {
 
 	return CustomRadio;
 }(_react2.default.Component);
-
-CustomRadio.propTypes = {
-	className: _propTypes2.default.string,
-	onUpdate: _propTypes2.default.func.isRequired,
-	textBefore: _propTypes2.default.instanceOf(Object),
-	hideRadio: _propTypes2.default.bool,
-	css: _propTypes2.default.instanceOf(Object),
-	label: _propTypes2.default.instanceOf(Object),
-	options: _propTypes2.default.instanceOf(Object).isRequired,
-	value: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number, _propTypes2.default.bool]),
-	name: _propTypes2.default.string.isRequired,
-	uncheck: _propTypes2.default.bool
-};
-
-CustomRadio.defaultProps = {
-	className: null,
-	textBefore: null,
-	hideRadio: null,
-	css: null,
-	label: null,
-	uncheck: false,
-	value: null
-};
 
 exports.default = CustomRadio;

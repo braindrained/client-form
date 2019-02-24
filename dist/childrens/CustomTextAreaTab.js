@@ -10,10 +10,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _utils = require('../helpers/utils');
 
 var _FieldError = require('./childrenComponents/FieldError');
@@ -191,19 +187,5 @@ var CustomTextareaWithTab = function (_React$Component) {
 
 	return CustomTextareaWithTab;
 }(_react2.default.Component);
-
-CustomTextareaWithTab.propTypes = {
-	value: _propTypes2.default.instanceOf(Object),
-	errorMessage: _propTypes2.default.string,
-	isRequired: _propTypes2.default.bool,
-	onUpdate: _propTypes2.default.func
-};
-
-CustomTextareaWithTab.defaultProps = {
-	value: [],
-	errorMessage: null,
-	isRequired: false,
-	onUpdate: null
-};
 
 exports.default = CustomTextareaWithTab;

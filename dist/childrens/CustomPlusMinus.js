@@ -10,10 +10,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _FieldLabel = require('./childrenComponents/FieldLabel');
 
 var _FieldLabel2 = _interopRequireDefault(_FieldLabel);
@@ -41,8 +37,7 @@ var CustomPlusMinus = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (CustomPlusMinus.__proto__ || Object.getPrototypeOf(CustomPlusMinus)).call(this, props));
 
 		_this.state = {
-			value: _this.props.value === '' ? 0 : parseFloat(_this.props.value),
-			error: !_this.props.isValid
+			value: _this.props.value === '' ? 0 : parseFloat(_this.props.value)
 		};
 		return _this;
 	}
@@ -59,8 +54,7 @@ var CustomPlusMinus = function (_React$Component) {
 		value: function onChange(event) {
 			var value = parseInt(event.target.value === '' ? 0 : event.target.value, 10);
 			this.setState({
-				value: value,
-				error: false
+				value: value
 			});
 		}
 	}, {
@@ -76,8 +70,7 @@ var CustomPlusMinus = function (_React$Component) {
 			} else {
 				var value = parseInt(event.target.value === '' ? 0 : event.target.value, 10);
 				this.setState({
-					value: value,
-					error: false
+					value: value
 				});
 			}
 		}
@@ -86,8 +79,7 @@ var CustomPlusMinus = function (_React$Component) {
 		value: function plusMinus(val) {
 			var value = val === 'min' ? this.state.value === 0 ? 0 : parseFloat(this.state.value) - 1 : parseFloat(this.state.value) + 1;
 			this.setState({
-				value: parseFloat(value),
-				error: false
+				value: parseFloat(value)
 			});
 
 			this.props.onUpdate({
@@ -187,37 +179,5 @@ var CustomPlusMinus = function (_React$Component) {
 
 	return CustomPlusMinus;
 }(_react2.default.Component);
-
-CustomPlusMinus.propTypes = {
-	placeholder: _propTypes2.default.string,
-	name: _propTypes2.default.string,
-	type: _propTypes2.default.string,
-	disabled: _propTypes2.default.bool,
-	label: _propTypes2.default.instanceOf(Object),
-	textAfter: _propTypes2.default.instanceOf(Object),
-	onUpdate: _propTypes2.default.func,
-	errorMessage: _propTypes2.default.string,
-	className: _propTypes2.default.string,
-	style: _propTypes2.default.instanceOf(Object),
-	isRequired: _propTypes2.default.bool,
-	isValid: _propTypes2.default.bool,
-	value: _propTypes2.default.number
-};
-
-CustomPlusMinus.defaultProps = {
-	placeholder: null,
-	name: null,
-	type: null,
-	disabled: false,
-	label: null,
-	textAfter: null,
-	onUpdate: null,
-	errorMessage: null,
-	className: null,
-	style: null,
-	isRequired: false,
-	isValid: true,
-	value: null
-};
 
 exports.default = CustomPlusMinus;

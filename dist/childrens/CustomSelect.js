@@ -10,10 +10,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _FieldLabel = require('./childrenComponents/FieldLabel');
 
 var _FieldLabel2 = _interopRequireDefault(_FieldLabel);
@@ -124,33 +120,5 @@ var CustomSelect = function (_React$Component) {
 
 	return CustomSelect;
 }(_react2.default.Component);
-
-CustomSelect.propTypes = {
-	options: _propTypes2.default.instanceOf(Object),
-	onUpdate: _propTypes2.default.func,
-	name: _propTypes2.default.string,
-	value: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
-	default: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
-	className: _propTypes2.default.string,
-	style: _propTypes2.default.instanceOf(Object),
-	label: _propTypes2.default.instanceOf(Object),
-	isValid: _propTypes2.default.bool,
-	isRequired: _propTypes2.default.bool,
-	errorMessage: _propTypes2.default.string
-};
-
-CustomSelect.defaultProps = {
-	options: null,
-	onUpdate: null,
-	name: '',
-	value: '',
-	default: null,
-	className: '',
-	style: null,
-	label: null,
-	isValid: true,
-	isRequired: false,
-	errorMessage: ''
-};
 
 exports.default = CustomSelect;

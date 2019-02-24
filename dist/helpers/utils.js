@@ -26,9 +26,9 @@ var notEmpty = exports.notEmpty = function notEmpty(val) {
 };
 
 var camelToTitle = exports.camelToTitle = function camelToTitle(str, name) {
-	return str === null ? name.replace(/([A-Z][a-z]+)/g, " $1") // Words beginning with UC
-	.replace(/([A-Z][A-Z]+)/g, " $1") // "Words" of only UC
-	.replace(/([^A-Za-z ]+)/g, " $1") // "Words" of non-letters
+	return str === null ? name.replace(/([A-Z][a-z]+)/g, ' $1') // Words beginning with UC
+	.replace(/([A-Z][A-Z]+)/g, ' $1') // "Words" of only UC
+	.replace(/([^A-Za-z ]+)/g, ' $1') // "Words" of non-letters
 	.replace(/\w\S*/g, function (txt) {
 		return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
 	}) : str;
