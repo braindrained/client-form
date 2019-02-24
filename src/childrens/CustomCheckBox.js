@@ -8,9 +8,9 @@ export default class CustomCheckBox extends React.Component<any, any> {
 
 	constructor(props) {
 		super(props);
-
+console.log(this.props.value);
 		this.state = {
-			value: this.props.value === 'false' || this.props.value === null ? false : true
+			value: this.props.value === 'false' || this.props.value === null || this.props.value === false || this.props.value === undefined ? false : true
 		};
 	}
 
