@@ -11,18 +11,19 @@ class CustomSelect extends React.Component<any, any> {
 
 		this.state = {
 			options: this.props.options,
+			isValid: this.props.isValid
 		};
 	}
 
 	shouldComponentUpdate(nextProps: Object, nextState: Object) {
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
+		if (this.props.isValid !== nextProps.isValid) return true;
 		return false;
 	}
 
 	componentWillReceiveProps(nextProps: Object) {
 		if (nextProps.options.length !== this.state.options.length) {
-			console.log('componentWillReceiveProps');
 			this.setState({
 				options: nextProps.options
 			});
@@ -41,12 +42,13 @@ class CustomSelect extends React.Component<any, any> {
 	}
 
 	render() {
-		const { className, style, label, isValid, isRequired, value, errorMessage, name } = this.props;
+		const { className, style, label, isRequired, value, errorMessage, name } = this.props;
+		const { isValid } = this.state;
 
 		return (
 			<div className={sumClasses(['field-container', className])} style={style}>
 				<FieldLabel {...{ label, name, isRequired, isValid }} />
-				<div className="select-style" style={!isValid ? { borderColor: '#e4002b' } : {}}>
+				<div className="select-style" style={isValid === false ? { borderColor: '#e4002b' } : {}}>
 					<select name={name} id={name} value={value} onChange={this.onChange.bind(this)}>
 						{
 							this.state.options.map((item, i) => {

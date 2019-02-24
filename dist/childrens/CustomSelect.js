@@ -37,7 +37,8 @@ var CustomSelect = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (CustomSelect.__proto__ || Object.getPrototypeOf(CustomSelect)).call(this, props));
 
 		_this.state = {
-			options: _this.props.options
+			options: _this.props.options,
+			isValid: _this.props.isValid
 		};
 		return _this;
 	}
@@ -47,13 +48,13 @@ var CustomSelect = function (_React$Component) {
 		value: function shouldComponentUpdate(nextProps, nextState) {
 			if (this.props.value !== nextProps.value) return true;
 			if (this.state.value !== nextState.value) return true;
+			if (this.props.isValid !== nextProps.isValid) return true;
 			return false;
 		}
 	}, {
 		key: 'componentWillReceiveProps',
 		value: function componentWillReceiveProps(nextProps) {
 			if (nextProps.options.length !== this.state.options.length) {
-				console.log('componentWillReceiveProps');
 				this.setState({
 					options: nextProps.options
 				});
@@ -78,11 +79,11 @@ var CustomSelect = function (_React$Component) {
 			    className = _props.className,
 			    style = _props.style,
 			    label = _props.label,
-			    isValid = _props.isValid,
 			    isRequired = _props.isRequired,
 			    value = _props.value,
 			    errorMessage = _props.errorMessage,
 			    name = _props.name;
+			var isValid = this.state.isValid;
 
 
 			return _react2.default.createElement(
@@ -91,7 +92,7 @@ var CustomSelect = function (_React$Component) {
 				_react2.default.createElement(_FieldLabel2.default, { label: label, name: name, isRequired: isRequired, isValid: isValid }),
 				_react2.default.createElement(
 					'div',
-					{ className: 'select-style', style: !isValid ? { borderColor: '#e4002b' } : {} },
+					{ className: 'select-style', style: isValid === false ? { borderColor: '#e4002b' } : {} },
 					_react2.default.createElement(
 						'select',
 						{ name: name, id: name, value: value, onChange: this.onChange.bind(this) },
