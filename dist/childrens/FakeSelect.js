@@ -67,7 +67,6 @@ var FakeSelect = function (_React$Component) {
 	}, {
 		key: 'onClick',
 		value: function onClick(val) {
-			console.log(val);
 			if (val !== this.state.displaySelect) {
 				this.setState({
 					displaySelect: val

@@ -31,7 +31,7 @@ var CustomCheckBox = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (CustomCheckBox.__proto__ || Object.getPrototypeOf(CustomCheckBox)).call(this, props));
 
 		_this.state = {
-			value: _this.props.value
+			value: _this.props.value === 'false' || _this.props.value === null ? false : true
 		};
 		return _this;
 	}
@@ -59,6 +59,8 @@ var CustomCheckBox = function (_React$Component) {
 	}, {
 		key: 'render',
 		value: function render() {
+			var _this2 = this;
+
 			var _props = this.props,
 			    className = _props.className,
 			    style = _props.style,
@@ -66,6 +68,7 @@ var CustomCheckBox = function (_React$Component) {
 			    name = _props.name,
 			    textAfter = _props.textAfter,
 			    textBefore = _props.textBefore;
+			var value = this.state.value;
 
 
 			return _react2.default.createElement(
@@ -83,8 +86,10 @@ var CustomCheckBox = function (_React$Component) {
 							type: 'checkbox',
 							name: name,
 							id: name,
-							checked: this.state.value,
-							onChange: this.onChange.bind(this)
+							checked: value,
+							onChange: function onChange(e) {
+								_this2.onChange(e);
+							}
 						}),
 						_react2.default.createElement(
 							'label',
