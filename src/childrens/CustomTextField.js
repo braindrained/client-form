@@ -1,13 +1,12 @@
 // @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { camelToTitle, sumClasses } from '../helpers/utils';
 
 class CustomTextField extends React.Component<any, any> {
 
-	constructor(props) {
+	constructor(props: Object) {
 		super(props);
 
 		this.state = {
@@ -17,13 +16,14 @@ class CustomTextField extends React.Component<any, any> {
 		};
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
+	shouldComponentUpdate(nextProps: Object, nextState: Object) {
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
 		if (this.props.isValid !== nextProps.isValid) return true;
-    return false;
+		return false;
 	}
 
+	/*
 	componentWillReceiveProps(nextProps: Object) {
 		if (this.state.value !== nextProps.value) {
 			this.setState({
@@ -38,6 +38,7 @@ class CustomTextField extends React.Component<any, any> {
 			});
 		}
 	}
+	*/
 
 	onChange(event: Object) {
 		const value = this.props.limitChar ? event.target.value.substring(0, this.props.limitChar) : event.target.value;
@@ -92,7 +93,7 @@ class CustomTextField extends React.Component<any, any> {
 
 		return (
 			<div className={sumClasses(['field-container', className])} style={style}>
-				<FieldLabel {...{ label, name, isRequired, isValid }}/>
+				<FieldLabel {...{ label, name, isRequired, isValid }} />
 				<input {...{
 					type,
 					placeholder: camelToTitle(placeholder, name),
@@ -115,42 +116,5 @@ class CustomTextField extends React.Component<any, any> {
 		);
 	}
 }
-
-CustomTextField.propTypes = {
-	placeholder: PropTypes.string,
-	name: PropTypes.string,
-	type: PropTypes.string,
-	disabled: PropTypes.bool,
-	label: PropTypes.instanceOf(Object),
-	textAfter: PropTypes.instanceOf(Object),
-	onUpdate: PropTypes.func,
-	errorMessage: PropTypes.string,
-	className: PropTypes.string,
-	style: PropTypes.instanceOf(Object),
-	isRequired: PropTypes.bool,
-	onlyNumber: PropTypes.bool,
-	isValid: PropTypes.bool,
-	value: PropTypes.oneOfType([
-		PropTypes.string,
-		PropTypes.number,
-	]),
-};
-
-CustomTextField.defaultProps = {
-	placeholder: null,
-	name: null,
-	type: null,
-	disabled: false,
-	label: null,
-	textAfter: null,
-	onUpdate: null,
-	errorMessage: null,
-	className: null,
-	style: null,
-	isRequired: false,
-	onlyNumber: false,
-	isValid: true,
-	value: null,
-};
 
 export default CustomTextField;

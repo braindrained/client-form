@@ -1,13 +1,12 @@
 // @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { sumClasses } from '../helpers/utils';
 
 class CustomSelect extends React.Component<any, any> {
 
-	constructor(props) {
+	constructor(props: Object) {
 		super(props);
 
 		this.state = {
@@ -15,10 +14,10 @@ class CustomSelect extends React.Component<any, any> {
 		};
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
+	shouldComponentUpdate(nextProps: Object, nextState: Object) {
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
-    return false;
+		return false;
 	}
 
 	componentWillReceiveProps(nextProps: Object) {
@@ -46,7 +45,7 @@ class CustomSelect extends React.Component<any, any> {
 
 		return (
 			<div className={sumClasses(['field-container', className])} style={style}>
-				<FieldLabel {...{ label, name, isRequired, isValid }}/>
+				<FieldLabel {...{ label, name, isRequired, isValid }} />
 				<div className="select-style" style={!isValid ? { borderColor: '#e4002b' } : {}}>
 					<select name={name} id={name} value={value} onChange={this.onChange.bind(this)}>
 						{
@@ -66,39 +65,5 @@ class CustomSelect extends React.Component<any, any> {
 		);
 	}
 }
-
-CustomSelect.propTypes = {
-	options: PropTypes.instanceOf(Object),
-	onUpdate: PropTypes.func,
-	name: PropTypes.string,
-	value: PropTypes.oneOfType([
-		PropTypes.string,
-		PropTypes.number
-	]),
-	default: PropTypes.oneOfType([
-		PropTypes.string,
-		PropTypes.number
-	]),
-	className: PropTypes.string,
-	style: PropTypes.instanceOf(Object),
-	label: PropTypes.instanceOf(Object),
-	isValid: PropTypes.bool,
-	isRequired: PropTypes.bool,
-	errorMessage: PropTypes.string
-};
-
-CustomSelect.defaultProps = {
-	options: null,
-	onUpdate: null,
-	name: '',
-	value: '',
-	default: null,
-	className: '',
-	style: null,
-	label: null,
-	isValid: true,
-	isRequired: false,
-	errorMessage: ''
-};
 
 export default CustomSelect;

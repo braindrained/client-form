@@ -30,7 +30,6 @@ var CustomCheckBox = function (_React$Component) {
 
 		var _this = _possibleConstructorReturn(this, (CustomCheckBox.__proto__ || Object.getPrototypeOf(CustomCheckBox)).call(this, props));
 
-		console.log(_this.props.value);
 		_this.state = {
 			value: _this.props.value === 'false' || _this.props.value === null || _this.props.value === false || _this.props.value === undefined ? false : true
 		};

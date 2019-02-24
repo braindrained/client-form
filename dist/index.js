@@ -155,8 +155,8 @@ var Form = function (_React$Component) {
 				controls: updatedControls
 			});
 
-			if (this.props.updateFather) {
-				this.props.updateFather(updatedControls);
+			if (this.props.updateOnChange) {
+				this.props.updateOnChange(updatedControls);
 			}
 		}
 	}, {
@@ -267,8 +267,8 @@ var Form = function (_React$Component) {
 			    textAfterButton = _props.textAfterButton;
 			var controls = this.state.controls;
 
-			var sendButtonClass = (0, _utils.sumClasses)([succeed !== null ? succeed ? 'btn btn-succeed' : 'btn btn-error' : 'btn', isSent ? 'spinner' : '', sendButton.disabled ? 'btn-disabled' : '']);
-			var sendButtonValue = succeed === null ? sendButton.text : succeed === false ? sendButton.errorText : sendButton.succeedText;
+			var sendButtonClass = (0, _utils.sumClasses)([succeed !== null ? succeed ? 'btn btn-succeed' : 'btn btn-error' : 'btn', isSent ? 'spinner' : '', sendButton && sendButton.disabled ? 'btn-disabled' : '']);
+			var sendButtonValue = sendButton ? succeed === null ? sendButton.text : succeed === false ? sendButton.errorText : sendButton.succeedText : null;
 
 			return _react2.default.createElement(
 				'div',
@@ -464,7 +464,7 @@ var Form = function (_React$Component) {
 					}
 				}),
 				textBeforeButton,
-				_react2.default.createElement(
+				sendButton ? _react2.default.createElement(
 					'div',
 					{ className: 'button-container', style: buttonContainerStyle },
 					_react2.default.createElement(
@@ -481,7 +481,7 @@ var Form = function (_React$Component) {
 						},
 						sendButtonValue
 					)
-				),
+				) : null,
 				textAfterButton
 			);
 		}

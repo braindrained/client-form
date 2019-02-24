@@ -1,5 +1,5 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import CustomTextField from './childrens/CustomTextField';
 import CustomTextarea from './childrens/CustomTextarea';
@@ -11,13 +11,14 @@ import CustomTextAreaTab from './childrens/CustomTextAreaTab';
 import DatePickerField from './childrens/DatePickerField';
 import CustomPlusMinus from './childrens/CustomPlusMinus';
 import FakeSelect from './childrens/FakeSelect';
+// flow-disable-next-line
 import './Form.scss';
 
 import { notEmpty, sumClasses } from './helpers/utils';
 
 const Form = class extends React.Component<any, any> {
 
-	constructor(props) {
+	constructor(props: Object) {
 		super(props);
 
 		this.state = {
@@ -26,7 +27,9 @@ const Form = class extends React.Component<any, any> {
 	}
 
 	onUpdate(e: Object, hasError: boolean) {
-		const updatedControls = this.state.controls.map((item) => {
+		const { controls } = this.state;
+
+		const updatedControls = controls.map((item) => {
 			if (e.target.name === item.name) {
 				item.isValid = !hasError;
 				item.value = e.target.value;
@@ -91,8 +94,9 @@ const Form = class extends React.Component<any, any> {
 
 	formIsValid() {
 		let formIsValid = true;
+		const { controls } = this.state;
 
-		const updatedControls = this.state.controls.map((item) => {
+		const updatedControls = controls.map((item) => {
 			if (item.isRequired && !item.hide) {
 				if (item.control !== 'select' && (item.value === '' || !item.value)) {
 					item.isValid = false;
@@ -160,8 +164,10 @@ const Form = class extends React.Component<any, any> {
 
 			if (typeof firstRequired.value === 'object') {
 				const subFieldRequired = firstRequired.value.filter(o => (o.isRequired && !o.isValid) || (o.greaterThan && !o.isValid) || (o.regEx && !o.isValid) || (o.equalTo && !o.isValid))[0];
+				/* eslint-disable-next-line */ /* flow-disable-next-line */
 				document.getElementById(subFieldRequired.name).focus();
 			} else {
+				/* eslint-disable-next-line */ /* flow-disable-next-line */
 				document.getElementById(firstRequired.name).focus();
 			}
 		}
@@ -169,7 +175,7 @@ const Form = class extends React.Component<any, any> {
 
 	render() {
 		const {
-			className, style, viewport, succeed, isSent,
+			className, style, succeed, isSent,
 			sendButton, textBeforeButton, buttonContainerStyle,
 			textAfterButton
 		} = this.props;
@@ -204,7 +210,7 @@ const Form = class extends React.Component<any, any> {
 								name: item.name,
 								label: item.label,
 								value: item.value ? item.value : '',
-								onUpdate: (e) => { this.onUpdate(e) },
+								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								isRequired: item.isRequired,
 								isValid: item.isValid,
 								disabled: item.disabled,
@@ -228,7 +234,7 @@ const Form = class extends React.Component<any, any> {
 								name: item.name,
 								label: item.label,
 								value: parseFloat(item.value),
-								onUpdate: (e) => { this.onUpdate(e) },
+								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								isRequired: item.isRequired,
 								isValid: item.isValid,
 								disabled: item.disabled,
@@ -247,12 +253,13 @@ const Form = class extends React.Component<any, any> {
 								name: item.name,
 								label: item.label,
 								value: item.value ? item.value : '',
-								onUpdate: (e) => { this.onUpdate(e) },
+								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								isRequired: item.isRequired,
 								isValid: item.isValid,
 								errorMessage: item.errorMessage,
 								style: item.style,
 								className: item.className ? item.className : '',
+								limitChar: item.limitChar
 							}} />
 						);
 					case 'select':
@@ -264,7 +271,7 @@ const Form = class extends React.Component<any, any> {
 								label: item.label,
 								disabled: item.disabled,
 								options: item.options,
-								onUpdate: (e) => { this.onUpdate(e) },
+								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								value: item.value,
 								style: item.style,
 								className: item.className ? item.className : '',
@@ -287,7 +294,7 @@ const Form = class extends React.Component<any, any> {
 								textAfter: item.textAfter,
 								hideCheck: item.hideCheck,
 								className: item.className ? item.className : '',
-								onUpdate: (e) => { this.onUpdate(e) },
+								onUpdate: (e, h) => { this.onUpdate(e, h); },
 							}} />
 						);
 					case 'radio':
@@ -298,7 +305,7 @@ const Form = class extends React.Component<any, any> {
 								name: item.name,
 								label: item.label,
 								options: item.options,
-								onUpdate: (e) => { this.onUpdate(e) },
+								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								value: notEmpty(item.value) ? item.value : item.default,
 								hideRadio: item.hideRadio,
 								uncheck: item.uncheck,
@@ -328,7 +335,7 @@ const Form = class extends React.Component<any, any> {
 								name: item.name,
 								value: item.value,
 								tabs: item.tabs,
-								onUpdate: (e) => { this.onUpdate(e) },
+								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								style: item.style,
 								className: item.className ? item.className : '',
 								isRequired: item.isRequired,
@@ -347,7 +354,7 @@ const Form = class extends React.Component<any, any> {
 								name: item.name,
 								label: item.label,
 								value: item.value,
-								onUpdate: (e) => { this.onUpdate(e) },
+								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								style: item.style,
 								className: item.className ? item.className : '',
 								updateOnChange: item.updateOnChange,
@@ -364,7 +371,7 @@ const Form = class extends React.Component<any, any> {
 								label: item.label,
 								value: item.value,
 								text: item.text,
-								onUpdate: (e) => { this.onUpdate(e) },
+								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								style: item.style,
 								firstRange: item.firstRange,
 								secondRange: item.secondRange,
@@ -378,10 +385,11 @@ const Form = class extends React.Component<any, any> {
 				{ textBeforeButton }
 				{ sendButton ?
 					<div className="button-container" style={buttonContainerStyle}>
+						{/* eslint-disable-next-line */}
 						<button {...{
 							className: sendButtonClass,
 							style: sendButton.style,
-							onClick: succeed === null && isSent === null && sendButton.disabled === undefined ? () => { this.formIsValid() } : () => { return null; },
+							onClick: succeed === null && isSent === null && sendButton.disabled === undefined ? () => { this.formIsValid(); } : () => null,
 							type: 'button'
 						}}>
 							{sendButtonValue}
@@ -392,29 +400,6 @@ const Form = class extends React.Component<any, any> {
 			</div>
 		);
 	}
-}
-
-Form.propTypes = {
-	textBeforeButton: PropTypes.element,
-	textAfterButton: PropTypes.element,
-	controls: PropTypes.instanceOf(Object).isRequired,
-	sendForm: PropTypes.func,
-	sendButton: PropTypes.instanceOf(Object),
-	style: PropTypes.instanceOf(Object),
-	onUpdate: PropTypes.func,
-	succeed: PropTypes.bool,
-	isSent: PropTypes.bool,
-};
-
-Form.defaultProps = {
-	textBeforeButton: null,
-	textAfterButton: null,
-	sendButton: null,
-	style: null,
-	onUpdate: null,
-	sendForm: null,
-	succeed: null,
-	isSent: null,
 };
 
 export default Form;

@@ -8,7 +8,7 @@ const FieldError = (props: Object) => {
 		<div className="validation-error noselect" style={style}>
 			&nbsp;{isValid === false ? errorMessage : '' }
 		</div>
-	)
+	);
 
 };
 

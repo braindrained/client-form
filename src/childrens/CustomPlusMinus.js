@@ -1,32 +1,29 @@
 // @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { sumClasses } from '../helpers/utils';
 
 class CustomPlusMinus extends React.Component<any, any> {
 
-	constructor(props) {
+	constructor(props: Object) {
 		super(props);
 
 		this.state = {
-			value: this.props.value === '' ? 0 : parseFloat(this.props.value),
-			error: !this.props.isValid
+			value: this.props.value === '' ? 0 : parseFloat(this.props.value)
 		};
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
+	shouldComponentUpdate(nextProps: Object, nextState: Object) {
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
-    return false;
+		return false;
 	}
 
 	onChange(event: Object) {
 		const value = parseInt(event.target.value === '' ? 0 : event.target.value, 10);
 		this.setState({
-			value: value,
-			error: false,
+			value
 		});
 	}
 
@@ -40,8 +37,7 @@ class CustomPlusMinus extends React.Component<any, any> {
 		} else {
 			const value = parseInt(event.target.value === '' ? 0 : event.target.value, 10);
 			this.setState({
-				value: value,
-				error: false,
+				value
 			});
 		}
 	}
@@ -52,8 +48,7 @@ class CustomPlusMinus extends React.Component<any, any> {
 				: parseFloat(this.state.value) - 1
 			: parseFloat(this.state.value) + 1;
 		this.setState({
-			value: parseFloat(value),
-			error: false,
+			value: parseFloat(value)
 		});
 
 		this.props.onUpdate({
@@ -72,7 +67,7 @@ class CustomPlusMinus extends React.Component<any, any> {
 
 		return (
 			<div className={sumClasses(['field-container cutom-plus-minus', className])} style={style}>
-				<FieldLabel {...{ label, name, isRequired, isValid }}/>
+				<FieldLabel {...{ label, name, isRequired, isValid }} />
 				<div style={{ float: 'left' }}>
 					<div {...{
 						onClick: () => { this.plusMinus('min'); },
@@ -124,37 +119,5 @@ class CustomPlusMinus extends React.Component<any, any> {
 		);
 	}
 }
-
-CustomPlusMinus.propTypes = {
-	placeholder: PropTypes.string,
-	name: PropTypes.string,
-	type: PropTypes.string,
-	disabled: PropTypes.bool,
-	label: PropTypes.instanceOf(Object),
-	textAfter: PropTypes.instanceOf(Object),
-	onUpdate: PropTypes.func,
-	errorMessage: PropTypes.string,
-	className: PropTypes.string,
-	style: PropTypes.instanceOf(Object),
-	isRequired: PropTypes.bool,
-	isValid: PropTypes.bool,
-	value: PropTypes.number,
-};
-
-CustomPlusMinus.defaultProps = {
-	placeholder: null,
-	name: null,
-	type: null,
-	disabled: false,
-	label: null,
-	textAfter: null,
-	onUpdate: null,
-	errorMessage: null,
-	className: null,
-	style: null,
-	isRequired: false,
-	isValid: true,
-	value: null,
-};
 
 export default CustomPlusMinus;

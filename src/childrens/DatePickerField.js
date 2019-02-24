@@ -10,7 +10,7 @@ moment.locale('it');
 
 class DatePickerField extends React.Component<any, any> {
 
-	constructor(props) {
+	constructor(props: Object) {
 		super(props);
 
 		this.state = {

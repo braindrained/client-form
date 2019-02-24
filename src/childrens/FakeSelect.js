@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import ClickOutHandler from 'react-onclickout';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
@@ -11,7 +10,7 @@ import './FakeSelect.scss';
 
 class FakeSelect extends React.Component<any, any> {
 
-	constructor(props) {
+	constructor(props: Object) {
 		super(props);
 
 		this.state = {
@@ -20,11 +19,11 @@ class FakeSelect extends React.Component<any, any> {
 		};
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
+	shouldComponentUpdate(nextProps: Object, nextState: Object) {
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
 		if (this.state.displaySelect !== nextState.displaySelect) return true;
-    return false;
+		return false;
 	}
 
 	onClick(val: boolean) {
@@ -59,7 +58,7 @@ class FakeSelect extends React.Component<any, any> {
 
 		return (
 			<div className={sumClasses(['field-container', className])} style={style}>
-				<FieldLabel {...{ label, name, isRequired, isValid }}/>
+				<FieldLabel {...{ label, name, isRequired, isValid }} />
 				<ClickOutHandler onClickOut={() => { this.onClick(true); }} style={{ maxHeight: 57 }}>
 					<div {...{
 						className: 'select-style noselect',
@@ -67,19 +66,19 @@ class FakeSelect extends React.Component<any, any> {
 						style: { zIndex: displaySelect ? 1 : 0, paddingLeft: 8 }
 					}}>
 
-							{
-								value.min !== '' && value.max !== '' ?
-									`${value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')} -
-									${value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`
+						{
+							value.min !== '' && value.max !== '' ?
+								`${value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')} -
+								${value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`
+								:
+								value.min !== '' && value.max === '' ?
+									`da ${value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`
 									:
-									value.min !== '' && value.max === '' ?
-										`da ${value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`
+									value.min === '' && value.max !== '' ?
+										`fino a ${value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`
 										:
-										value.min === '' && value.max !== '' ?
-											`fino a ${value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`
-											:
-											text
-							}
+										text
+						}
 
 					</div>
 					<FieldError {...{ isValid, errorMessage }} />
@@ -108,31 +107,5 @@ class FakeSelect extends React.Component<any, any> {
 		);
 	}
 }
-
-FakeSelect.propTypes = {
-	value: PropTypes.instanceOf(Object),
-	onUpdate: PropTypes.func,
-	name: PropTypes.string,
-	className: PropTypes.string,
-	style: PropTypes.instanceOf(Object),
-	label: PropTypes.instanceOf(Object),
-	text: PropTypes.string,
-	firstRange: PropTypes.instanceOf(Object),
-	secondRange: PropTypes.instanceOf(Object),
-	rangesStyle: PropTypes.instanceOf(Object)
-};
-
-FakeSelect.defaultProps = {
-	value: null,
-	onUpdate: null,
-	name: '',
-	className: '',
-	style: {},
-	label: {},
-	text: '',
-	firstRange: null,
-	secondRange: null,
-	rangesStyle: null
-};
 
 export default FakeSelect;

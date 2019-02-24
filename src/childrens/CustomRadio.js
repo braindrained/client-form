@@ -1,14 +1,14 @@
 // @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import FieldLabel from './childrenComponents/FieldLabel';
 import { sumClasses } from '../helpers/utils';
 
+// flow-disable-next-line
 import './CustomRadio.scss';
 
 class CustomRadio extends React.Component<any, any> {
 
-	constructor(props) {
+	constructor(props: Object) {
 		super(props);
 
 		this.state = {
@@ -16,10 +16,10 @@ class CustomRadio extends React.Component<any, any> {
 		};
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
+	shouldComponentUpdate(nextProps: Object, nextState: Object) {
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
-    return false;
+		return false;
 	}
 
 	onChange(event: Object) {
@@ -34,7 +34,7 @@ class CustomRadio extends React.Component<any, any> {
 			// eslint-disable-next-line
 			if (this.state.value == event.target.value) {
 				this.props.options.map((item) => {
-					// flow-disable-next-line
+					/* eslint-disable-next-line */ /* flow-disable-next-line */
 					document.getElementById(this.props.name + item.value).checked = false;
 					return null;
 				});
@@ -55,18 +55,16 @@ class CustomRadio extends React.Component<any, any> {
 		const { className, style, label, name, hideRadio, textBefore, options, css, isRequired, isValid } = this.props;
 
 		return (
-			<div className={sumClasses([
-					hideRadio ? 'field-container toggle-format' : 'field-container regular-radio',
-					className
-				])} style={style}>
+			<div className={sumClasses([hideRadio ? 'field-container toggle-format' : 'field-container regular-radio', className])} style={style}>
 				{ textBefore ? (
 					<div style={textBefore.style}>
 						{textBefore.text}
 					</div>
 				) : null }
 				<div className={css}>
-					<FieldLabel {...{ label, name, isRequired, isValid }}/>
+					<FieldLabel {...{ label, name, isRequired, isValid }} />
 					<div className="float-container">
+						{ /* eslint-disable */ }
 						{ options.map(item => <div {...{
 							key: `select_${item.name}_${item.value}`,
 							className:
@@ -87,6 +85,7 @@ class CustomRadio extends React.Component<any, any> {
 							}} />
 							<label htmlFor={name + item.value} style={item.labelStyle ? item.labelStyle : {}}>
 								{ hideRadio ? <span className="hide-radio" /> : <div style={item.disabled === true ? { opacity: 0.5 } : {}} />}
+								{ /* eslint-disable-next-line */ }
 								<div dangerouslySetInnerHTML={{ __html: item.label }} />
 								{ item.customObject ?
 									<div className={item.value === this.state.value ? 'custom-radio-options-wrapper custom-radio-options-wrapper-sel' : 'custom-radio-options-wrapper'}>{item.customObject}</div>
@@ -94,40 +93,13 @@ class CustomRadio extends React.Component<any, any> {
 									null
 								}
 							</label>
-						</div>)
-						}
+						</div>)}
+						{ /* eslint-enable */ }
 					</div>
 				</div>
 			</div>
 		);
 	}
 }
-
-CustomRadio.propTypes = {
-	className: PropTypes.string,
-	onUpdate: PropTypes.func.isRequired,
-	textBefore: PropTypes.instanceOf(Object),
-	hideRadio: PropTypes.bool,
-	css: PropTypes.instanceOf(Object),
-	label: PropTypes.instanceOf(Object),
-	options: PropTypes.instanceOf(Object).isRequired,
-	value: PropTypes.oneOfType([
-		PropTypes.string,
-		PropTypes.number,
-		PropTypes.bool,
-	]),
-	name: PropTypes.string.isRequired,
-	uncheck: PropTypes.bool,
-};
-
-CustomRadio.defaultProps = {
-	className: null,
-	textBefore: null,
-	hideRadio: null,
-	css: null,
-	label: null,
-	uncheck: false,
-	value: null,
-};
 
 export default CustomRadio;

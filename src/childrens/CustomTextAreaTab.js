@@ -1,13 +1,12 @@
 // @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import { sumClasses } from '../helpers/utils';
 
 import FieldError from './childrenComponents/FieldError';
 
 class CustomTextareaWithTab extends React.Component<any, any> {
 
-	constructor(props) {
+	constructor(props: Object) {
 		super(props);
 
 		this.state = {
@@ -119,19 +118,5 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 		);
 	}
 }
-
-CustomTextareaWithTab.propTypes = {
-	value: PropTypes.instanceOf(Object),
-	errorMessage: PropTypes.string,
-	isRequired: PropTypes.bool,
-	onUpdate: PropTypes.func,
-};
-
-CustomTextareaWithTab.defaultProps = {
-	value: [],
-	errorMessage: null,
-	isRequired: false,
-	onUpdate: null,
-};
 
 export default CustomTextareaWithTab;

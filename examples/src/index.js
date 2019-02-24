@@ -151,10 +151,10 @@ class App extends React.Component {
 							},
 							{
 								control: 'check',
-								name: 'isACheckBox',
+								name: 'thisIsACheckBox',
 								label: { text: 'This is an almost real checkbox' },
-								value:	false,
-								hideCheck: true,
+								value: false,
+								hideCheck: false,
 							},
 							{
 								control: 'text',

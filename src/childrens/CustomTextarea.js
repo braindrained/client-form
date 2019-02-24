@@ -1,82 +1,66 @@
 // @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { camelToTitle, sumClasses } from '../helpers/utils';
 
 class CustomTextarea extends React.Component<any, any> {
 
-	constructor(props) {
+	constructor(props: Object) {
 		super(props);
 
 		this.state = {
 			value: this.props.value,
-			error: false,
+			isValid: this.props.isValid
 		};
 	}
 
+	shouldComponentUpdate(nextProps: Object, nextState: Object) {
+		if (this.props.value !== nextProps.value) return true;
+		if (this.state.value !== nextState.value) return true;
+		if (this.props.isValid !== nextProps.isValid) return true;
+		return false;
+	}
+
 	onChange(event: Object) {
-		this.setState({ value: event.target.value });
-		this.props.onUpdate(event);
-	}
-
-	onBlur() {
-		this.validation();
-	}
-
-	validation() {
-		if (this.props.isRequired) {
-			const { value } = this.state;
-			this.setState({ error: !value });
+		const value = this.props.limitChar ? event.target.value.substring(0, this.props.limitChar) : event.target.value;
+		this.setState({
+			value,
+			isValid: true,
+		});
+		if (this.props.updateOnChange === true) {
+			this.props.onUpdate({
+				target: {
+					name: this.props.name,
+					value: this.props.onlyNumber ? value.replace(/\D/g, '') : value,
+				}
+			}, false);
 		}
 	}
 
 	render() {
-		const { placeholder, label, className, style, isRequired, name, value, isValid, errorMessage } = this.props;
+		const { placeholder, label, className, style, isRequired, name, value, errorMessage, limitChar } = this.props;
+		const { isValid } = this.state;
 
 		return (
 			<div className={sumClasses(['field-container', className])} style={style}>
-				<FieldLabel {...{ label, name, isRequired, isValid }}/>
+				<FieldLabel {...{ label, name, isRequired, isValid }} />
 				<textarea {...{
 					placeholder: camelToTitle(placeholder, name),
 					className: 'large-field',
 					name,
 					id: name,
 					onChange: this.onChange.bind(this),
-					onBlur: this.onBlur.bind(this),
-					value: value
+					value
 				}} />
+				{ limitChar ?
+					<div style={{ textAlign: 'right', position: 'absolute', width: '100%' }}>
+						{ value.length }/{limitChar}
+					</div> : null }
 				<FieldError {...{ isValid, errorMessage }} />
 			</div>
 		);
 	}
 }
-
-CustomTextarea.propTypes = {
-	placeholder: PropTypes.string,
-	name: PropTypes.string,
-	label: PropTypes.instanceOf(Object),
-	onUpdate: PropTypes.func,
-	errorMessage: PropTypes.string,
-	className: PropTypes.string,
-	style: PropTypes.instanceOf(Object),
-	isRequired: PropTypes.bool,
-	isValid: PropTypes.bool,
-	value: PropTypes.string,
-};
-
-CustomTextarea.defaultProps = {
-	placeholder: null,
-	name: null,
-	label: null,
-	onUpdate: null,
-	errorMessage: null,
-	className: null,
-	style: null,
-	isRequired: false,
-	isValid: true,
-	value: null,
-};
 
 export default CustomTextarea;
