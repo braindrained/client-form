@@ -8,7 +8,7 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
     filename: "./index.html"
 });
 const devMode = process.env.NODE_ENV !== 'production'
-
+console.log(devMode);
 module.exports = {
 		devtool: 'cheap-module-source-map',
     entry: path.join(__dirname, "examples/src/index.js"),

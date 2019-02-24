@@ -27,16 +27,14 @@
 		"uglifyjs-webpack-plugin": "^2.1.1",
     "webpack-isomorphic-tools": "^3.0.6",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
-    "webpack-dev-server": "^3.2.0"
+    "webpack-dev-server": "^3.2.0",
+		"moment": "^2.24.0",
+    "react-datepicker": "^2.1.0",
+    "react-onclickout": "^2.0.8"
   },
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "transpile": "babel src -d dist --copy-files",
     "build": "webpack --mode production"
-  },
-  "dependencies": {
-    "moment": "^2.24.0",
-    "react-datepicker": "^2.1.0",
-    "react-onclickout": "^2.0.8"
   }
 }
