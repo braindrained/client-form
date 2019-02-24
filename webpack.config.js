@@ -8,9 +8,8 @@ module.exports = {
 		devtool: 'cheap-module-source-map',
     entry: path.join(__dirname, "examples/src/index.js"),
 		output: {
-        path: path.join(__dirname, "build"),
-				chunkFilename: '[name].bundle.js',
-        filename: "[name].bundle.js"
+        path: path.join(__dirname, "examples/dist"),
+        filename: "bundle.js"
     },
     module: {
         rules: [
