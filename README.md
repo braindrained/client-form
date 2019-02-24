@@ -1,5 +1,11 @@
 # Form component
-A component exportable for standard forms
+A component exportable for standard forms, demo: https://braindrained.github.io/client-form/
+
+#### Install from npm
+```sh
+> yarn add client-form
+```
+
 #### Developing
 Clone, install dependencies and run the component in the development mode.
 ```sh
