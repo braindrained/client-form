@@ -84,8 +84,8 @@ const Form = class extends React.Component<any, any> {
 			controls: updatedControls
 		});
 
-		if (this.props.updateFather) {
-			this.props.updateFather(updatedControls);
+		if (this.props.updateOnChange) {
+			this.props.updateOnChange(updatedControls);
 		}
 	}
 
@@ -177,9 +177,9 @@ const Form = class extends React.Component<any, any> {
 		const sendButtonClass = sumClasses([
 			succeed !== null ? (succeed ? 'btn btn-succeed' : 'btn btn-error') : 'btn',
 			isSent ? 'spinner' : '',
-			sendButton.disabled ? 'btn-disabled' : ''
+			sendButton && sendButton.disabled ? 'btn-disabled' : ''
 		]);
-		const sendButtonValue = succeed === null ? sendButton.text : succeed === false ? sendButton.errorText : sendButton.succeedText;
+		const sendButtonValue = sendButton ? (succeed === null ? sendButton.text : succeed === false ? sendButton.errorText : sendButton.succeedText) : null;
 
 		return (
 			<div className={sumClasses(['form-container', className !== null && className !== undefined ? className : ''])} style={style}>
@@ -376,16 +376,18 @@ const Form = class extends React.Component<any, any> {
 					}
 				})}
 				{ textBeforeButton }
-				<div className="button-container" style={buttonContainerStyle}>
-					<button {...{
-						className: sendButtonClass,
-						style: sendButton.style,
-						onClick: succeed === null && isSent === null && sendButton.disabled === undefined ? () => { this.formIsValid() } : () => { return null; },
-						type: 'button'
-					}}>
-						{sendButtonValue}
-					</button>
-				</div>
+				{ sendButton ?
+					<div className="button-container" style={buttonContainerStyle}>
+						<button {...{
+							className: sendButtonClass,
+							style: sendButton.style,
+							onClick: succeed === null && isSent === null && sendButton.disabled === undefined ? () => { this.formIsValid() } : () => { return null; },
+							type: 'button'
+						}}>
+							{sendButtonValue}
+						</button>
+					</div>
+					: null }
 				{ textAfterButton }
 			</div>
 		);
