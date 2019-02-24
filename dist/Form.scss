@@ -240,7 +240,12 @@ input {
 
 .form-container {
 	text-align: left;
-	display: inline-block;
+	display: block;
+	margin: 0 auto;
+	padding: 0px 0px 0px 20px;
+	@media screen and (max-width: 560px) {
+		padding: 0px 15px;
+	}
 
 	input[type='radio'], input[type='checkbox'] {
 		display: none;
@@ -321,16 +326,16 @@ input {
 	.field-container {
 		width: auto;
 		float: left;
-		min-height: 66px;
+		min-height: 76px;
 		position: relative;
     display: inline-block;
 		width: 250px;
+		margin-right: 20px;
 		@media screen and (max-width: 560px) {
 			float: left!important;
-			width: -webkit-calc(100% - 30px);
-			width: -moz-calc(100% - 30px);
-	    width: calc(100% - 30px);
+			width: 100%;
 			min-height: 90px;
+			margin-right: 0px;
 		}
 		.field-label {
 			width: 100%;
@@ -621,9 +626,9 @@ input {
 		font-size: 11px;
 		display: block;
 		clear: both;
-		min-height: 10px;
+		min-height: 19px;
 		text-align: right;
-    line-height: 10px;
+    line-height: 19px;
 	}
 
 	.react-datepicker__input-container input[type="text"] {
