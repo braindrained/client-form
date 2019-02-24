@@ -28,7 +28,6 @@ class FakeSelect extends React.Component<any, any> {
 	}
 
 	onClick(val: boolean) {
-		console.log(val);
 		if (val !== this.state.displaySelect) {
 			this.setState({
 				displaySelect: val

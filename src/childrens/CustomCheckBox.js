@@ -10,7 +10,7 @@ export default class CustomCheckBox extends React.Component<any, any> {
 		super(props);
 
 		this.state = {
-			value: this.props.value
+			value: this.props.value === 'false' || this.props.value === null ? false : true
 		};
 	}
 
@@ -34,6 +34,7 @@ export default class CustomCheckBox extends React.Component<any, any> {
 
 	render() {
 		const { className, style, label, name, textAfter, textBefore } = this.props;
+		const { value } = this.state;
 
 		return (
 			<div className={sumClasses(['field-container', className !== undefined ? className : 'check'])} style={style}>
@@ -45,8 +46,8 @@ export default class CustomCheckBox extends React.Component<any, any> {
 							type: 'checkbox',
 							name,
 							id: name,
-							checked: this.state.value,
-							onChange: this.onChange.bind(this)
+							checked: value,
+							onChange: (e) => { this.onChange(e) }
 						}} />
 						<label htmlFor={name} style={label.style}>
 							<div />
