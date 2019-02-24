@@ -1,8 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
     template: path.join(__dirname, "examples/src/index.html"),
     filename: "./index.html"
@@ -45,7 +42,7 @@ module.exports = {
 						{
                 test: /\.(scss)$/,
                 use: [
-									devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+									'style-loader',
 									"style-loader",
 									"css-loader",
 									"sass-loader"
@@ -53,13 +50,7 @@ module.exports = {
             }
         ]
     },
-    plugins: [
-			htmlWebpackPlugin,
-			new MiniCssExtractPlugin({
-				filename: devMode ? '[name].css' : '[name].[hash].css',
-	      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
-			})
-		],
+    plugins: [htmlWebpackPlugin],
     devServer: {
         port: 3007
     }
