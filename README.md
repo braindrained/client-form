@@ -12,17 +12,13 @@ Open http://localhost:3007 to view it in the browser.
 #### Export the component
 ```sh
 > yarn transpile
-> git tag 0.0.4
+> git tag <version>
 > git push origin --tag
 ```
-#### Import the component
-Add in you package.json
-
-`"client-form": git+ssh://git@bitbucket.org:casait/it.casa.client.form.git#0.0.4`
-
+#### Install and Import the component
 Install
 ```sh
-> yarn
+> yarn add git+ssh://git@bitbucket.org:casait/it.casa.client.form.git#<tag-version>
 ```
 Import
 
