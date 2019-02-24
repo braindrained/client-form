@@ -4,8 +4,6 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
     template: path.join(__dirname, "examples/src/index.html"),
     filename: "./index.html"
 });
-const devMode = process.env.NODE_ENV !== 'production'
-console.log(devMode);
 module.exports = {
 		devtool: 'cheap-module-source-map',
     entry: path.join(__dirname, "examples/src/index.js"),
@@ -36,21 +34,20 @@ module.exports = {
                 exclude: /node_modules/,
             },
 						{
-							test: /\.(ttf|otf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
-      				loader: 'file-loader?name=fonts/[name].[ext]'
-		        },
-						{
-                test: /\.(scss)$/,
+                test: /\.(css|scss)$/,
                 use: [
-									'style-loader',
 									"style-loader",
-									"css-loader",
+									{ loader: 'css-loader', options: { importLoaders: 1 } },
+									"postcss-loader",
 									"sass-loader"
 								]
             }
         ]
     },
     plugins: [htmlWebpackPlugin],
+		resolve: {
+	      extensions: [".js", ".jsx"]
+	  },
     devServer: {
         port: 3007
     }
