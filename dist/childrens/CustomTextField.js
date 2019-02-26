@@ -60,23 +60,22 @@ function (_React$Component) {
       if (this.props.isValid !== nextProps.isValid) return true;
       return false;
     }
-    /*
-    componentWillReceiveProps(nextProps: Object) {
-    	if (this.state.value !== nextProps.value) {
-    		this.setState({
-    			value: nextProps.value,
-    		});
-    	}
-    
-    	if (!nextProps.isValid) {
-    		this.setState({
-    			value: nextProps.value,
-    			isValid: nextProps.isValid,
-    		});
-    	}
-    }
-    */
+  }, {
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      if (this.state.value !== nextProps.value) {
+        this.setState({
+          value: nextProps.value
+        });
+      }
 
+      if (!nextProps.isValid) {
+        this.setState({
+          value: nextProps.value,
+          isValid: nextProps.isValid
+        });
+      }
+    }
   }, {
     key: "onChange",
     value: function onChange(event) {
