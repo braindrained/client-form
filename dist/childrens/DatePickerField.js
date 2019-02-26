@@ -18,6 +18,14 @@ var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
+var _FieldLabel = require('./childrenComponents/FieldLabel');
+
+var _FieldLabel2 = _interopRequireDefault(_FieldLabel);
+
+var _FieldError = require('./childrenComponents/FieldError');
+
+var _FieldError2 = _interopRequireDefault(_FieldError);
+
 require('./DatePickerField.scss');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -86,11 +94,7 @@ var DatePickerField = function (_React$Component) {
 				'div',
 				{ className: 'container-field ' + className, style: this.props.style },
 				_react2.default.createElement('input', { type: 'text', id: name, style: { opacity: 0, height: 0 } }),
-				_react2.default.createElement(
-					'div',
-					{ className: 'field-label noselect', style: Object.assign({}, label.style, !isValid ? { color: '#e4002b' } : {}) },
-					label.text
-				),
+				_react2.default.createElement(_FieldLabel2.default, { label: label, name: name, isRequired: isRequired, isValid: isValid }),
 				_react2.default.createElement(
 					'div',
 					{ className: 'field-picker-container' },
@@ -105,12 +109,7 @@ var DatePickerField = function (_React$Component) {
 						}
 					})
 				),
-				_react2.default.createElement(
-					'span',
-					{ className: 'validation-error noselect' },
-					(isRequired || greaterThan) && !isValid ? errorMessage : '',
-					'\xA0'
-				)
+				_react2.default.createElement(_FieldError2.default, { isValid: isValid, errorMessage: errorMessage })
 			);
 		}
 	}]);

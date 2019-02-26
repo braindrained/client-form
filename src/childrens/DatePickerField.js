@@ -3,6 +3,9 @@ import React from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
+import FieldLabel from './childrenComponents/FieldLabel';
+import FieldError from './childrenComponents/FieldError';
+
 // flow-disable-next-line
 import './DatePickerField.scss';
 
@@ -42,7 +45,7 @@ class DatePickerField extends React.Component<any, any> {
 		return (
 			<div className={`container-field ${className}`} style={this.props.style}>
 				<input type="text" id={name} style={{ opacity: 0, height: 0 }} />
-				<div className="field-label noselect" style={Object.assign({}, label.style, !isValid ? { color: '#e4002b' } : {})}>{label.text}</div>
+				<FieldLabel {...{ label, name, isRequired, isValid }} />
 				<div className="field-picker-container">
 					<DatePicker {...{
 						name,
@@ -51,10 +54,7 @@ class DatePickerField extends React.Component<any, any> {
 						onBlur: (e) => { this.onBlur(e); }
 					}} />
 				</div>
-				<span className="validation-error noselect">
-					{(isRequired || greaterThan) && !isValid ? errorMessage : '' }
-					&nbsp;
-				</span>
+				<FieldError {...{ isValid, errorMessage }} />
 			</div>
 		);
 	}

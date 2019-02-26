@@ -3,15 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.sumClasses = exports.camelToTitle = exports.notEmpty = exports.makeId = undefined;
-
-var _moment = require('moment');
-
-var _moment2 = _interopRequireDefault(_moment);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-_moment2.default.locale('it');
 var makeId = exports.makeId = function makeId() {
 	var text = '';
 	var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

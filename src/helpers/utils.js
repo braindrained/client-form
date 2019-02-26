@@ -1,7 +1,4 @@
 // @flow
-import moment from 'moment';
-
-moment.locale('it');
 
 export const makeId = () => {
 	let text = '';
