@@ -1,498 +1,503 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
+exports.default = void 0;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _react = _interopRequireDefault(require("react"));
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _CustomTextField = _interopRequireDefault(require("./childrens/CustomTextField"));
 
-var _react = require('react');
+var _CustomTextarea = _interopRequireDefault(require("./childrens/CustomTextarea"));
 
-var _react2 = _interopRequireDefault(_react);
+var _CustomCheckBox = _interopRequireDefault(require("./childrens/CustomCheckBox"));
 
-var _CustomTextField = require('./childrens/CustomTextField');
+var _CustomSelect = _interopRequireDefault(require("./childrens/CustomSelect"));
 
-var _CustomTextField2 = _interopRequireDefault(_CustomTextField);
+var _CustomRadio = _interopRequireDefault(require("./childrens/CustomRadio"));
 
-var _CustomTextarea = require('./childrens/CustomTextarea');
+var _CustomLabel = _interopRequireDefault(require("./childrens/CustomLabel"));
 
-var _CustomTextarea2 = _interopRequireDefault(_CustomTextarea);
+var _CustomTextAreaTab = _interopRequireDefault(require("./childrens/CustomTextAreaTab"));
 
-var _CustomCheckBox = require('./childrens/CustomCheckBox');
+var _DatePickerField = _interopRequireDefault(require("./childrens/DatePickerField"));
 
-var _CustomCheckBox2 = _interopRequireDefault(_CustomCheckBox);
+var _CustomPlusMinus = _interopRequireDefault(require("./childrens/CustomPlusMinus"));
 
-var _CustomSelect = require('./childrens/CustomSelect');
+var _FakeSelect = _interopRequireDefault(require("./childrens/FakeSelect"));
 
-var _CustomSelect2 = _interopRequireDefault(_CustomSelect);
+require("./Form.scss");
 
-var _CustomRadio = require('./childrens/CustomRadio');
-
-var _CustomRadio2 = _interopRequireDefault(_CustomRadio);
-
-var _CustomLabel = require('./childrens/CustomLabel');
-
-var _CustomLabel2 = _interopRequireDefault(_CustomLabel);
-
-var _CustomTextAreaTab = require('./childrens/CustomTextAreaTab');
-
-var _CustomTextAreaTab2 = _interopRequireDefault(_CustomTextAreaTab);
-
-var _DatePickerField = require('./childrens/DatePickerField');
-
-var _DatePickerField2 = _interopRequireDefault(_DatePickerField);
-
-var _CustomPlusMinus = require('./childrens/CustomPlusMinus');
-
-var _CustomPlusMinus2 = _interopRequireDefault(_CustomPlusMinus);
-
-var _FakeSelect = require('./childrens/FakeSelect');
-
-var _FakeSelect2 = _interopRequireDefault(_FakeSelect);
-
-require('./Form.scss');
-
-var _utils = require('./helpers/utils');
+var _utils = require("./helpers/utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// flow-disable-next-line
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-var Form = function (_React$Component) {
-	_inherits(Form, _React$Component);
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-	function Form(props) {
-		_classCallCheck(this, Form);
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-		var _this = _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this, props));
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
-		_this.state = {
-			controls: _this.props.controls
-		};
-		return _this;
-	}
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-	_createClass(Form, [{
-		key: 'onUpdate',
-		value: function onUpdate(e, hasError) {
-			var _this2 = this;
+var Form =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Form, _React$Component);
 
-			var controls = this.state.controls;
+  function Form(props) {
+    var _this;
 
+    _classCallCheck(this, Form);
 
-			var updatedControls = controls.map(function (item) {
-				if (e.target.name === item.name) {
-					item.isValid = !hasError;
-					item.value = e.target.value;
-				} else {
-					if (_typeof(item.hideIf) === 'object') {
-						var hide = false;
-						item.hideIf.map(function (v) {
-							var control = _this2.state.controls.filter(function (o) {
-								return o.name === v.field;
-							});
-							if (control.length > 0) {
-								if (control[0].value.toString().match(v.regEx) != null) {
-									hide = true;
-								}
-							}
-							return null;
-						});
-						item.value = hide ? '' : item.value;
-						item.hide = hide;
-					}
-					if (item.label && _typeof(item.label.changeIf) === 'object') {
-						item.label.changeIf.map(function (v) {
-							var control = _this2.state.controls.filter(function (o) {
-								return o.name === v.field;
-							});
-							if (control.length > 0) {
-								item.label.text = control[0].value.toString().match(v.regEx) != null ? v.ifTrue : v.ifFalse;
-							}
-							return null;
-						});
-					}
-					if (_typeof(item.optionIf) === 'object') {
-						item.optionIf.map(function (v) {
-							var control = _this2.state.controls.filter(function (o) {
-								return o.name === v.field;
-							});
-							if (control.length > 0) {
-								item.options = v.options.filter(function (o) {
-									return o.type.indexOf(parseFloat(control[0].value)) !== -1;
-								});
-							}
-							return null;
-						});
-					}
-					if (_typeof(item.changeStyleIf) === 'object') {
-						item.changeStyleIf.map(function (v) {
-							var control = _this2.state.controls.filter(function (o) {
-								return o.name === v.field;
-							});
-							if (control.length > 0) {
-								if (control[0].value.toString().match(v.regEx) != null) {
-									item.style = v.style;
-								} else {
-									item.style = v.altStyle;
-								}
-							}
-							return null;
-						});
-					}
-				}
-				return item;
-			});
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Form).call(this, props));
+    _this.state = {
+      controls: _this.props.controls
+    };
+    return _this;
+  }
 
-			this.setState({
-				controls: updatedControls
-			});
+  _createClass(Form, [{
+    key: "onUpdate",
+    value: function onUpdate(e, hasError) {
+      var _this2 = this;
 
-			if (this.props.updateOnChange) {
-				this.props.updateOnChange(updatedControls);
-			}
-		}
-	}, {
-		key: 'formIsValid',
-		value: function formIsValid() {
-			var _this3 = this;
+      var controls = this.state.controls;
+      var updatedControls = controls.map(function (item) {
+        if (e.target.name === item.name) {
+          item.isValid = !hasError;
+          item.value = e.target.value;
+        } else {
+          if (_typeof(item.hideIf) === 'object') {
+            var hide = false;
+            item.hideIf.map(function (v) {
+              var control = _this2.state.controls.filter(function (o) {
+                return o.name === v.field;
+              });
 
-			var formIsValid = true;
-			var controls = this.state.controls;
+              if (control.length > 0) {
+                if (control[0].value.toString().match(v.regEx) != null) {
+                  hide = true;
+                }
+              }
 
+              return null;
+            });
+            item.value = hide ? '' : item.value;
+            item.hide = hide;
+          }
 
-			var updatedControls = controls.map(function (item) {
-				if (item.isRequired && !item.hide) {
-					if (item.control !== 'select' && (item.value === '' || !item.value)) {
-						item.isValid = false;
-						formIsValid = false;
-					} else if (item.control === 'select' && item.value === '0' && item.value === 0) {
-						item.isValid = false;
-						formIsValid = false;
-					}
-				}
+          if (item.label && _typeof(item.label.changeIf) === 'object') {
+            item.label.changeIf.map(function (v) {
+              var control = _this2.state.controls.filter(function (o) {
+                return o.name === v.field;
+              });
 
-				if (_typeof(item.value) === 'object' && item.valueAsObject) {
-					if (item.value && item.value.filter(function (o) {
-						return o.isRequired === true;
-					}).length > 0) {
-						var updatedValues = item.value.map(function (itemS) {
-							if (itemS.isRequired) {
-								if (itemS.value === '' || !itemS.value) {
-									itemS.isValid = false;
-									item.isValid = false;
-									formIsValid = false;
-								}
-							}
-							return itemS;
-						});
-						item.value = updatedValues;
-					}
-				}
-				if (item.regEx !== undefined && !item.hide) {
-					if (item.value !== '' && !item.regEx.test(item.value)) {
-						item.isValid = false;
-						formIsValid = false;
-					}
-				}
-				if (item.equalTo !== undefined) {
-					var valueToCompare = _this3.state.controls.filter(function (o) {
-						return o.name === item.equalTo;
-					})[0].value;
-					if (!(item.value === valueToCompare) || item.value === '') {
-						item.isValid = false;
-						formIsValid = false;
-					}
-				}
-				if (item.greaterThan !== undefined) {
-					var _valueToCompare = _this3.state.controls.filter(function (o) {
-						return o.name === item.greaterThan;
-					})[0].value;
-					if (parseFloat(item.value.toString().replace(/\./g, '')) < parseFloat(_valueToCompare.toString().replace(/\./g, ''))) {
-						item.isValid = false;
-						formIsValid = false;
-					}
-				}
-				return item;
-			});
+              if (control.length > 0) {
+                item.label.text = control[0].value.toString().match(v.regEx) != null ? v.ifTrue : v.ifFalse;
+              }
 
-			this.setState({
-				controls: updatedControls
-			});
+              return null;
+            });
+          }
 
-			if (formIsValid) {
-				var formObject = {};
-				updatedControls.map(function (item) {
-					if (item.control !== 'label') {
-						formObject[item.name] = item.value;
-					}
-					return null;
-				});
+          if (_typeof(item.optionIf) === 'object') {
+            item.optionIf.map(function (v) {
+              var control = _this2.state.controls.filter(function (o) {
+                return o.name === v.field;
+              });
 
-				this.props.sendForm(formObject);
-			} else {
-				var firstRequired = updatedControls.filter(function (o) {
-					return o.isRequired && !o.isValid || o.greaterThan && !o.isValid || o.regEx && !o.isValid || o.equalTo && !o.isValid;
-				})[0];
+              if (control.length > 0) {
+                item.options = v.options.filter(function (o) {
+                  return o.type.indexOf(parseFloat(control[0].value)) !== -1;
+                });
+              }
 
-				if (_typeof(firstRequired.value) === 'object') {
-					var subFieldRequired = firstRequired.value.filter(function (o) {
-						return o.isRequired && !o.isValid || o.greaterThan && !o.isValid || o.regEx && !o.isValid || o.equalTo && !o.isValid;
-					})[0];
-					/* eslint-disable-next-line */ /* flow-disable-next-line */
-					document.getElementById(subFieldRequired.name).focus();
-				} else {
-					/* eslint-disable-next-line */ /* flow-disable-next-line */
-					document.getElementById(firstRequired.name).focus();
-				}
-			}
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var _this4 = this;
+              return null;
+            });
+          }
 
-			var _props = this.props,
-			    className = _props.className,
-			    style = _props.style,
-			    succeed = _props.succeed,
-			    isSent = _props.isSent,
-			    sendButton = _props.sendButton,
-			    textBeforeButton = _props.textBeforeButton,
-			    buttonContainerStyle = _props.buttonContainerStyle,
-			    textAfterButton = _props.textAfterButton;
-			var controls = this.state.controls;
+          if (_typeof(item.changeStyleIf) === 'object') {
+            item.changeStyleIf.map(function (v) {
+              var control = _this2.state.controls.filter(function (o) {
+                return o.name === v.field;
+              });
 
-			var sendButtonClass = (0, _utils.sumClasses)([succeed !== null ? succeed ? 'btn btn-succeed' : 'btn btn-error' : 'btn', isSent ? 'spinner' : '', sendButton && sendButton.disabled ? 'btn-disabled' : '']);
-			var sendButtonValue = sendButton ? succeed === null ? sendButton.text : succeed === false ? sendButton.errorText : sendButton.succeedText : null;
+              if (control.length > 0) {
+                if (control[0].value.toString().match(v.regEx) != null) {
+                  item.style = v.style;
+                } else {
+                  item.style = v.altStyle;
+                }
+              }
 
-			return _react2.default.createElement(
-				'div',
-				{ className: (0, _utils.sumClasses)(['client-form', className !== null && className !== undefined ? className : '']), style: style },
-				controls.map(function (item) {
-					switch (item.control) {
-						default:
-							return null;
-						case 'external':
-							return _react2.default.createElement(
-								'div',
-								{ key: item.name },
-								item.component
-							);
-						case 'text':
-							if (item.hide) return null;
-							return _react2.default.createElement(_CustomTextField2.default, {
-								type: item.type,
-								onlyNumber: item.onlyNumber,
-								key: item.name,
-								placeholder: item.placeholder,
-								name: item.name,
-								label: item.label,
-								value: item.value ? item.value : '',
-								onUpdate: function onUpdate(e, h) {
-									_this4.onUpdate(e, h);
-								},
-								isRequired: item.isRequired,
-								isValid: item.isValid,
-								disabled: item.disabled,
-								errorMessage: item.errorMessage,
-								className: item.className ? item.className : '',
-								style: item.style,
-								textAfter: item.textAfter,
-								updateOnChange: item.updateOnChange,
-								limitChar: item.limitChar,
-								currency: item.currency
-							});
-						case 'plusMinus':
-							if (item.hide) return null;
-							return _react2.default.createElement(_CustomPlusMinus2.default, {
-								type: item.type,
-								onlyNumber: item.onlyNumber,
-								key: item.name,
-								placeholder: item.placeholder,
-								name: item.name,
-								label: item.label,
-								value: parseFloat(item.value),
-								onUpdate: function onUpdate(e, h) {
-									_this4.onUpdate(e, h);
-								},
-								isRequired: item.isRequired,
-								isValid: item.isValid,
-								disabled: item.disabled,
-								errorMessage: item.errorMessage,
-								className: item.className ? item.className : '',
-								style: item.style,
-								textAfter: item.textAfter
-							});
-						case 'textArea':
-							if (item.hide) return null;
-							return _react2.default.createElement(_CustomTextarea2.default, {
-								key: item.name,
-								placeholder: item.placeholder,
-								name: item.name,
-								label: item.label,
-								value: item.value ? item.value : '',
-								onUpdate: function onUpdate(e, h) {
-									_this4.onUpdate(e, h);
-								},
-								isRequired: item.isRequired,
-								isValid: item.isValid,
-								errorMessage: item.errorMessage,
-								style: item.style,
-								className: item.className ? item.className : '',
-								limitChar: item.limitChar
-							});
-						case 'select':
-							if (item.hide) return null;
-							return _react2.default.createElement(_CustomSelect2.default, {
-								key: item.name,
-								name: item.name,
-								label: item.label,
-								disabled: item.disabled,
-								options: item.options,
-								onUpdate: function onUpdate(e, h) {
-									_this4.onUpdate(e, h);
-								},
-								value: item.value,
-								style: item.style,
-								className: item.className ? item.className : '',
-								isRequired: item.isRequired,
-								isValid: item.isValid,
-								errorMessage: item.errorMessage,
-								default: item.default
-							});
-						case 'check':
-							if (item.hide) return null;
-							return _react2.default.createElement(_CustomCheckBox2.default, {
-								key: item.name,
-								name: item.name,
-								label: item.label,
-								value: item.value,
-								style: item.style,
-								textBefore: item.textBefore,
-								textAfter: item.textAfter,
-								hideCheck: item.hideCheck,
-								className: item.className ? item.className : '',
-								onUpdate: function onUpdate(e, h) {
-									_this4.onUpdate(e, h);
-								}
-							});
-						case 'radio':
-							if (item.hide) return null;
-							return _react2.default.createElement(_CustomRadio2.default, {
-								key: item.name,
-								name: item.name,
-								label: item.label,
-								options: item.options,
-								onUpdate: function onUpdate(e, h) {
-									_this4.onUpdate(e, h);
-								},
-								value: (0, _utils.notEmpty)(item.value) ? item.value : item.default,
-								hideRadio: item.hideRadio,
-								uncheck: item.uncheck,
-								className: item.className ? item.className : '',
-								style: item.style,
-								highlightSel: item.highlightSel
-							});
-						case 'label':
-							if (item.hide) return null;
-							return _react2.default.createElement(_CustomLabel2.default, {
-								key: item.name,
-								name: item.name,
-								label: item.label,
-								style: item.style,
-								text: item.text,
-								value: item.value,
-								className: item.className ? item.className : ''
-							});
-						case 'tabTextArea':
-							if (item.hide) return null;
-							return _react2.default.createElement(_CustomTextAreaTab2.default, {
-								key: item.name,
-								name: item.name,
-								value: item.value,
-								tabs: item.tabs,
-								onUpdate: function onUpdate(e, h) {
-									_this4.onUpdate(e, h);
-								},
-								style: item.style,
-								className: item.className ? item.className : '',
-								isRequired: item.isRequired,
-								isValid: item.isValid,
-								errorMessage: item.errorMessage,
-								valueAsObject: item.valueAsObject,
-								limitChar: item.limitChar
-							});
-						case 'datepicker':
-							if (item.hide) return null;
-							return _react2.default.createElement(_DatePickerField2.default, {
-								key: item.name,
-								placeholder: item.placeholder,
-								name: item.name,
-								label: item.label,
-								value: item.value,
-								onUpdate: function onUpdate(e, h) {
-									_this4.onUpdate(e, h);
-								},
-								style: item.style,
-								className: item.className ? item.className : '',
-								updateOnChange: item.updateOnChange,
-								errorMessage: item.errorMessage,
-								isValid: item.isValid
-							});
-						case 'fakeselect':
-							if (item.hide) return null;
-							return _react2.default.createElement(_FakeSelect2.default, {
-								key: item.name,
-								name: item.name,
-								label: item.label,
-								value: item.value,
-								text: item.text,
-								onUpdate: function onUpdate(e, h) {
-									_this4.onUpdate(e, h);
-								},
-								style: item.style,
-								firstRange: item.firstRange,
-								secondRange: item.secondRange,
-								rangesStyle: item.rangesStyle,
-								className: item.className ? item.className : '',
-								overlayBg: item.overlayBg
-							});
-					}
-				}),
-				textBeforeButton,
-				sendButton ? _react2.default.createElement(
-					'div',
-					{ className: 'button-container', style: buttonContainerStyle },
-					_react2.default.createElement(
-						'button',
-						{
-							className: sendButtonClass,
-							style: sendButton.style,
-							onClick: succeed === null && isSent === null && sendButton.disabled === undefined ? function () {
-								_this4.formIsValid();
-							} : function () {
-								return null;
-							},
-							type: 'button'
-						},
-						sendButtonValue
-					)
-				) : null,
-				textAfterButton
-			);
-		}
-	}]);
+              return null;
+            });
+          }
+        }
 
-	return Form;
-}(_react2.default.Component);
+        return item;
+      });
+      this.setState({
+        controls: updatedControls
+      });
 
-exports.default = Form;
+      if (this.props.updateOnChange) {
+        this.props.updateOnChange(updatedControls);
+      }
+    }
+  }, {
+    key: "formIsValid",
+    value: function formIsValid() {
+      var _this3 = this;
+
+      var formIsValid = true;
+      var controls = this.state.controls;
+      var updatedControls = controls.map(function (item) {
+        if (item.isRequired && !item.hide) {
+          if (item.control !== 'select' && (item.value === '' || !item.value)) {
+            item.isValid = false;
+            formIsValid = false;
+          } else if (item.control === 'select' && item.value === '0' && item.value === 0) {
+            item.isValid = false;
+            formIsValid = false;
+          }
+        }
+
+        if (_typeof(item.value) === 'object' && item.valueAsObject) {
+          if (item.value && item.value.filter(function (o) {
+            return o.isRequired === true;
+          }).length > 0) {
+            var updatedValues = item.value.map(function (itemS) {
+              if (itemS.isRequired) {
+                if (itemS.value === '' || !itemS.value) {
+                  itemS.isValid = false;
+                  item.isValid = false;
+                  formIsValid = false;
+                }
+              }
+
+              return itemS;
+            });
+            item.value = updatedValues;
+          }
+        }
+
+        if (item.regEx !== undefined && !item.hide) {
+          if (item.value !== '' && !item.regEx.test(item.value)) {
+            item.isValid = false;
+            formIsValid = false;
+          }
+        }
+
+        if (item.equalTo !== undefined) {
+          var valueToCompare = _this3.state.controls.filter(function (o) {
+            return o.name === item.equalTo;
+          })[0].value;
+
+          if (!(item.value === valueToCompare) || item.value === '') {
+            item.isValid = false;
+            formIsValid = false;
+          }
+        }
+
+        if (item.greaterThan !== undefined) {
+          var _valueToCompare = _this3.state.controls.filter(function (o) {
+            return o.name === item.greaterThan;
+          })[0].value;
+
+          if (parseFloat(item.value.toString().replace(/\./g, '')) < parseFloat(_valueToCompare.toString().replace(/\./g, ''))) {
+            item.isValid = false;
+            formIsValid = false;
+          }
+        }
+
+        return item;
+      });
+      this.setState({
+        controls: updatedControls
+      });
+
+      if (formIsValid) {
+        var formObject = {};
+        updatedControls.map(function (item) {
+          if (item.control !== 'label') {
+            formObject[item.name] = item.value;
+          }
+
+          return null;
+        });
+        this.props.sendForm(formObject);
+      } else {
+        var firstRequired = updatedControls.filter(function (o) {
+          return o.isRequired && !o.isValid || o.greaterThan && !o.isValid || o.regEx && !o.isValid || o.equalTo && !o.isValid;
+        })[0];
+
+        if (_typeof(firstRequired.value) === 'object') {
+          var subFieldRequired = firstRequired.value.filter(function (o) {
+            return o.isRequired && !o.isValid || o.greaterThan && !o.isValid || o.regEx && !o.isValid || o.equalTo && !o.isValid;
+          })[0];
+          /* eslint-disable-next-line */
+
+          /* flow-disable-next-line */
+
+          document.getElementById(subFieldRequired.name).focus();
+        } else {
+          /* eslint-disable-next-line */
+
+          /* flow-disable-next-line */
+          document.getElementById(firstRequired.name).focus();
+        }
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
+      var _this$props = this.props,
+          className = _this$props.className,
+          style = _this$props.style,
+          succeed = _this$props.succeed,
+          isSent = _this$props.isSent,
+          sendButton = _this$props.sendButton,
+          textBeforeButton = _this$props.textBeforeButton,
+          buttonContainerStyle = _this$props.buttonContainerStyle,
+          textAfterButton = _this$props.textAfterButton;
+      var controls = this.state.controls;
+      var sendButtonClass = (0, _utils.sumClasses)([succeed !== null ? succeed ? 'btn btn-succeed' : 'btn btn-error' : 'btn', isSent ? 'spinner' : '', sendButton && sendButton.disabled ? 'btn-disabled' : '']);
+      var sendButtonValue = sendButton ? succeed === null ? sendButton.text : succeed === false ? sendButton.errorText : sendButton.succeedText : null;
+      return _react.default.createElement("div", {
+        className: (0, _utils.sumClasses)(['client-form', className !== null && className !== undefined ? className : '']),
+        style: style
+      }, controls.map(function (item) {
+        switch (item.control) {
+          default:
+            return null;
+
+          case 'external':
+            return _react.default.createElement("div", {
+              key: item.name
+            }, item.component);
+
+          case 'text':
+            if (item.hide) return null;
+            return _react.default.createElement(_CustomTextField.default, {
+              type: item.type,
+              onlyNumber: item.onlyNumber,
+              key: item.name,
+              placeholder: item.placeholder,
+              name: item.name,
+              label: item.label,
+              value: item.value ? item.value : '',
+              onUpdate: function onUpdate(e, h) {
+                _this4.onUpdate(e, h);
+              },
+              isRequired: item.isRequired,
+              isValid: item.isValid,
+              disabled: item.disabled,
+              errorMessage: item.errorMessage,
+              className: item.className ? item.className : '',
+              style: item.style,
+              textAfter: item.textAfter,
+              updateOnChange: item.updateOnChange,
+              limitChar: item.limitChar,
+              currency: item.currency
+            });
+
+          case 'plusMinus':
+            if (item.hide) return null;
+            return _react.default.createElement(_CustomPlusMinus.default, {
+              type: item.type,
+              onlyNumber: item.onlyNumber,
+              key: item.name,
+              placeholder: item.placeholder,
+              name: item.name,
+              label: item.label,
+              value: parseFloat(item.value),
+              onUpdate: function onUpdate(e, h) {
+                _this4.onUpdate(e, h);
+              },
+              isRequired: item.isRequired,
+              isValid: item.isValid,
+              disabled: item.disabled,
+              errorMessage: item.errorMessage,
+              className: item.className ? item.className : '',
+              style: item.style,
+              textAfter: item.textAfter
+            });
+
+          case 'textArea':
+            if (item.hide) return null;
+            return _react.default.createElement(_CustomTextarea.default, {
+              key: item.name,
+              placeholder: item.placeholder,
+              name: item.name,
+              label: item.label,
+              value: item.value ? item.value : '',
+              onUpdate: function onUpdate(e, h) {
+                _this4.onUpdate(e, h);
+              },
+              isRequired: item.isRequired,
+              isValid: item.isValid,
+              errorMessage: item.errorMessage,
+              style: item.style,
+              className: item.className ? item.className : '',
+              limitChar: item.limitChar
+            });
+
+          case 'select':
+            if (item.hide) return null;
+            return _react.default.createElement(_CustomSelect.default, {
+              key: item.name,
+              name: item.name,
+              label: item.label,
+              disabled: item.disabled,
+              options: item.options,
+              onUpdate: function onUpdate(e, h) {
+                _this4.onUpdate(e, h);
+              },
+              value: item.value,
+              style: item.style,
+              className: item.className ? item.className : '',
+              isRequired: item.isRequired,
+              isValid: item.isValid,
+              errorMessage: item.errorMessage,
+              default: item.default
+            });
+
+          case 'check':
+            if (item.hide) return null;
+            return _react.default.createElement(_CustomCheckBox.default, {
+              key: item.name,
+              name: item.name,
+              label: item.label,
+              value: item.value,
+              style: item.style,
+              textBefore: item.textBefore,
+              textAfter: item.textAfter,
+              hideCheck: item.hideCheck,
+              className: item.className ? item.className : '',
+              onUpdate: function onUpdate(e, h) {
+                _this4.onUpdate(e, h);
+              }
+            });
+
+          case 'radio':
+            if (item.hide) return null;
+            return _react.default.createElement(_CustomRadio.default, {
+              key: item.name,
+              name: item.name,
+              label: item.label,
+              options: item.options,
+              onUpdate: function onUpdate(e, h) {
+                _this4.onUpdate(e, h);
+              },
+              value: (0, _utils.notEmpty)(item.value) ? item.value : item.default,
+              hideRadio: item.hideRadio,
+              uncheck: item.uncheck,
+              className: item.className ? item.className : '',
+              style: item.style,
+              highlightSel: item.highlightSel
+            });
+
+          case 'label':
+            if (item.hide) return null;
+            return _react.default.createElement(_CustomLabel.default, {
+              key: item.name,
+              name: item.name,
+              label: item.label,
+              style: item.style,
+              text: item.text,
+              value: item.value,
+              className: item.className ? item.className : ''
+            });
+
+          case 'tabTextArea':
+            if (item.hide) return null;
+            return _react.default.createElement(_CustomTextAreaTab.default, {
+              key: item.name,
+              name: item.name,
+              value: item.value,
+              tabs: item.tabs,
+              onUpdate: function onUpdate(e, h) {
+                _this4.onUpdate(e, h);
+              },
+              style: item.style,
+              className: item.className ? item.className : '',
+              isRequired: item.isRequired,
+              isValid: item.isValid,
+              errorMessage: item.errorMessage,
+              valueAsObject: item.valueAsObject,
+              limitChar: item.limitChar
+            });
+
+          case 'datepicker':
+            if (item.hide) return null;
+            return _react.default.createElement(_DatePickerField.default, {
+              key: item.name,
+              placeholder: item.placeholder,
+              name: item.name,
+              label: item.label,
+              value: item.value,
+              onUpdate: function onUpdate(e, h) {
+                _this4.onUpdate(e, h);
+              },
+              style: item.style,
+              className: item.className ? item.className : '',
+              updateOnChange: item.updateOnChange,
+              errorMessage: item.errorMessage,
+              isValid: item.isValid
+            });
+
+          case 'fakeselect':
+            if (item.hide) return null;
+            return _react.default.createElement(_FakeSelect.default, {
+              key: item.name,
+              name: item.name,
+              label: item.label,
+              value: item.value,
+              text: item.text,
+              onUpdate: function onUpdate(e, h) {
+                _this4.onUpdate(e, h);
+              },
+              style: item.style,
+              firstRange: item.firstRange,
+              secondRange: item.secondRange,
+              rangesStyle: item.rangesStyle,
+              className: item.className ? item.className : '',
+              overlayBg: item.overlayBg
+            });
+        }
+      }), textBeforeButton, sendButton ? _react.default.createElement("div", {
+        className: "button-container",
+        style: buttonContainerStyle
+      }, _react.default.createElement("button", {
+        className: sendButtonClass,
+        style: sendButton.style,
+        onClick: succeed === null && isSent === null && sendButton.disabled === undefined ? function () {
+          _this4.formIsValid();
+        } : function () {
+          return null;
+        },
+        type: 'button'
+      }, sendButtonValue)) : null, textAfterButton);
+    }
+  }]);
+
+  return Form;
+}(_react.default.Component);
+
+var _default = Form;
+exports.default = _default;

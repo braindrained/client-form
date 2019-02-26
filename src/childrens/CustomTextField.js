@@ -23,7 +23,6 @@ class CustomTextField extends React.Component<any, any> {
 		return false;
 	}
 
-	/*
 	componentWillReceiveProps(nextProps: Object) {
 		if (this.state.value !== nextProps.value) {
 			this.setState({
@@ -38,7 +37,6 @@ class CustomTextField extends React.Component<any, any> {
 			});
 		}
 	}
-	*/
 
 	onChange(event: Object) {
 		const value = this.props.limitChar ? event.target.value.substring(0, this.props.limitChar) : event.target.value;

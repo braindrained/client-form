@@ -1,120 +1,130 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
+exports.default = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _react = _interopRequireDefault(require("react"));
 
-var _react = require('react');
+var _reactDatepicker = _interopRequireDefault(require("react-datepicker"));
 
-var _react2 = _interopRequireDefault(_react);
+var _moment = _interopRequireDefault(require("moment"));
 
-var _reactDatepicker = require('react-datepicker');
+var _FieldLabel = _interopRequireDefault(require("./childrenComponents/FieldLabel"));
 
-var _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);
+var _FieldError = _interopRequireDefault(require("./childrenComponents/FieldError"));
 
-var _moment = require('moment');
-
-var _moment2 = _interopRequireDefault(_moment);
-
-var _FieldLabel = require('./childrenComponents/FieldLabel');
-
-var _FieldLabel2 = _interopRequireDefault(_FieldLabel);
-
-var _FieldError = require('./childrenComponents/FieldError');
-
-var _FieldError2 = _interopRequireDefault(_FieldError);
-
-require('./DatePickerField.scss');
+require("./DatePickerField.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-// flow-disable-next-line
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-_moment2.default.locale('it');
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-var DatePickerField = function (_React$Component) {
-	_inherits(DatePickerField, _React$Component);
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
-	function DatePickerField(props) {
-		_classCallCheck(this, DatePickerField);
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-		var _this = _possibleConstructorReturn(this, (DatePickerField.__proto__ || Object.getPrototypeOf(DatePickerField)).call(this, props));
+_moment.default.locale('it');
 
-		_this.state = {
-			value: _this.props.value ? (0, _moment2.default)(_this.props.value, 'DD/MM/YYYY') : (0, _moment2.default)()
-		};
-		return _this;
-	}
+var DatePickerField =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(DatePickerField, _React$Component);
 
-	_createClass(DatePickerField, [{
-		key: 'handleChange',
-		value: function handleChange(date) {
-			this.setState({
-				value: date
-			});
-			if (this.props.updateOnChange === true) {
-				this.props.onUpdate({
-					target: {
-						name: this.props.name,
-						value: (0, _moment2.default)(date, 'DD/MM/YYYY').format('DD/MM/YYYY')
-					}
-				}, false);
-			}
-		}
-	}, {
-		key: 'onBlur',
-		value: function onBlur(event) {
-			if (event !== undefined) this.props.onUpdate(event, false);
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var _this2 = this;
+  function DatePickerField(props) {
+    var _this;
 
-			var _props = this.props,
-			    label = _props.label,
-			    name = _props.name,
-			    className = _props.className,
-			    isRequired = _props.isRequired,
-			    greaterThan = _props.greaterThan,
-			    errorMessage = _props.errorMessage,
-			    isValid = _props.isValid;
+    _classCallCheck(this, DatePickerField);
 
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DatePickerField).call(this, props));
+    _this.state = {
+      value: _this.props.value ? (0, _moment.default)(_this.props.value, 'DD/MM/YYYY') : (0, _moment.default)()
+    };
+    return _this;
+  }
 
-			return _react2.default.createElement(
-				'div',
-				{ className: 'container-field ' + className, style: this.props.style },
-				_react2.default.createElement('input', { type: 'text', id: name, style: { opacity: 0, height: 0 } }),
-				_react2.default.createElement(_FieldLabel2.default, { label: label, name: name, isRequired: isRequired, isValid: isValid }),
-				_react2.default.createElement(
-					'div',
-					{ className: 'field-picker-container' },
-					_react2.default.createElement(_reactDatepicker2.default, {
-						name: name,
-						selected: this.state.value,
-						onChange: function onChange(e) {
-							_this2.handleChange(e);
-						},
-						onBlur: function onBlur(e) {
-							_this2.onBlur(e);
-						}
-					})
-				),
-				_react2.default.createElement(_FieldError2.default, { isValid: isValid, errorMessage: errorMessage })
-			);
-		}
-	}]);
+  _createClass(DatePickerField, [{
+    key: "handleChange",
+    value: function handleChange(date) {
+      this.setState({
+        value: date
+      });
 
-	return DatePickerField;
-}(_react2.default.Component);
+      if (this.props.updateOnChange === true) {
+        this.props.onUpdate({
+          target: {
+            name: this.props.name,
+            value: (0, _moment.default)(date, 'DD/MM/YYYY').format('DD/MM/YYYY')
+          }
+        }, false);
+      }
+    }
+  }, {
+    key: "onBlur",
+    value: function onBlur(event) {
+      if (event !== undefined) this.props.onUpdate(event, false);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
 
-exports.default = DatePickerField;
+      var _this$props = this.props,
+          label = _this$props.label,
+          name = _this$props.name,
+          className = _this$props.className,
+          isRequired = _this$props.isRequired,
+          greaterThan = _this$props.greaterThan,
+          errorMessage = _this$props.errorMessage,
+          isValid = _this$props.isValid;
+      return _react.default.createElement("div", {
+        className: "container-field ".concat(className),
+        style: this.props.style
+      }, _react.default.createElement("input", {
+        type: "text",
+        id: name,
+        style: {
+          opacity: 0,
+          height: 0
+        }
+      }), _react.default.createElement(_FieldLabel.default, {
+        label: label,
+        name: name,
+        isRequired: isRequired,
+        isValid: isValid
+      }), _react.default.createElement("div", {
+        className: "field-picker-container"
+      }, _react.default.createElement(_reactDatepicker.default, {
+        name: name,
+        selected: this.state.value,
+        onChange: function onChange(e) {
+          _this2.handleChange(e);
+        },
+        onBlur: function onBlur(e) {
+          _this2.onBlur(e);
+        }
+      })), _react.default.createElement(_FieldError.default, {
+        isValid: isValid,
+        errorMessage: errorMessage
+      }));
+    }
+  }]);
+
+  return DatePickerField;
+}(_react.default.Component);
+
+var _default = DatePickerField;
+exports.default = _default;

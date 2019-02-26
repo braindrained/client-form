@@ -1,114 +1,126 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
+exports.default = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _react = _interopRequireDefault(require("react"));
 
-var _react = require('react');
+var _FieldLabel = _interopRequireDefault(require("./childrenComponents/FieldLabel"));
 
-var _react2 = _interopRequireDefault(_react);
+var _FieldError = _interopRequireDefault(require("./childrenComponents/FieldError"));
 
-var _FieldLabel = require('./childrenComponents/FieldLabel');
-
-var _FieldLabel2 = _interopRequireDefault(_FieldLabel);
-
-var _FieldError = require('./childrenComponents/FieldError');
-
-var _FieldError2 = _interopRequireDefault(_FieldError);
-
-var _utils = require('../helpers/utils');
+var _utils = require("../helpers/utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var CustomTextarea = function (_React$Component) {
-	_inherits(CustomTextarea, _React$Component);
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-	function CustomTextarea(props) {
-		_classCallCheck(this, CustomTextarea);
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-		var _this = _possibleConstructorReturn(this, (CustomTextarea.__proto__ || Object.getPrototypeOf(CustomTextarea)).call(this, props));
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-		_this.state = {
-			value: _this.props.value,
-			isValid: _this.props.isValid
-		};
-		return _this;
-	}
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
-	_createClass(CustomTextarea, [{
-		key: 'shouldComponentUpdate',
-		value: function shouldComponentUpdate(nextProps, nextState) {
-			if (this.props.value !== nextProps.value) return true;
-			if (this.state.value !== nextState.value) return true;
-			if (this.props.isValid !== nextProps.isValid) return true;
-			return false;
-		}
-	}, {
-		key: 'onChange',
-		value: function onChange(event) {
-			var value = this.props.limitChar ? event.target.value.substring(0, this.props.limitChar) : event.target.value;
-			this.setState({
-				value: value,
-				isValid: true
-			});
-			if (this.props.updateOnChange === true) {
-				this.props.onUpdate({
-					target: {
-						name: this.props.name,
-						value: this.props.onlyNumber ? value.replace(/\D/g, '') : value
-					}
-				}, false);
-			}
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var _props = this.props,
-			    placeholder = _props.placeholder,
-			    label = _props.label,
-			    className = _props.className,
-			    style = _props.style,
-			    isRequired = _props.isRequired,
-			    name = _props.name,
-			    value = _props.value,
-			    errorMessage = _props.errorMessage,
-			    limitChar = _props.limitChar;
-			var isValid = this.state.isValid;
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+var CustomTextarea =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(CustomTextarea, _React$Component);
 
-			return _react2.default.createElement(
-				'div',
-				{ className: (0, _utils.sumClasses)(['container-field', className]), style: style },
-				_react2.default.createElement(_FieldLabel2.default, { label: label, name: name, isRequired: isRequired, isValid: isValid }),
-				_react2.default.createElement('textarea', {
-					placeholder: (0, _utils.camelToTitle)(placeholder, name),
-					className: 'large-field',
-					name: name,
-					id: name,
-					onChange: this.onChange.bind(this),
-					value: value
-				}),
-				limitChar ? _react2.default.createElement(
-					'div',
-					{ style: { textAlign: 'right', position: 'absolute', width: '100%' } },
-					value.length,
-					'/',
-					limitChar
-				) : null,
-				_react2.default.createElement(_FieldError2.default, { isValid: isValid, errorMessage: errorMessage })
-			);
-		}
-	}]);
+  function CustomTextarea(props) {
+    var _this;
 
-	return CustomTextarea;
-}(_react2.default.Component);
+    _classCallCheck(this, CustomTextarea);
 
-exports.default = CustomTextarea;
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CustomTextarea).call(this, props));
+    _this.state = {
+      value: _this.props.value,
+      isValid: _this.props.isValid
+    };
+    return _this;
+  }
+
+  _createClass(CustomTextarea, [{
+    key: "shouldComponentUpdate",
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      if (this.props.value !== nextProps.value) return true;
+      if (this.state.value !== nextState.value) return true;
+      if (this.props.isValid !== nextProps.isValid) return true;
+      return false;
+    }
+  }, {
+    key: "onChange",
+    value: function onChange(event) {
+      var value = this.props.limitChar ? event.target.value.substring(0, this.props.limitChar) : event.target.value;
+      this.setState({
+        value: value,
+        isValid: true
+      });
+
+      if (this.props.updateOnChange === true) {
+        this.props.onUpdate({
+          target: {
+            name: this.props.name,
+            value: this.props.onlyNumber ? value.replace(/\D/g, '') : value
+          }
+        }, false);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          placeholder = _this$props.placeholder,
+          label = _this$props.label,
+          className = _this$props.className,
+          style = _this$props.style,
+          isRequired = _this$props.isRequired,
+          name = _this$props.name,
+          value = _this$props.value,
+          errorMessage = _this$props.errorMessage,
+          limitChar = _this$props.limitChar;
+      var isValid = this.state.isValid;
+      return _react.default.createElement("div", {
+        className: (0, _utils.sumClasses)(['container-field', className]),
+        style: style
+      }, _react.default.createElement(_FieldLabel.default, {
+        label: label,
+        name: name,
+        isRequired: isRequired,
+        isValid: isValid
+      }), _react.default.createElement("textarea", {
+        placeholder: (0, _utils.camelToTitle)(placeholder, name),
+        className: 'large-field',
+        name: name,
+        id: name,
+        onChange: this.onChange.bind(this),
+        value: value
+      }), limitChar ? _react.default.createElement("div", {
+        style: {
+          textAlign: 'right',
+          position: 'absolute',
+          width: '100%'
+        }
+      }, value.length, "/", limitChar) : null, _react.default.createElement(_FieldError.default, {
+        isValid: isValid,
+        errorMessage: errorMessage
+      }));
+    }
+  }]);
+
+  return CustomTextarea;
+}(_react.default.Component);
+
+var _default = CustomTextarea;
+exports.default = _default;

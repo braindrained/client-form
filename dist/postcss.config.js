@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
 module.exports = {
-	plugins: {
-		'postcss-plugin': false
-	}
+  plugins: {
+    'postcss-plugin': false
+  }
 };

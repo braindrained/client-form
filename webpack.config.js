@@ -62,7 +62,7 @@ module.exports = {
     plugins: isLocal ?
 			[
 				htmlWebpackPlugin,
-				new BundleAnalyzerPlugin(),
+				//new BundleAnalyzerPlugin(),
 				new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /it/)
 			]
 			:
