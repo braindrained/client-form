@@ -3,7 +3,6 @@
 	display: block;
 	margin: 0 auto;
 	padding: 0px 0px 0px 20px;
-	font-family: sans-serif;
 	@media screen and (max-width: 560px) {
 		padding: 0px 15px;
 	}
@@ -34,7 +33,6 @@
 		transition-duration: 0.2s, 0.2s;
 		transition-timing-function: ease-in, ease-out;
 		outline: none;
-		font-family: sans-serif;
 		font-weight: 500;
 		-webkit-touch-callout: none; /* iOS Safari */
 			-webkit-user-select: none; /* Safari */
@@ -240,7 +238,7 @@
 	}
 
 	input {
-		font-family: sans-serif;
+
 	}
 
 	.clear {
@@ -345,7 +343,6 @@
 			text-align: left;
 			height: 24px;
 			font-size: 13px;
-			font-family: sans-serif;
 		}
 		.container-field-tabs {
 			width: 100%;
@@ -353,9 +350,11 @@
 			float: left;
 			.tab-label {
 				display: block;
+				font-size: 13px;
 			}
 			.tab-abbr {
 				display: none;
+				font-size: 13px;
 			}
 			@media screen and (max-width: 560px) {
 				.tab-label {
@@ -471,7 +470,6 @@
 			cursor: pointer;
 			outline: none;
 			z-index: 1;
-			font-family: sans-serif;
 			@media screen and (max-width: 560px) {
 				height: 47px;
 			}

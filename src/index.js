@@ -29,7 +29,7 @@ const Form = class extends React.Component<any, any> {
 	onUpdate(e: Object, hasError: boolean) {
 		const { controls } = this.state;
 
-		const updatedControls = controls.map((item) => {
+		let updatedControls = controls.map((item) => {
 			if (e.target.name === item.name) {
 				item.isValid = !hasError;
 				item.value = e.target.value;
@@ -88,15 +88,16 @@ const Form = class extends React.Component<any, any> {
 		});
 
 		if (this.props.updateOnChange) {
-			this.props.updateOnChange(updatedControls);
+			this.props.updateOnChange(noUndefined ? updatedControls.filter(o => o.value !== 'undefined') : updatedControls);
 		}
 	}
 
 	formIsValid() {
 		let formIsValid = true;
 		const { controls } = this.state;
+		const { noUndefined } = this.props;
 
-		const updatedControls = controls.map((item) => {
+		let updatedControls = controls.map((item) => {
 			if (item.isRequired && !item.hide) {
 				if (item.control !== 'select' && (item.value === '' || !item.value)) {
 					item.isValid = false;
@@ -151,10 +152,9 @@ const Form = class extends React.Component<any, any> {
 
 		if (formIsValid) {
 			const formObject = {};
-			updatedControls.map((item) => {
-				if (item.control !== 'label') {
-					formObject[item.name] = item.value;
-				}
+			updatedControls.filter(o => o.control !== 'label').map((item) => {
+				if (noUndefined && item.value !== undefined) formObject[item.name] = item.value;
+				if (!noUndefined) formObject[item.name] = item.value;
 				return null;
 			});
 
@@ -194,10 +194,16 @@ const Form = class extends React.Component<any, any> {
 					default:
 						return null;
 					case 'external':
+						if (item.hide) return (null);
 						return (
-							<div {...{ key: item.name }}>
-								{item.component}
-							</div>
+							Object.assign({}, item.component,
+								{
+									key: item.name,
+									props: Object.assign({}, item, {
+										onUpdate: (e, h) => { this.onUpdate(e, h); }
+									}),
+								}
+							)
 						);
 					case 'text':
 						if (item.hide) return (null);
@@ -217,7 +223,6 @@ const Form = class extends React.Component<any, any> {
 								errorMessage: item.errorMessage,
 								className: item.className ? item.className : '',
 								style: item.style,
-								textAfter: item.textAfter,
 								updateOnChange: item.updateOnChange,
 								limitChar: item.limitChar,
 								currency: item.currency,
@@ -241,7 +246,6 @@ const Form = class extends React.Component<any, any> {
 								errorMessage: item.errorMessage,
 								className: item.className ? item.className : '',
 								style: item.style,
-								textAfter: item.textAfter,
 							}} />
 						);
 					case 'textArea':
@@ -291,7 +295,6 @@ const Form = class extends React.Component<any, any> {
 								value: item.value,
 								style: item.style,
 								textBefore: item.textBefore,
-								textAfter: item.textAfter,
 								hideCheck: item.hideCheck,
 								className: item.className ? item.className : '',
 								onUpdate: (e, h) => { this.onUpdate(e, h); },

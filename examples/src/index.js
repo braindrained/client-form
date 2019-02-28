@@ -1,10 +1,13 @@
 import React from 'react';
+import FieldLabel from '../../src/childrens/childrenComponents/FieldLabel';
+import FieldError from '../../src/childrens/childrenComponents/FieldError';
 import ClickOutHandler from 'react-onclickout';
 import { render } from 'react-dom';
 
 import Form from '../../src';
 import { makeId } from '../../src/helpers/utils';
 import { tipologies, priceRanges } from  './var';
+import CustomComp from './CustomComp';
 
 class App extends React.Component {
 
@@ -19,6 +22,7 @@ class App extends React.Component {
 	}
 
 	sendForm(formObject: Object) {
+		console.log(formObject);
 		this.setState({
 			editDataSpin: true
 		});
@@ -62,7 +66,7 @@ class App extends React.Component {
 								onlyNumber: false,
 								limitChar: 25,
 								isRequired: true,
-								errorMessage: 'Campo obbligatorio'
+								errorMessage: 'Mandatory field'
 							},
 							{
 								control: 'text',
@@ -71,7 +75,7 @@ class App extends React.Component {
 								onlyNumber: false,
 								limitChar: 25,
 								isRequired: true,
-								errorMessage: 'Campo obbligatorio'
+								errorMessage: 'Mandatory field'
 							},
 							{
 								control: 'fakeselect',
@@ -163,7 +167,7 @@ class App extends React.Component {
 								onlyNumber: false,
 								limitChar: 12,
 								isRequired: true,
-								errorMessage: 'Campo obbligatorio',
+								errorMessage: 'Mandatory field',
 								isValid: true
 							},
 							{
@@ -172,7 +176,7 @@ class App extends React.Component {
 								name: 'repeatPassword',
 								onlyNumber: false,
 								limitChar: 12,
-								errorMessage: 'La password non coincide',
+								errorMessage: 'Wrong password',
 								isValid: true,
 								equalTo: 'password'
 							},
@@ -193,9 +197,14 @@ class App extends React.Component {
 								name: 'aMinimalTextField',
 							},
 							{
+								control: 'label',
+								name: 'label-3',
+								style: { clear: 'both', width: '100%' }
+							},
+							{
 								control: 'text',
 								type: 'text',
-								name: 'correncyField',
+								name: 'currencyField',
 								currency: true,
 								onlyNumber: true,
 							},
@@ -219,10 +228,28 @@ class App extends React.Component {
 								style: { width: 'calc(100% - 20px)' },
 								isRequired: true,
 								isValid: true,
-								errorMessage: 'La descrizione in italiano è obbligatoria',
+								errorMessage: 'The italian description is mandatory',
 								fieldClassName: 'tabTextArea',
 								valueAsObject: true,
 								limitChar: 4000
+							},
+							{
+								control: 'external',
+								name: 'thisIsACustomExternalComponent',
+								placeholder: `but is managed externally 'cause I need a complete customized one`,
+								value: '',
+								style: {
+									background: '#e4002b',
+									clear: 'both',
+									width: 'calc(100% - 20px)',
+									borderRadius: 4,
+									marginTop: 20,
+									position: 'relative',
+									clear: 'both',
+									display: 'inline-block',
+									padding: 20
+								},
+								component: <CustomComp />
 							},
 						],
 						textBeforeButton: <div style={{ clear: 'both', fontSize: 11, lineHeight: '30px', textAlign: 'center' }}>This is a text before button</div>,
@@ -242,6 +269,7 @@ class App extends React.Component {
 							maxWidth: 560,
 							margin: '0 auto'
 						},
+						noUndefined: true
 					}}/>
 				</div>
 			</ClickOutHandler>

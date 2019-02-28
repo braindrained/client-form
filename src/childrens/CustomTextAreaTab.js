@@ -105,7 +105,7 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 								cols: 20
 							}} />
 						</div>
-						<div style={{ textAlign: 'right',
+						<div className="noselect" style={{ textAlign: 'right',
 							position: 'absolute',
 							width: '100%'
 						}}>

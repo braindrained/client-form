@@ -154,7 +154,9 @@ function (_React$Component) {
       });
 
       if (this.props.updateOnChange) {
-        this.props.updateOnChange(updatedControls);
+        this.props.updateOnChange(noUndefined ? updatedControls.filter(function (o) {
+          return o.value !== 'undefined';
+        }) : updatedControls);
       }
     }
   }, {
@@ -164,6 +166,7 @@ function (_React$Component) {
 
       var formIsValid = true;
       var controls = this.state.controls;
+      var noUndefined = this.props.noUndefined;
       var updatedControls = controls.map(function (item) {
         if (item.isRequired && !item.hide) {
           if (item.control !== 'select' && (item.value === '' || !item.value)) {
@@ -231,11 +234,11 @@ function (_React$Component) {
 
       if (formIsValid) {
         var formObject = {};
-        updatedControls.map(function (item) {
-          if (item.control !== 'label') {
-            formObject[item.name] = item.value;
-          }
-
+        updatedControls.filter(function (o) {
+          return o.control !== 'label';
+        }).map(function (item) {
+          if (noUndefined && item.value !== undefined) formObject[item.name] = item.value;
+          if (!noUndefined) formObject[item.name] = item.value;
           return null;
         });
         this.props.sendForm(formObject);
@@ -287,9 +290,15 @@ function (_React$Component) {
             return null;
 
           case 'external':
-            return _react.default.createElement("div", {
-              key: item.name
-            }, item.component);
+            if (item.hide) return null;
+            return Object.assign({}, item.component, {
+              key: item.name,
+              props: Object.assign({}, item, {
+                onUpdate: function onUpdate(e, h) {
+                  _this4.onUpdate(e, h);
+                }
+              })
+            });
 
           case 'text':
             if (item.hide) return null;
@@ -310,7 +319,6 @@ function (_React$Component) {
               errorMessage: item.errorMessage,
               className: item.className ? item.className : '',
               style: item.style,
-              textAfter: item.textAfter,
               updateOnChange: item.updateOnChange,
               limitChar: item.limitChar,
               currency: item.currency
@@ -334,8 +342,7 @@ function (_React$Component) {
               disabled: item.disabled,
               errorMessage: item.errorMessage,
               className: item.className ? item.className : '',
-              style: item.style,
-              textAfter: item.textAfter
+              style: item.style
             });
 
           case 'textArea':
@@ -386,7 +393,6 @@ function (_React$Component) {
               value: item.value,
               style: item.style,
               textBefore: item.textBefore,
-              textAfter: item.textAfter,
               hideCheck: item.hideCheck,
               className: item.className ? item.className : '',
               onUpdate: function onUpdate(e, h) {

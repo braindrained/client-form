@@ -65,7 +65,6 @@ class FakeSelect extends React.Component<any, any> {
 						onClick: () => { this.onClick(false); },
 						style: { zIndex: displaySelect ? 1 : 0, paddingLeft: 8 }
 					}}>
-
 						{
 							value.min !== '' && value.max !== '' ?
 								`${value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')} -
@@ -79,7 +78,6 @@ class FakeSelect extends React.Component<any, any> {
 										:
 										text
 						}
-
 					</div>
 					<FieldError {...{ isValid, errorMessage }} />
 

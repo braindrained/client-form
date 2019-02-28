@@ -38,23 +38,23 @@ Use it
 		{
 			control: 'text',
 			type: 'text',
-			name: 'firstName',
-			limitChar: 25,
+			name: 'firstName', // if label and placeholder are not specified this text will be the placeholder and label text decamelized
+			limitChar: 25, // length check
 		}
 	],
 	sendButton: {
-		text: 'Save',
-		errorText: 'Error saving data',
-		succeedText: 'Saved!',
+		text: 'Save', // button value
+		errorText: 'Error saving data', // button value on error
+		succeedText: 'Saved!', // button value on success
 		style: { minWidth: 250, margin: '0 auto', float: 'none' }
 	},
 	sendForm: (e) => { this.sendForm(e); }, // your function that fetch data
 	key: 'randomKey',
-	succeed: editSucceed, // get it from the state
-	isSent: editDataSpin, // get it from the state
+	succeed: editSucceed, // bool, get it from the state
+	isSent: editDataSpin, // bool, get it from the state
 }}/>
 ```
-#### Build to every page
+#### Build to every environment
 Builds the component for production to the `examples/dist` folder.
 ```sh
 > yarn build

@@ -155,6 +155,7 @@ function (_React$Component) {
           rows: 2,
           cols: 20
         })), _react.default.createElement("div", {
+          className: "noselect",
           style: {
             textAlign: 'right',
             position: 'absolute',

@@ -61,7 +61,7 @@ class CustomPlusMinus extends React.Component<any, any> {
 
 	render() {
 		const { className, style, label, name, type,
-			disabled, isRequired, errorMessage, textAfter,
+			disabled, isRequired, errorMessage,
 			isValid
 		} = this.props;
 
@@ -111,10 +111,6 @@ class CustomPlusMinus extends React.Component<any, any> {
 					</div>
 				</div>
 				<FieldError {...{ isValid, errorMessage }} />
-				{ textAfter ? (
-					<div style={textAfter.style}>
-						{textAfter.text}
-					</div>) : null }
 			</div>
 		);
 	}

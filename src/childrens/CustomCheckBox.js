@@ -34,7 +34,7 @@ export default class CustomCheckBox extends React.Component<any, any> {
 	}
 
 	render() {
-		const { className, style, label, name, textAfter, textBefore } = this.props;
+		const { className, style, label, name, textBefore } = this.props;
 		const { value } = this.state;
 
 		return (
@@ -56,7 +56,6 @@ export default class CustomCheckBox extends React.Component<any, any> {
 						</label>
 					</div>
 				</div>
-				{textAfter !== null && textAfter !== undefined ? textAfter : ''}
 			</div>
 		);
 	}

@@ -25,10 +25,7 @@ var notEmpty = function notEmpty(val) {
 exports.notEmpty = notEmpty;
 
 var camelToTitle = function camelToTitle(str, name) {
-  return str === null || str === undefined ? name.replace(/([A-Z][a-z]+)/g, ' $1') // Words beginning with UC
-  .replace(/([A-Z][A-Z]+)/g, ' $1') // "Words" of only UC
-  .replace(/([^A-Za-z ]+)/g, ' $1') // "Words" of non-letters
-  .replace(/\w\S*/g, function (txt) {
+  return str === null || str === undefined ? name.replace(/([a-z\d])([A-Z])/g, '$1  $2').replace(/([A-Z]+)([A-Z][a-z\d]+)/g, '$1 $2').replace(/\w\S*/g, function (txt) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   }) : str;
 };

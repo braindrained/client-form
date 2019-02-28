@@ -1,18 +1,15 @@
-// @flow
 import React from 'react';
-import FieldLabel from './childrenComponents/FieldLabel';
-import FieldError from './childrenComponents/FieldError';
-import { camelToTitle, sumClasses, notEmpty } from '../helpers/utils';
+import FieldLabel from '../../src/childrens/childrenComponents/FieldLabel';
+import FieldError from '../../src/childrens/childrenComponents/FieldError';
 
-class CustomTextField extends React.Component<any, any> {
+class CustomComp extends React.Component {
 
 	constructor(props: Object) {
 		super(props);
-		const { value, isValid } = this.props;
 
 		this.state = {
-			value: `${value}`,
-			isValid: isValid,
+			value: `${this.props.value}`,
+			isValid: this.props.isValid,
 			editing: false,
 		};
 	}
@@ -84,32 +81,28 @@ class CustomTextField extends React.Component<any, any> {
 	}
 
 	render() {
-		const {
-			className, style, label, name, isRequired,
-			errorMessage, type, placeholder, currency, disabled
-		} = this.props;
-		const { isValid, value } = this.state;
+		const { label, name, isRequired, isValid, errorMessage, placeholder, style } = this.props;
+		const { value } = this.state;
 
-		return (
-			<div className={sumClasses(['container-field', className])} style={style}>
+		return(
+			<div style={style}>
 				<FieldLabel {...{ label, name, isRequired, isValid }} />
 				<input {...{
-					type,
-					placeholder: camelToTitle(placeholder, name),
+					type: 'email',
+					placeholder,
 					name,
 					id: name,
-					value: currency ? value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : value,
-					disabled,
+					value: value,
 					onKeyPress: (e) => { this.handleKeyPress(e); },
 					onChange: (e) => { this.onChange(e); },
 					onBlur: (e) => { this.onBlur(e); },
 					onFocus: () => { this.onFocus(); },
-					style: isValid === false ? { border: '1px solid #e4002b' } : {}
-				}} />
+				}} style={{  }}/>
 				<FieldError {...{ isValid, errorMessage }} />
+				<div>And I need that it have a complete custom behaviour and contents, is value will be returned with other fields.</div>
 			</div>
-		);
+		)
 	}
 }
 
-export default CustomTextField;
+export default CustomComp;

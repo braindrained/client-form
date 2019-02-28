@@ -110,7 +110,6 @@ function (_React$Component) {
           disabled = _this$props.disabled,
           isRequired = _this$props.isRequired,
           errorMessage = _this$props.errorMessage,
-          textAfter = _this$props.textAfter,
           isValid = _this$props.isValid;
       return _react.default.createElement("div", {
         className: (0, _utils.sumClasses)(['container-field cutom-plus-minus', className]),
@@ -185,9 +184,7 @@ function (_React$Component) {
       }, "+")), _react.default.createElement(_FieldError.default, {
         isValid: isValid,
         errorMessage: errorMessage
-      }), textAfter ? _react.default.createElement("div", {
-        style: textAfter.style
-      }, textAfter.text) : null);
+      }));
     }
   }]);
 

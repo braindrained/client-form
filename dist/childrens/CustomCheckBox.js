@@ -78,7 +78,6 @@ function (_React$Component) {
           style = _this$props.style,
           label = _this$props.label,
           name = _this$props.name,
-          textAfter = _this$props.textAfter,
           textBefore = _this$props.textBefore;
       var value = this.state.value;
       return _react.default.createElement("div", {
@@ -99,7 +98,7 @@ function (_React$Component) {
       }), _react.default.createElement("label", {
         htmlFor: name,
         style: label.style
-      }, _react.default.createElement("div", null), _react.default.createElement("div", null, label.text)))), textAfter !== null && textAfter !== undefined ? textAfter : '');
+      }, _react.default.createElement("div", null), _react.default.createElement("div", null, label.text)))));
     }
   }]);
 

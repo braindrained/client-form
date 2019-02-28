@@ -44,9 +44,12 @@ function (_React$Component) {
     _classCallCheck(this, CustomTextField);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CustomTextField).call(this, props));
+    var _this$props = _this.props,
+        value = _this$props.value,
+        isValid = _this$props.isValid;
     _this.state = {
-      value: "".concat(_this.props.value),
-      isValid: _this.props.isValid,
+      value: "".concat(value),
+      isValid: isValid,
       editing: false
     };
     return _this;
@@ -129,19 +132,20 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var _this$props = this.props,
-          className = _this$props.className,
-          style = _this$props.style,
-          label = _this$props.label,
-          name = _this$props.name,
-          isRequired = _this$props.isRequired,
-          errorMessage = _this$props.errorMessage,
-          type = _this$props.type,
-          placeholder = _this$props.placeholder,
-          currency = _this$props.currency,
-          disabled = _this$props.disabled,
-          textAfter = _this$props.textAfter;
-      var isValid = this.state.isValid;
+      var _this$props2 = this.props,
+          className = _this$props2.className,
+          style = _this$props2.style,
+          label = _this$props2.label,
+          name = _this$props2.name,
+          isRequired = _this$props2.isRequired,
+          errorMessage = _this$props2.errorMessage,
+          type = _this$props2.type,
+          placeholder = _this$props2.placeholder,
+          currency = _this$props2.currency,
+          disabled = _this$props2.disabled;
+      var _this$state = this.state,
+          isValid = _this$state.isValid,
+          value = _this$state.value;
       return _react.default.createElement("div", {
         className: (0, _utils.sumClasses)(['container-field', className]),
         style: style
@@ -155,7 +159,7 @@ function (_React$Component) {
         placeholder: (0, _utils.camelToTitle)(placeholder, name),
         name: name,
         id: name,
-        value: currency ? this.state.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : this.state.value,
+        value: currency ? value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : value,
         disabled: disabled,
         onKeyPress: function onKeyPress(e) {
           _this2.handleKeyPress(e);
@@ -175,9 +179,7 @@ function (_React$Component) {
       }), _react.default.createElement(_FieldError.default, {
         isValid: isValid,
         errorMessage: errorMessage
-      }), textAfter ? _react.default.createElement("div", {
-        style: textAfter.style
-      }, textAfter.text) : null);
+      }));
     }
   }]);
 

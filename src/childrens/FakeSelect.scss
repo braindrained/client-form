@@ -8,7 +8,7 @@
 		transition-timing-function: ease-in, ease-out;
 		width: 100%;
 		@media screen and (max-width: 560px) {
-			margin-top: -57px;
+			margin-top: -66px;
 		}
 		.min-max {
 			float: left;
@@ -16,6 +16,7 @@
 			font-size: 11px;
 			color: rgb(106, 119, 134);
 			margin-right: 15px;
+			padding-left: 15px;
 		}
 	}
 }
