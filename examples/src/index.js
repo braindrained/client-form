@@ -85,7 +85,7 @@ class App extends React.Component {
 									text: 'Fake select min/max'
 								},
 								style: { maxHeight: 76 },
-								rangesStyle: { width: 200, maxWidth: 200 },
+								rangesStyle: { width: 150, maxWidth: 150 },
 								value: { min: '', max: '' },
 								firstRange: priceRanges,
 								secondRange: priceRanges,
@@ -189,7 +189,10 @@ class App extends React.Component {
 							{
 								control: 'textArea',
 								name: 'thisIsATextArea',
-								value: ''
+								value: '',
+								limitChar: 1000,
+								isRequired: true,
+								errorMessage: 'Mandatory field'
 							},
 							{
 								control: 'text',

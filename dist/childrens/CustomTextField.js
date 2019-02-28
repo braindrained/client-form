@@ -116,18 +116,6 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "handleKeyPress",
-    value: function handleKeyPress(val) {
-      if (val.key === 'Enter') {
-        val.preventDefault();
-      } else {
-        this.setState({
-          value: val.target.value,
-          isValid: true
-        });
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -161,9 +149,6 @@ function (_React$Component) {
         id: name,
         value: currency ? value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : value,
         disabled: disabled,
-        onKeyPress: function onKeyPress(e) {
-          _this2.handleKeyPress(e);
-        },
         onChange: function onChange(e) {
           _this2.onChange(e);
         },

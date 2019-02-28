@@ -155,12 +155,7 @@ function (_React$Component) {
           rows: 2,
           cols: 20
         })), _react.default.createElement("div", {
-          className: "noselect",
-          style: {
-            textAlign: 'right',
-            position: 'absolute',
-            width: '100%'
-          }
+          className: "limit-char noselect"
         }, item.value.length, "/", limitChar));
       }), _react.default.createElement(_FieldError.default, {
         isValid: isValid,

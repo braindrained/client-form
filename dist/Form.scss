@@ -2,9 +2,9 @@
 	text-align: left;
 	display: block;
 	margin: 0 auto;
-	padding: 0px 0px 0px 20px;
-	@media screen and (max-width: 560px) {
-		padding: 0px 15px;
+	padding: 0px 15px;
+	@media screen and (min-width: 560px) {
+		padding: 0px 0px 0px 20px;
 	}
 
 	.box-shadow {
@@ -71,6 +71,7 @@
 	.btn-link-red img {
 		float: left;
 	}
+
 	.btn-link-red div {
 		text-decoration: underline;
 		float: right!important;
@@ -272,10 +273,10 @@
 	}
 
 	input[type="checkbox"] + label > div:last-child, input[type="radio"] + label > div:first-child {
-		white-space: nowrap;
-		@media screen and (max-width: 560px) {
-			white-space: normal;
-			text-align: left;
+		white-space: normal;
+		text-align: left;
+		@media screen and (min-width: 560px) {
+			white-space: nowrap;
 		}
 	}
 
@@ -293,7 +294,7 @@
 
 	input[type=email], input[type=number], input[type=password], input[type=tel], input[type=text], textarea {
 			border: 1px solid #949da2;
-			padding: 8px 8px;
+			padding: 15px 8px;
 			border-radius: 2px;
 			color: #333f48;
 			background-color: #fff;
@@ -304,18 +305,14 @@
 			-moz-appearance: none;
 			width: 100%;
 			transition: border .5s ease;
-			@media screen and (max-width: 560px) {
-				padding: 15px 8px;
+			@media screen and (min-width: 560px) {
+				padding: 8px 8px;
 			}
 	}
 
 	.button-container {
 		width: 100%;
 		float: right;
-		@media screen and (max-width: 560px) {
-			position: relative;
-			text-align: center;
-		}
 	}
 
 	.hide {
@@ -323,18 +320,16 @@
 	}
 
 	.container-field {
-		width: auto;
 		float: left;
-		min-height: 76px;
 		position: relative;
     display: inline-block;
-		width: 250px;
-		margin-right: 20px;
-		@media screen and (max-width: 560px) {
-			float: left!important;
-			width: 100%;
-			min-height: 90px;
-			margin-right: 0px;
+		width: 100%;
+		min-height: 90px;
+		margin-right: 0px;
+		@media screen and (min-width: 560px) {
+			width: 250px;
+			min-height: 76px;
+			margin-right: 20px;
 		}
 		.field-label {
 			width: 100%;
@@ -349,19 +344,19 @@
 			clear: both;
 			float: left;
 			.tab-label {
-				display: block;
-				font-size: 13px;
-			}
-			.tab-abbr {
 				display: none;
 				font-size: 13px;
 			}
-			@media screen and (max-width: 560px) {
+			.tab-abbr {
+				display: block;
+				font-size: 13px;
+			}
+			@media screen and (min-width: 560px) {
 				.tab-label {
-					display: none;
+					display: block;
 				}
 				.tab-abbr {
-					display: block;
+					display: none;
 				}
 			}
 			.container-field-tabs-item {
@@ -379,9 +374,6 @@
 					background: #949da2;
 					color: #fff;
 				}
-				@media screen and (max-width: 560px) {
-					min-width: 40px;
-				}
 			}
 			.container-field-tabs-item-selected {
 				background: #949da2;
@@ -394,16 +386,14 @@
 	}
 
 	.cutom-plus-minus {
-		@media screen and (max-width: 560px) {
-			min-height: 20px;
-			max-width: 160px;
+		min-height: 20px;
+		max-width: 160px;
+		@media screen and (min-width: 560px) {
+			min-width: 250px;
 		}
 		.field-label {
 			float: left;
 			width: 130px;
-			@media screen and (max-width: 560px) {
-				width: 110px;
-			}
 		}
 		input {
 			height: 30px;
@@ -437,8 +427,8 @@
 
 	.select-style {
 		background: #fff url("assets/img/arrow_down.png") no-repeat right center;
-		height: 33px;
-		line-height: 33px;
+		height: 47px;
+		line-height: 47px;
 		width: 100%;
 		display: inline-block;
 		border: 1px solid #949da2;
@@ -446,6 +436,10 @@
 		position: relative;
 		z-index: 1;
 		font-size: 13px;
+		@media screen and (min-width: 560px) {
+			height: 33px;
+			line-height: 33px;
+		}
 		label {
 			position: absolute;
 			top: -21px;
@@ -461,7 +455,7 @@
 			padding: 3px 0px 3px 8px;
 			border: 0;
 			background: transparent;
-			height: 33px;
+			height: 47px;
 			color: #333f48;
 			font-size: 13px;
 			-webkit-appearance: none;
@@ -470,13 +464,9 @@
 			cursor: pointer;
 			outline: none;
 			z-index: 1;
-			@media screen and (max-width: 560px) {
-				height: 47px;
+			@media screen and (min-width: 560px) {
+				height: 33px;
 			}
-		}
-		@media screen and (max-width: 560px) {
-			height: 47px;
-			line-height: 47px;
 		}
 	}
 
@@ -491,15 +481,19 @@
 		clear: both;
 		.field-label {
 			float: left;
-			width: auto;
-			min-width: 120px;
-			@media screen and (max-width: 560px) {
-				width: 140px;
-				min-width: 200px;
-				max-width: 140px;
-				margin-right: 10px;
-				white-space: nowrap;
-				text-overflow: ellipsis;
+			width: 140px;
+			min-width: 200px;
+			max-width: 140px;
+			margin-right: 10px;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			@media screen and (min-width: 560px) {
+				width: auto;
+				min-width: 120px;
+				max-width: unset;
+				margin-right: unset;
+				white-space: unset;
+				text-overflow: unset;
 			}
 		}
 		.float-label {
@@ -645,6 +639,13 @@
 				min-height: 30px
 			}
 		}
+	}
+
+	.limit-char {
+		text-align: right;
+		position: absolute;
+		width: 100%;
+		font-size: 13px;
 	}
 
 }

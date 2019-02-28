@@ -44,8 +44,11 @@ function (_React$Component) {
     _classCallCheck(this, CustomTextarea);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CustomTextarea).call(this, props));
+    var _this$props = _this.props,
+        value = _this$props.value,
+        isValid = _this$props.isValid;
     _this.state = {
-      value: _this.props.value,
+      value: "".concat(value),
       isValid: _this.props.isValid
     };
     return _this;
@@ -60,9 +63,26 @@ function (_React$Component) {
       return false;
     }
   }, {
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      if (this.state.value !== nextProps.value) {
+        this.setState({
+          value: nextProps.value
+        });
+      }
+
+      if (!nextProps.isValid) {
+        this.setState({
+          value: nextProps.value,
+          isValid: nextProps.isValid
+        });
+      }
+    }
+  }, {
     key: "onChange",
     value: function onChange(event) {
       var value = this.props.limitChar ? event.target.value.substring(0, this.props.limitChar) : event.target.value;
+      console.log(value);
       this.setState({
         value: value,
         isValid: true
@@ -78,19 +98,29 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "onBlur",
+    value: function onBlur(event) {
+      if (this.props.value !== this.state.value) {
+        this.props.onUpdate(event, false);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          placeholder = _this$props.placeholder,
-          label = _this$props.label,
-          className = _this$props.className,
-          style = _this$props.style,
-          isRequired = _this$props.isRequired,
-          name = _this$props.name,
-          value = _this$props.value,
-          errorMessage = _this$props.errorMessage,
-          limitChar = _this$props.limitChar;
-      var isValid = this.state.isValid;
+      var _this2 = this;
+
+      var _this$props2 = this.props,
+          placeholder = _this$props2.placeholder,
+          label = _this$props2.label,
+          className = _this$props2.className,
+          style = _this$props2.style,
+          isRequired = _this$props2.isRequired,
+          name = _this$props2.name,
+          errorMessage = _this$props2.errorMessage,
+          limitChar = _this$props2.limitChar;
+      var _this$state = this.state,
+          isValid = _this$state.isValid,
+          value = _this$state.value;
       return _react.default.createElement("div", {
         className: (0, _utils.sumClasses)(['container-field', className]),
         style: style
@@ -104,17 +134,24 @@ function (_React$Component) {
         className: 'large-field',
         name: name,
         id: name,
-        onChange: this.onChange.bind(this),
-        value: value
+        onBlur: function onBlur(e) {
+          _this2.onBlur(e);
+        },
+        onChange: function onChange(e) {
+          _this2.onChange(e);
+        },
+        value: value,
+        style: isValid === false ? {
+          border: '1px solid #e4002b'
+        } : {}
       }), limitChar ? _react.default.createElement("div", {
-        style: {
-          textAlign: 'right',
-          position: 'absolute',
-          width: '100%'
-        }
+        className: "limit-char noselect"
       }, value.length, "/", limitChar) : null, _react.default.createElement(_FieldError.default, {
         isValid: isValid,
-        errorMessage: errorMessage
+        errorMessage: errorMessage,
+        style: {
+          paddingRight: 60
+        }
       }));
     }
   }]);

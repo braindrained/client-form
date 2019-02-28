@@ -71,18 +71,6 @@ class CustomTextField extends React.Component<any, any> {
 		});
 	}
 
-	handleKeyPress(val: Object) {
-		if (val.key === 'Enter') {
-			val.preventDefault();
-
-		} else {
-			this.setState({
-				value: val.target.value,
-				isValid: true,
-			});
-		}
-	}
-
 	render() {
 		const {
 			className, style, label, name, isRequired,
@@ -100,7 +88,6 @@ class CustomTextField extends React.Component<any, any> {
 					id: name,
 					value: currency ? value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : value,
 					disabled,
-					onKeyPress: (e) => { this.handleKeyPress(e); },
 					onChange: (e) => { this.onChange(e); },
 					onBlur: (e) => { this.onBlur(e); },
 					onFocus: () => { this.onFocus(); },

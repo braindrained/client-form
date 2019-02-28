@@ -8,9 +8,10 @@ class CustomTextarea extends React.Component<any, any> {
 
 	constructor(props: Object) {
 		super(props);
+		const { value, isValid } = this.props;
 
 		this.state = {
-			value: this.props.value,
+			value: `${value}`,
 			isValid: this.props.isValid
 		};
 	}
@@ -22,10 +23,26 @@ class CustomTextarea extends React.Component<any, any> {
 		return false;
 	}
 
+	componentWillReceiveProps(nextProps: Object) {
+		if (this.state.value !== nextProps.value) {
+			this.setState({
+				value: nextProps.value,
+			});
+		}
+
+		if (!nextProps.isValid) {
+			this.setState({
+				value: nextProps.value,
+				isValid: nextProps.isValid,
+			});
+		}
+	}
+
 	onChange(event: Object) {
 		const value = this.props.limitChar ? event.target.value.substring(0, this.props.limitChar) : event.target.value;
+		console.log(value);
 		this.setState({
-			value,
+			value: value,
 			isValid: true,
 		});
 		if (this.props.updateOnChange === true) {
@@ -38,9 +55,15 @@ class CustomTextarea extends React.Component<any, any> {
 		}
 	}
 
+	onBlur(event: Object) {
+		if (this.props.value !== this.state.value) {
+			this.props.onUpdate(event, false);
+		}
+	}
+
 	render() {
-		const { placeholder, label, className, style, isRequired, name, value, errorMessage, limitChar } = this.props;
-		const { isValid } = this.state;
+		const { placeholder, label, className, style, isRequired, name, errorMessage, limitChar } = this.props;
+		const { isValid, value } = this.state;
 
 		return (
 			<div className={sumClasses(['container-field', className])} style={style}>
@@ -50,14 +73,16 @@ class CustomTextarea extends React.Component<any, any> {
 					className: 'large-field',
 					name,
 					id: name,
-					onChange: this.onChange.bind(this),
-					value
+					onBlur: (e) => { this.onBlur(e); },
+					onChange: (e) => { this.onChange(e); },
+					value,
+					style: isValid === false ? { border: '1px solid #e4002b' } : {}
 				}} />
 				{ limitChar ?
-					<div style={{ textAlign: 'right', position: 'absolute', width: '100%' }}>
+					<div className="limit-char noselect">
 						{ value.length }/{limitChar}
 					</div> : null }
-				<FieldError {...{ isValid, errorMessage }} />
+				<FieldError {...{ isValid, errorMessage, style: { paddingRight: 60 } }} />
 			</div>
 		);
 	}

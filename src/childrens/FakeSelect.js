@@ -81,9 +81,9 @@ class FakeSelect extends React.Component<any, any> {
 					</div>
 					<FieldError {...{ isValid, errorMessage }} />
 
-					<div className="fake-cont" style={{ width: style.maxWidth, opacity: displaySelect ? '0' : '1', zIndex: displaySelect ? -1 : 1, background: overlayBg }}>
+					<div className="fake-cont box-shadow" style={{ width: style.maxWidth, opacity: displaySelect ? '0' : '1', zIndex: displaySelect ? -1 : 1, background: overlayBg }}>
 						<div className="min-max">Min</div>
-						<div className="select-style" style={Object.assign({}, rangesStyle, { marginBottom: 15, float: 'right' })}>
+						<div className="select-style" style={Object.assign({}, rangesStyle, { marginBottom: 10, float: 'right' })}>
 							<select name="min" id="min" value={this.props.value.min} onChange={(o) => { this.onChange(o); }}>
 								{
 									firstRange.map(item => <option value={item.value} key={`f_${item.value}`}>{item.text}</option>)
@@ -92,7 +92,7 @@ class FakeSelect extends React.Component<any, any> {
 						</div>
 						<div className="clear" />
 						<div className="min-max">Max</div>
-						<div className="select-style" style={Object.assign({}, rangesStyle, { marginBottom: 15, float: 'right' })}>
+						<div className="select-style" style={Object.assign({}, rangesStyle, { marginBottom: 10, float: 'right' })}>
 							<select name="max" id="max" value={this.props.value.max} onChange={(o) => { this.onChange(o); }}>
 								{
 									maxRange.map(item => <option value={item.value} key={`f_${item.value}`}>{item.text}</option>)

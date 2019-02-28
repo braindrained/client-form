@@ -105,11 +105,8 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 								cols: 20
 							}} />
 						</div>
-						<div className="noselect" style={{ textAlign: 'right',
-							position: 'absolute',
-							width: '100%'
-						}}>
-							{ item.value.length }/{limitChar}
+						<div className="limit-char noselect">
+							{item.value.length}/{limitChar}
 						</div>
 					</div>
 				))}

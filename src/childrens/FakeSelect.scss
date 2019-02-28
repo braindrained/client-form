@@ -1,14 +1,15 @@
 .container-field {
 	.fake-cont {
 		position: absolute;
-		margin-top: -52px;
+		margin-top: -66px;
 		opacity: 0;
 		z-index: -1;
 		transition-duration: 0.3s, 0.3s;
 		transition-timing-function: ease-in, ease-out;
 		width: 100%;
-		@media screen and (max-width: 560px) {
-			margin-top: -66px;
+		padding: 10px 10px 0px 10px;
+		@media screen and (min-width: 560px) {
+			margin-top: -52px;
 		}
 		.min-max {
 			float: left;
@@ -16,7 +17,6 @@
 			font-size: 11px;
 			color: rgb(106, 119, 134);
 			margin-right: 15px;
-			padding-left: 15px;
 		}
 	}
 }

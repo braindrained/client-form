@@ -361,7 +361,8 @@ function (_React$Component) {
               errorMessage: item.errorMessage,
               style: item.style,
               className: item.className ? item.className : '',
-              limitChar: item.limitChar
+              limitChar: item.limitChar,
+              updateOnChange: item.updateOnChange
             });
 
           case 'select':

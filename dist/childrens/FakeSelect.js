@@ -141,7 +141,7 @@ function (_React$Component) {
         isValid: isValid,
         errorMessage: errorMessage
       }), _react.default.createElement("div", {
-        className: "fake-cont",
+        className: "fake-cont box-shadow",
         style: {
           width: style.maxWidth,
           opacity: displaySelect ? '0' : '1',
@@ -153,7 +153,7 @@ function (_React$Component) {
       }, "Min"), _react.default.createElement("div", {
         className: "select-style",
         style: Object.assign({}, rangesStyle, {
-          marginBottom: 15,
+          marginBottom: 10,
           float: 'right'
         })
       }, _react.default.createElement("select", {
@@ -175,7 +175,7 @@ function (_React$Component) {
       }, "Max"), _react.default.createElement("div", {
         className: "select-style",
         style: Object.assign({}, rangesStyle, {
-          marginBottom: 15,
+          marginBottom: 10,
           float: 'right'
         })
       }, _react.default.createElement("select", {
