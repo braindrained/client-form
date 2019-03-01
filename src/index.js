@@ -27,8 +27,9 @@ const Form = class extends React.Component<any, any> {
 
 	onUpdate(e: Object, hasError: boolean) {
 		const { controls } = this.state;
+		const { noUndefined } = this.props;
 
-		let updatedControls = controls.map((item) => {
+		const updatedControls = controls.map((item) => {
 			if (e.target.name === item.name) {
 				item.isValid = !hasError;
 				item.value = e.target.value;
@@ -96,7 +97,7 @@ const Form = class extends React.Component<any, any> {
 		const { controls } = this.state;
 		const { noUndefined } = this.props;
 
-		let updatedControls = controls.map((item) => {
+		const updatedControls = controls.map((item) => {
 			if (item.isRequired && !item.hide) {
 				if (item.control !== 'select' && (item.value === '' || !item.value)) {
 					item.isValid = false;
@@ -189,62 +190,66 @@ const Form = class extends React.Component<any, any> {
 		return (
 			<div className={sumClasses(['client-form', className !== null && className !== undefined ? className : ''])} style={style}>
 				{ controls.map((item) => {
-					switch (item.control) {
+					const {
+						control, hide, name, component, type, onlyNumber, placeholder, label,
+						value, isRequired, isValid, disabled, errorMessage, className, style,
+						updateOnChange, limitChar, currency, disable, options, hideRadio, uncheck,
+						highlightSel, textBefore, hideCheck, tabs, valueAsObject, text, firstRange,
+						secondRange, rangesStyle, overlayBg
+					} = item;
+					switch (control) {
 					default:
 						return null;
 					case 'external':
-						if (item.hide) return (null);
-						return (
-							Object.assign({}, item.component,
-								{
-									key: item.name,
-									props: Object.assign({}, item, {
-										onUpdate: (e, h) => { this.onUpdate(e, h); }
-									}),
-								}
-							)
-						);
+						if (hide) return (null);
+						return Object.assign({}, component,
+							{
+								key: name,
+								props: Object.assign({}, item, {
+									onUpdate: (e, h) => { this.onUpdate(e, h); }
+								}),
+							});
 					case 'text':
-						if (item.hide) return (null);
+						if (hide) return (null);
 						return (
 							<CustomTextField {...{
-								type: item.type,
-								onlyNumber: item.onlyNumber,
+								type,
+								onlyNumber,
 								key: item.name,
-								placeholder: item.placeholder,
-								name: item.name,
-								label: item.label,
-								value: item.value ? item.value : '',
+								placeholder,
+								name,
+								label,
+								value: value ? value : '',
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								isRequired: item.isRequired,
-								isValid: item.isValid,
-								disabled: item.disabled,
-								errorMessage: item.errorMessage,
-								className: item.className ? item.className : '',
-								style: item.style,
-								updateOnChange: item.updateOnChange,
-								limitChar: item.limitChar,
-								currency: item.currency,
+								isRequired,
+								isValid,
+								disabled,
+								errorMessage,
+								className: className ? className : '',
+								style,
+								updateOnChange,
+								limitChar,
+								currency,
 							}} />
 						);
 					case 'plusMinus':
 						if (item.hide) return (null);
 						return (
 							<CustomPlusMinus {...{
-								type: item.type,
-								onlyNumber: item.onlyNumber,
+								type,
+								onlyNumber,
 								key: item.name,
-								placeholder: item.placeholder,
-								name: item.name,
-								label: item.label,
+								placeholder,
+								name,
+								label,
 								value: parseFloat(item.value),
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								isRequired: item.isRequired,
-								isValid: item.isValid,
-								disabled: item.disabled,
-								errorMessage: item.errorMessage,
-								className: item.className ? item.className : '',
-								style: item.style,
+								isRequired,
+								isValid,
+								disabled,
+								errorMessage,
+								className: className ? className : '',
+								style,
 							}} />
 						);
 					case 'textArea':
@@ -252,18 +257,18 @@ const Form = class extends React.Component<any, any> {
 						return (
 							<CustomTextarea {...{
 								key: item.name,
-								placeholder: item.placeholder,
-								name: item.name,
-								label: item.label,
+								placeholder,
+								name,
+								label,
 								value: item.value ? item.value : '',
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								isRequired: item.isRequired,
-								isValid: item.isValid,
-								errorMessage: item.errorMessage,
-								style: item.style,
+								isRequired,
+								isValid,
+								errorMessage,
+								style,
 								className: item.className ? item.className : '',
-								limitChar: item.limitChar,
-								updateOnChange: item.updateOnChange,
+								limitChar,
+								updateOnChange,
 							}} />
 						);
 					case 'select':
@@ -271,17 +276,17 @@ const Form = class extends React.Component<any, any> {
 						return (
 							<CustomSelect {...{
 								key: item.name,
-								name: item.name,
-								label: item.label,
-								disabled: item.disabled,
-								options: item.options,
+								name,
+								label,
+								disable,
+								options,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								value: item.value,
-								style: item.style,
+								value,
+								style,
 								className: item.className ? item.className : '',
-								isRequired: item.isRequired,
-								isValid: item.isValid,
-								errorMessage: item.errorMessage,
+								isRequired,
+								isValid,
+								errorMessage,
 								default: item.default,
 							}} />
 						);
@@ -290,12 +295,12 @@ const Form = class extends React.Component<any, any> {
 						return (
 							<CustomCheckBox {...{
 								key: item.name,
-								name: item.name,
-								label: item.label,
-								value: item.value,
-								style: item.style,
-								textBefore: item.textBefore,
-								hideCheck: item.hideCheck,
+								name,
+								label,
+								value,
+								style,
+								textBefore,
+								hideCheck,
 								className: item.className ? item.className : '',
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 							}} />
@@ -305,16 +310,16 @@ const Form = class extends React.Component<any, any> {
 						return (
 							<CustomRadio {...{
 								key: item.name,
-								name: item.name,
-								label: item.label,
-								options: item.options,
+								name,
+								label,
+								options,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								value: notEmpty(item.value) ? item.value : item.default,
-								hideRadio: item.hideRadio,
-								uncheck: item.uncheck,
+								hideRadio,
+								uncheck,
 								className: item.className ? item.className : '',
-								style: item.style,
-								highlightSel: item.highlightSel,
+								style,
+								highlightSel,
 							}} />
 						);
 					case 'label':
@@ -322,11 +327,11 @@ const Form = class extends React.Component<any, any> {
 						return (
 							<CustomLabel {...{
 								key: item.name,
-								name: item.name,
-								label: item.label,
-								style: item.style,
-								text: item.text,
-								value: item.value,
+								name,
+								label,
+								style,
+								text,
+								value,
 								className: item.className ? item.className : '',
 							}} />
 						);
@@ -335,17 +340,17 @@ const Form = class extends React.Component<any, any> {
 						return (
 							<CustomTextAreaTab {...{
 								key: item.name,
-								name: item.name,
-								value: item.value,
-								tabs: item.tabs,
+								name,
+								value,
+								tabs,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								style: item.style,
+								style,
 								className: item.className ? item.className : '',
-								isRequired: item.isRequired,
-								isValid: item.isValid,
-								errorMessage: item.errorMessage,
-								valueAsObject: item.valueAsObject,
-								limitChar: item.limitChar,
+								isRequired,
+								isValid,
+								errorMessage,
+								valueAsObject,
+								limitChar,
 							}} />
 						);
 					case 'fakeselect':
@@ -353,17 +358,17 @@ const Form = class extends React.Component<any, any> {
 						return (
 							<FakeSelect {...{
 								key: item.name,
-								name: item.name,
-								label: item.label,
-								value: item.value,
-								text: item.text,
+								name,
+								label,
+								value,
+								text,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								style: item.style,
-								firstRange: item.firstRange,
-								secondRange: item.secondRange,
-								rangesStyle: item.rangesStyle,
+								style,
+								firstRange,
+								secondRange,
+								rangesStyle,
 								className: item.className ? item.className : '',
-								overlayBg: item.overlayBg
+								overlayBg
 							}} />
 						);
 					}

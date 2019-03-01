@@ -49,7 +49,7 @@ function (_React$Component) {
         isValid = _this$props.isValid;
     _this.state = {
       value: "".concat(value),
-      isValid: _this.props.isValid
+      isValid: isValid
     };
     return _this;
   }

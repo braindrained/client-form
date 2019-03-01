@@ -2,7 +2,7 @@
 import React from 'react';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
-import { camelToTitle, sumClasses, notEmpty } from '../helpers/utils';
+import { camelToTitle, sumClasses } from '../helpers/utils';
 
 class CustomTextField extends React.Component<any, any> {
 
@@ -12,7 +12,7 @@ class CustomTextField extends React.Component<any, any> {
 
 		this.state = {
 			value: `${value}`,
-			isValid: isValid,
+			isValid,
 			editing: false,
 		};
 	}

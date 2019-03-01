@@ -3,6 +3,8 @@ A component exportable for standard forms, demo: https://braindrained.github.io/
 
 #### Install from npm
 ```sh
+> npm install client-form
+or
 > yarn add client-form
 ```
 

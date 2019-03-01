@@ -12,7 +12,7 @@ class CustomTextarea extends React.Component<any, any> {
 
 		this.state = {
 			value: `${value}`,
-			isValid: this.props.isValid
+			isValid
 		};
 	}
 
@@ -42,7 +42,7 @@ class CustomTextarea extends React.Component<any, any> {
 		const value = this.props.limitChar ? event.target.value.substring(0, this.props.limitChar) : event.target.value;
 		console.log(value);
 		this.setState({
-			value: value,
+			value,
 			isValid: true,
 		});
 		if (this.props.updateOnChange === true) {

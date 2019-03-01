@@ -133,7 +133,7 @@ class App extends React.Component {
 							{
 								control: 'radio',
 								name: 'genericRadio',
-								label: { text: 'This is an almost real radio', style: { } },
+								label: { text: 'This is an almost real radio' },
 								options: [
 									{ value: '', label: 'N.i.', style: { width: '100%', float: 'left' } },
 									{ value: 'true', label: 'Sì', style: { width: '100%', float: 'left' } },

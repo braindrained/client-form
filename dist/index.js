@@ -72,6 +72,7 @@ function (_React$Component) {
       var _this2 = this;
 
       var controls = this.state.controls;
+      var noUndefined = this.props.noUndefined;
       var updatedControls = controls.map(function (item) {
         if (e.target.name === item.name) {
           item.isValid = !hasError;
@@ -283,14 +284,47 @@ function (_React$Component) {
         className: (0, _utils.sumClasses)(['client-form', className !== null && className !== undefined ? className : '']),
         style: style
       }, controls.map(function (item) {
-        switch (item.control) {
+        var control = item.control,
+            hide = item.hide,
+            name = item.name,
+            component = item.component,
+            type = item.type,
+            onlyNumber = item.onlyNumber,
+            placeholder = item.placeholder,
+            label = item.label,
+            value = item.value,
+            isRequired = item.isRequired,
+            isValid = item.isValid,
+            disabled = item.disabled,
+            errorMessage = item.errorMessage,
+            className = item.className,
+            style = item.style,
+            updateOnChange = item.updateOnChange,
+            limitChar = item.limitChar,
+            currency = item.currency,
+            disable = item.disable,
+            options = item.options,
+            hideRadio = item.hideRadio,
+            uncheck = item.uncheck,
+            highlightSel = item.highlightSel,
+            textBefore = item.textBefore,
+            hideCheck = item.hideCheck,
+            tabs = item.tabs,
+            valueAsObject = item.valueAsObject,
+            text = item.text,
+            firstRange = item.firstRange,
+            secondRange = item.secondRange,
+            rangesStyle = item.rangesStyle,
+            overlayBg = item.overlayBg;
+
+        switch (control) {
           default:
             return null;
 
           case 'external':
-            if (item.hide) return null;
-            return Object.assign({}, item.component, {
-              key: item.name,
+            if (hide) return null;
+            return Object.assign({}, component, {
+              key: name,
               props: Object.assign({}, item, {
                 onUpdate: function onUpdate(e, h) {
                   _this4.onUpdate(e, h);
@@ -299,87 +333,87 @@ function (_React$Component) {
             });
 
           case 'text':
-            if (item.hide) return null;
+            if (hide) return null;
             return _react.default.createElement(_CustomTextField.default, {
-              type: item.type,
-              onlyNumber: item.onlyNumber,
+              type: type,
+              onlyNumber: onlyNumber,
               key: item.name,
-              placeholder: item.placeholder,
-              name: item.name,
-              label: item.label,
-              value: item.value ? item.value : '',
+              placeholder: placeholder,
+              name: name,
+              label: label,
+              value: value ? value : '',
               onUpdate: function onUpdate(e, h) {
                 _this4.onUpdate(e, h);
               },
-              isRequired: item.isRequired,
-              isValid: item.isValid,
-              disabled: item.disabled,
-              errorMessage: item.errorMessage,
-              className: item.className ? item.className : '',
-              style: item.style,
-              updateOnChange: item.updateOnChange,
-              limitChar: item.limitChar,
-              currency: item.currency
+              isRequired: isRequired,
+              isValid: isValid,
+              disabled: disabled,
+              errorMessage: errorMessage,
+              className: className ? className : '',
+              style: style,
+              updateOnChange: updateOnChange,
+              limitChar: limitChar,
+              currency: currency
             });
 
           case 'plusMinus':
             if (item.hide) return null;
             return _react.default.createElement(_CustomPlusMinus.default, {
-              type: item.type,
-              onlyNumber: item.onlyNumber,
+              type: type,
+              onlyNumber: onlyNumber,
               key: item.name,
-              placeholder: item.placeholder,
-              name: item.name,
-              label: item.label,
+              placeholder: placeholder,
+              name: name,
+              label: label,
               value: parseFloat(item.value),
               onUpdate: function onUpdate(e, h) {
                 _this4.onUpdate(e, h);
               },
-              isRequired: item.isRequired,
-              isValid: item.isValid,
-              disabled: item.disabled,
-              errorMessage: item.errorMessage,
-              className: item.className ? item.className : '',
-              style: item.style
+              isRequired: isRequired,
+              isValid: isValid,
+              disabled: disabled,
+              errorMessage: errorMessage,
+              className: className ? className : '',
+              style: style
             });
 
           case 'textArea':
             if (item.hide) return null;
             return _react.default.createElement(_CustomTextarea.default, {
               key: item.name,
-              placeholder: item.placeholder,
-              name: item.name,
-              label: item.label,
+              placeholder: placeholder,
+              name: name,
+              label: label,
               value: item.value ? item.value : '',
               onUpdate: function onUpdate(e, h) {
                 _this4.onUpdate(e, h);
               },
-              isRequired: item.isRequired,
-              isValid: item.isValid,
-              errorMessage: item.errorMessage,
-              style: item.style,
+              isRequired: isRequired,
+              isValid: isValid,
+              errorMessage: errorMessage,
+              style: style,
               className: item.className ? item.className : '',
-              limitChar: item.limitChar,
-              updateOnChange: item.updateOnChange
+              limitChar: limitChar,
+              updateOnChange: updateOnChange
             });
 
           case 'select':
             if (item.hide) return null;
             return _react.default.createElement(_CustomSelect.default, {
               key: item.name,
-              name: item.name,
-              label: item.label,
-              disabled: item.disabled,
-              options: item.options,
+              name: name,
+              label: label,
+              disable: disable,
+              options: options,
               onUpdate: function onUpdate(e, h) {
                 _this4.onUpdate(e, h);
               },
-              value: item.value,
-              style: item.style,
+              value: value,
+              style: style,
               className: item.className ? item.className : '',
-              isRequired: item.isRequired,
-              isValid: item.isValid,
-              errorMessage: item.errorMessage,
+              isRequired: isRequired,
+              isValid: isValid,
+              errorMessage: errorMessage,
               default: item.default
             });
 
@@ -387,12 +421,12 @@ function (_React$Component) {
             if (item.hide) return null;
             return _react.default.createElement(_CustomCheckBox.default, {
               key: item.name,
-              name: item.name,
-              label: item.label,
-              value: item.value,
-              style: item.style,
-              textBefore: item.textBefore,
-              hideCheck: item.hideCheck,
+              name: name,
+              label: label,
+              value: value,
+              style: style,
+              textBefore: textBefore,
+              hideCheck: hideCheck,
               className: item.className ? item.className : '',
               onUpdate: function onUpdate(e, h) {
                 _this4.onUpdate(e, h);
@@ -403,29 +437,29 @@ function (_React$Component) {
             if (item.hide) return null;
             return _react.default.createElement(_CustomRadio.default, {
               key: item.name,
-              name: item.name,
-              label: item.label,
-              options: item.options,
+              name: name,
+              label: label,
+              options: options,
               onUpdate: function onUpdate(e, h) {
                 _this4.onUpdate(e, h);
               },
               value: (0, _utils.notEmpty)(item.value) ? item.value : item.default,
-              hideRadio: item.hideRadio,
-              uncheck: item.uncheck,
+              hideRadio: hideRadio,
+              uncheck: uncheck,
               className: item.className ? item.className : '',
-              style: item.style,
-              highlightSel: item.highlightSel
+              style: style,
+              highlightSel: highlightSel
             });
 
           case 'label':
             if (item.hide) return null;
             return _react.default.createElement(_CustomLabel.default, {
               key: item.name,
-              name: item.name,
-              label: item.label,
-              style: item.style,
-              text: item.text,
-              value: item.value,
+              name: name,
+              label: label,
+              style: style,
+              text: text,
+              value: value,
               className: item.className ? item.className : ''
             });
 
@@ -433,38 +467,38 @@ function (_React$Component) {
             if (item.hide) return null;
             return _react.default.createElement(_CustomTextAreaTab.default, {
               key: item.name,
-              name: item.name,
-              value: item.value,
-              tabs: item.tabs,
+              name: name,
+              value: value,
+              tabs: tabs,
               onUpdate: function onUpdate(e, h) {
                 _this4.onUpdate(e, h);
               },
-              style: item.style,
+              style: style,
               className: item.className ? item.className : '',
-              isRequired: item.isRequired,
-              isValid: item.isValid,
-              errorMessage: item.errorMessage,
-              valueAsObject: item.valueAsObject,
-              limitChar: item.limitChar
+              isRequired: isRequired,
+              isValid: isValid,
+              errorMessage: errorMessage,
+              valueAsObject: valueAsObject,
+              limitChar: limitChar
             });
 
           case 'fakeselect':
             if (item.hide) return null;
             return _react.default.createElement(_FakeSelect.default, {
               key: item.name,
-              name: item.name,
-              label: item.label,
-              value: item.value,
-              text: item.text,
+              name: name,
+              label: label,
+              value: value,
+              text: text,
               onUpdate: function onUpdate(e, h) {
                 _this4.onUpdate(e, h);
               },
-              style: item.style,
-              firstRange: item.firstRange,
-              secondRange: item.secondRange,
-              rangesStyle: item.rangesStyle,
+              style: style,
+              firstRange: firstRange,
+              secondRange: secondRange,
+              rangesStyle: rangesStyle,
               className: item.className ? item.className : '',
-              overlayBg: item.overlayBg
+              overlayBg: overlayBg
             });
         }
       }), textBeforeButton, sendButton ? _react.default.createElement("div", {
