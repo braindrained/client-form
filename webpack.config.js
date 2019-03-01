@@ -60,7 +60,7 @@ module.exports = {
     plugins: isLocal ?
 			[
 				htmlWebpackPlugin,
-				new BundleAnalyzerPlugin()
+				//new BundleAnalyzerPlugin()
 			]
 			:
 			[
