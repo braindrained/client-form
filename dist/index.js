@@ -21,13 +21,11 @@ var _CustomLabel = _interopRequireDefault(require("./childrens/CustomLabel"));
 
 var _CustomTextAreaTab = _interopRequireDefault(require("./childrens/CustomTextAreaTab"));
 
-var _DatePickerField = _interopRequireDefault(require("./childrens/DatePickerField"));
-
 var _CustomPlusMinus = _interopRequireDefault(require("./childrens/CustomPlusMinus"));
 
 var _FakeSelect = _interopRequireDefault(require("./childrens/FakeSelect"));
 
-require("./Form.scss");
+require("./Form.css");
 
 var _utils = require("./helpers/utils");
 
@@ -448,24 +446,6 @@ function (_React$Component) {
               errorMessage: item.errorMessage,
               valueAsObject: item.valueAsObject,
               limitChar: item.limitChar
-            });
-
-          case 'datepicker':
-            if (item.hide) return null;
-            return _react.default.createElement(_DatePickerField.default, {
-              key: item.name,
-              placeholder: item.placeholder,
-              name: item.name,
-              label: item.label,
-              value: item.value,
-              onUpdate: function onUpdate(e, h) {
-                _this4.onUpdate(e, h);
-              },
-              style: item.style,
-              className: item.className ? item.className : '',
-              updateOnChange: item.updateOnChange,
-              errorMessage: item.errorMessage,
-              isValid: item.isValid
             });
 
           case 'fakeselect':

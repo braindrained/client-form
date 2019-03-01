@@ -128,20 +128,9 @@ function (_React$Component) {
           _this2.plusMinus('min');
         },
         style: {
-          float: 'left',
-          width: 30,
-          lineHeight: '30px',
-          borderRadius: 15,
-          backgroundColor: '#323f48',
-          color: '#fff',
-          fontWeight: 700,
-          textAlign: 'center',
-          fontSize: 16,
-          marginRight: 30,
-          cursor: 'pointer',
           opacity: this.state.value === 0 ? 0.3 : 1
         },
-        className: 'box-shadow noselect'
+        className: 'box-shadow noselect cutom-plus-minus-min'
       }, "-"), _react.default.createElement("div", {
         style: {
           float: 'left'
@@ -167,20 +156,8 @@ function (_React$Component) {
         onClick: function onClick() {
           _this2.plusMinus('plus');
         },
-        style: {
-          float: 'left',
-          width: 30,
-          lineHeight: '30px',
-          borderRadius: 15,
-          backgroundColor: '#323f48',
-          color: '#fff',
-          fontWeight: 700,
-          textAlign: 'center',
-          fontSize: 16,
-          marginLeft: 25,
-          cursor: 'pointer'
-        },
-        className: 'box-shadow noselect'
+        style: {},
+        className: 'box-shadow noselect cutom-plus-minus-plus'
       }, "+")), _react.default.createElement(_FieldError.default, {
         isValid: isValid,
         errorMessage: errorMessage

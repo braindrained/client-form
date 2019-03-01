@@ -11,8 +11,6 @@ var _FieldLabel = _interopRequireDefault(require("./childrenComponents/FieldLabe
 
 var _utils = require("../helpers/utils");
 
-require("./CustomRadio.scss");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -125,7 +123,7 @@ function (_React$Component) {
       }, options.map(function (item) {
         return _react.default.createElement("div", {
           key: "select_".concat(item.name, "_").concat(item.value),
-          className: hideRadio && item.value === _this3.state.value ? "floating ".concat(item.value === options[0].value ? 'selected-radio' : 'selected-radio-red', " type type-selected ").concat(item.className, " text-type") : hideRadio ? "floating type ".concat(item.className, " text-type") : item.className,
+          className: hideRadio && item.value === _this3.state.value ? "floating ".concat(item.value === options[0].value ? 'selected-radio' : 'selected-radio-red', " type type-selected ").concat(item.className, " text-type") : (hideRadio ? "floating type ".concat(item.className, " text-type") : item.className) + ' float-container-first-child',
           style: item.style
         }, _react.default.createElement("input", {
           type: 'radio',
@@ -145,7 +143,7 @@ function (_React$Component) {
           style: item.disabled === true ? {
             opacity: 0.5
           } : {}
-        }), _react.default.createElement("div", {
+        }, item.value === _this3.state.value ? _react.default.createElement("div", null) : null), _react.default.createElement("div", {
           dangerouslySetInnerHTML: {
             __html: item.label
           }

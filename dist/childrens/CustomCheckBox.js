@@ -9,8 +9,6 @@ var _react = _interopRequireDefault(require("react"));
 
 var _utils = require("../helpers/utils");
 
-require("./CustomCheckBox.scss");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -98,7 +96,24 @@ function (_React$Component) {
       }), _react.default.createElement("label", {
         htmlFor: name,
         style: label.style
-      }, _react.default.createElement("div", null), _react.default.createElement("div", null, label.text)))));
+      }, _react.default.createElement("div", null, value === true ? _react.default.createElement("svg", {
+        width: "15px",
+        viewBox: "0 0 24 20"
+      }, _react.default.createElement("g", {
+        stroke: "none",
+        strokeWidth: "1",
+        fill: "none",
+        fillRule: "evenodd"
+      }, _react.default.createElement("g", {
+        transform: "translate(-43.000000, -419.000000)",
+        strokeWidth: "3",
+        stroke: "#ffffff",
+        fill: "#ffffff"
+      }, _react.default.createElement("g", {
+        transform: "translate(45.000000, 421.000000)"
+      }, _react.default.createElement("polygon", {
+        points: "6.46669022 12.0255431 1.81870474 7.37755757 0.2359375 8.94917857 6.46669022 15.1799313 19.842188 1.80443349 18.270567 0.2328125"
+      }))))) : null), _react.default.createElement("div", null, label.text)))));
     }
   }]);
 
