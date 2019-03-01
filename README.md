@@ -11,7 +11,7 @@ or
 #### Developing
 Clone, install dependencies and run the component in the development mode.
 ```sh
-> git clone git@bitbucket.org:casait/it.casa.client.form.git client-form
+> git clone git@github.com:braindrained/client-form.git client-form
 > cd client-form
 > yarn
 > yarn start
@@ -26,7 +26,7 @@ Open http://localhost:3007 to view it in the browser.
 #### Install and Import the component
 Install
 ```sh
-> yarn add git+ssh://git@bitbucket.org:casait/it.casa.client.form.git#<tag-version>
+> yarn add git+ssh://git@github.com:braindrained/client-form.git#<tag-version>
 ```
 Import
 
