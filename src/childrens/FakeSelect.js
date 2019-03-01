@@ -5,9 +5,6 @@ import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { sumClasses } from '../helpers/utils';
 
-// flow-disable-next-line
-import './FakeSelect.scss';
-
 class FakeSelect extends React.Component<any, any> {
 
 	constructor(props: Object) {

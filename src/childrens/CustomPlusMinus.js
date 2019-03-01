@@ -71,21 +71,8 @@ class CustomPlusMinus extends React.Component<any, any> {
 				<div style={{ float: 'left' }}>
 					<div {...{
 						onClick: () => { this.plusMinus('min'); },
-						style: {
-							float: 'left',
-							width: 30,
-							lineHeight: '30px',
-							borderRadius: 15,
-							backgroundColor: '#323f48',
-							color: '#fff',
-							fontWeight: 700,
-							textAlign: 'center',
-							fontSize: 16,
-							marginRight: 30,
-							cursor: 'pointer',
-							opacity: this.state.value === 0 ? 0.3 : 1
-						},
-						className: 'box-shadow noselect'
+						style: { opacity: this.state.value === 0 ? 0.3 : 1 },
+						className: 'box-shadow noselect cutom-plus-minus-min'
 					}}>
 						-
 					</div>
@@ -104,8 +91,8 @@ class CustomPlusMinus extends React.Component<any, any> {
 					</div>
 					<div {...{
 						onClick: () => { this.plusMinus('plus'); },
-						style: { float: 'left', width: 30, lineHeight: '30px', borderRadius: 15, backgroundColor: '#323f48', color: '#fff', fontWeight: 700, textAlign: 'center', fontSize: 16, marginLeft: 25, cursor: 'pointer' },
-						className: 'box-shadow noselect'
+						style: {},
+						className: 'box-shadow noselect cutom-plus-minus-plus'
 					}}>
 						+
 					</div>

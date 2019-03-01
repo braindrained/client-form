@@ -49,12 +49,10 @@ module.exports = {
 					      }
             },
 						{
-                test: /\.(css|scss)$/,
+                test: /\.css$/,
                 use: [
 									"style-loader",
 									{ loader: 'css-loader', options: { importLoaders: 1 } },
-									"postcss-loader",
-									"sass-loader"
 								]
             }
         ]
@@ -62,13 +60,11 @@ module.exports = {
     plugins: isLocal ?
 			[
 				htmlWebpackPlugin,
-				//new BundleAnalyzerPlugin(),
-				new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /it/)
+				new BundleAnalyzerPlugin()
 			]
 			:
 			[
 				htmlWebpackPlugin,
-				new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /it/),
 				new webpack.optimize.DedupePlugin(),
 		    new webpack.NoErrorsPlugin(),
 		    new CompressionPlugin({

@@ -81,11 +81,11 @@ class CustomComp extends React.Component {
 	}
 
 	render() {
-		const { label, name, isRequired, isValid, errorMessage, placeholder, style } = this.props;
+		const { label, name, isRequired, isValid, errorMessage, placeholder, style, className } = this.props;
 		const { value } = this.state;
 
 		return(
-			<div style={style}>
+			<div className={className} style={style}>
 				<FieldLabel {...{ label, name, isRequired, isValid }} />
 				<input {...{
 					type: 'email',
@@ -99,7 +99,7 @@ class CustomComp extends React.Component {
 					onFocus: () => { this.onFocus(); },
 				}} style={{  }}/>
 				<FieldError {...{ isValid, errorMessage }} />
-				<div>And I need that it have a complete custom behaviour and contents, is value will be returned with other fields.</div>
+				<div>It will have a custom behaviour and its value will be returned in the returned object with other fields.</div>
 			</div>
 		)
 	}

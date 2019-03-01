@@ -3,9 +3,6 @@ import React from 'react';
 import FieldLabel from './childrenComponents/FieldLabel';
 import { sumClasses } from '../helpers/utils';
 
-// flow-disable-next-line
-import './CustomRadio.scss';
-
 class CustomRadio extends React.Component<any, any> {
 
 	constructor(props: Object) {
@@ -70,7 +67,10 @@ class CustomRadio extends React.Component<any, any> {
 							className:
 								hideRadio &&
 								item.value === this.state.value
-									? `floating ${(item.value === options[0].value ? 'selected-radio' : 'selected-radio-red')} type type-selected ${item.className} text-type` : (hideRadio ? `floating type ${item.className} text-type` : item.className),
+									?
+									`floating ${(item.value === options[0].value ? 'selected-radio' : 'selected-radio-red')} type type-selected ${item.className} text-type`
+									:
+									(hideRadio ? `floating type ${item.className} text-type` : item.className) + ' float-container-first-child',
 							style: item.style
 						}}>
 							<input {...{
@@ -84,7 +84,12 @@ class CustomRadio extends React.Component<any, any> {
 								onChange: this.onChange.bind(this)
 							}} />
 							<label htmlFor={name + item.value} style={item.labelStyle ? item.labelStyle : {}}>
-								{ hideRadio ? <span className="hide-radio" /> : <div style={item.disabled === true ? { opacity: 0.5 } : {}} />}
+								{ hideRadio ?
+									<span className="hide-radio" /> :
+									<div style={item.disabled === true ? { opacity: 0.5 } : {}}>
+										{item.value === this.state.value ? <div></div> : null}
+									</div>
+								}
 								{ /* eslint-disable-next-line */ }
 								<div dangerouslySetInnerHTML={{ __html: item.label }} />
 								{ item.customObject ?

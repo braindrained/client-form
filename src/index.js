@@ -8,11 +8,10 @@ import CustomSelect from './childrens/CustomSelect';
 import CustomRadio from './childrens/CustomRadio';
 import CustomLabel from './childrens/CustomLabel';
 import CustomTextAreaTab from './childrens/CustomTextAreaTab';
-import DatePickerField from './childrens/DatePickerField';
 import CustomPlusMinus from './childrens/CustomPlusMinus';
 import FakeSelect from './childrens/FakeSelect';
 // flow-disable-next-line
-import './Form.scss';
+import './Form.css';
 
 import { notEmpty, sumClasses } from './helpers/utils';
 
@@ -347,23 +346,6 @@ const Form = class extends React.Component<any, any> {
 								errorMessage: item.errorMessage,
 								valueAsObject: item.valueAsObject,
 								limitChar: item.limitChar,
-							}} />
-						);
-					case 'datepicker':
-						if (item.hide) return (null);
-						return (
-							<DatePickerField {...{
-								key: item.name,
-								placeholder: item.placeholder,
-								name: item.name,
-								label: item.label,
-								value: item.value,
-								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								style: item.style,
-								className: item.className ? item.className : '',
-								updateOnChange: item.updateOnChange,
-								errorMessage: item.errorMessage,
-								isValid: item.isValid,
 							}} />
 						);
 					case 'fakeselect':
