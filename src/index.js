@@ -182,7 +182,6 @@ const Form = class extends React.Component<any, any> {
 		const { controls } = this.state;
 		const sendButtonClass = sumClasses([
 			succeed !== null ? (succeed ? 'btn btn-succeed' : 'btn btn-error') : 'btn',
-			isSent ? 'spinner' : '',
 			sendButton && sendButton.disabled ? 'btn-disabled' : ''
 		]);
 		const sendButtonValue = sendButton ? (succeed === null ? sendButton.text : succeed === false ? sendButton.errorText : sendButton.succeedText) : null;
@@ -383,6 +382,23 @@ const Form = class extends React.Component<any, any> {
 							onClick: succeed === null && isSent === null && sendButton.disabled === undefined ? () => { this.formIsValid(); } : () => null,
 							type: 'button'
 						}}>
+							{ isSent ?
+								<svg width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+									<circle cx="50" cy="50" fill="none" stroke="#fff" strokeWidth="10" r="35" strokeDasharray="164.93361431346415 56.97787143782138" transform="rotate(341.554 50 50)">
+										<animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite" />
+									</circle>
+								</svg> : null }
+							{ succeed !== null ?
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+									<path fill="none" d="M0 0h24v24H0z"/>
+									<path fill="#fff" d={ succeed ? "M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" : "M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" }/>
+								</svg> : null }
+							{/*
+								succeed !== null ? (succeed ? 'btn btn-succeed' : 'btn btn-error') : 'btn',
+								isSent ? 'spinner' : null,
+								sendButton && sendButton.disabled ? 'btn-disabled' :
+							*/}
+
 							{sendButtonValue}
 						</button>
 					</div>

@@ -3,6 +3,7 @@
 	display: block;
 	margin: 0 auto;
 	padding: 0px 15px;
+	color: #333f48;
 }
 .client-form label {
 	font-size: 13px;
@@ -20,6 +21,7 @@
 	box-shadow: 0 -5px 5px -5px rgba(0,0,0,.14);
 }
 .client-form .btn {
+	position: relative;
 	float: left;
 	background: #323f48;
 	margin: 0px 0px 0px 0px;
@@ -83,21 +85,12 @@
 	background-color: #00c694!important;
 	border: 1px solid #00c694!important;
 	color: #fff!important;
-	background-image: url('assets/img/check.png');
-	background-repeat: no-repeat;
-	background-position: 10px 10px;
-	line-height: 38px!important;
 }
 
 .client-form .btn-succeed-small {
 	background-color: #00c694!important;
 	border: 1px solid #00c694!important;
 	color: #fff!important;
-	background-image: url('assets/img/check.png');
-	background-repeat: no-repeat;
-	background-position: 5px center;
-	background-size: 20px;
-	line-height: 30px!important;
 }
 
 .client-form .btn-white {
@@ -114,24 +107,12 @@
 	background-color: #e4002b!important;
 	border: 1px solid #e4002b!important;
 	color: #fff!important;
-	background-image: url('assets/img/x.png')!important;
-	background-repeat: no-repeat;
-	background-position: 10px 10px;
-	font-size: 13px;
-	max-height: 41px;
 	overflow: hidden;
-	line-height: 38px!important;
 }
 .client-form .btn-error-small {
 	background-color: #e4002b!important;
 	border: 1px solid #e4002b!important;
 	color: #fff!important;
-	padding-left: 35px;
-	background-image: url('assets/img/x.png');
-	background-repeat: no-repeat;
-	background-position: 10px center;
-	background-size: 12px;
-	line-height: 30px!important;
 }
 
 .client-form .btn-gray-small {
@@ -179,19 +160,6 @@
 	background-color: #a30000;
 	border-color: #a30000;
 }
-.client-form .spinner {
-	background-image: url('assets/img/default.gif')!important;
-	background-repeat: no-repeat!important;
-	background-position: 0px 0px!important;
-	background-size: 40px!important;
-}
-
-.client-form .spinner-small {
-	background-image: url('assets/img/default.gif')!important;
-	background-repeat: no-repeat;
-	background-position: 5px center!important;
-	background-size: 25px!important;
-}
 
 .client-form .loader {
 	opacity: 0.5;
@@ -215,60 +183,29 @@
 	display: inline-block;
 	cursor: pointer;
 }
-.client-form input[type='radio'] + label {
-	margin-right: 7px;
-	width: 100%;
+.client-form input[type="checkbox"] + label > svg,
+.client-form input[type="radio"] + label > svg {
+	float: left;
 }
-.client-form input[type="checkbox"] + label > div:first-child,
-.client-form input[type="radio"] + label > div:first-child {
-	display: inline-block;
+.client-form input[type="checkbox"] + label > div,
+.client-form input[type="radio"] + label > .custom-radio-options-label {
 	width: 20px;
 	height: 20px;
 	vertical-align: middle;
-	margin: -1px 8px 0 0;
+	padding-left: 5px;
 	cursor: pointer;
 	float: left;
-	padding: 2px 1px;
+	white-space: nowrap;
+	line-height: 24px;
 }
-.client-form input[type="checkbox"] + label > div:first-child {
-	border: 2px solid #c1c5c8;
-	border-radius: 3px;
-}
-.client-form input[type="radio"] + label > div:first-child {
-	border: 2px solid #c1c5c8;
-	border-radius: 10px;
-	height: 20px;
-	max-height: 20px!important;
-}
-.client-form input[type="checkbox"] + label > div:last-child,
-.client-form input[type="radio"] + label > div:first-child {
-	white-space: normal;
-	text-align: left;
-}
-@media screen and (min-width: 560px) {
-	.client-form input[type="checkbox"] + label > div:last-child,
-	.client-form input[type="radio"] + label > div:first-child {
-		white-space: nowrap;
-	}
-}
-.client-form input[type="checkbox"]:checked + label > div:first-child {
-	background: rgb(0, 132, 255);
-	border: 2px solid rgb(0, 132, 255);
-}
-.client-form input[type="radio"] + label > div:first-child div {
-	background: rgb(0, 132, 255);
-	border-radius: 10px;
-	width: 10px;
-	height: 10px;
-	margin: 1px 2px;
-}
+
 .client-form input[type=email],
 .client-form input[type=number],
 .client-form input[type=password],
 .client-form input[type=tel],
 .client-form input[type=text],
 .client-form textarea {
-	border: 1px solid #949da2;
+	border: 1px solid #d8dbdf;
 	padding: 15px 8px;
 	border-radius: 2px;
 	color: #333f48;
@@ -286,14 +223,20 @@
 	.client-form input[type=number],
 	.client-form input[type=password],
 	.client-form input[type=tel],
-	.client-form input[type=text],
-	.client-form textarea {
-		padding: 8px 8px;
+	.client-form input[type=text] {
+		max-height: 30px;
 	}
 }
 .client-form .button-container {
 	width: 100%;
 	float: right;
+	position: relative;
+}
+.client-form .button-container svg {
+	background: none;
+	position: absolute;
+	left: 10px;
+	top: 8px;
 }
 .client-form .hide {
 	display: none;
@@ -313,7 +256,7 @@
 		margin-right: 20px;
 	}
 }
-.client-form .container-field .field-label {
+.client-form .container-field label {
 	width: 100%;
 	float: left;
 	clear: both;
@@ -373,57 +316,50 @@
 }
 
 .client-form .cutom-plus-minus {
-	min-height: 20px;
-	max-width: 160px;
-}
-@media screen and (min-width: 560px) {
-	.client-form .cutom-plus-minus {
-		min-width: 250px;
-	}
-}
-.client-form .cutom-plus-minus .field-label {
-	float: left;
-	width: 130px;
+	min-height: 79px;
+	max-width: 250px;
 }
 .client-form .cutom-plus-minus input {
 	height: 30px;
 }
-.client-form .cutom-plus-minus .cutom-plus-minus-min, .client-form .cutom-plus-minus .cutom-plus-minus-plus {
+.client-form .cutom-plus-minus button {
 	float: left;
-	width: 30px;
-	line-height: 32px;
-	border-radius: 15px;
+	width: 32px;
+	border-radius: 50%;
 	background-color: rgb(50, 63, 72);
+	border: none;
 	color: rgb(255, 255, 255);
 	font-weight: 700;
 	text-align: center;
 	font-size: 16px;
 	cursor: pointer;
-	height: 30px;
+	height: 32px;
+	line-height: 32px;
 }
-.client-form .cutom-plus-minus .cutom-plus-minus-min {
+.client-form .cutom-plus-minus button:first-child {
 		margin-right: 30px;
 }
-.client-form .cutom-plus-minus .cutom-plus-minus-plus {
-		margin-left: 25px;
+.client-form .cutom-plus-minus button:last-child {
+		margin-left: 30px;
 }
 
 .client-form .select-style {
-	background: #fff url("assets/img/arrow_down.png") no-repeat right center;
+	background: #fff;
 	height: 47px;
 	line-height: 47px;
 	width: 100%;
 	display: inline-block;
-	border: 1px solid #949da2;
+	border: 1px solid #d8dbdf;
 	border-radius: 2px;
 	position: relative;
 	z-index: 1;
 	font-size: 13px;
+	cursor: pointer;
 }
 @media screen and (min-width: 560px) {
 	.client-form .select-style {
-		height: 33px;
-		line-height: 33px;
+		height: 32px;
+		line-height: 32px;
 	}
 }
 .client-form .select-style label {
@@ -446,6 +382,12 @@
 	cursor: pointer;
 	outline: none;
 	z-index: 1;
+	-webkit-touch-callout: none; /* iOS Safari */
+		-webkit-user-select: none; /* Safari */
+		 -khtml-user-select: none; /* Konqueror HTML */
+			 -moz-user-select: none; /* Firefox */
+				-ms-user-select: none; /* Internet Explorer/Edge */
+						user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 @media screen and (min-width: 560px) {
 	.client-form .select-style select {
@@ -453,6 +395,20 @@
 	}
 }
 
+.client-form .select-style svg {
+	position: absolute;
+	right: 2px;
+	top: 10px;
+	z-index: -1;
+}
+@media screen and (min-width: 560px) {
+	.client-form .select-style svg {
+		position: absolute;
+		right: 2px;
+		top: 3px;
+		z-index: -1;
+	}
+}
 
 .client-form .validation-error {
 	color: #e4002b;
@@ -531,63 +487,31 @@
 		display: none!important;
 }
 
-.client-form .selected-radio {
-		background-color: #949da2!important;
-		color:#fff;
-}
-
-.client-form .selected-radio:hover {
-		background-color: #949da2!important;
-}
-
-.client-form .selected-radio-red {
-	background-color: #949da2!important;
-	color:#fff;
-}
-
-.client-form .selected-radio-red:hover {
-	background-color: #949da2!important;
-}
-
 .client-form .floating {
-		border: 1px solid #949da2;
-		cursor: pointer;
-		height: 30px;
-		-moz-transition:		background-color 0.3s ease-in-out;
-		-o-transition:			background-color 0.3s ease-in-out;
-		-webkit-transition: background-color 0.3s ease-in-out;
-		transition:				 background-color 0.3s ease-in-out;
+	float: left;
+	border: 1px solid #d8dbdf;
+	cursor: pointer;
+	height: 33px;
+	-moz-transition:		background-color 0.3s ease-in-out;
+	-o-transition:			background-color 0.3s ease-in-out;
+	-webkit-transition: background-color 0.3s ease-in-out;
+	transition:				 background-color 0.3s ease-in-out;
 }
 .client-form .floating label {
 		cursor: pointer;
-		height: 30px;
-		width: 42px;
-}
-
-.client-form .text-type {
-	float: left;
-	height: 33px;
-	line-height: 33px;
-	text-align: center;
-	margin-bottom: 10px;
-	white-space: nowrap;
-}
-.client-form .text-type label {
-	height: 100%;
-	width: auto;
-	text-align: center;
-	margin: 0 auto!important;
-	bottom: 0;
-	line-height: 30px;
-	padding: 0px 10px;
-}
-.client-form .text-type:last-child {
-	margin-right: 0px;
+		text-align: center;
 }
 .client-form .floating:hover {
 	background: #949da2;
+	border-color: #949da2;
 	color:#fff;
 }
+.client-form .selected-radio {
+		background-color: #949da2!important;
+		border-color: #949da2;
+		color:#fff;
+}
+
 .client-form .toggle-format {
 		text-align: center;
 		top:-1px;
@@ -597,8 +521,4 @@
 		text-align: left;
 		width:100%;
 		display: block;
-}
-.client-form .toggle-format .float-container {
-		width: 100%;
-		margin-top:1px;
 }

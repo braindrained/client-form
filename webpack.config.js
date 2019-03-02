@@ -18,8 +18,6 @@ module.exports = {
 						compress: true,
 						screw_ie8: true, // eslint-disable-line camelcase
 						warnings: false, // Because uglify reports irrelevant warnings.
-						cache: true,
-		        parallel: true
 					}
 				})
 			],
@@ -65,15 +63,12 @@ module.exports = {
 			:
 			[
 				htmlWebpackPlugin,
+				new webpack.LoaderOptionsPlugin({
+          minimize: true,
+          debug: false,
+        }),
 				new webpack.optimize.DedupePlugin(),
 		    new webpack.NoErrorsPlugin(),
-		    new CompressionPlugin({
-		      asset: "[path].gz[query]",
-		      algorithm: "gzip",
-		      test: /\.js$|\.css$|\.html$/,
-		      threshold: 10240,
-		      minRatio: 0
-		    })
 			],
 		resolve: {
 	      extensions: [".js", ".jsx"]

@@ -22,13 +22,13 @@ class App extends React.Component {
 	}
 
 	sendForm(formObject: Object) {
-		console.log(formObject);
 		this.setState({
 			editDataSpin: true
 		});
 
 		// put your fetch here
 		setTimeout(() => {
+			console.log(formObject);
 			this.setState({
 				editDataSpin: false,
 				editSucceed: true
@@ -65,7 +65,6 @@ class App extends React.Component {
 								name: 'firstName',
 								onlyNumber: false,
 								limitChar: 25,
-								isRequired: true,
 								errorMessage: 'Mandatory field'
 							},
 							{
@@ -74,7 +73,6 @@ class App extends React.Component {
 								name: 'lastName',
 								onlyNumber: false,
 								limitChar: 25,
-								isRequired: true,
 								errorMessage: 'Mandatory field'
 							},
 							{
@@ -106,7 +104,6 @@ class App extends React.Component {
 									text: 'N. Locali',
 								},
 								value: 0,
-								isRequired: false,
 							},
 							{
 								control: 'select',
@@ -118,8 +115,7 @@ class App extends React.Component {
 							},
 							{
 								control: 'radio',
-								name: 'hasTerrace',
-								label: { text: 'This is a fake radio' },
+								name: 'thisIsAFakeRadio',
 								options: [
 									{ value: '', label: 'N.i.', className: 'first' },
 									{ value: 'true', label: 'Sì', className: 'central' },
@@ -166,9 +162,6 @@ class App extends React.Component {
 								name: 'password',
 								onlyNumber: false,
 								limitChar: 12,
-								isRequired: true,
-								errorMessage: 'Mandatory field',
-								isValid: true
 							},
 							{
 								control: 'text',
@@ -176,8 +169,6 @@ class App extends React.Component {
 								name: 'repeatPassword',
 								onlyNumber: false,
 								limitChar: 12,
-								errorMessage: 'Wrong password',
-								isValid: true,
 								equalTo: 'password'
 							},
 							{
@@ -191,8 +182,6 @@ class App extends React.Component {
 								name: 'thisIsATextArea',
 								value: '',
 								limitChar: 1000,
-								isRequired: true,
-								errorMessage: 'Mandatory field'
 							},
 							{
 								control: 'text',
@@ -215,7 +204,7 @@ class App extends React.Component {
 								control: 'tabTextArea',
 								name: 'description',
 								value: [
-									{ name: 'listingDescIt', value: '', isRequired: true, isValid: true },
+									{ name: 'listingDescIt', value: '', isRequired: false, isValid: true },
 									{ name: 'listingDescEn', value: '', isRequired: false, isValid: true },
 									{ name: 'listingDescFr', value: '', isRequired: false, isValid: true },
 									{ name: 'listingDescEs', value: '', isRequired: false, isValid: true },
@@ -271,7 +260,7 @@ class App extends React.Component {
 							maxWidth: 560,
 							margin: '0 auto'
 						},
-						noUndefined: true
+						noUndefined: false
 					}}/>
 				</div>
 			</ClickOutHandler>

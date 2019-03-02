@@ -48,19 +48,17 @@ export default class CustomCheckBox extends React.Component<any, any> {
 							onChange: (e) => { this.onChange(e); }
 						}} />
 						<label htmlFor={name} style={label.style}>
-							<div>
-								{ value === true ?
-									<svg width="15px" viewBox="0 0 24 20">
-										<g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-											<g transform="translate(-43.000000, -419.000000)" strokeWidth="3" stroke="#ffffff" fill="#ffffff">
-												<g transform="translate(45.000000, 421.000000)">
-													<polygon points="6.46669022 12.0255431 1.81870474 7.37755757 0.2359375 8.94917857 6.46669022 15.1799313 19.842188 1.80443349 18.270567 0.2328125" />
-												</g>
-											</g>
-										</g>
-									</svg>
-									: null }
-							</div>
+							{ value === true ?
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+									<path d="M0 0h24v24H0z" fill="none"/>
+									<path fill="rgb(0, 132, 255)" d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+								</svg>
+								:
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+									<path fill="#c1c5c8" d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+									<path d="M0 0h24v24H0z" fill="none"/>
+								</svg>
+							}
 							<div>{label.text}</div>
 						</label>
 					</div>

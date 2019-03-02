@@ -68,9 +68,9 @@ class CustomRadio extends React.Component<any, any> {
 								hideRadio &&
 								item.value === this.state.value
 									?
-									`floating ${(item.value === options[0].value ? 'selected-radio' : 'selected-radio-red')} type type-selected ${item.className} text-type`
+									`floating selected-radio ${item.className}`
 									:
-									(hideRadio ? `floating type ${item.className} text-type` : item.className) + ' float-container-first-child',
+									(hideRadio ? `floating ${item.className}` : item.className) + ' float-container-first-child',
 							style: item.style
 						}}>
 							<input {...{
@@ -85,13 +85,21 @@ class CustomRadio extends React.Component<any, any> {
 							}} />
 							<label htmlFor={name + item.value} style={item.labelStyle ? item.labelStyle : {}}>
 								{ hideRadio ?
-									<span className="hide-radio" /> :
-									<div style={item.disabled === true ? { opacity: 0.5 } : {}}>
-										{item.value === this.state.value ? <div></div> : null}
-									</div>
+									null :
+									(item.value === this.state.value ?
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+											<path fill="rgb(0, 132, 255)" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+											<path d="M0 0h24v24H0z" fill="none"/>
+										</svg>
+										:
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+											<path fill="#c1c5c8" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+											<path d="M0 0h24v24H0z" fill="none"/>
+										</svg>
+									)
 								}
 								{ /* eslint-disable-next-line */ }
-								<div dangerouslySetInnerHTML={{ __html: item.label }} />
+								{ hideRadio ? <div>{item.label}</div> : <div className="custom-radio-options-label">{item.label}</div>}
 								{ item.customObject ?
 									<div className={item.value === this.state.value ? 'custom-radio-options-wrapper custom-radio-options-wrapper-sel' : 'custom-radio-options-wrapper'}>{item.customObject}</div>
 									:

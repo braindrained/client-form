@@ -40,7 +40,6 @@ class CustomTextarea extends React.Component<any, any> {
 
 	onChange(event: Object) {
 		const value = this.props.limitChar ? event.target.value.substring(0, this.props.limitChar) : event.target.value;
-		console.log(value);
 		this.setState({
 			value,
 			isValid: true,

@@ -69,13 +69,13 @@ class CustomPlusMinus extends React.Component<any, any> {
 			<div className={sumClasses(['container-field cutom-plus-minus', className])} style={style}>
 				<FieldLabel {...{ label, name, isRequired, isValid }} />
 				<div style={{ float: 'left' }}>
-					<div {...{
+					<button {...{
 						onClick: () => { this.plusMinus('min'); },
 						style: { opacity: this.state.value === 0 ? 0.3 : 1 },
-						className: 'box-shadow noselect cutom-plus-minus-min'
+						className: 'box-shadow noselect'
 					}}>
 						-
-					</div>
+					</button>
 					<div style={{ float: 'left' }}>
 						<input {...{
 							type,
@@ -89,13 +89,13 @@ class CustomPlusMinus extends React.Component<any, any> {
 							style: { border: 'none', background: 'none', width: 40, textAlign: 'center' }
 						}} />
 					</div>
-					<div {...{
+					<button {...{
 						onClick: () => { this.plusMinus('plus'); },
 						style: {},
-						className: 'box-shadow noselect cutom-plus-minus-plus'
+						className: 'box-shadow noselect'
 					}}>
 						+
-					</div>
+					</button>
 				</div>
 				<FieldError {...{ isValid, errorMessage }} />
 			</div>

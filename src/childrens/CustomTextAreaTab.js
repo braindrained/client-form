@@ -99,7 +99,7 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 									borderRadius: '0px 4px 4px',
 									height: 200,
 									resize: 'none',
-									border: !isValid ? '1px solid #e4002b' : '1px solid #949da2'
+									border: !isValid ? '1px solid #e4002b' : '1px solid #d8dbdf'
 								},
 								rows: 2,
 								cols: 20
