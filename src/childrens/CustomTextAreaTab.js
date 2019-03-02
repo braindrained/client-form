@@ -63,7 +63,7 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 						<div {...{
 							key: item.name,
 							style: {
-								borderRadius: i === 0 ? '4px 0px 0px 0px' : i === 4 ? '0px 4px 0px 0px' : '0px',
+								borderRadius: i === 0 ? '2px 0px 0px 0px' : i === 4 ? '0px 2px 0px 0px' : '0px',
 								textAlign: 'left',
 							},
 							className: this.state.selected === i ? 'container-field-tabs-item container-field-tabs-item-selected' : 'container-field-tabs-item',
@@ -96,7 +96,7 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 								onChange: (e) => { this.onChange(e); },
 								value: item.value,
 								style: {
-									borderRadius: '0px 4px 4px',
+									borderRadius: '0px 2px 2px',
 									height: 200,
 									resize: 'none',
 									border: !isValid ? '1px solid #e4002b' : '1px solid #d8dbdf'

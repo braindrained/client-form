@@ -250,7 +250,7 @@ class App extends React.Component {
 							succeedText: 'Saved!',
 							style: { minWidth: 250, margin: '0 auto', float: 'none' }
 						},
-						textAfterButton: <div style={{ clear: 'both', fontSize: 11, lineHeight: '30px', textAlign: 'center' }}>This is a text after button</div>,
+						textAfterButton: <div style={{ clear: 'both', fontSize: 11, lineHeight: '30px', textAlign: 'center' }}>Look in the console for the output object</div>,
 						buttonContainerStyle: { textAlign: 'center' },
 						sendForm: (e) => { this.sendForm(e); },
 						key: randomKey,
