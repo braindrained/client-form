@@ -1,6 +1,6 @@
 {
   "name": "client-form",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "author": "Paolo Senese",
   "description": "A react component to build forms",
   "keywords": [
@@ -18,9 +18,7 @@
   "peerDependencies": {
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
-    "file-loader": "^3.0.1",
     "react-onclickout": "^2.0.8",
-    "url-loader": "^1.1.2",
     "uglifyjs-webpack-plugin": "^2.1.1"
   },
   "devDependencies": {
@@ -61,9 +59,7 @@
     "debug": "npm run build -- --progress --colors --profile --display-modules --display-reasons --display-error-details"
   },
   "dependencies": {
-    "file-loader": "^3.0.1",
     "react-onclickout": "^2.0.8",
-    "uglifyjs-webpack-plugin": "^2.1.1",
-    "url-loader": "^1.1.2"
+    "uglifyjs-webpack-plugin": "^2.1.1"
   }
 }

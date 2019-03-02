@@ -153,8 +153,17 @@ const Form = class extends React.Component<any, any> {
 		if (formIsValid) {
 			const formObject = {};
 			updatedControls.filter(o => o.control !== 'label').map((item) => {
-				if (noUndefined && item.value !== undefined) formObject[item.name] = item.value;
-				if (!noUndefined) formObject[item.name] = item.value;
+				let value = item.value;
+				if (typeof item.value === 'object' && item.valueAsObject) {
+					const valueObject = {};
+					item.value.map((itemx) => {
+						valueObject[itemx.name] = itemx.value;
+						return null;
+					});
+					value = valueObject;
+				}
+				if (noUndefined && item.value !== undefined) formObject[item.name] = value;
+				if (!noUndefined) formObject[item.name] = value;
 				return null;
 			});
 

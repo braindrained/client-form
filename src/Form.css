@@ -311,7 +311,7 @@
 }
 @media screen and (min-width: 560px) {
 	.client-form .container-field .check-filters {
-		margin-top: 32px;
+		margin-top: 27px;
 	}
 }
 
@@ -322,7 +322,7 @@
 .client-form .cutom-plus-minus input {
 	height: 30px;
 }
-.client-form .cutom-plus-minus button {
+.client-form .cutom-plus-minus svg {
 	float: left;
 	width: 32px;
 	border-radius: 50%;
@@ -331,15 +331,15 @@
 	color: rgb(255, 255, 255);
 	font-weight: 700;
 	text-align: center;
-	font-size: 16px;
+	font-size: 20px;
 	cursor: pointer;
 	height: 32px;
 	line-height: 32px;
 }
-.client-form .cutom-plus-minus button:first-child {
+.client-form .cutom-plus-minus svg:first-child {
 		margin-right: 30px;
 }
-.client-form .cutom-plus-minus button:last-child {
+.client-form .cutom-plus-minus svg:last-child {
 		margin-left: 30px;
 }
 

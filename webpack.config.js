@@ -29,13 +29,6 @@ module.exports = {
     },
     module: {
         rules: [
-						{
-							loader: 'url-loader',
-		          test: /\.(gif|jpg|png|svg)(\?.*)?$/,
-							options: {
-		            limit: 10000,
-		          },
-		        },
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,

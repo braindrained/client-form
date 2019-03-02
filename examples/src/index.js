@@ -63,17 +63,17 @@ class App extends React.Component {
 								control: 'text',
 								type: 'text',
 								name: 'firstName',
-								onlyNumber: false,
 								limitChar: 25,
-								errorMessage: 'Mandatory field'
+								errorMessage: 'Mandatory field',
+								isRequired: true
 							},
 							{
 								control: 'text',
 								type: 'text',
 								name: 'lastName',
-								onlyNumber: false,
 								limitChar: 25,
-								errorMessage: 'Mandatory field'
+								errorMessage: 'Mandatory field',
+								isRequired: true
 							},
 							{
 								control: 'fakeselect',
@@ -162,6 +162,8 @@ class App extends React.Component {
 								name: 'password',
 								onlyNumber: false,
 								limitChar: 12,
+								isRequired: true,
+								errorMessage: 'Mandatory field',
 							},
 							{
 								control: 'text',
@@ -169,7 +171,8 @@ class App extends React.Component {
 								name: 'repeatPassword',
 								onlyNumber: false,
 								limitChar: 12,
-								equalTo: 'password'
+								equalTo: 'password',
+								errorMessage: 'Must be equal',
 							},
 							{
 								control: 'label',
@@ -204,7 +207,7 @@ class App extends React.Component {
 								control: 'tabTextArea',
 								name: 'description',
 								value: [
-									{ name: 'listingDescIt', value: '', isRequired: false, isValid: true },
+									{ name: 'listingDescIt', value: '', isRequired: true, isValid: true },
 									{ name: 'listingDescEn', value: '', isRequired: false, isValid: true },
 									{ name: 'listingDescFr', value: '', isRequired: false, isValid: true },
 									{ name: 'listingDescEs', value: '', isRequired: false, isValid: true },
@@ -227,19 +230,27 @@ class App extends React.Component {
 							{
 								control: 'external',
 								name: 'thisIsACustomExternalComponent',
-								placeholder: 'but managed externally \'cause I need a complete customized one',
-								value: '',
-								className: 'tabTextArea',
+								placeholder: '\'cause I need a complete customized one',
+								value: [
+									{ name: 'firstField', value: '', isRequired: true, isValid: true },
+									{ name: 'secondField', value: '', isRequired: false, isValid: true },
+								],
+								isRequired: true,
+								isValid: true,
+								className: 'container-field tabTextArea',
 								style: {
-									background: '#e4002b',
+									background: 'rgb(50, 63, 72)',
 									clear: 'both',
 									borderRadius: 4,
 									marginTop: 20,
 									position: 'relative',
 									clear: 'both',
 									display: 'inline-block',
-									padding: 20
+									padding: 20,
+									color: '#fff',
+									fontWeight: 700
 								},
+								valueAsObject: true,
 								component: <CustomComp />
 							},
 						],

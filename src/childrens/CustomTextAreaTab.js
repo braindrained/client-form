@@ -16,13 +16,6 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 		};
 	}
 
-	filterTabs(obj: Object) {
-		if (this === obj.name) {
-			return true;
-		}
-		return false;
-	}
-
 	onChange(event: Object) {
 		const formObject = [];
 		this.state.value.map((item) => {
