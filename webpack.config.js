@@ -32,12 +32,7 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-								use: {
-					        loader: 'babel-loader',
-					        options: {
-					          presets: ['@babel/preset-env']
-					        }
-					      }
+				        loader: 'babel-loader'
             },
 						{
                 test: /\.css$/,
@@ -45,7 +40,15 @@ module.exports = {
 									"style-loader",
 									{ loader: 'css-loader', options: { importLoaders: 1 } },
 								]
-            }
+            },
+						{
+			        test: /favicon\.ico$/,
+			        loader: 'url-loader',
+			        query: {
+			          limit: 1,
+			          name: '[name].[ext]',
+			        },
+			      },
         ]
     },
     plugins: isLocal ?

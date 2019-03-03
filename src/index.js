@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import ClickOutHandler from 'react-onclickout';
 
 import CustomTextField from './childrens/CustomTextField';
 import CustomTextarea from './childrens/CustomTextarea';
@@ -19,15 +20,18 @@ const Form = class extends React.Component<any, any> {
 
 	constructor(props: Object) {
 		super(props);
+		const { controls } = this.props;
 
 		this.state = {
-			controls: this.props.controls
+			controls,
+			succeed: null,
+			isSent: null
 		};
 	}
 
+
 	onUpdate(e: Object, hasError: boolean) {
 		const { controls } = this.state;
-		const { noUndefined } = this.props;
 
 		const updatedControls = controls.map((item) => {
 			if (e.target.name === item.name) {
@@ -88,14 +92,13 @@ const Form = class extends React.Component<any, any> {
 		});
 
 		if (this.props.updateOnChange) {
-			this.props.updateOnChange(noUndefined ? updatedControls.filter(o => o.value !== 'undefined') : updatedControls);
+			this.props.updateOnChange(updatedControls);
 		}
 	}
 
 	formIsValid() {
 		let formIsValid = true;
 		const { controls } = this.state;
-		const { noUndefined } = this.props;
 
 		const updatedControls = controls.map((item) => {
 			if (item.isRequired && !item.hide) {
@@ -162,12 +165,23 @@ const Form = class extends React.Component<any, any> {
 					});
 					value = valueObject;
 				}
-				if (noUndefined && item.value !== undefined) formObject[item.name] = value;
-				if (!noUndefined) formObject[item.name] = value;
+				if (item.currency && value !== undefined) {
+					value = value.replace(/\./g, '');
+				}
+				value = value === undefined ? '' : value.toString() === 'true' ? true : value.toString() === 'false' ? false : value;
+				formObject[item.name] = value;
 				return null;
 			});
 
-			this.props.sendForm(formObject);
+			this.setState({
+				isSent: true,
+			});
+			this.props.sendForm(formObject).then((x) => {
+				this.setState({
+					isSent: false,
+					succeed: x.succeed
+				});
+			});
 		} else {
 			const firstRequired = updatedControls.filter(o => (o.isRequired && !o.isValid) || (o.greaterThan && !o.isValid) || (o.regEx && !o.isValid) || (o.equalTo && !o.isValid))[0];
 
@@ -182,13 +196,22 @@ const Form = class extends React.Component<any, any> {
 		}
 	}
 
+	resetButton() {
+		if (this.state.succeed !== null) {
+			this.setState({
+				succeed: null,
+				isSent: null,
+			});
+		}
+	}
+
 	render() {
 		const {
-			className, style, succeed, isSent,
+			className, style,
 			sendButton, textBeforeButton, buttonContainerStyle,
 			textAfterButton
 		} = this.props;
-		const { controls } = this.state;
+		const { controls, succeed, isSent } = this.state;
 		const sendButtonClass = sumClasses([
 			succeed !== null ? (succeed ? 'btn btn-succeed' : 'btn btn-error') : 'btn',
 			sendButton && sendButton.disabled ? 'btn-disabled' : ''
@@ -201,8 +224,8 @@ const Form = class extends React.Component<any, any> {
 					const {
 						control, hide, name, component, type, onlyNumber, placeholder, label,
 						value, isRequired, isValid, disabled, errorMessage, className, style,
-						updateOnChange, limitChar, currency, disable, options, hideRadio, uncheck,
-						highlightSel, textBefore, hideCheck, tabs, valueAsObject, text, firstRange,
+						updateOnChange, limitChar, currency, disable, options, hideRadio,
+						textBefore, hideCheck, tabs, valueAsObject, text, firstRange,
 						secondRange, rangesStyle, overlayBg
 					} = item;
 					switch (control) {
@@ -322,12 +345,10 @@ const Form = class extends React.Component<any, any> {
 								label,
 								options,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								value: notEmpty(item.value) ? item.value : item.default,
+								value: item.value,
 								hideRadio,
-								uncheck,
 								className: item.className ? item.className : '',
 								style,
-								highlightSel,
 							}} />
 						);
 					case 'label':
@@ -385,26 +406,28 @@ const Form = class extends React.Component<any, any> {
 				{ sendButton ?
 					<div className="button-container" style={buttonContainerStyle}>
 						{/* eslint-disable-next-line */}
-						<button {...{
-							className: sendButtonClass,
-							style: sendButton.style,
-							onClick: succeed === null && isSent === null && sendButton.disabled === undefined ? () => { this.formIsValid(); } : () => null,
-							type: 'button'
-						}}>
-							<svg width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" viewBox={ isSent ? '0 0 100 100' : '0 0 24 24' }>
-								{ isSent ?
-									<circle cx="50" cy="50" fill="none" stroke="#fff" strokeWidth="10" r="48" strokeDasharray="164.93361431346415 56.97787143782138" transform="rotate(245.789 50 50)">
-										<animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animateTransform>
-									</circle>
-									:
-									succeed !== null ?
-									<path fill="#fff" d={ succeed ? "M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" : "M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" }/>
-									:
-									null
-								}
-							</svg>
-							{sendButtonValue}
-						</button>
+						<ClickOutHandler onClickOut={() => { this.resetButton(); }}>
+							<button {...{
+								className: sendButtonClass,
+								style: sendButton.style,
+								onClick: succeed === null && isSent === null && sendButton.disabled === undefined ? () => { this.formIsValid(); } : () => null,
+								type: 'button'
+							}}>
+								<svg width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" viewBox={ isSent ? '0 0 100 100' : '0 0 24 24' }>
+									{ isSent ?
+										<circle cx="50" cy="50" fill="none" stroke="#fff" strokeWidth="10" r="44" strokeDasharray="164.93361431346415 56.97787143782138" transform="rotate(245.789 50 50)">
+											<animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animateTransform>
+										</circle>
+										:
+										succeed !== null ?
+										<path fill="#fff" d={ succeed ? "M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" : "M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" }/>
+										:
+										null
+									}
+								</svg>
+								{sendButtonValue}
+							</button>
+						</ClickOutHandler>
 					</div>
 					: null }
 				{ textAfterButton }

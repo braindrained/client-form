@@ -18,7 +18,7 @@ export const camelToTitle = (str: string, name: string) => str === null || str =
 	: str;
 
 export const sumClasses = (classes: Array<string>) => {
-	const filteredClasses = classes.filter(o => o !== '');
+	const filteredClasses = classes.filter(o => o !== '' && o !== undefined);
 	let returnEach = '';
 	filteredClasses.map((item, i) => {
 		returnEach += i === filteredClasses.length - 1 ? `${item}` : `${item} `;

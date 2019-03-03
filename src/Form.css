@@ -225,6 +225,8 @@
 	.client-form input[type=tel],
 	.client-form input[type=text] {
 		max-height: 30px;
+		padding: 0px 8px;
+		height: 30px;
 	}
 }
 .client-form .button-container {
@@ -358,8 +360,8 @@
 }
 @media screen and (min-width: 560px) {
 	.client-form .select-style {
-		height: 32px;
-		line-height: 32px;
+		height: 30px;
+		line-height: 30px;
 	}
 }
 .client-form .select-style label {
@@ -370,7 +372,7 @@
 	font-size:13px;
 }
 .client-form .select-style select {
-	padding: 3px 0px 3px 8px;
+	padding: 0px 0px 0px 8px;
 	border: 0;
 	background: transparent;
 	height: 47px;
@@ -391,7 +393,7 @@
 }
 @media screen and (min-width: 560px) {
 	.client-form .select-style select {
-		height: 33px;
+		height: 30px;
 	}
 }
 
@@ -521,4 +523,23 @@
 		text-align: left;
 		width:100%;
 		display: block;
+}
+
+select::-ms-expand {
+	display: none;
+}
+
+.client-form .container-field .eye {
+	position: absolute;
+	right: 5px;
+	top: 37px;
+	cursor: pointer;
+}
+@media screen and (min-width: 560px) {
+	.client-form .container-field .eye {
+		position: absolute;
+		right: 5px;
+		top: 27px;
+		cursor: pointer;
+	}
 }

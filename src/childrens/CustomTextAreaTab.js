@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { sumClasses } from '../helpers/utils';
-
+import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 
 class CustomTextareaWithTab extends React.Component<any, any> {
@@ -10,7 +10,6 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 		super(props);
 
 		this.state = {
-			tabs: this.props.tabs,
 			value: this.props.value,
 			selected: 0,
 		};
@@ -47,12 +46,13 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 	}
 
 	render() {
-		const { className, style, name, isValid, tabs, value, limitChar, errorMessage } = this.props;
+		const { className, style, name, isValid, value, limitChar, errorMessage, label, isRequired } = this.props;
 
 		return (
 			<div className={sumClasses(['container-field', className])} style={style}>
+				<FieldLabel {...{ label, name, isRequired, isValid }} />
 				<div className="container-field-tabs" id={name}>
-					{ this.state.tabs.map((item, i) => (
+					{ this.state.value.map((item, i) => (
 						<div {...{
 							key: item.name,
 							style: {
@@ -82,7 +82,7 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 					}}>
 						<div>
 							<textarea {...{
-								placeholder: tabs[i].placeholder,
+								placeholder: value[i].placeholder,
 								className: 'large-field',
 								name: item.name,
 								id: item.name,
