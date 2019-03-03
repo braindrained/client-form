@@ -4,6 +4,8 @@ import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { sumClasses } from '../helpers/utils';
 
+const e = React.createElement;
+
 class CustomSelect extends React.Component<any, any> {
 
 	constructor(props: Object) {
@@ -37,37 +39,25 @@ class CustomSelect extends React.Component<any, any> {
 		}
 	}
 
-	onChange(event: Object) {
-		this.props.onUpdate(event);
-	}
-
 	render() {
 		const { className, style, label, isRequired, value, errorMessage, name } = this.props;
 		const { isValid } = this.state;
-
-		return (
-			<div className={sumClasses(['container-field', className])} style={style}>
-				<FieldLabel {...{ label, name, isRequired, isValid }} />
-				<div className="select-style" style={isValid === false ? { borderColor: '#e4002b' } : {}}>
-					<select name={name} id={name} value={value} onChange={this.onChange.bind(this)}>
-						{
-							this.state.options.map((item, i) => {
-								switch (item.value) {
-								case '0':
-									return <option key={`cs_${i}`} value="0" className="disabled-option">{item.label}</option>;
-								default:
-									return <option key={`cs_${i}`} value={item.value} disabled={item.disabled}>{item.label}</option>;
-								}
-							})
+		/* no jsx experiment, cool!!! */
+		return e('div', { className: sumClasses(['container-field', className]), style },
+			e(FieldLabel, { label, name, isRequired, isValid }),
+			e('div', { className: 'select-style', style: isValid === false ? { borderColor: '#e4002b' } : {} },
+				e('select', { name, id: name, value, onChange: (e) => { this.props.onUpdate(e); } },
+					this.state.options.map((item, i) => {
+						switch (item.value) {
+						case '0':
+							return e('option', { key: `cs_${i}`, value: '0', className: 'disabled-option' }, item.label);
+						default:
+							return e('option', { key: `cs_${i}`, value: item.value, disabled: item.disabled }, item.label);
 						}
-					</select>
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-						<path fill="#d8dbdf" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
-					</svg>
-				</div>
-				<FieldError {...{ isValid, errorMessage }} />
-			</div>
-		);
+					})),
+				e('svg', { width: '24', height: '24', viewBox: '0 0 24 24' },
+					e('path', { fill: '#d8dbdf', d: 'M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z' }))),
+			e(FieldError, { isValid, errorMessage }));
 	}
 }
 

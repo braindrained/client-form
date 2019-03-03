@@ -69,12 +69,14 @@ class CustomPlusMinus extends React.Component<any, any> {
 			<div className={sumClasses(['container-field cutom-plus-minus', className])} style={style}>
 				<FieldLabel {...{ label, name, isRequired, isValid }} />
 				<div style={{ float: 'left' }}>
-					<svg width="32" height="32" {...{
+					<svg {...{
+						width: 32,
+						height: 32,
 						onClick: () => { this.plusMinus('min'); },
 						style: { opacity: this.state.value === 0 ? 0.3 : 1 },
 						className: 'box-shadow noselect'
 					}}>
-						<circle cx="16" cy="16" r="16" fill="rgb(50, 63, 72)"/>
+						<circle cx="16" cy="16" r="16" fill="rgb(50, 63, 72)" />
 						<text x="50%" y="21" fill="#FFF" textAnchor="middle">-</text>
 					</svg>
 					<div style={{ float: 'left' }}>
@@ -90,12 +92,14 @@ class CustomPlusMinus extends React.Component<any, any> {
 							style: { border: 'none', background: 'none', width: 40, textAlign: 'center' }
 						}} />
 					</div>
-					<svg width="32" height="32" {...{
+					<svg {...{
+						width: 32,
+						height: 32,
 						onClick: () => { this.plusMinus('plus'); },
 						style: {},
 						className: 'box-shadow noselect'
 					}}>
-						<circle cx="16" cy="16" r="16" fill="rgb(50, 63, 72)"/>
+						<circle cx="16" cy="16" r="16" fill="rgb(50, 63, 72)" />
 						<text x="50%" y="23" fill="#FFF" textAnchor="middle">+</text>
 					</svg>
 				</div>

@@ -26,12 +26,15 @@ class App extends React.Component {
 					{
 						control: 'text',
 						label: {
+							text: 'Nome',
 							className: 'label-class'
 						},
+						placeholder: 'Nome',
 						type: 'text',
 						name: 'firstName',
 						limitChar: 25,
 						errorMessage: 'Mandatory field',
+						isRequired: true
 					},
 					{
 						control: 'text',
@@ -39,6 +42,7 @@ class App extends React.Component {
 						name: 'lastName',
 						limitChar: 25,
 						errorMessage: 'Mandatory field',
+						isRequired: true
 					},
 					{
 						control: 'fakeselect',
@@ -128,6 +132,7 @@ class App extends React.Component {
 						onlyNumber: false,
 						limitChar: 12,
 						errorMessage: 'Mandatory field',
+						isRequired: true
 					},
 					{
 						control: 'text',
@@ -228,7 +233,7 @@ class App extends React.Component {
 			    return promise;
 				},
 				key: makeId(),
-				style: {
+				formStyle: {
 					maxWidth: 560,
 					margin: '0 auto'
 				},

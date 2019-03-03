@@ -14,7 +14,7 @@ import FakeSelect from './childrens/FakeSelect';
 // flow-disable-next-line
 import './Form.css';
 
-import { notEmpty, sumClasses } from './helpers/utils';
+import { sumClasses } from './helpers/utils';
 
 const Form = class extends React.Component<any, any> {
 
@@ -156,20 +156,21 @@ const Form = class extends React.Component<any, any> {
 		if (formIsValid) {
 			const formObject = {};
 			updatedControls.filter(o => o.control !== 'label').map((item) => {
-				let value = item.value;
-				if (typeof item.value === 'object' && item.valueAsObject) {
+				let { value } = item;
+				const { valueAsObject, currency, name } = item;
+				if (typeof value === 'object' && valueAsObject) {
 					const valueObject = {};
-					item.value.map((itemx) => {
+					value.map((itemx) => {
 						valueObject[itemx.name] = itemx.value;
 						return null;
 					});
 					value = valueObject;
 				}
-				if (item.currency && value !== undefined) {
+				if (currency && value !== undefined) {
 					value = value.replace(/\./g, '');
 				}
 				value = value === undefined ? '' : value.toString() === 'true' ? true : value.toString() === 'false' ? false : value;
-				formObject[item.name] = value;
+				formObject[name] = value;
 				return null;
 			});
 
@@ -207,7 +208,7 @@ const Form = class extends React.Component<any, any> {
 
 	render() {
 		const {
-			className, style,
+			formClassName, formStyle,
 			sendButton, textBeforeButton, buttonContainerStyle,
 			textAfterButton
 		} = this.props;
@@ -219,7 +220,7 @@ const Form = class extends React.Component<any, any> {
 		const sendButtonValue = sendButton ? (succeed === null ? sendButton.text : succeed === false ? sendButton.errorText : sendButton.succeedText) : null;
 
 		return (
-			<div className={sumClasses(['client-form', className !== null && className !== undefined ? className : ''])} style={style}>
+			<div className={sumClasses(['client-form', formClassName !== null && formClassName !== undefined ? formClassName : ''])} style={formStyle}>
 				{ controls.map((item) => {
 					const {
 						control, hide, name, component, type, onlyNumber, placeholder, label,
@@ -250,13 +251,13 @@ const Form = class extends React.Component<any, any> {
 								placeholder,
 								name,
 								label,
-								value: value ? value : '',
+								value,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								isRequired,
 								isValid,
 								disabled,
 								errorMessage,
-								className: className ? className : '',
+								className,
 								style,
 								updateOnChange,
 								limitChar,
@@ -279,7 +280,7 @@ const Form = class extends React.Component<any, any> {
 								isValid,
 								disabled,
 								errorMessage,
-								className: className ? className : '',
+								className,
 								style,
 							}} />
 						);
@@ -291,13 +292,13 @@ const Form = class extends React.Component<any, any> {
 								placeholder,
 								name,
 								label,
-								value: item.value ? item.value : '',
+								value,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								isRequired,
 								isValid,
 								errorMessage,
 								style,
-								className: item.className ? item.className : '',
+								className,
 								limitChar,
 								updateOnChange,
 							}} />
@@ -314,7 +315,7 @@ const Form = class extends React.Component<any, any> {
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								value,
 								style,
-								className: item.className ? item.className : '',
+								className,
 								isRequired,
 								isValid,
 								errorMessage,
@@ -332,7 +333,7 @@ const Form = class extends React.Component<any, any> {
 								style,
 								textBefore,
 								hideCheck,
-								className: item.className ? item.className : '',
+								className,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 							}} />
 						);
@@ -345,9 +346,9 @@ const Form = class extends React.Component<any, any> {
 								label,
 								options,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								value: item.value,
+								value,
 								hideRadio,
-								className: item.className ? item.className : '',
+								className,
 								style,
 							}} />
 						);
@@ -374,7 +375,7 @@ const Form = class extends React.Component<any, any> {
 								tabs,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								style,
-								className: item.className ? item.className : '',
+								className,
 								isRequired,
 								isValid,
 								errorMessage,
@@ -396,7 +397,7 @@ const Form = class extends React.Component<any, any> {
 								firstRange,
 								secondRange,
 								rangesStyle,
-								className: item.className ? item.className : '',
+								className,
 								overlayBg
 							}} />
 						);
@@ -407,22 +408,23 @@ const Form = class extends React.Component<any, any> {
 					<div className="button-container" style={buttonContainerStyle}>
 						{/* eslint-disable-next-line */}
 						<ClickOutHandler onClickOut={() => { this.resetButton(); }}>
+							{/* eslint-disable-next-line */}
 							<button {...{
 								className: sendButtonClass,
 								style: sendButton.style,
 								onClick: succeed === null && isSent === null && sendButton.disabled === undefined ? () => { this.formIsValid(); } : () => null,
 								type: 'button'
 							}}>
-								<svg width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" viewBox={ isSent ? '0 0 100 100' : '0 0 24 24' }>
+								<svg width="24px" height="24px" viewBox={isSent ? '0 0 100 100' : '0 0 24 24'}>
 									{ isSent ?
 										<circle cx="50" cy="50" fill="none" stroke="#fff" strokeWidth="10" r="44" strokeDasharray="164.93361431346415 56.97787143782138" transform="rotate(245.789 50 50)">
-											<animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animateTransform>
+											<animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite" />
 										</circle>
 										:
 										succeed !== null ?
-										<path fill="#fff" d={ succeed ? "M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" : "M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" }/>
-										:
-										null
+											<path fill="#fff" d={succeed ? 'M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z' : 'M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z'} />
+											:
+											null
 									}
 								</svg>
 								{sendButtonValue}
