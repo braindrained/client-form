@@ -190,28 +190,30 @@ class App extends React.Component {
 					},
 					{
 						control: 'external',
-						name: 'thisIsACustomExternalComponent',
-						placeholder: '\'cause I need a complete customized one',
-						value: [
-							{ name: 'firstField', value: '', isRequired: false, isValid: true },
-							{ name: 'secondField', value: '', isRequired: false, isValid: true },
-						],
-						isValid: true,
-						className: 'container-field tabTextArea',
-						style: {
-							background: 'rgb(50, 63, 72)',
-							clear: 'both',
-							borderRadius: 4,
-							marginTop: 20,
-							position: 'relative',
-							clear: 'both',
-							display: 'inline-block',
-							padding: 20,
-							color: '#fff',
-							fontWeight: 700
+						props: {
+							key: 'thisIsACustomExternalComponent',
+							name: 'thisIsACustomExternalComponent',
+							value: [
+								{ name: 'firstField', value: '', isRequired: false, isValid: true, placeholder: '\'cause I need a complete customized one', },
+								{ name: 'secondFieldWithEmptyPlaceholder', value: '', isRequired: false, isValid: true, placeholder: '', },
+							],
+							isValid: true,
+							className: 'container-field tabTextArea',
+							style: {
+								background: 'rgb(50, 63, 72)',
+								clear: 'both',
+								borderRadius: 4,
+								marginTop: 20,
+								position: 'relative',
+								clear: 'both',
+								display: 'inline-block',
+								padding: 20,
+								color: '#fff',
+								fontWeight: 700
+							},
+							valueAsObject: true,
 						},
-						valueAsObject: true,
-						component: <CustomComp />
+						component: CustomComp
 					},
 				],
 				textBeforeButton: <div style={{ clear: 'both', fontSize: 11, lineHeight: '30px', textAlign: 'center' }}>This is a text before button</div>,

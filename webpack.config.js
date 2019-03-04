@@ -35,10 +35,12 @@ module.exports = {
 				        loader: 'babel-loader'
             },
 						{
-                test: /\.css$/,
+                test: /\.(css|scss)$/,
                 use: [
 									"style-loader",
 									{ loader: 'css-loader', options: { importLoaders: 1 } },
+									"postcss-loader",
+									"sass-loader"
 								]
             },
 						{

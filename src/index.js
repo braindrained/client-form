@@ -12,9 +12,10 @@ import CustomTextAreaTab from './childrens/CustomTextAreaTab';
 import CustomPlusMinus from './childrens/CustomPlusMinus';
 import FakeSelect from './childrens/FakeSelect';
 // flow-disable-next-line
+import { sumClasses } from './helpers/utils';
 import './Form.css';
 
-import { sumClasses } from './helpers/utils';
+const e = React.createElement;
 
 const Form = class extends React.Component<any, any> {
 
@@ -234,173 +235,79 @@ const Form = class extends React.Component<any, any> {
 						return null;
 					case 'external':
 						if (hide) return (null);
-						return Object.assign({}, component,
-							{
-								key: name,
-								props: Object.assign({}, item, {
-									onUpdate: (e, h) => { this.onUpdate(e, h); }
-								}),
-							});
+						return e(component, item.props);
 					case 'text':
 						if (hide) return (null);
-						return (
-							<CustomTextField {...{
-								type,
-								onlyNumber,
-								key: item.name,
-								placeholder,
-								name,
-								label,
-								value,
-								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								isRequired,
-								isValid,
-								disabled,
-								errorMessage,
-								className,
-								style,
-								updateOnChange,
-								limitChar,
-								currency,
-							}} />
-						);
+						return e(CustomTextField, {
+							type, onlyNumber, key: item.name, placeholder,
+							name, label, value,
+							onUpdate: (e, h) => { this.onUpdate(e, h); },
+							isRequired, isValid, disabled,
+							errorMessage, className, style,
+							updateOnChange, limitChar, currency,
+						});
 					case 'plusMinus':
 						if (item.hide) return (null);
-						return (
-							<CustomPlusMinus {...{
-								type,
-								onlyNumber,
-								key: item.name,
-								placeholder,
-								name,
-								label,
-								value: parseFloat(item.value),
+						return e(CustomPlusMinus, {
+								type, onlyNumber, key: item.name, placeholder,
+								name, label, value: parseFloat(item.value),
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								isRequired,
-								isValid,
-								disabled,
-								errorMessage,
-								className,
-								style,
-							}} />
-						);
+								isRequired, isValid, disabled,
+								errorMessage, className, style,
+						});
 					case 'textArea':
 						if (item.hide) return (null);
-						return (
-							<CustomTextarea {...{
-								key: item.name,
-								placeholder,
-								name,
-								label,
-								value,
+						return e(CustomTextarea, {
+								key: item.name, placeholder, name, label, value,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								isRequired,
-								isValid,
-								errorMessage,
-								style,
-								className,
-								limitChar,
-								updateOnChange,
-							}} />
-						);
+								isRequired, isValid, errorMessage,
+								style, className, limitChar, updateOnChange,
+						});
 					case 'select':
 						if (item.hide) return (null);
-						return (
-							<CustomSelect {...{
-								key: item.name,
-								name,
-								label,
-								disable,
-								options,
+						return e(CustomSelect, {
+								key: item.name, name, label,
+								disable, options,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								value,
-								style,
-								className,
-								isRequired,
-								isValid,
-								errorMessage,
+								value, style, className,
+								isRequired, isValid, errorMessage,
 								default: item.default,
-							}} />
-						);
+						});
 					case 'check':
 						if (item.hide) return (null);
-						return (
-							<CustomCheckBox {...{
-								key: item.name,
-								name,
-								label,
-								value,
-								style,
-								textBefore,
-								hideCheck,
-								className,
+						return e(CustomCheckBox, {
+								key: item.name, name, label, value, style,
+								textBefore, hideCheck, className,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
-							}} />
-						);
+						});
 					case 'radio':
 						if (item.hide) return (null);
-						return (
-							<CustomRadio {...{
-								key: item.name,
-								name,
-								label,
-								options,
+						return e(CustomRadio, {
+								key: item.name, name, label, options,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								value,
-								hideRadio,
-								className,
-								style,
-							}} />
-						);
+								value, hideRadio, className, style,
+						});
 					case 'label':
 						if (item.hide) return (null);
-						return (
-							<CustomLabel {...{
-								key: item.name,
-								name,
-								label,
-								style,
-								text,
-								value,
-								className: item.className ? item.className : '',
-							}} />
-						);
+						return e(CustomLabel, {
+								key: item.name, name, label, style, text, value, className,
+						});
 					case 'tabTextArea':
 						if (item.hide) return (null);
-						return (
-							<CustomTextAreaTab {...{
-								key: item.name,
-								name,
-								value,
-								tabs,
+						return e(CustomTextAreaTab, {
+								key: item.name, name, value, tabs,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								style,
-								className,
-								isRequired,
-								isValid,
-								errorMessage,
-								valueAsObject,
-								limitChar,
-							}} />
-						);
+								style, className, isRequired, isValid,
+								errorMessage, valueAsObject, limitChar,
+						});
 					case 'fakeselect':
 						if (item.hide) return (null);
-						return (
-							<FakeSelect {...{
-								key: item.name,
-								name,
-								label,
-								value,
-								text,
+						return e(FakeSelect, {
+								key: item.name, name, label, value, text,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								style,
-								firstRange,
-								secondRange,
-								rangesStyle,
-								className,
-								overlayBg
-							}} />
-						);
+								style, firstRange, secondRange,
+								rangesStyle, className, overlayBg
+						});
 					}
 				})}
 				{ textBeforeButton }

@@ -76,7 +76,7 @@ class FakeSelect extends React.Component<any, any> {
 										text
 						}
 						<svg width="24" height="24" viewBox="0 0 24 24">
-							<path fill="#d8dbdf" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+							<path fill="#949da2" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
 						</svg>
 					</div>
 					<FieldError {...{ isValid, errorMessage }} />
@@ -90,7 +90,7 @@ class FakeSelect extends React.Component<any, any> {
 								}
 							</select>
 							<svg width="24" height="24" viewBox="0 0 24 24">
-								<path fill="#d8dbdf" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+								<path fill="#949da2" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
 							</svg>
 						</div>
 						<div className="clear" />
@@ -102,7 +102,7 @@ class FakeSelect extends React.Component<any, any> {
 								}
 							</select>
 							<svg width="24" height="24" viewBox="0 0 24 24">
-								<path fill="#d8dbdf" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+								<path fill="#949da2" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
 							</svg>
 						</div>
 					</div>

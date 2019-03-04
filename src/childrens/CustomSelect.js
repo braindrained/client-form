@@ -56,7 +56,7 @@ class CustomSelect extends React.Component<any, any> {
 						}
 					})),
 				e('svg', { width: '24', height: '24', viewBox: '0 0 24 24' },
-					e('path', { fill: '#d8dbdf', d: 'M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z' }))),
+					e('path', { fill: '#949da2', d: 'M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z' }))),
 			e(FieldError, { isValid, errorMessage }));
 	}
 }

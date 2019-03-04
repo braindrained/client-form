@@ -205,7 +205,7 @@
 .client-form input[type=tel],
 .client-form input[type=text],
 .client-form textarea {
-	border: 1px solid #d8dbdf;
+	border: 1px solid #949da2;
 	padding: 15px 8px;
 	border-radius: 2px;
 	color: #333f48;
@@ -351,7 +351,7 @@
 	line-height: 47px;
 	width: 100%;
 	display: inline-block;
-	border: 1px solid #d8dbdf;
+	border: 1px solid #949da2;
 	border-radius: 2px;
 	position: relative;
 	z-index: 1;
@@ -491,7 +491,7 @@
 
 .client-form .floating {
 	float: left;
-	border: 1px solid #d8dbdf;
+	border: 1px solid #949da2;
 	cursor: pointer;
 	height: 33px;
 	-moz-transition:		background-color 0.3s ease-in-out;

@@ -71,11 +71,29 @@ class CustomRadio extends React.Component<any, any> {
 									null :
 									(item.value === value ?
 										<svg width="24" height="24" viewBox="0 0 24 24">
-											<path fill="rgb(0, 132, 255)" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+											<path fill="#949da2" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+											<circle
+										     id="path14"
+										     cx="12"
+										     cy="12"
+										     style={{ fill:'#ffffff', strokeWidth: '0.98041338' }}
+										     r="8" />
+											<circle
+										     id="path14"
+										     cx="12"
+										     cy="12"
+										     style={{ fill:'rgb(0, 132, 255)', strokeWidth: '0.98041338' }}
+										     r="5" />
 										</svg>
 										:
 										<svg width="24" height="24" viewBox="0 0 24 24">
-											<path fill="#d8dbdf" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+											<path fill="#949da2" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+											<circle
+										     id="path14"
+										     cx="12"
+										     cy="12"
+										     style={{ fill:'#ffffff', strokeWidth: '0.98041338' }}
+										     r="8" />
 										</svg>
 									)
 								}
