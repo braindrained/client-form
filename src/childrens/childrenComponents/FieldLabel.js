@@ -11,12 +11,12 @@ const FieldLabel = (props: Object) => {
 		{
 			htmlFor: name,
 			className: sumClasses(['noselect', label && label.className]),
-			style: Object.assign({}, label && label.style ? label.style : {}, isValid === false ? { color: '#e4002b' } : {}) },
+			style: Object.assign({}, label && label.style ? label.style : {}, isValid === false ? { color: '#e4002b' } : {})
+		},
 		label && label.object ?
 			label.object
 			:
-			`${camelToTitle(label && label.text, name) + (isRequired ? '*' : '')}`
-	);
+			`${camelToTitle(label && label.text, name) + (isRequired ? '*' : '')}`);
 };
 
 export default FieldLabel;

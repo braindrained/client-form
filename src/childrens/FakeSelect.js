@@ -75,8 +75,8 @@ class FakeSelect extends React.Component<any, any> {
 										:
 										text
 						}
-						<svg width="24" height="24" viewBox="0 0 24 24">
-							<path fill="#949da2" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+						<svg {...{ width: 24, height: 24, viewBox: '0 0 24 24' }}>
+							<path {...{ fill: '#949da2', d: 'M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z' }} />
 						</svg>
 					</div>
 					<FieldError {...{ isValid, errorMessage }} />
@@ -84,25 +84,25 @@ class FakeSelect extends React.Component<any, any> {
 					<div className="fake-cont box-shadow" style={{ width: style.maxWidth, opacity: displaySelect ? '0' : '1', zIndex: displaySelect ? -1 : 1, background: overlayBg }}>
 						<div className="min-max">Min</div>
 						<div className="select-style" style={Object.assign({}, rangesStyle, { marginBottom: 10, float: 'right' })}>
-							<select name="min" id="min" value={this.props.value.min} onChange={(o) => { this.onChange(o); }}>
+							<select {...{ name: 'min', id: 'min', value: this.props.value.min, onChange: (o) => { this.onChange(o); } }}>
 								{
-									firstRange.map(item => <option value={item.value} key={`f_${item.value}`}>{item.text}</option>)
+									firstRange.map(item => <option {...{ value: item.value, key: `f_${item.value}` }}>{item.text}</option>)
 								}
 							</select>
-							<svg width="24" height="24" viewBox="0 0 24 24">
-								<path fill="#949da2" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+							<svg {...{ width: 24, height: 24, viewBox: '0 0 24 24' }}>
+								<path {...{ fill: '#949da2', d: 'M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z' }} />
 							</svg>
 						</div>
 						<div className="clear" />
 						<div className="min-max">Max</div>
 						<div className="select-style" style={Object.assign({}, rangesStyle, { marginBottom: 10, float: 'right' })}>
-							<select name="max" id="max" value={this.props.value.max} onChange={(o) => { this.onChange(o); }}>
+							<select {...{ name: 'max', id: 'max', value: this.props.value.max, onChange: (o) => { this.onChange(o); } }}>
 								{
 									maxRange.map(item => <option value={item.value} key={`f_${item.value}`}>{item.text}</option>)
 								}
 							</select>
-							<svg width="24" height="24" viewBox="0 0 24 24">
-								<path fill="#949da2" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+							<svg {...{ width: 24, height: 24, viewBox: '0 0 24 24' }}>
+								<path {...{ fill: '#949da2', d: 'M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z' }} />
 							</svg>
 						</div>
 					</div>

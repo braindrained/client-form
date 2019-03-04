@@ -52,8 +52,6 @@ Use it
 	},
 	sendForm: (e) => { this.sendForm(e); }, // your function that fetch data
 	key: 'randomKey',
-	succeed: editSucceed, // bool, get it from the state
-	isSent: editDataSpin, // bool, get it from the state
 }}/>
 ```
 #### Build to every environment

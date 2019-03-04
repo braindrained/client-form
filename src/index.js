@@ -15,7 +15,7 @@ import FakeSelect from './childrens/FakeSelect';
 import { sumClasses } from './helpers/utils';
 import './Form.css';
 
-const e = React.createElement;
+const el = React.createElement;
 
 const Form = class extends React.Component<any, any> {
 
@@ -226,110 +226,132 @@ const Form = class extends React.Component<any, any> {
 					const {
 						control, hide, name, component, type, onlyNumber, placeholder, label,
 						value, isRequired, isValid, disabled, errorMessage, className, style,
-						updateOnChange, limitChar, currency, disable, options, hideRadio,
+						updateOnChange, limitChar, currency, options, hideRadio,
 						textBefore, hideCheck, tabs, valueAsObject, text, firstRange,
-						secondRange, rangesStyle, overlayBg
+						secondRange, rangesStyle, overlayBg, content
 					} = item;
+					/* eslint-disable */
 					switch (control) {
-					default:
-						return null;
-					case 'external':
-						if (hide) return (null);
-						return e(component, item.props);
-					case 'text':
-						if (hide) return (null);
-						return e(CustomTextField, {
-							type, onlyNumber, key: item.name, placeholder,
-							name, label, value,
-							onUpdate: (e, h) => { this.onUpdate(e, h); },
-							isRequired, isValid, disabled,
-							errorMessage, className, style,
-							updateOnChange, limitChar, currency,
-						});
-					case 'plusMinus':
-						if (item.hide) return (null);
-						return e(CustomPlusMinus, {
-								type, onlyNumber, key: item.name, placeholder,
-								name, label, value: parseFloat(item.value),
+						default:
+							return null;
+						case 'external':
+							if (hide) return (null);
+							return el(component, {
+								key: item.name, name, value,
+								className, style, valueAsObject,
+								onUpdate: (e, h) => { this.onUpdate(e, h); },
+							});
+						case 'text':
+							if (hide) return (null);
+							return el(CustomTextField, {
+								key: item.name, name, label, value,
+								type, onlyNumber, placeholder,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								isRequired, isValid, disabled,
 								errorMessage, className, style,
-						});
-					case 'textArea':
-						if (item.hide) return (null);
-						return e(CustomTextarea, {
-								key: item.name, placeholder, name, label, value,
-								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								isRequired, isValid, errorMessage,
-								style, className, limitChar, updateOnChange,
-						});
-					case 'select':
-						if (item.hide) return (null);
-						return e(CustomSelect, {
-								key: item.name, name, label,
-								disable, options,
-								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								value, style, className,
-								isRequired, isValid, errorMessage,
-								default: item.default,
-						});
-					case 'check':
-						if (item.hide) return (null);
-						return e(CustomCheckBox, {
-								key: item.name, name, label, value, style,
-								textBefore, hideCheck, className,
-								onUpdate: (e, h) => { this.onUpdate(e, h); },
-						});
-					case 'radio':
-						if (item.hide) return (null);
-						return e(CustomRadio, {
-								key: item.name, name, label, options,
-								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								value, hideRadio, className, style,
-						});
-					case 'label':
-						if (item.hide) return (null);
-						return e(CustomLabel, {
-								key: item.name, name, label, style, text, value, className,
-						});
-					case 'tabTextArea':
-						if (item.hide) return (null);
-						return e(CustomTextAreaTab, {
-								key: item.name, name, value, tabs,
-								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								style, className, isRequired, isValid,
-								errorMessage, valueAsObject, limitChar,
-						});
-					case 'fakeselect':
-						if (item.hide) return (null);
-						return e(FakeSelect, {
-								key: item.name, name, label, value, text,
-								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								style, firstRange, secondRange,
-								rangesStyle, className, overlayBg
-						});
+								updateOnChange, limitChar, currency,
+							});
+						case 'plusMinus':
+							if (item.hide) return (null);
+							return el(CustomPlusMinus, {
+									key: item.name, name, label, value: parseFloat(item.value),
+									type, onlyNumber, placeholder,
+									onUpdate: (e, h) => { this.onUpdate(e, h); },
+									isRequired, isValid, disabled,
+									errorMessage, className, style,
+									updateOnChange
+							});
+						case 'textArea':
+							if (item.hide) return (null);
+							return el(CustomTextarea, {
+									key: item.name, name, label, value,
+									placeholder,
+									onUpdate: (e, h) => { this.onUpdate(e, h); },
+									isRequired, isValid, disabled,
+									errorMessage, className, style,
+									updateOnChange, limitChar
+							});
+						case 'select':
+							if (item.hide) return (null);
+							return el(CustomSelect, {
+									key: item.name, name, label, value,
+									onUpdate: (e, h) => { this.onUpdate(e, h); },
+									isRequired, isValid, disabled,
+									errorMessage, className, style,
+									options, default: item.default
+							});
+						case 'check':
+							if (item.hide) return (null);
+							return el(CustomCheckBox, {
+									key: item.name, name, label, value,
+									onUpdate: (e, h) => { this.onUpdate(e, h); },
+									className, style,
+									textBefore, hideCheck
+							});
+						case 'radio':
+							if (item.hide) return (null);
+							return el(CustomRadio, {
+									key: item.name, name, label, value,
+									onUpdate: (e, h) => { this.onUpdate(e, h); },
+									className, style,
+									options, hideRadio
+							});
+						case 'label':
+							if (item.hide) return (null);
+							return el(CustomLabel, {
+									key: item.name, content, className, style
+							});
+						case 'tabTextArea':
+							if (item.hide) return (null);
+							return el(CustomTextAreaTab, {
+									key: item.name, name, value, tabs,
+									onUpdate: (e, h) => { this.onUpdate(e, h); },
+									isRequired, isValid, disabled,
+									errorMessage, className, style,
+									valueAsObject, limitChar,
+							});
+						case 'fakeselect':
+							if (item.hide) return (null);
+							return el(FakeSelect, {
+									key: item.name, name, label, value, text,
+									onUpdate: (e, h) => { this.onUpdate(e, h); },
+									className, style,
+									firstRange, secondRange,
+									rangesStyle, overlayBg
+							});
 					}
+					/* eslint-enable */
 				})}
 				{ textBeforeButton }
 				{ sendButton ?
 					<div className="button-container" style={buttonContainerStyle}>
-						{/* eslint-disable-next-line */}
+						{/* eslint-disable */}
 						<ClickOutHandler onClickOut={() => { this.resetButton(); }}>
-							{/* eslint-disable-next-line */}
 							<button {...{
 								className: sendButtonClass,
 								style: sendButton.style,
 								onClick: succeed === null && isSent === null && sendButton.disabled === undefined ? () => { this.formIsValid(); } : () => null,
 								type: 'button'
 							}}>
-								<svg width="24px" height="24px" viewBox={isSent ? '0 0 100 100' : '0 0 24 24'}>
+								<svg {...{ width: 24, height: 24, viewBox: isSent ? '0 0 100 100' : '0 0 24 24' }}>
 									{ isSent ?
-										<circle cx="50" cy="50" fill="none" stroke="#fff" strokeWidth="10" r="44" strokeDasharray="164.93361431346415 56.97787143782138" transform="rotate(245.789 50 50)">
-											<animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite" />
+										<circle {...{
+											cx: 50, cy: 50, fill: 'none', stroke: '#fff',
+											strokeWidth: 10, r: 44, strokeDasharray: '164.93361431346415 56.97787143782138',
+											transform: 'rotate(245.789 50 50)'
+										}}>
+											<animateTransform {...{
+												attributeName: 'transform', type: 'rotate', calcMode: 'linear',
+												values: '0 50 50;360 50 50', keyTimes: '0;1', dur: '1s',
+												begin: '0s', repeatCount: 'indefinite'
+											}} />
 										</circle>
 										:
 										succeed !== null ?
-											<path fill="#fff" d={succeed ? 'M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z' : 'M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z'} />
+											<path {...{
+												fill: '#fff',
+												d: succeed ? 'M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z' : 'M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z'
+											}} />
 											:
 											null
 									}
@@ -337,6 +359,7 @@ const Form = class extends React.Component<any, any> {
 								{sendButtonValue}
 							</button>
 						</ClickOutHandler>
+						{/* eslint-enable */}
 					</div>
 					: null }
 				{ textAfterButton }

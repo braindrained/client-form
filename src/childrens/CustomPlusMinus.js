@@ -76,8 +76,8 @@ class CustomPlusMinus extends React.Component<any, any> {
 						style: { opacity: this.state.value === 0 ? 0.3 : 1 },
 						className: 'box-shadow noselect'
 					}}>
-						<circle cx="16" cy="16" r="16" fill="rgb(50, 63, 72)" />
-						<text x="50%" y="21" fill="#FFF" textAnchor="middle">-</text>
+						<circle {...{ cx: 16, cy: 16, r: 16, fill: 'rgb(50, 63, 72)' }} />
+						<text {...{ x: '50%', y: 21, fill: '#FFF', textAnchor: 'middle' }}>-</text>
 					</svg>
 					<div style={{ float: 'left' }}>
 						<input {...{
@@ -99,8 +99,8 @@ class CustomPlusMinus extends React.Component<any, any> {
 						style: {},
 						className: 'box-shadow noselect'
 					}}>
-						<circle cx="16" cy="16" r="16" fill="rgb(50, 63, 72)" />
-						<text x="50%" y="23" fill="#FFF" textAnchor="middle">+</text>
+						<circle {...{ cx: 16, cy: 16, r: 16, fill: 'rgb(50, 63, 72)' }} />
+						<text {...{ x: '50%', y: 23, fill: '#FFF', textAnchor: 'middle' }}>+</text>
 					</svg>
 				</div>
 				<FieldError {...{ isValid, errorMessage }} />

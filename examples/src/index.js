@@ -7,6 +7,8 @@ import { tipologies, priceRanges } from  './var';
 import CustomComp from './CustomComp';
 import './favicon.ico'
 
+const el = React.createElement;
+
 class App extends React.Component {
 
 	constructor(props) {
@@ -20,8 +22,9 @@ class App extends React.Component {
 					{
 						control: 'label',
 						name: 'label-1',
-						text: 'This is a generic label',
-						style: { lineHeight: '40px', clear: 'both', width: '100%', fontSize: 16, fontWeight: 700, marginBottom: 20 }
+						content: 'This is a text only label',
+						style: { lineHeight: '40px', clear: 'both', width: '100%', fontSize: 16, marginBottom: 20 },
+						className: 'tabTextArea noselect'
 					},
 					{
 						control: 'text',
@@ -146,8 +149,9 @@ class App extends React.Component {
 					{
 						control: 'label',
 						name: 'label-2',
-						text: 'This is a generic label that separate things',
-						style: { lineHeight: '40px', clear: 'both', width: '100%', fontSize: 16, fontWeight: 700, marginBottom: 20 }
+						content: el('div', { style: { color: '#fff', background: 'rgb(50, 63, 72)', paddingLeft: 8 } }, 'This is an element based label'),
+						style: { lineHeight: '40px', clear: 'both', width: '100%', fontSize: 16, marginBottom: 20 },
+						className: 'tabTextArea noselect'
 					},
 					{
 						control: 'textArea',
@@ -190,40 +194,41 @@ class App extends React.Component {
 					},
 					{
 						control: 'external',
-						props: {
-							key: 'thisIsACustomExternalComponent',
-							name: 'thisIsACustomExternalComponent',
-							value: [
-								{ name: 'firstField', value: '', isRequired: false, isValid: true, placeholder: '\'cause I need a complete customized one', },
-								{ name: 'secondFieldWithEmptyPlaceholder', value: '', isRequired: false, isValid: true, placeholder: '', },
-							],
-							isValid: true,
-							className: 'container-field tabTextArea',
-							style: {
-								background: 'rgb(50, 63, 72)',
-								clear: 'both',
-								borderRadius: 4,
-								marginTop: 20,
-								position: 'relative',
-								clear: 'both',
-								display: 'inline-block',
-								padding: 20,
-								color: '#fff',
-								fontWeight: 700
-							},
-							valueAsObject: true,
+						component: CustomComp,
+						key: 'thisIsACustomExternalComponent',
+						name: 'thisIsACustomExternalComponent',
+						value: [
+							{ name: 'firstField', value: '', isRequired: false, isValid: true, placeholder: '\'cause I need a complete customized one', },
+							{ name: 'secondFieldWithEmptyPlaceholder', value: '', isRequired: false, isValid: true, placeholder: '', },
+						],
+						isValid: true,
+						className: 'container-field tabTextArea',
+						style: {
+							background: 'rgb(50, 63, 72)',
+							clear: 'both',
+							borderRadius: 4,
+							marginTop: 20,
+							position: 'relative',
+							clear: 'both',
+							display: 'inline-block',
+							padding: 20,
+							color: '#fff'
 						},
-						component: CustomComp
+						valueAsObject: true
 					},
 				],
-				textBeforeButton: <div style={{ clear: 'both', fontSize: 11, lineHeight: '30px', textAlign: 'center' }}>This is a text before button</div>,
+				textBeforeButton: el('div', {
+					style: { clear: 'both', fontSize: 11, lineHeight: '30px', textAlign: 'center' }
+				}, 'This is a text before button'),
 				sendButton: {
 					text: 'Save',
 					errorText: 'Error saving data',
 					succeedText: 'Saved!',
 					style: { minWidth: 250, margin: '0 auto', float: 'none' }
 				},
-				textAfterButton: <div style={{ clear: 'both', fontSize: 11, lineHeight: '30px', textAlign: 'center' }}>Look in the console for the output object</div>,
+				textAfterButton: el('div', {
+					style: { clear: 'both', fontSize: 11, lineHeight: '30px', textAlign: 'center' }
+				}, 'Look in the console for the output object'),
 				buttonContainerStyle: { textAlign: 'center' },
 				sendForm: (e) => {
 					console.log(e);

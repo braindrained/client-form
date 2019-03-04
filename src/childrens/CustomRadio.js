@@ -69,35 +69,12 @@ class CustomRadio extends React.Component<any, any> {
 							<label htmlFor={name + item.value} style={item.labelStyle ? item.labelStyle : {}}>
 								{ hideRadio ?
 									null :
-									(item.value === value ?
-										<svg width="24" height="24" viewBox="0 0 24 24">
-											<path fill="#949da2" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
-											<circle
-										     id="path14"
-										     cx="12"
-										     cy="12"
-										     style={{ fill:'#ffffff', strokeWidth: '0.98041338' }}
-										     r="8" />
-											<circle
-										     id="path14"
-										     cx="12"
-										     cy="12"
-										     style={{ fill:'rgb(0, 132, 255)', strokeWidth: '0.98041338' }}
-										     r="5" />
+										<svg {...{ width: 24, height: 24, viewBox: '0 0 24 24' }}>
+											<path {...{ d: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z' }} />
+											<circle {...{ className: 'ext', cx: 12, cy: 12, r: 9 }} />
+											{ item.value === value ? <circle {...{ className: 'int', cx: 12, cy: 12, r: 4 }} /> : null }
 										</svg>
-										:
-										<svg width="24" height="24" viewBox="0 0 24 24">
-											<path fill="#949da2" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
-											<circle
-										     id="path14"
-										     cx="12"
-										     cy="12"
-										     style={{ fill:'#ffffff', strokeWidth: '0.98041338' }}
-										     r="8" />
-										</svg>
-									)
 								}
-								{ /* eslint-disable-next-line */ }
 								{ hideRadio ?
 									<div>{item.label}</div>
 									:

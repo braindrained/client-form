@@ -311,6 +311,16 @@
 .client-form .container-field .check-filters {
 	margin-top: 23px;
 }
+.client-form .check svg path,
+.client-form .regular-radio svg path {
+	fill: #949da2;
+}
+.client-form .container-field .ext {
+	fill: #fff;
+}
+.client-form .container-field .int {
+	fill: rgb(0, 132, 255);
+}
 @media screen and (min-width: 560px) {
 	.client-form .container-field .check-filters {
 		margin-top: 27px;

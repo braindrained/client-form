@@ -48,16 +48,16 @@ export default class CustomCheckBox extends React.Component<any, any> {
 							onChange: (e) => { this.onChange(e); }
 						}} />
 						<label htmlFor={name} style={label.style}>
-							{ value === true ?
-								<svg width="24" height="24" viewBox="0 0 24 24">
-									<path fill="rgb(0, 132, 255)" d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-								</svg>
-								:
-								<svg width="24" height="24" viewBox="0 0 24 24">
-									<path fill="#949da2" d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
-									<rect fill="#ffffff" id="rect3737" width="14" height="14" x="5" y="5" />
-								</svg>
-							}
+							<svg {...{ width: 24, height: 24, viewBox: '0 0 24 24' }}>
+								<path {...{
+									className: value === true ? 'int' : '',
+									d: value === true ?
+										'M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'
+										:
+										'M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z'
+								}} />
+								{ value === true ? null : <rect {...{ className: 'ext', width: 16, height: 16, x: 4, y: 4, style: { borderRadius: 2 } }} /> }
+							</svg>
 							<div>{label.text}</div>
 						</label>
 					</div>

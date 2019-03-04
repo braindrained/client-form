@@ -1,18 +1,12 @@
 // @flow
 import React from 'react';
 
-const CustomLabel = (props: Object) => {
-	const { name, style, text, label } = props;
+const e = React.createElement;
 
-	return (
-		<div {...{
-			className: 'noselect',
-			name,
-			style
-		}}>
-			{label ? label.text : text}
-		</div>
-	);
+const CustomLabel = (props: Object) => {
+	const { style, content, className } = props;
+
+	return e('div', { className, style }, content);
 };
 
 export default CustomLabel;
