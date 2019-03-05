@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 
 import Form from '../../src';
 import { makeId } from '../../src/helpers/utils';
-import { tipologies, priceRanges } from  './var';
+import { tipologies, priceRanges, energy } from  './var';
 import CustomComp from './CustomComp';
 import './favicon.ico'
 
@@ -195,26 +195,29 @@ class App extends React.Component {
 					{
 						control: 'external',
 						component: CustomComp,
-						key: 'thisIsACustomExternalComponent',
-						name: 'thisIsACustomExternalComponent',
-						value: [
-							{ name: 'firstField', value: '', isRequired: false, isValid: true, placeholder: '\'cause I need a complete customized one', },
-							{ name: 'secondFieldWithEmptyPlaceholder', value: '', isRequired: false, isValid: true, placeholder: '', },
-						],
-						isValid: true,
-						className: 'container-field tabTextArea',
-						style: {
-							background: 'rgb(50, 63, 72)',
-							clear: 'both',
-							borderRadius: 4,
-							marginTop: 20,
-							position: 'relative',
-							clear: 'both',
-							display: 'inline-block',
-							padding: 20,
-							color: '#fff'
+						props: {
+							name: 'thisIsACustomExternalComponent',
+							key: 'thisIsACustomExternalComponent',
+							value: [
+								{ name: 'firstField', value: '', isRequired: false, isValid: true, placeholder: '\'cause I need a complete customized one', },
+								{ name: 'secondFieldWithEmptyPlaceholder', value: '', isRequired: false, isValid: true, placeholder: '', },
+							],
+							isValid: true,
+							className: 'container-field tabTextArea',
+							style: {
+								background: 'rgb(50, 63, 72)',
+								clear: 'both',
+								borderRadius: 4,
+								marginTop: 20,
+								position: 'relative',
+								clear: 'both',
+								display: 'inline-block',
+								padding: 20,
+								color: '#fff'
+							},
+							valueAsObject: true
 						},
-						valueAsObject: true
+						exclude: false
 					},
 				],
 				textBeforeButton: el('div', {

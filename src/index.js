@@ -57,7 +57,8 @@ const Form = class extends React.Component<any, any> {
 					item.label.changeIf.map((v) => {
 						const control = this.state.controls.filter(o => o.name === v.field);
 						if (control.length > 0) {
-							item.label.text = control[0].value.toString().match(v.regEx) != null ? v.ifTrue : v.ifFalse;
+							if (item.control !== 'label' && control[0].value) item.label.text = control[0].value.toString().match(v.regEx) != null ? v.ifTrue : v.ifFalse;
+							if (item.control === 'label' && control[0].value) item.content = control[0].value.toString().match(v.regEx) != null ? v.ifTrue : v.ifFalse;
 						}
 						return null;
 					});
@@ -74,11 +75,11 @@ const Form = class extends React.Component<any, any> {
 				if (typeof item.changeStyleIf === 'object') {
 					item.changeStyleIf.map((v) => {
 						const control = this.state.controls.filter(o => o.name === v.field);
-						if (control.length > 0) {
+						if (control.length > 0 && control[0].value !== undefined) {
 							if (control[0].value.toString().match(v.regEx) != null) {
-								item.style = v.style;
-							} else {
 								item.style = v.altStyle;
+							} else {
+								item.style = v.style;
 							}
 						}
 						return null;
@@ -181,7 +182,8 @@ const Form = class extends React.Component<any, any> {
 			this.props.sendForm(formObject).then((x) => {
 				this.setState({
 					isSent: false,
-					succeed: x.succeed
+					succeed: x.succeed,
+					message: x.message
 				});
 			});
 		} else {
@@ -213,12 +215,12 @@ const Form = class extends React.Component<any, any> {
 			sendButton, textBeforeButton, buttonContainerStyle,
 			textAfterButton
 		} = this.props;
-		const { controls, succeed, isSent } = this.state;
+		const { controls, succeed, isSent, message } = this.state;
 		const sendButtonClass = sumClasses([
 			succeed !== null ? (succeed ? 'btn btn-succeed' : 'btn btn-error') : 'btn',
 			sendButton && sendButton.disabled ? 'btn-disabled' : ''
 		]);
-		const sendButtonValue = sendButton ? (succeed === null ? sendButton.text : succeed === false ? sendButton.errorText : sendButton.succeedText) : null;
+		const sendButtonValue = sendButton ? (succeed === null ? sendButton.text : message) : null;
 
 		return (
 			<div className={sumClasses(['client-form', formClassName !== null && formClassName !== undefined ? formClassName : ''])} style={formStyle}>
@@ -228,7 +230,7 @@ const Form = class extends React.Component<any, any> {
 						value, isRequired, isValid, disabled, errorMessage, className, style,
 						updateOnChange, limitChar, currency, options, hideRadio,
 						textBefore, hideCheck, tabs, valueAsObject, text, firstRange,
-						secondRange, rangesStyle, overlayBg, content
+						secondRange, rangesStyle, overlayBg, content, props, exclude
 					} = item;
 					/* eslint-disable */
 					switch (control) {
@@ -236,11 +238,12 @@ const Form = class extends React.Component<any, any> {
 							return null;
 						case 'external':
 							if (hide) return (null);
-							return el(component, {
-								key: item.name, name, value,
-								className, style, valueAsObject,
-								onUpdate: (e, h) => { this.onUpdate(e, h); },
-							});
+							const itemProps = exclude === true ?
+							props
+							:
+							Object.assign({}, props, { onUpdate: (e, h) => { this.onUpdate(e, h) } });
+
+							return el(component, itemProps);
 						case 'text':
 							if (hide) return (null);
 							return el(CustomTextField, {

@@ -26,3 +26,5 @@ export const sumClasses = (classes: Array<string>) => {
 	});
 	return returnEach;
 };
+
+export const isInt = (value: any) => !isNaN(value) && ((x) => { return (x | 0) === x; })(parseFloat(value));

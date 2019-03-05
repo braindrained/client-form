@@ -15,6 +15,7 @@ export default class CustomCheckBox extends React.Component<any, any> {
 	shouldComponentUpdate(nextProps: Object, nextState: Object) {
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
+		if (this.props.style !== nextProps.style) return true;
 		return false;
 	}
 

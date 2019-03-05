@@ -1,14 +1,14 @@
 // @flow
 import React from 'react';
 import FieldLabel from './childrenComponents/FieldLabel';
-import { sumClasses } from '../helpers/utils';
+import { sumClasses, isInt } from '../helpers/utils';
 
 class CustomRadio extends React.Component<any, any> {
 
 	constructor(props: Object) {
 		super(props);
 		const { value } = this.props;
-		const checkValue = value.toString() === 'true' ? true : value.toString() === 'false' ? false : value;
+		const checkValue = value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value,) : value;
 
 		this.state = {
 			value: checkValue
@@ -23,7 +23,7 @@ class CustomRadio extends React.Component<any, any> {
 
 	onChange(event: Object) {
 		const { value } = event.target;
-		const checkValue = value.toString() === 'true' ? true : value.toString() === 'false' ? false : value;
+		const checkValue = value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value,) : value;
 
 		this.setState({
 			value: checkValue

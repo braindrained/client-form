@@ -8,13 +8,14 @@ class CustomTextField extends React.Component<any, any> {
 
 	constructor(props: Object) {
 		super(props);
-		const { value, isValid, type } = this.props;
+		const { value, isValid, type, label } = this.props;
 
 		this.state = {
 			value: value === undefined ? '' : value,
 			isValid,
 			editing: false,
-			type
+			type,
+			labelText: label && label.text
 		};
 	}
 
@@ -23,14 +24,16 @@ class CustomTextField extends React.Component<any, any> {
 		if (this.state.value !== nextState.value) return true;
 		if (this.props.isValid !== nextProps.isValid) return true;
 		if (this.state.type !== nextState.type) return true;
+		if (nextProps.label && this.state.labelText !== nextProps.label.text) return true;
 		return false;
 	}
 
 	componentWillReceiveProps(nextProps: Object) {
-		if (this.state.value !== nextProps.value || !nextProps.isValid) {
+		if (this.state.value !== nextProps.value || !nextProps.isValid || (nextProps.label && this.state.labelText !== nextProps.label.text)) {
 			this.setState({
 				value: nextProps.value === undefined ? '' : nextProps.value,
 				isValid: nextProps.isValid,
+				labelText: nextProps.label && nextProps.label.text
 			});
 		}
 	}

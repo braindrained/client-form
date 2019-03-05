@@ -254,7 +254,7 @@
 @media screen and (min-width: 560px) {
 	.client-form .container-field {
 		width: 250px;
-		min-height: 79px;
+		min-height: 73px;
 		margin-right: 20px;
 	}
 }
@@ -503,7 +503,7 @@
 	float: left;
 	border: 1px solid #949da2;
 	cursor: pointer;
-	height: 33px;
+	height: 30px;
 	-moz-transition:		background-color 0.3s ease-in-out;
 	-o-transition:			background-color 0.3s ease-in-out;
 	-webkit-transition: background-color 0.3s ease-in-out;
