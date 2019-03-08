@@ -12,7 +12,7 @@ import CustomTextAreaTab from './childrens/CustomTextAreaTab';
 import CustomPlusMinus from './childrens/CustomPlusMinus';
 import FakeSelect from './childrens/FakeSelect';
 // flow-disable-next-line
-import { sumClasses } from './helpers/utils';
+import { sumClasses, isInt } from './helpers/utils';
 import './Form.css';
 
 const el = React.createElement;
@@ -103,6 +103,8 @@ const Form = class extends React.Component<any, any> {
 		const { controls } = this.state;
 
 		const updatedControls = controls.map((item) => {
+			item.isValid = true;
+			if (item.value === null || item.value === undefined) item.value = '';
 			if (item.isRequired && !item.hide) {
 				if (item.control !== 'select' && (item.value === '' || !item.value)) {
 					item.isValid = false;
@@ -129,7 +131,8 @@ const Form = class extends React.Component<any, any> {
 				}
 			}
 			if (item.regEx !== undefined && !item.hide) {
-				if (item.value !== '' &&	!item.regEx.test(item.value)) {
+				console.log(item.name, item.regEx.test(item.value));
+				if (!item.regEx.test(item.value)) {
 					item.isValid = false;
 					formIsValid = false;
 				}
@@ -157,7 +160,7 @@ const Form = class extends React.Component<any, any> {
 
 		if (formIsValid) {
 			const formObject = {};
-			updatedControls.filter(o => o.control !== 'label').map((item) => {
+			updatedControls.filter(o => o.control !== 'label' && o.exclude !== true).map((item) => {
 				let { value } = item;
 				const { valueAsObject, currency, name } = item;
 				if (typeof value === 'object' && valueAsObject) {
@@ -168,7 +171,7 @@ const Form = class extends React.Component<any, any> {
 					});
 					value = valueObject;
 				}
-				if (currency && value !== undefined) {
+				if (currency && value !== undefined && value !== null && value !== '' && value !== 0 && !isInt(value)) {
 					value = value.replace(/\./g, '');
 				}
 				value = value === undefined ? '' : value.toString() === 'true' ? true : value.toString() === 'false' ? false : value;
@@ -180,6 +183,12 @@ const Form = class extends React.Component<any, any> {
 				isSent: true,
 			});
 			this.props.sendForm(formObject).then((x) => {
+				this.setState({
+					isSent: false,
+					succeed: x.succeed,
+					message: x.message
+				});
+			}).catch((x) => {
 				this.setState({
 					isSent: false,
 					succeed: x.succeed,
@@ -238,10 +247,11 @@ const Form = class extends React.Component<any, any> {
 							return null;
 						case 'external':
 							if (hide) return (null);
-							const itemProps = exclude === true ?
+							/*const itemProps = exclude === true ?
 							props
 							:
-							Object.assign({}, props, { onUpdate: (e, h) => { this.onUpdate(e, h) } });
+							Object.assign({}, props, { onUpdate: (e, h) => { this.onUpdate(e, h) } });*/
+							const itemProps = Object.assign({}, item, { onUpdate: (e, h) => { this.onUpdate(e, h) } });
 
 							return el(component, itemProps);
 						case 'text':
@@ -311,7 +321,7 @@ const Form = class extends React.Component<any, any> {
 									onUpdate: (e, h) => { this.onUpdate(e, h); },
 									isRequired, isValid, disabled,
 									errorMessage, className, style,
-									valueAsObject, limitChar,
+									valueAsObject, limitChar, label
 							});
 						case 'fakeselect':
 							if (item.hide) return (null);

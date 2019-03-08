@@ -57,7 +57,7 @@ class CustomComp extends React.Component {
 								value: item.value,
 								onChange: (e) => { this.onChange(e); },
 							}} style={{  }}/>
-							<FieldError {...{ isValid, errorMessage }} />
+							<FieldError {...{ isValid: item.isRequired === false ? true : isValid, errorMessage: item.errorMessage }} />
 						</div>
 					)
 				})}

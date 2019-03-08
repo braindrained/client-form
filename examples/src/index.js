@@ -16,6 +16,8 @@ class App extends React.Component {
 	}
 
 	render() {
+		const prpMail = undefined;
+
 		return (
 	    <Form {...{
 				controls: [
@@ -179,14 +181,20 @@ class App extends React.Component {
 					{
 						control: 'tabTextArea',
 						name: 'aMultipleDescriptionFieldThatStripHTMLCauseWeDontLikeHTMLInTextArea',
+						label: {
+							style: {
+								display: 'none'
+							}
+						},
 						value: [
-							{ name: 'listingDescIt', value: '', isRequired: false, isValid: true, label: 'Italiano', abbr: 'IT', placeholder: 'Inserisci qui la descrizione' },
+							{ name: 'listingDescIt', value: '', isRequired: true, isValid: true, label: 'Italiano', abbr: 'IT', placeholder: 'Inserisci qui la descrizione' },
 							{ name: 'listingDescEn', value: '', isRequired: false, isValid: true, label: 'Inglese', abbr: 'EN', placeholder: 'Descrizione inglese' },
 							{ name: 'listingDescFr', value: '', isRequired: false, isValid: true, label: 'Francese', abbr: 'FR', placeholder: 'Descrizione francese' },
 							{ name: 'listingDescEs', value: '', isRequired: false, isValid: true, label: 'Spagnolo', abbr: 'ES', placeholder: 'Descrizione spagnolo' },
 							{ name: 'listingDescDe', value: '', isRequired: false, isValid: true, label: 'Tedesco', abbr: 'DE', placeholder: 'Descrizione tedesco' }
 						],
 						isValid: true,
+						isRequired: true,
 						errorMessage: 'The italian description is mandatory',
 						className: 'tabTextArea',
 						valueAsObject: true,
@@ -195,29 +203,41 @@ class App extends React.Component {
 					{
 						control: 'external',
 						component: CustomComp,
-						props: {
-							name: 'thisIsACustomExternalComponent',
-							key: 'thisIsACustomExternalComponent',
-							value: [
-								{ name: 'firstField', value: '', isRequired: false, isValid: true, placeholder: '\'cause I need a complete customized one', },
-								{ name: 'secondFieldWithEmptyPlaceholder', value: '', isRequired: false, isValid: true, placeholder: '', },
-							],
-							isValid: true,
-							className: 'container-field tabTextArea',
-							style: {
-								background: 'rgb(50, 63, 72)',
-								clear: 'both',
-								borderRadius: 4,
-								marginTop: 20,
-								position: 'relative',
-								clear: 'both',
-								display: 'inline-block',
-								padding: 20,
-								color: '#fff'
-							},
-							valueAsObject: true
+						name: 'thisIsACustomExternalComponent',
+						key: 'thisIsACustomExternalComponent',
+						value: [
+							{ name: 'firstField', value: '', isRequired: true, isValid: true, placeholder: '\'cause I need a complete customized one', errorMessage: 'Campo obbligatorio' },
+							{ name: 'secondFieldWithEmptyPlaceholder', value: '', isRequired: false, isValid: true, placeholder: '', },
+						],
+						isValid: true,
+						isRequired: true,
+						className: 'container-field tabTextArea',
+						style: {
+							background: 'rgb(50, 63, 72)',
+							clear: 'both',
+							borderRadius: 4,
+							marginTop: 20,
+							position: 'relative',
+							clear: 'both',
+							display: 'inline-block',
+							padding: 20,
+							color: '#fff',
+							marginBottom: 15
 						},
-						exclude: false
+						valueAsObject: true,
+						exclude: true
+					},
+					{
+						control: 'text',
+						type: 'text',
+						name: 'prpMail',
+						placeholder: '',
+						label: {
+							text: 'Indirizzo Email',
+						},
+						regEx: /(^$|^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$)/i,
+						errorMessage: 'Inserisci un indirizzo mail valido',
+						limitChar: 60,
 					},
 				],
 				textBeforeButton: el('div', {
@@ -225,8 +245,6 @@ class App extends React.Component {
 				}, 'This is a text before button'),
 				sendButton: {
 					text: 'Save',
-					errorText: 'Error saving data',
-					succeedText: 'Saved!',
 					style: { minWidth: 250, margin: '0 auto', float: 'none' }
 				},
 				textAfterButton: el('div', {
@@ -237,7 +255,9 @@ class App extends React.Component {
 					console.log(e);
 					var promise = new Promise((resolve, reject) => {
 			      window.setTimeout(() => {
-			        resolve({ succeed: true });
+							/*errorText: 'Error saving data',
+							succeedText: 'Saved!',*/
+			        resolve({ succeed: true, message: 'Saved!' });
 			      }, 2000);
 			    });
 			    return promise;
