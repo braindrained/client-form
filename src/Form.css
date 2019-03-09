@@ -147,6 +147,7 @@
 }
 .client-form input[type='radio'] + label {
 	height: 30px;
+	width: 100%;
 }
 .client-form input[type="checkbox"] + label > svg,
 .client-form input[type="radio"] + label > svg {

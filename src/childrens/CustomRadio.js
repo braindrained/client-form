@@ -42,7 +42,7 @@ class CustomRadio extends React.Component<any, any> {
 			el(FieldLabel, { label, name, isRequired, isValid }),
 			el('div', { className: 'float-container' },
 				options.map(item => el('div', { key: `select_${item.name}_${item.value}`, className: hideRadio && item.value === value ? `floating selected-radio ${item.className}` : hideRadio ? `floating ${item.className}` : item.className, style: item.style },
-					el('input', { type: 'radio', name, id: name + item.value, value: item.value, disabled: item.disabled === true, checked: item.value === value, onChange: this.onChange.bind(this) }),
+					el('input', { type: 'radio', name, id: name + item.value, value: item.value, disabled: item.disabled === true, checked: item.value === value, onChange: (e) => { this.onChange(e); } }),
 					el('label', { htmlFor: name + item.value, style: item.labelStyle ? item.labelStyle : {} },
 						hideRadio ?
 							null

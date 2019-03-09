@@ -60,7 +60,7 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 								textAlign: 'left',
 							},
 							className: this.state.selected === i ? 'container-field-tabs-item container-field-tabs-item-selected' : 'container-field-tabs-item',
-							onClick: this.selectTab.bind(this, i),
+							onClick: () => { this.selectTab(i); },
 							role: 'button'
 						}}>
 							<div className="noselect">
