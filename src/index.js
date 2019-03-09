@@ -354,10 +354,13 @@ const Form = class extends React.Component<any, any> {
 											}} />
 										</circle>
 										:
-										succeed !== null ?
+										succeed === true ?
+											<polyline {...{ fill: 'none', points: '4,12 9,18 21,6', style: { fill: 'none', stroke: '#fff', strokeWidth: 2 } }} />
+											:
+											succeed === false ?
 											<path {...{
 												fill: '#fff',
-												d: succeed ? 'M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z' : 'M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z'
+												d: 'M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z'
 											}} />
 											:
 											null
