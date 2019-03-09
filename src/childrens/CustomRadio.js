@@ -3,12 +3,14 @@ import React from 'react';
 import FieldLabel from './childrenComponents/FieldLabel';
 import { sumClasses, isInt } from '../helpers/utils';
 
+const el = React.createElement;
+
 class CustomRadio extends React.Component<any, any> {
 
 	constructor(props: Object) {
 		super(props);
 		const { value } = this.props;
-		const checkValue = value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value,) : value;
+		const checkValue = value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value;
 
 		this.state = {
 			value: checkValue
@@ -23,7 +25,7 @@ class CustomRadio extends React.Component<any, any> {
 
 	onChange(event: Object) {
 		const { value } = event.target;
-		const checkValue = value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value,) : value;
+		const checkValue = value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value;
 
 		this.setState({
 			value: checkValue
@@ -32,68 +34,23 @@ class CustomRadio extends React.Component<any, any> {
 	}
 
 	render() {
-		const { className, style, label, name, hideRadio, textBefore, options, css, isRequired, isValid } = this.props;
+		const { className, style, label, name, hideRadio, options, isRequired, isValid } = this.props;
 		const { value } = this.state;
 
-		return (
-			<div className={sumClasses([hideRadio ? 'container-field toggle-format' : 'container-field regular-radio', className])} style={style}>
-				{ textBefore ? (
-					<div style={textBefore.style}>
-						{textBefore.text}
-					</div>
-				) : null }
-				<div className={css}>
-					<FieldLabel {...{ label, name, isRequired, isValid }} />
-					<div className="float-container">
-						{ /* eslint-disable */ }
-						{ options.map(item => <div {...{
-							key: `select_${item.name}_${item.value}`,
-							className:
-								hideRadio &&
-								item.value === value
-									?
-									`floating selected-radio ${item.className}`
-									:
-									(hideRadio ? `floating ${item.className}` : item.className) + ' float-container-first-child',
-							style: item.style
-						}}>
-							<input {...{
-								type: 'radio',
-								name,
-								id: name + item.value,
-								value: item.value,
-								disabled: item.disabled === true,
-								checked: item.value === value,
-								onChange: this.onChange.bind(this)
-							}} />
-							<label htmlFor={name + item.value} style={item.labelStyle ? item.labelStyle : {}}>
-								{ hideRadio ?
-									null :
-										<svg {...{ width: 24, height: 24, viewBox: '0 0 24 24' }}>
-											<path {...{ d: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z' }} />
-											<circle {...{ className: 'ext', cx: 12, cy: 12, r: 9 }} />
-											{ item.value === value ? <circle {...{ className: 'int', cx: 12, cy: 12, r: 4 }} /> : null }
-										</svg>
-								}
-								{ hideRadio ?
-									<div>{item.label}</div>
-									:
-									<div className="custom-radio-options-label">{item.label}</div>
-								}
-								{ item.customObject ?
-									<div className={item.value === value ? 'custom-radio-options-wrapper custom-radio-options-wrapper-sel' : 'custom-radio-options-wrapper'}>
-										{item.customObject}
-									</div>
-									:
-									null
-								}
-							</label>
-						</div>)}
-						{ /* eslint-enable */ }
-					</div>
-				</div>
-			</div>
-		);
+		return el('div', { className: sumClasses(['container-field', className]), style },
+			el(FieldLabel, { label, name, isRequired, isValid }),
+			el('div', { className: 'float-container' },
+				options.map(item => el('div', { key: `select_${item.name}_${item.value}`, className: hideRadio && item.value === value ? `floating selected-radio ${item.className}` : hideRadio ? `floating ${item.className}` : item.className, style: item.style },
+					el('input', { type: 'radio', name, id: name + item.value, value: item.value, disabled: item.disabled === true, checked: item.value === value, onChange: this.onChange.bind(this) }),
+					el('label', { htmlFor: name + item.value, style: item.labelStyle ? item.labelStyle : {} },
+						hideRadio ?
+							null
+							:
+							el('svg', { width: 24, height: 24, viewBox: '0 0 24 24' },
+								el('path', { d: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z' }),
+								el('circle', { className: 'ext', cx: 12, cy: 12, r: 9 }),
+								item.value === value ? el('circle', { className: 'int', cx: 12, cy: 12, r: 4 }) : null),
+						el('div', null, item.label), item.customObject ? item.customObject : null)))));
 	}
 }
 

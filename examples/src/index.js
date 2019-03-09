@@ -26,7 +26,7 @@ class App extends React.Component {
 						name: 'label-1',
 						content: 'This is a text only label',
 						style: { lineHeight: '40px', clear: 'both', width: '100%', fontSize: 16, marginBottom: 20 },
-						className: 'tabTextArea noselect'
+						className: 'noselect'
 					},
 					{
 						control: 'text',
@@ -50,6 +50,21 @@ class App extends React.Component {
 						isRequired: true
 					},
 					{
+						control: 'text',
+						type: 'text',
+						name: 'age',
+						onlyNumber: true,
+						limitChar: 3
+					},
+					{
+						control: 'select',
+						name: 'propertyTypeId',
+						hideRadio: true,
+						options: tipologies.filter(o => o.type.indexOf(parseFloat(1)) !== -1),
+						value: '',
+						optionIf: [],
+					},
+					{
 						control: 'fakeselect',
 						name: 'priceRange',
 						text: 'Seleziona...',
@@ -66,9 +81,14 @@ class App extends React.Component {
 					{
 						control: 'text',
 						type: 'text',
-						name: 'age',
-						onlyNumber: true,
-						limitChar: 3
+						name: 'prpMail',
+						placeholder: '',
+						label: {
+							text: 'Indirizzo Email',
+						},
+						regEx: /(^$|^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$)/i,
+						errorMessage: 'Inserisci un indirizzo mail valido',
+						limitChar: 60,
 					},
 					{
 						control: 'plusMinus',
@@ -80,12 +100,11 @@ class App extends React.Component {
 						value: 0,
 					},
 					{
-						control: 'select',
-						name: 'propertyTypeId',
-						hideRadio: true,
-						options: tipologies.filter(o => o.type.indexOf(parseFloat(1)) !== -1),
-						value: '',
-						optionIf: [],
+						control: 'check',
+						name: 'thisIsACheckBox',
+						label: { text: 'This is an almost real checkbox' },
+						value: false,
+						hideCheck: false,
 					},
 					{
 						control: 'radio',
@@ -115,23 +134,6 @@ class App extends React.Component {
 					},
 					{
 						control: 'text',
-						type: 'text',
-						name: 'anotherText',
-						onlyNumber: false,
-						placeholder: 'Another text input',
-						label: { text: 'Another text input with limitChar 25' },
-						value: '',
-						limitChar: 25,
-					},
-					{
-						control: 'check',
-						name: 'thisIsACheckBox',
-						label: { text: 'This is an almost real checkbox' },
-						value: false,
-						hideCheck: false,
-					},
-					{
-						control: 'text',
 						type: 'password',
 						name: 'password',
 						onlyNumber: false,
@@ -149,11 +151,21 @@ class App extends React.Component {
 						errorMessage: 'Must be equal',
 					},
 					{
+						control: 'text',
+						type: 'text',
+						name: 'anotherText',
+						onlyNumber: false,
+						placeholder: 'Another text input',
+						label: { text: 'Another text input with limitChar 25' },
+						value: '',
+						limitChar: 25,
+					},
+					{
 						control: 'label',
 						name: 'label-2',
 						content: el('div', { style: { color: '#fff', background: 'rgb(50, 63, 72)', paddingLeft: 8 } }, 'This is an element based label'),
 						style: { lineHeight: '40px', clear: 'both', width: '100%', fontSize: 16, marginBottom: 20 },
-						className: 'tabTextArea noselect'
+						className: 'noselect'
 					},
 					{
 						control: 'textArea',
@@ -225,46 +237,32 @@ class App extends React.Component {
 							marginBottom: 15
 						},
 						valueAsObject: true,
-						exclude: true
-					},
-					{
-						control: 'text',
-						type: 'text',
-						name: 'prpMail',
-						placeholder: '',
-						label: {
-							text: 'Indirizzo Email',
-						},
-						regEx: /(^$|^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$)/i,
-						errorMessage: 'Inserisci un indirizzo mail valido',
-						limitChar: 60,
+						exclude: false
 					},
 				],
-				textBeforeButton: el('div', {
+				beforeButton: el('div', {
 					style: { clear: 'both', fontSize: 11, lineHeight: '30px', textAlign: 'center' }
 				}, 'This is a text before button'),
 				sendButton: {
-					text: 'Save',
-					style: { minWidth: 250, margin: '0 auto', float: 'none' }
+					text: 'Save changes',
+					style: { margin: '0 auto', float: 'none', paddingLeft: 40, paddingRight: 40 },
 				},
-				textAfterButton: el('div', {
+				afterButton: el('div', {
 					style: { clear: 'both', fontSize: 11, lineHeight: '30px', textAlign: 'center' }
-				}, 'Look in the console for the output object'),
+				}, '(Look in the console for the output object)'),
 				buttonContainerStyle: { textAlign: 'center' },
 				sendForm: (e) => {
 					console.log(e);
 					var promise = new Promise((resolve, reject) => {
 			      window.setTimeout(() => {
-							/*errorText: 'Error saving data',
-							succeedText: 'Saved!',*/
-			        resolve({ succeed: true, message: 'Saved!' });
+			        reject({ succeed: true, message: 'Saved!' });
 			      }, 2000);
 			    });
 			    return promise;
 				},
 				key: makeId(),
 				formStyle: {
-					maxWidth: 560,
+					maxWidth: 540,
 					margin: '0 auto'
 				},
 				noUndefined: false

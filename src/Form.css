@@ -2,20 +2,80 @@
 	text-align: left;
 	display: block;
 	margin: 0 auto;
-	padding: 0px 15px;
 	color: #333f48;
-}
-@media screen and (min-width: 560px) {
-	.client-form {
-		padding: 0px 0px 0px 20px;
-	}
+	font-size: 13px;
 }
 .client-form .box-shadow {
 	box-shadow: 0 3px 1px -2px rgba(0,0,0,.01), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 	border-radius: 2px;
 }
-.client-form .box-shadow-top {
-	box-shadow: 0 -5px 5px -5px rgba(0,0,0,.14);
+.client-form .clear {
+	clear: both;
+	width: 100%;
+}
+.client-form .hide {
+	display: none;
+}
+.client-form .limit-char {
+	text-align: right;
+	position: absolute;
+	width: 100%;
+}
+.client-form .noselect, .client-form img, .client-form label {
+	-webkit-touch-callout: none; /* iOS Safari */
+		-webkit-user-select: none; /* Safari */
+		 -khtml-user-select: none; /* Konqueror HTML */
+			 -moz-user-select: none; /* Firefox */
+				-ms-user-select: none; /* Internet Explorer/Edge */
+						user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+.client-form .validation-error {
+	color: #e4002b;
+	font-size: 11px;
+	display: block;
+	clear: both;
+	min-height: 19px;
+	text-align: right;
+  line-height: 19px;
+}
+
+.client-form .container-field {
+	float: left;
+	position: relative;
+	width: -webkit-calc(100% - 20px);
+	width: -moz-calc(100% - 20px);
+	width: calc(100% - 20px);
+	min-height: 90px;
+	margin: 0px 10px;
+}
+.client-form .container-field label:first-child {
+	width: 100%;
+	float: left;
+	clear: both;
+	text-align: left;
+	height: 24px;
+	font-weight: 500;
+}
+.client-form .container-field svg path {
+	fill: #949da2;
+}
+.client-form .container-field .ext {
+	fill: #fff;
+}
+.client-form .container-field .int {
+	fill: rgb(0, 132, 255);
+}
+
+.client-form .button-container {
+	width: 100%;
+	float: right;
+	position: relative;
+}
+.client-form .button-container svg {
+	background: none;
+	position: absolute;
+	left: 8px;
+	top: 8px;
 }
 .client-form .btn {
 	position: relative;
@@ -24,8 +84,8 @@
 	margin: 0px 0px 0px 0px;
 	padding: 0px 10px;
 	height: 40px;
-	font-size: 14px !important;
-	color: #fff !important;
+	font-size: 14px;
+	color: #fff;
 	cursor: pointer;
 	line-height: 40px;
 	border: none;
@@ -47,49 +107,11 @@
 		background-color: #161e24;
 		border-color: #161e24;
 }
-.client-form .btn-link-black {
-	font-size: 12px!important;
-	color: #697684!important;
-	background: transparent;
-}
-.client-form .btn-link-black:hover {
-	background: transparent!important;
-	border-color: none;
-	color: #323f48!important;
-}
-.client-form .btn-link-red {
-	font-size: 12px!important;
-	color: #e4002b!important;
-	background: transparent;
-}
-.client-form .btn-link-red:hover {
-	background: transparent!important;
-	border-color: none;
-	color: #a30000!important;
-}
-.client-form .btn-link-red img {
-	float: left;
-}
-.client-form .btn-link-red div {
-	text-decoration: underline;
-	float: right!important;
-	clear: none!important;
-	line-height: 20px;
-	height: 20px;
-	margin: 0px!important;
-}
 .client-form .btn-succeed {
 	background-color: #00c694!important;
 	border: 1px solid #00c694!important;
 	color: #fff!important;
 }
-
-.client-form .btn-succeed-small {
-	background-color: #00c694!important;
-	border: 1px solid #00c694!important;
-	color: #fff!important;
-}
-
 .client-form .btn-white {
 	background-color: #fff!important;
 	border: 1px solid #323f48!important;
@@ -100,54 +122,11 @@
 	border: 1px solid #323f48!important;
 	color: #323f48!important;
 }
-.client-form .btn-error {
-	background-color: #e4002b!important;
-	border: 1px solid #e4002b!important;
-	color: #fff!important;
-	overflow: hidden;
-}
-.client-form .btn-error-small {
-	background-color: #e4002b!important;
-	border: 1px solid #e4002b!important;
-	color: #fff!important;
-}
-
-.client-form .btn-gray-small {
-	background: #f1f1f1;
-	color: #323f48!important;
-	line-height: 30px!important;
-	height: 30px;
-}
-.client-form .btn-gray-small:hover {
-	background: #f1f1f1;
-}
-
-.client-form .btn-white-small {
-	background-color: #fff!important;
-	border: 1px solid #323f48!important;
-	color: #323f48!important;
-	line-height: 30px!important;
-	height: 30px;
-}
-.client-form .btn-white-small:hover {
-	background-color: #fff!important;
-	border: 1px solid #323f48!important;
-	color: #323f48!important;
-}
-.client-form .btn-red-small {
-	background: #e4002b;
-	line-height: 30px!important;
-	height: 30px;
-}
-.client-form .btn-red-small:hover {
-	background-color: #a30000;
-	border-color: #a30000;
-}
-.client-form .btn-gray {
+.client-form .btn-grey {
 	background: #f1f1f1;
 	color: #323f48!important;
 }
-.client-form .btn-gray:hover {
+.client-form .btn-grey:hover {
 	background: #f1f1f1;
 }
 .client-form .btn-red {
@@ -158,21 +137,7 @@
 	border-color: #a30000;
 }
 
-.client-form .loader {
-	opacity: 0.5;
-}
-.client-form .noselect, .client-form img, .client-form label {
-	-webkit-touch-callout: none; /* iOS Safari */
-		-webkit-user-select: none; /* Safari */
-		 -khtml-user-select: none; /* Konqueror HTML */
-			 -moz-user-select: none; /* Firefox */
-				-ms-user-select: none; /* Internet Explorer/Edge */
-						user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
-}
-.client-form .clear {
-	clear: both;
-	width: 100%;
-}
+/* CustomCheckBox CustomRadio */
 .client-form input[type='radio'], input[type='checkbox'] {
 	display: none;
 }
@@ -180,22 +145,28 @@
 	display: inline-block;
 	cursor: pointer;
 }
+.client-form input[type='radio'] + label {
+	height: 30px;
+}
 .client-form input[type="checkbox"] + label > svg,
 .client-form input[type="radio"] + label > svg {
 	float: left;
 }
 .client-form input[type="checkbox"] + label > div,
-.client-form input[type="radio"] + label > .custom-radio-options-label {
-	width: 20px;
-	height: 20px;
-	vertical-align: middle;
+.client-form input[type="radio"] + label > div {
+	width: auto;
+	height: 24px;
+	line-height: 24px;
 	padding-left: 5px;
 	cursor: pointer;
 	float: left;
 	white-space: nowrap;
-	line-height: 24px;
+}
+.client-form .check {
+	padding-top: 23px;
 }
 
+/* CustomTextField CustomTextarea */
 .client-form input[type=email],
 .client-form input[type=number],
 .client-form input[type=password],
@@ -208,62 +179,23 @@
 	color: #333f48;
 	background-color: #fff;
 	line-height: 13px;
-	font-size: 13px;
 	box-sizing: border-box;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	width: 100%;
 	transition: border .5s ease;
 }
-@media screen and (min-width: 560px) {
-	.client-form input[type=email],
-	.client-form input[type=number],
-	.client-form input[type=password],
-	.client-form input[type=tel],
-	.client-form input[type=text] {
-		max-height: 30px;
-		padding: 0px 8px;
-		height: 30px;
-	}
-}
-.client-form .button-container {
-	width: 100%;
-	float: right;
-	position: relative;
-}
-.client-form .button-container svg {
-	background: none;
+.client-form .container-field .eye {
 	position: absolute;
-	left: 8px;
-	top: 8px;
+	right: 5px;
+	top: 37px;
+	cursor: pointer;
 }
-.client-form .hide {
-	display: none;
+.client-form .container-field .eye .show {
+	fill: none;
 }
-.client-form .container-field {
-	float: left;
-	position: relative;
-	display: inline-block;
-	width: 100%;
-	min-height: 90px;
-	margin-right: 0px;
-}
-@media screen and (min-width: 560px) {
-	.client-form .container-field {
-		width: 250px;
-		min-height: 73px;
-		margin-right: 20px;
-	}
-}
-.client-form .container-field label {
-	width: 100%;
-	float: left;
-	clear: both;
-	text-align: left;
-	height: 24px;
-	font-size: 13px;
-	font-weight: 500;
-}
+
+/* CustomTextAreaTab */
 .client-form .container-field .container-field-tabs {
 	width: 100%;
 	clear: both;
@@ -271,19 +203,9 @@
 }
 .client-form .container-field .container-field-tabs .tab-label {
 	display: none;
-	font-size: 13px;
 }
 .client-form .container-field .container-field-tabs .tab-abbr {
 	display: block;
-	font-size: 13px;
-}
-@media screen and (min-width: 560px) {
-	.client-form .container-field .container-field-tabs .tab-label {
-		display: block;
-	}
-	.client-form .container-field .container-field-tabs .tab-abbr {
-		display: none;
-	}
 }
 .client-form .container-field .container-field-tabs .container-field-tabs-item {
 	transition-duration: 0.2s, 0.2s;
@@ -305,35 +227,18 @@
 	background: #949da2;
 	color: #fff;
 }
-.client-form .container-field .check-filters {
-	margin-top: 23px;
-}
-.client-form .check svg path,
-.client-form .regular-radio svg path {
-	fill: #949da2;
-}
-.client-form .container-field .ext {
-	fill: #fff;
-}
-.client-form .container-field .int {
-	fill: rgb(0, 132, 255);
-}
-@media screen and (min-width: 560px) {
-	.client-form .container-field .check-filters {
-		margin-top: 27px;
-	}
-}
 
-.client-form .cutom-plus-minus {
-	min-height: 79px;
+/* CustomPlusMinus */
+.client-form .plus-minus {
 	max-width: 250px;
 }
-.client-form .cutom-plus-minus input {
+.client-form .plus-minus input {
 	height: 30px;
 }
-.client-form .cutom-plus-minus svg {
+.client-form .plus-minus svg {
 	float: left;
-	width: 32px;
+	width: 30px;
+	height: 30px;
 	border-radius: 50%;
 	background-color: rgb(50, 63, 72);
 	border: none;
@@ -342,16 +247,16 @@
 	text-align: center;
 	font-size: 20px;
 	cursor: pointer;
-	height: 32px;
-	line-height: 32px;
+	line-height: 30px;
 }
-.client-form .cutom-plus-minus svg:first-child {
+.client-form .plus-minus svg:first-child {
 		margin-right: 30px;
 }
-.client-form .cutom-plus-minus svg:last-child {
+.client-form .plus-minus svg:last-child {
 		margin-left: 30px;
 }
 
+/* CustomSelect */
 .client-form .select-style {
 	background: #fff;
 	height: 47px;
@@ -362,14 +267,7 @@
 	border-radius: 2px;
 	position: relative;
 	z-index: 1;
-	font-size: 13px;
 	cursor: pointer;
-}
-@media screen and (min-width: 560px) {
-	.client-form .select-style {
-		height: 30px;
-		line-height: 30px;
-	}
 }
 .client-form .select-style label {
 	position: absolute;
@@ -379,12 +277,11 @@
 	font-size:13px;
 }
 .client-form .select-style select {
-	padding: 0px 0px 0px 8px;
+	padding: 0px 26px 0px 8px;
 	border: 0;
 	background: transparent;
 	height: 47px;
 	color: #333f48;
-	font-size: 13px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	width: 100%;
@@ -398,69 +295,17 @@
 				-ms-user-select: none; /* Internet Explorer/Edge */
 						user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
-@media screen and (min-width: 560px) {
-	.client-form .select-style select {
-		height: 30px;
-	}
-}
-
 .client-form .select-style svg {
 	position: absolute;
 	right: 1px;
 	top: 10px;
-	z-index: 0;
+	z-index: -1;
 }
-@media screen and (min-width: 560px) {
-	.client-form .select-style svg {
-		top: 3px;
-	}
+select::-ms-expand {
+	display: none;
 }
 
-.client-form .validation-error {
-	color: #e4002b;
-	font-size: 11px;
-	display: block;
-	clear: both;
-	min-height: 19px;
-	text-align: right;
-  line-height: 19px;
-}
-
-.client-form .regular-radio .float-container .float-container-first-child {
-	min-height: 30px
-}
-
-.client-form .limit-char {
-	text-align: right;
-	position: absolute;
-	width: 100%;
-	font-size: 13px;
-}
-
-@-webkit-keyframes fadeInFromNone {
-		0% {display: none;opacity: 0;}
-		50% {display: block;opacity: 0.5;}
-		100% {display: block;opacity: 1;}
-}
-
-@-moz-keyframes fadeInFromNone {
-		0% {display: none;opacity: 0;}
-		50% {display: block;opacity: 0.5;}
-		100% {display: block;opacity: 1;}
-}
-
-@-o-keyframes fadeInFromNone {
-		0% {display: none;opacity: 0;}
-		50% {display: block;opacity: 0.5;}
-		100% {display: block;opacity: 1;}
-}
-
-@keyframes fadeInFromNone {
-		0% {display: none;opacity: 0;}
-		50% {display: block;opacity: 0.5;}
-		100% {display: block;opacity: 1;}
-}
-
+/* FakeSelect */
 .client-form .container-field .fake-cont {
 	position: absolute;
 	margin-top: -66px;
@@ -471,11 +316,6 @@
 	width: 100%;
 	padding: 10px 10px 0px 10px;
 }
-@media screen and (min-width: 560px) {
-	.client-form .container-field .fake-cont {
-		margin-top: -52px;
-	}
-}
 .client-form .container-field .fake-cont .min-max {
 	float: left;
 	line-height: 47px;
@@ -483,16 +323,8 @@
 	color: rgb(106, 119, 134);
 	margin-right: 15px;
 }
-@media screen and (min-width: 560px) {
-	.client-form .container-field .fake-cont .min-max {
-		line-height: 33px;
-	}
-}
 
-.client-form .hide-radio {
-		display: none!important;
-}
-
+/* CustomRadio */
 .client-form .floating {
 	float: left;
 	border: 1px solid #949da2;
@@ -506,6 +338,9 @@
 .client-form .floating label {
 		cursor: pointer;
 		text-align: center;
+		padding: 0px 15px;
+		height: 30px;
+		line-height: 30px;
 }
 .client-form .floating:hover {
 	background: #949da2!important;
@@ -518,21 +353,59 @@
 		color:#fff;
 }
 
-select::-ms-expand {
-	display: none;
-}
-
-.client-form .container-field .eye {
-	position: absolute;
-	right: 5px;
-	top: 37px;
-	cursor: pointer;
-}
 @media screen and (min-width: 560px) {
+	.client-form {
+		padding: 0px 0px 0px 0px;
+	}
+
+	.client-form .container-field {
+		width: 250px;
+		min-height: 73px;
+	}
+
+	.client-form .check {
+		padding-top: 27px;
+	}
+
+	.client-form input[type=email],
+	.client-form input[type=number],
+	.client-form input[type=password],
+	.client-form input[type=tel],
+	.client-form input[type=text] {
+		max-height: 30px;
+		padding: 0px 8px;
+		height: 30px;
+	}
+
 	.client-form .container-field .eye {
 		position: absolute;
 		right: 5px;
 		top: 27px;
 		cursor: pointer;
+	}
+
+	.client-form .container-field .container-field-tabs .tab-label {
+		display: block;
+	}
+	.client-form .container-field .container-field-tabs .tab-abbr {
+		display: none;
+	}
+
+	.client-form .select-style {
+		height: 30px;
+		line-height: 30px;
+	}
+	.client-form .select-style select {
+		height: 30px;
+	}
+	.client-form .select-style svg {
+		top: 3px;
+	}
+
+	.client-form .container-field .fake-cont {
+		margin-top: -52px;
+	}
+	.client-form .container-field .fake-cont .min-max {
+		line-height: 33px;
 	}
 }

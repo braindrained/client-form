@@ -32,37 +32,32 @@ export default class CustomCheckBox extends React.Component<any, any> {
 	}
 
 	render() {
-		const { className, style, label, name, textBefore } = this.props;
+		const { className, style, label, name } = this.props;
 		const { value } = this.state;
 
 		return (
 			<div className={sumClasses(['container-field', className !== undefined ? className : 'check'])} style={style}>
-				{textBefore !== null && textBefore !== undefined ? textBefore : ''}
-				<div className="check-filters">
-					<div className="separator" />
-					<div>
-						<input {...{
-							type: 'checkbox',
-							name,
-							id: name,
-							checked: value,
-							onChange: (e) => { this.onChange(e); }
+				<input {...{
+					type: 'checkbox',
+					name,
+					id: name,
+					checked: value,
+					onChange: (e) => { this.onChange(e); }
+				}} />
+				<label htmlFor={name} style={label.style}>
+					<svg {...{ width: 24, height: 24, viewBox: '0 0 24 24' }}>
+						{ value !== true ? null : <rect {...{ className: 'ext', width: 16, height: 16, x: 4, y: 4, style: { borderRadius: 2 } }} /> }
+						<path {...{
+							className: value === true ? 'int' : '',
+							d: value === true ?
+								'M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'
+								:
+								'M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z'
 						}} />
-						<label htmlFor={name} style={label.style}>
-							<svg {...{ width: 24, height: 24, viewBox: '0 0 24 24' }}>
-								<path {...{
-									className: value === true ? 'int' : '',
-									d: value === true ?
-										'M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'
-										:
-										'M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z'
-								}} />
-								{ value === true ? null : <rect {...{ className: 'ext', width: 16, height: 16, x: 4, y: 4, style: { borderRadius: 2 } }} /> }
-							</svg>
-							<div>{label.text}</div>
-						</label>
-					</div>
-				</div>
+						{ value === true ? null : <rect {...{ className: 'ext', width: 16, height: 16, x: 4, y: 4, style: { borderRadius: 2 } }} /> }
+					</svg>
+					<div>{label.text}</div>
+				</label>
 			</div>
 		);
 	}

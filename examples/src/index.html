@@ -21,7 +21,9 @@
 			    font-family: 'Open Sans', sans-serif;
 			}
 			.tabTextArea {
-				width: 100%!important;
+				width: -webkit-calc(100% - 20px);
+				width: -moz-calc(100% - 20px);
+				width: calc(100% - 20px);
 			}
 			@media screen and (min-width: 560px) {
 				.tabTextArea {
@@ -92,9 +94,11 @@
 				width: 60px;
 				background: #fff;
 			}
-			.client-form input[type="radio"] + label > div {
-				line-height: 30px;
+			.custom-radio-container .float-container label div {
+				height: 28px!important;
+				line-height: 28px!important;
 			}
+
 		</style>
   </head>
   <body>

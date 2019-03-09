@@ -220,26 +220,25 @@ const Form = class extends React.Component<any, any> {
 
 	render() {
 		const {
-			formClassName, formStyle,
-			sendButton, textBeforeButton, buttonContainerStyle,
-			textAfterButton
+			formClassName, formStyle, sendButton,
+			beforeButton, buttonContainerStyle, afterButton
 		} = this.props;
 		const { controls, succeed, isSent, message } = this.state;
 		const sendButtonClass = sumClasses([
-			succeed !== null ? (succeed ? 'btn btn-succeed' : 'btn btn-error') : 'btn',
-			sendButton && sendButton.disabled ? 'btn-disabled' : ''
+			succeed !== null ? (succeed ? 'btn btn-succeed' : 'btn btn-red') : 'btn',
+			sendButton && sendButton.disabled ? 'btn-grey' : ''
 		]);
 		const sendButtonValue = sendButton ? (succeed === null ? sendButton.text : message) : null;
 
 		return (
-			<div className={sumClasses(['client-form', formClassName !== null && formClassName !== undefined ? formClassName : ''])} style={formStyle}>
+			<div className={sumClasses(['client-form', formClassName])} style={formStyle}>
 				{ controls.map((item) => {
 					const {
 						control, hide, name, component, type, onlyNumber, placeholder, label,
 						value, isRequired, isValid, disabled, errorMessage, className, style,
 						updateOnChange, limitChar, currency, options, hideRadio,
 						textBefore, hideCheck, tabs, valueAsObject, text, firstRange,
-						secondRange, rangesStyle, overlayBg, content, props, exclude
+						secondRange, rangesStyle, overlayBg, content
 					} = item;
 					/* eslint-disable */
 					switch (control) {
@@ -247,12 +246,7 @@ const Form = class extends React.Component<any, any> {
 							return null;
 						case 'external':
 							if (hide) return (null);
-							/*const itemProps = exclude === true ?
-							props
-							:
-							Object.assign({}, props, { onUpdate: (e, h) => { this.onUpdate(e, h) } });*/
 							const itemProps = Object.assign({}, item, { onUpdate: (e, h) => { this.onUpdate(e, h) } });
-
 							return el(component, itemProps);
 						case 'text':
 							if (hide) return (null);
@@ -335,7 +329,7 @@ const Form = class extends React.Component<any, any> {
 					}
 					/* eslint-enable */
 				})}
-				{ textBeforeButton }
+				{ beforeButton }
 				{ sendButton ?
 					<div className="button-container" style={buttonContainerStyle}>
 						{/* eslint-disable */}
@@ -343,7 +337,7 @@ const Form = class extends React.Component<any, any> {
 							<button {...{
 								className: sendButtonClass,
 								style: sendButton.style,
-								onClick: succeed === null && isSent === null && sendButton.disabled === undefined ? () => { this.formIsValid(); } : () => null,
+								onClick: succeed === null && isSent === null && sendButton.disabled !== true ? () => { this.formIsValid(); } : () => null,
 								type: 'button'
 							}}>
 								<svg {...{ width: 24, height: 24, viewBox: isSent ? '0 0 100 100' : '0 0 24 24' }}>
@@ -375,7 +369,7 @@ const Form = class extends React.Component<any, any> {
 						{/* eslint-enable */}
 					</div>
 					: null }
-				{ textAfterButton }
+				{ afterButton }
 			</div>
 		);
 	}

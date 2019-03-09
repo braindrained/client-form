@@ -27,4 +27,5 @@ export const sumClasses = (classes: Array<string>) => {
 	return returnEach;
 };
 
-export const isInt = (value: any) => !isNaN(value) && ((x) => { return (x | 0) === x; })(parseFloat(value));
+/* eslint-disable-next-line */
+export const isInt = (value: any) => !isNaN(value) && (x => (x | 0) === x)(parseFloat(value));
