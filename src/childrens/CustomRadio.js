@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import FieldLabel from './childrenComponents/FieldLabel';
+import FieldError from './childrenComponents/FieldError';
 import { sumClasses, isInt } from '../helpers/utils';
 
 const el = React.createElement;
@@ -34,7 +35,7 @@ class CustomRadio extends React.Component<any, any> {
 	}
 
 	render() {
-		const { className, style, label, name, hideRadio, options, isRequired, isValid } = this.props;
+		const { className, style, label, name, hideRadio, options, isRequired, isValid, errorMessage } = this.props;
 		const { value } = this.state;
 
 		return el('div', { className: sumClasses(['container-field', className]), style },
@@ -47,10 +48,10 @@ class CustomRadio extends React.Component<any, any> {
 							null
 							:
 							el('svg', { width: 24, height: 24, viewBox: '0 0 24 24' },
-								el('path', { d: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z' }),
-								el('circle', { className: 'ext', cx: 12, cy: 12, r: 9 }),
+								el('circle', { className: 'ext', cx: 12, cy: 12, r: 9, stroke: 'rgb(216, 216, 223)', strokeWidth: 2 }),
 								item.value === value ? el('circle', { className: 'int', cx: 12, cy: 12, r: 4 }) : null),
-						el('div', null, item.label), item.customObject ? item.customObject : null)))));
+						el('div', null, item.label), item.customObject ? item.customObject : null)))),
+			el(FieldError, { isValid, errorMessage }));
 	}
 }
 

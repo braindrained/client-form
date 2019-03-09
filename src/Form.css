@@ -57,7 +57,7 @@
 	font-weight: 500;
 }
 .client-form .container-field svg path {
-	fill: #949da2;
+	fill: #d8d8df;
 }
 .client-form .container-field .ext {
 	fill: #fff;
@@ -173,7 +173,7 @@
 .client-form input[type=tel],
 .client-form input[type=text],
 .client-form textarea {
-	border: 1px solid #949da2;
+	border: 1px solid #d8d8df;
 	padding: 15px 8px;
 	border-radius: 2px;
 	color: #333f48;
@@ -220,10 +220,14 @@
 	color: #333f48;
 }
 .client-form .container-field .container-field-tabs .container-field-tabs-item:hover {
+	background: #d8d8df;
+	color: #333f48;
+}
+.client-form .container-field .container-field-tabs .container-field-tabs-item-selected {
 	background: #949da2;
 	color: #fff;
 }
-.client-form .container-field .container-field-tabs .container-field-tabs-item-selected {
+.client-form .container-field .container-field-tabs .container-field-tabs-item-selected:hover {
 	background: #949da2;
 	color: #fff;
 }
@@ -255,6 +259,9 @@
 .client-form .plus-minus svg:last-child {
 		margin-left: 30px;
 }
+.client-form .plus-minus svg path, .client-form .plus-minus svg rect {
+	fill: #fff;
+}
 
 /* CustomSelect */
 .client-form .select-style {
@@ -263,7 +270,7 @@
 	line-height: 47px;
 	width: 100%;
 	display: inline-block;
-	border: 1px solid #949da2;
+	border: 1px solid #d8d8df;
 	border-radius: 2px;
 	position: relative;
 	z-index: 1;
@@ -327,7 +334,7 @@ select::-ms-expand {
 /* CustomRadio */
 .client-form .floating {
 	float: left;
-	border: 1px solid #949da2;
+	border: 1px solid #d8d8df;
 	cursor: pointer;
 	height: 30px;
 	-moz-transition:		background-color 0.3s ease-in-out;
@@ -343,14 +350,19 @@ select::-ms-expand {
 		line-height: 30px;
 }
 .client-form .floating:hover {
-	background: #949da2!important;
-	border-color: #949da2;
-	color:#fff;
+	background: #d8d8df!important;
+	border-color: #d8d8df;
+	color:#333f48;
 }
 .client-form .selected-radio {
 		background-color: #949da2!important;
-		border-color: #949da2;
+		border-color: #949da2!important;
 		color:#fff;
+}
+.client-form .selected-radio:hover {
+	background-color: #949da2!important;
+	border-color: #949da2!important;
+	color:#fff;
 }
 
 @media screen and (min-width: 560px) {

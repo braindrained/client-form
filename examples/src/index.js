@@ -255,7 +255,7 @@ class App extends React.Component {
 					console.log(e);
 					var promise = new Promise((resolve, reject) => {
 			      window.setTimeout(() => {
-			        reject({ succeed: true, message: 'Saved!' });
+			        resolve({ succeed: true, message: 'Saved!' });
 			      }, 2000);
 			    });
 			    return promise;

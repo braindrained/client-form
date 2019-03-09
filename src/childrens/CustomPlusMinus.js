@@ -77,7 +77,7 @@ class CustomPlusMinus extends React.Component<any, any> {
 						className: 'box-shadow noselect'
 					}}>
 						<circle {...{ cx: 15, cy: 15, r: 15, fill: 'rgb(50, 63, 72)' }} />
-						<text {...{ x: '50%', y: 21, fill: '#FFF', textAnchor: 'middle' }}>-</text>
+						<rect {...{ width: 12.418323, height: 1.5814986, x: 8.792613, y: 14.209251 }} />
 					</svg>
 					<div style={{ float: 'left' }}>
 						<input {...{
@@ -100,7 +100,7 @@ class CustomPlusMinus extends React.Component<any, any> {
 						className: 'box-shadow noselect'
 					}}>
 						<circle {...{ cx: 15, cy: 15, r: 15, fill: 'rgb(50, 63, 72)' }} />
-						<text {...{ x: '50%', y: 23, fill: '#FFF', textAnchor: 'middle' }}>+</text>
+						<path {...{ fill: '#FFF', d: 'm 21.207387,15.79075 h -5.386984 v 5.386984 H 14.179598 V 15.79075 H 8.7926135 V 14.209251 H 14.179598 V 8.8222655 h 1.640805 v 5.3869855 h 5.386983 z' }} />
 					</svg>
 				</div>
 				<FieldError {...{ isValid, errorMessage }} />
