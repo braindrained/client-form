@@ -16,7 +16,7 @@ export const floors = [
 ];
 
 export const tipologies = [
-	{ value: ' ', label: 'Seleziona...', type: [1, 4] },
+	{ value: '', label: 'Seleziona...', type: [1, 4] },
 	{ value: 4, label: 'Appartamento con descrizione molto lunga', type: [1] },
 	{ value: 23, label: 'Attività / Licenza comm', type: [4] },
 	{ value: 31, label: 'Bar', type: [4] },

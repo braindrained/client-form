@@ -227,7 +227,6 @@ class App extends React.Component {
 						valueAsObject: true,
 						exclude: false
 					},
-					*/
 					{
 						control: 'radio',
 						name: 'thisIsAFakeRadio',
@@ -254,7 +253,7 @@ class App extends React.Component {
 						control: 'label',
 						name: '',
 						content: 'The below component change is vale depending on the above selection',
-						style: { clear: 'both', width: '100%', height: 40, lineHeight: '40px' },
+						style: { clear: 'both', width: '100%', lineHeight: '40px' },
 					},
 					{
 						control: 'radio',
@@ -264,7 +263,7 @@ class App extends React.Component {
 						default: 0,
 						hideRadio: true,
 						style: { width: '100%' },
-						className: 'custom-energy',
+						className: 'custom-energy resize-mobile',
 						hide: true,
 						hideIf: [
 							{ field: 'energyClass', regEx: /^(0|9|10|11)$/ }
@@ -275,6 +274,34 @@ class App extends React.Component {
 								options: energy
 							},
 						],
+					},*/
+					{
+						control: 'radio',
+						name: 'categoryTypeId',
+						label: { text: 'Categoria' },
+						value: 1,
+						hideRadio: true,
+						options: [
+							{ value: 1, label: 'Residenziale', className: 'first', style: { width: 137 } },
+							{ value: 4, label: 'Commerciale', className: 'last', style: { width: 137 } },
+						],
+						className: 'custom-radio-container',
+					},
+					{
+						control: 'select',
+						name: 'propertyTypeId',
+						label: { text: 'Tipo immobile' },
+						options: tipologies.filter(o => o.type.indexOf(1) !== -1),
+						value: 4,
+						optionIf: [
+							{
+								field: 'categoryTypeId',
+								options: tipologies
+							},
+						],
+						isRequired: true,
+						errorMessage: 'Campo obbligatorio',
+						className: 'container-field-right',
 					},
 				],
 				beforeButton: el('div', {

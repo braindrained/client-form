@@ -21,27 +21,29 @@ class CustomSelect extends React.Component<any, any> {
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
 		if (this.props.isValid !== nextProps.isValid) return true;
+		if (this.state.options !== nextProps.options) return true;
 		return false;
 	}
 
 	componentWillReceiveProps(nextProps: Object) {
-		if (nextProps.options.length !== this.state.options.length) {
+		if (nextProps.options !== this.state.options) {
 			this.setState({
-				options: nextProps.options
+				options: nextProps.options,
+				isValid: nextProps.isValid
 			});
 
 			this.props.onUpdate({
 				target: {
 					name: this.props.name,
-					value: ''
+					value: nextProps.value
 				}
 			});
 		}
 	}
 
 	render() {
-		const { className, style, label, isRequired, value, errorMessage, name } = this.props;
-		const { isValid } = this.state;
+		const { className, style, label, isRequired, errorMessage, name, value, isValid } = this.props;
+		//const { isValid } = this.state;
 		/* no jsx experiment, cool!!! */
 		return el('div', { className: sumClasses(['container-field', className]), style },
 			el(FieldLabel, { label, name, isRequired, isValid }),

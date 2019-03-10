@@ -67,7 +67,9 @@ const Form = class extends React.Component<any, any> {
 					item.optionIf.map((v) => {
 						const control = this.state.controls.filter(o => o.name === v.field);
 						if (control.length > 0) {
-							item.value = '';
+							if (e.target.name === v.field) {
+								item.value = '';
+							}
 							item.options = v.options.filter(o => o.type.indexOf(parseFloat(control[0].value))	!== -1);
 						}
 						return null;
@@ -110,7 +112,7 @@ const Form = class extends React.Component<any, any> {
 				if (item.control !== 'select' && (item.value === '' || !item.value)) {
 					item.isValid = false;
 					formIsValid = false;
-				} else if (item.control === 'select' && item.value === '0' && item.value === 0) {
+				} else if (item.control === 'select' && (item.value === '0' || item.value === 0 || item.value === '')) {
 					item.isValid = false;
 					formIsValid = false;
 				}
@@ -132,7 +134,6 @@ const Form = class extends React.Component<any, any> {
 				}
 			}
 			if (item.regEx !== undefined && !item.hide) {
-				console.log(item.name, item.regEx.test(item.value));
 				if (!item.regEx.test(item.value)) {
 					item.isValid = false;
 					formIsValid = false;
