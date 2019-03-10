@@ -67,6 +67,7 @@ const Form = class extends React.Component<any, any> {
 					item.optionIf.map((v) => {
 						const control = this.state.controls.filter(o => o.name === v.field);
 						if (control.length > 0) {
+							item.value = '';
 							item.options = v.options.filter(o => o.type.indexOf(parseFloat(control[0].value))	!== -1);
 						}
 						return null;
@@ -306,7 +307,7 @@ const Form = class extends React.Component<any, any> {
 						case 'label':
 							if (item.hide) return (null);
 							return el(CustomLabel, {
-									key: item.name, content, className, style
+									key: `${Math.random()}`, content, className, style
 							});
 						case 'tabTextArea':
 							if (item.hide) return (null);
@@ -340,19 +341,9 @@ const Form = class extends React.Component<any, any> {
 								onClick: succeed === null && isSent === null && sendButton.disabled !== true ? () => { this.formIsValid(); } : () => null,
 								type: 'button'
 							}}>
-								<svg {...{ width: 24, height: 24, viewBox: isSent ? '0 0 100 100' : '0 0 24 24' }}>
+								<svg {...{ width: 24, height: 24, viewBox: '0 0 24 24', className: isSent !== false ? 'spin' : '' }}>
 									{ isSent ?
-										<circle {...{
-											cx: 50, cy: 50, fill: 'none', stroke: '#fff',
-											strokeWidth: 10, r: 44, strokeDasharray: '164.93361431346415 56.97787143782138',
-											transform: 'rotate(245.789 50 50)'
-										}}>
-											<animateTransform {...{
-												attributeName: 'transform', type: 'rotate', calcMode: 'linear',
-												values: '0 50 50;360 50 50', keyTimes: '0;1', dur: '1s',
-												begin: '0s', repeatCount: 'indefinite'
-											}} />
-										</circle>
+										<circle {...{ cx: 12, cy: 12, fill: 'none', stroke: '#fff', strokeWidth: 2, r: 11, strokeDasharray: '55,20' }} />
 										:
 										succeed === true ?
 											<polyline {...{ fill: 'none', points: '4,12 9,18 21,6', style: { fill: 'none', stroke: '#fff', strokeWidth: 2 } }} />

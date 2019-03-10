@@ -1,10 +1,13 @@
 {
   "name": "client-form",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "author": "Paolo Senese",
   "description": "A react component to build forms",
   "keywords": [
-    "react", "form", "responsive", "customizable"
+    "react",
+    "form",
+    "responsive",
+    "customizable"
   ],
   "license": "ISC",
   "main": "dist/index.js",
@@ -13,10 +16,7 @@
     "url": "git://github.com/braindrained/client-form"
   },
   "peerDependencies": {
-    "react": "^16.8.2",
-    "react-dom": "^16.8.2",
-    "react-onclickout": "^2.0.8",
-    "uglifyjs-webpack-plugin": "^2.1.1"
+    "react-onclickout": "^2.0.8"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -30,6 +30,7 @@
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "babel-polyfill": "^6.26.0",
+    "babel-preset-minify": "^0.5.0",
     "babel-runtime": "^6.26.0",
     "css-loader": "^2.1.0",
     "eslint": "^5.14.1",
@@ -44,10 +45,9 @@
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.11.0",
     "postcss-loader": "^3.0.0",
-    "react": "^16.8.2",
-    "react-dom": "^16.8.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.1.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.5",
     "webpack-bundle-analyzer": "^3.0.4",
@@ -66,7 +66,8 @@
     "debug": "npm run build -- --progress --colors --profile --display-modules --display-reasons --display-error-details"
   },
   "dependencies": {
-    "react-onclickout": "^2.0.8",
-    "uglifyjs-webpack-plugin": "^2.1.1"
+		"react": "^16.8.2",
+    "react-dom": "^16.8.2",
+    "react-onclickout": "^2.0.8"
   }
 }

@@ -1,4 +1,4 @@
-// @flow
+              // @flow
 import React from 'react';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
@@ -21,7 +21,18 @@ class CustomRadio extends React.Component<any, any> {
 	shouldComponentUpdate(nextProps: Object, nextState: Object) {
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
+		if (this.props.options !== nextState.options) return true;
 		return false;
+	}
+
+	componentWillReceiveProps(nextProps: Object) {
+		const { value } = nextProps;
+		const checkValue = value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value;
+		if (this.state.value !== checkValue) {
+			this.setState({
+				value: checkValue,
+			});
+		}
 	}
 
 	onChange(event: Object) {
@@ -41,7 +52,14 @@ class CustomRadio extends React.Component<any, any> {
 		return el('div', { className: sumClasses(['container-field', className]), style },
 			el(FieldLabel, { label, name, isRequired, isValid }),
 			el('div', { className: 'float-container' },
-				options.map(item => el('div', { key: `select_${item.name}_${item.value}`, className: hideRadio && item.value === value ? `floating selected-radio ${item.className}` : hideRadio ? `floating ${item.className}` : item.className, style: item.style },
+				options.map(item => el('div', { key: `select_${item.name}_${item.value}`, className:
+					hideRadio && item.value === value ?
+						`floating ${item.className} ${item.selectedClassName ? item.selectedClassName : 'selected-radio'}`
+						:
+						hideRadio ?
+							`floating ${item.className}`
+							:
+							item.className, style: item.style },
 					el('input', { type: 'radio', name, id: name + item.value, value: item.value, disabled: item.disabled === true, checked: item.value === value, onChange: (e) => { this.onChange(e); } }),
 					el('label', { htmlFor: name + item.value, style: item.labelStyle ? item.labelStyle : {} },
 						hideRadio ?

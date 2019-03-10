@@ -76,7 +76,7 @@ class FakeSelect extends React.Component<any, any> {
 										text
 						}
 						<svg {...{ width: 24, height: 24, viewBox: '0 0 24 24' }}>
-							<polyline {...{ fill: 'none', points: '6,9 12,15 18,9', style: { fill: 'none', stroke: '#d8d8df', strokeWidth:1 } }} />
+							<polyline {...{ fill: 'none', points: '6,9 12,15 18,9', style: { fill: 'none', stroke: '#d8d8df', strokeWidth: 1 } }} />
 						</svg>
 					</div>
 					<FieldError {...{ isValid, errorMessage }} />
@@ -90,7 +90,7 @@ class FakeSelect extends React.Component<any, any> {
 								}
 							</select>
 							<svg {...{ width: 24, height: 24, viewBox: '0 0 24 24' }}>
-								<polyline {...{ fill: 'none', points: '6,9 12,15 18,9', style: { fill: 'none', stroke: '#d8d8df', strokeWidth:1 } }} />
+								<polyline {...{ fill: 'none', points: '6,9 12,15 18,9', style: { fill: 'none', stroke: '#d8d8df', strokeWidth: 1 } }} />
 							</svg>
 						</div>
 						<div className="clear" />
@@ -102,7 +102,7 @@ class FakeSelect extends React.Component<any, any> {
 								}
 							</select>
 							<svg {...{ width: 24, height: 24, viewBox: '0 0 24 24' }}>
-								<polyline {...{ fill: 'none', points: '6,9 12,15 18,9', style: { fill: 'none', stroke: '#d8d8df', strokeWidth:1 } }} />
+								<polyline {...{ fill: 'none', points: '6,9 12,15 18,9', style: { fill: 'none', stroke: '#d8d8df', strokeWidth: 1 } }} />
 							</svg>
 						</div>
 					</div>

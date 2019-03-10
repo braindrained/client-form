@@ -81,7 +81,7 @@ class CustomTextarea extends React.Component<any, any> {
 					<div className="limit-char noselect">
 						{ value.length }/{limitChar}
 					</div> : null }
-				<FieldError {...{ isValid, errorMessage, style: { paddingRight: 60 } }} />
+				<FieldError {...{ isValid, errorMessage, style: limitChar ? { paddingRight: 60 } : {} }} />
 			</div>
 		);
 	}

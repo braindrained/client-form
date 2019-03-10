@@ -57,7 +57,7 @@ class CustomSelect extends React.Component<any, any> {
 					})),
 				el('svg', { width: '24', height: '24', viewBox: '0 0 24 24' },
 					el('rect', { fill: '#fff', width: 24, height: 24, x: 0, y: 0 }),
-					el('polyline', { fill: 'none', points: '6,9 12,15 18,9', style: { fill: 'none', stroke: '#d8d8df', strokeWidth:1 } }))),
+					el('polyline', { fill: 'none', points: '6,9 12,15 18,9', style: { fill: 'none', stroke: '#d8d8df', strokeWidth: 1 } }))),
 			el(FieldError, { isValid, errorMessage }));
 	}
 }

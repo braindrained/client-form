@@ -1,0 +1,115 @@
+.custom-energy {
+	text-align: center;
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+	clear: both;
+}
+.custom-energy .field-label {
+	float: left;
+	width: 140px;
+	min-width: 200px;
+	max-width: 140px;
+	margin-right: 10px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+@media screen and (min-width: 560px) {
+	.custom-energy .field-label {
+		width: auto;
+		min-width: 120px;
+		max-width: unset;
+		margin-right: unset;
+		white-space: unset;
+		text-overflow: unset;
+	}
+}
+.custom-energy .float-label {
+	float: left;
+	text-align: left;
+	font-size: 13px;
+	width:100%;
+	display: block;
+}
+.custom-energy .float-container {
+	float: left;
+	width: auto;
+}
+.custom-energy .a4, .custom-energy .aplus {
+	border-radius: 2px 0px 0px 2px;
+	border: 1px solid #d8d8df;
+	width: auto;
+	background: #fff;
+}
+.custom-energy .a3,
+.custom-energy .a2,
+.custom-energy .a1,
+.custom-energy .a,
+.custom-energy .b,
+.custom-energy .c,
+.custom-energy .d,
+.custom-energy .e,
+.custom-energy .f {
+	border-radius: 0;
+	border-left: none !important;
+	border-right: 1px solid #d8d8df;
+	border-top: 1px solid #d8d8df;
+	border-bottom: 1px solid #d8d8df;
+	width: auto;
+	background: #fff;
+}
+.custom-energy .g {
+	border: 1px solid #d8d8df;
+	border-left: none !important;
+	border-radius: 0px 2px 2px 0px;
+	width: auto;
+	background: #fff;
+}
+.custom-energy .a4, .custom-energy .aplus {
+	border-bottom: 4px solid #336601;
+}
+.custom-energy .a4:hover, .custom-energy .aplus:hover {
+	border-bottom: 4px solid #336601;
+	background-color: rgba(254,0,0, .5);
+}
+.custom-energy .a3 {
+	border-bottom: 4px solid #006600;
+}
+.custom-energy .a2 {
+	border-bottom: 4px solid #009900;
+}
+.custom-energy .a1 {
+	border-bottom: 4px solid #01cc00;
+}
+.custom-energy .a {
+	border-bottom: 4px solid #336601;
+}
+.custom-energy .b {
+	border-bottom: 4px solid #98cb00;
+}
+.custom-energy .c {
+	border-bottom: 4px solid #ffff00;
+}
+.custom-energy .d {
+	border-bottom: 4px solid #ffc000;
+}
+.custom-energy .e {
+	border-bottom: 4px solid #e46c0b;
+}
+.custom-energy .f {
+	border-bottom: 4px solid #c0504e;
+}
+.custom-energy .g {
+	border-bottom: 4px solid #fe0000;
+}
+.custom-energy .float-container label div {
+	height: 28px!important;
+	line-height: 28px!important;
+	text-align: center;
+	width: 100%!important;
+	padding-left: 0px!important;
+	font-size: 12px;
+}

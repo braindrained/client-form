@@ -77,6 +77,14 @@
 	left: 8px;
 	top: 8px;
 }
+.client-form .button-container .spin {
+	-webkit-animation:spin 1s linear infinite;
+	-moz-animation:spin 1s linear infinite;
+	animation:spin 1s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 .client-form .btn {
 	position: relative;
 	float: left;
@@ -328,7 +336,6 @@ select::-ms-expand {
 /* CustomRadio */
 .client-form .floating {
 	float: left;
-	border: 1px solid #d8d8df;
 	cursor: pointer;
 	height: 30px;
 	-moz-transition:		background-color 0.3s ease-in-out;
@@ -342,21 +349,6 @@ select::-ms-expand {
 		padding: 0px 15px;
 		height: 30px;
 		line-height: 30px;
-}
-.client-form .floating:hover {
-	background: #d8d8df!important;
-	border-color: #d8d8df;
-	color:#333f48;
-}
-.client-form .selected-radio {
-		background-color: #949da2!important;
-		border-color: #949da2!important;
-		color:#fff;
-}
-.client-form .selected-radio:hover {
-	background-color: #949da2!important;
-	border-color: #949da2!important;
-	color:#fff;
 }
 
 @media screen and (min-width: 560px) {

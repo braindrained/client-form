@@ -98,12 +98,12 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 								cols: 20
 							}} />
 						</div>
-						<div className="limit-char noselect">
+						{ limitChar ? <div className="limit-char noselect">
 							{item.value.length}/{limitChar}
-						</div>
+						</div> : null }
 					</div>
 				))}
-				<FieldError {...{ isValid, errorMessage, style: { paddingRight: 60 } }} />
+				<FieldError {...{ isValid, errorMessage, style: limitChar ? { paddingRight: 60 } : {} }} />
 			</div>
 		);
 	}

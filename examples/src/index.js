@@ -21,6 +21,7 @@ class App extends React.Component {
 		return (
 	    <Form {...{
 				controls: [
+					/*
 					{
 						control: 'label',
 						name: 'label-1',
@@ -51,7 +52,7 @@ class App extends React.Component {
 					},
 					{
 						control: 'text',
-						type: 'text',
+						type: 'number',
 						name: 'age',
 						onlyNumber: true,
 						limitChar: 3
@@ -92,7 +93,7 @@ class App extends React.Component {
 					},
 					{
 						control: 'plusMinus',
-						type: 'text',
+						type: 'number',
 						name: 'roomNum',
 						label: {
 							text: 'N. Locali',
@@ -105,19 +106,6 @@ class App extends React.Component {
 						label: { text: 'This is an almost real checkbox' },
 						value: false,
 						hideCheck: false,
-					},
-					{
-						control: 'radio',
-						name: 'thisIsAFakeRadio',
-						options: [
-							{ value: '', label: 'N.i.', className: 'first' },
-							{ value: true, label: 'Sì', className: 'central' },
-							{ value: false, label: 'No', className: 'last' },
-						],
-						default: '',
-						value: '',
-						hideRadio: true,
-						className: 'custom-radio-container',
 					},
 					{
 						control: 'radio',
@@ -185,7 +173,7 @@ class App extends React.Component {
 					},
 					{
 						control: 'text',
-						type: 'text',
+						type: 'number',
 						name: 'currencyField',
 						currency: true,
 						onlyNumber: true,
@@ -238,6 +226,55 @@ class App extends React.Component {
 						},
 						valueAsObject: true,
 						exclude: false
+					},
+					*/
+					{
+						control: 'radio',
+						name: 'thisIsAFakeRadio',
+						options: [
+							{ value: '', label: 'N.i.', className: 'first' },
+							{ value: true, label: 'Sì', className: 'central' },
+							{ value: false, label: 'No', className: 'last' },
+						],
+						default: '',
+						value: '',
+						hideRadio: true,
+						className: 'custom-radio-container',
+					},
+					{
+						control: 'radio',
+						name: 'energyClass',
+						options: energy.filter(o => o.value === 997 || o.value === 998 || o.value === 0 || o.value === 9 || o.value === 10 || o.value === 11).map(item => Object.assign({}, item, { style: { width: 'auto', float: 'left', marginRight: 15 } })),
+						value: 0,
+						default: 0,
+						hideRadio: false,
+						style: { width: '100%' }
+					},
+					{
+						control: 'label',
+						name: '',
+						content: 'The below component change is vale depending on the above selection',
+						style: { clear: 'both', width: '100%', height: 40, lineHeight: '40px' },
+					},
+					{
+						control: 'radio',
+						name: 'energyClassId',
+						options: energy.filter(o => o.type.indexOf(parseFloat(997)) !== -1),
+						value: 0,
+						default: 0,
+						hideRadio: true,
+						style: { width: '100%' },
+						className: 'custom-energy',
+						hide: true,
+						hideIf: [
+							{ field: 'energyClass', regEx: /^(0|9|10|11)$/ }
+						],
+						optionIf: [
+							{
+								field: 'energyClass',
+								options: energy
+							},
+						],
 					},
 				],
 				beforeButton: el('div', {
