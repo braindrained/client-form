@@ -21,7 +21,6 @@ class App extends React.Component {
 		return (
 	    <Form {...{
 				controls: [
-					/*
 					{
 						control: 'label',
 						name: 'label-1',
@@ -247,7 +246,7 @@ class App extends React.Component {
 						value: 0,
 						default: 0,
 						hideRadio: false,
-						style: { width: '100%' }
+						style: { width: '-webkit-calc(100% - 20px)', width: '-moz-calc(100% - 20px)', width: 'calc(100% - 20px)' }
 					},
 					{
 						control: 'label',
@@ -274,34 +273,6 @@ class App extends React.Component {
 								options: energy
 							},
 						],
-					},*/
-					{
-						control: 'radio',
-						name: 'categoryTypeId',
-						label: { text: 'Categoria' },
-						value: 1,
-						hideRadio: true,
-						options: [
-							{ value: 1, label: 'Residenziale', className: 'first', style: { width: 137 } },
-							{ value: 4, label: 'Commerciale', className: 'last', style: { width: 137 } },
-						],
-						className: 'custom-radio-container',
-					},
-					{
-						control: 'select',
-						name: 'propertyTypeId',
-						label: { text: 'Tipo immobile' },
-						options: tipologies.filter(o => o.type.indexOf(1) !== -1),
-						value: 4,
-						optionIf: [
-							{
-								field: 'categoryTypeId',
-								options: tipologies
-							},
-						],
-						isRequired: true,
-						errorMessage: 'Campo obbligatorio',
-						className: 'container-field-right',
 					},
 				],
 				beforeButton: el('div', {
