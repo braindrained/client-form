@@ -78,7 +78,6 @@
 				border-radius: 2px 0px 0px 2px;
 		    border: 1px solid #d8d8df;
 		    width: auto;
-		    background: #fff;
 			}
 			.custom-radio-container .central {
 				border-radius: 0;
@@ -87,14 +86,12 @@
 		    border-top: 1px solid #d8d8df;
 		    border-bottom: 1px solid #d8d8df;
 		    width: auto;
-		    background: #fff;
 			}
 			.custom-radio-container .last {
 				border: 1px solid #d8d8df;
 		    border-left: none !important;
 		    border-radius: 0px 2px 2px 0px;
 		    width: auto;
-		    background: #fff;
 			}
 			.custom-radio-container .float-container label div {
 				height: 28px!important;
@@ -118,6 +115,34 @@
 				background-color: #949da2!important;
 				border-color: #949da2!important;
 				color:#fff;
+			}
+			.custom-energy .float-container label div {
+				height: 28px!important;
+				line-height: 28px!important;
+				text-align: center;
+				width: 100%!important;
+				padding-left: 0px!important;
+				font-size: 12px;
+			}
+			.client-form .floating {
+				float: left;
+				cursor: pointer;
+				height: 30px;
+				-moz-transition:		background-color 0.3s ease-in-out;
+				-o-transition:			background-color 0.3s ease-in-out;
+				-webkit-transition: background-color 0.3s ease-in-out;
+				transition:				 background-color 0.3s ease-in-out;
+				background: #f0f2f5;
+			}
+			.custom-energy .floating {
+				background: #fff;
+			}
+			.client-form .floating label {
+					cursor: pointer;
+					text-align: center;
+					padding: 0px 15px!important;
+					height: 28px!important;
+					line-height: 28px;
 			}
 
 			/* energy start */
@@ -230,20 +255,12 @@
 				border-bottom: 4px solid #fe0000!important;
 				background-color: rgba(254, 0, 0, .5);
 			}
-			.custom-energy .float-container label div {
-				height: 28px!important;
-				line-height: 28px!important;
-				text-align: center;
-				width: 100%!important;
-				padding-left: 0px!important;
-				font-size: 12px;
-			}
 
 			@media screen and (max-width: 560px) {
 				.resize-mobile .floating {
 					border-left: 1px solid #d8d8df!important;
-					margin-right: 5px!important;
-					margin-bottom: 5px!important;
+					margin-right: 8px!important;
+					margin-bottom: 8px!important;
 					border-radius: 2px!important;
 				}
 			}
