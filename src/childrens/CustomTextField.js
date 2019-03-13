@@ -115,6 +115,13 @@ class CustomTextField extends React.Component<any, any> {
 					</svg>
 					:
 					null }
+				{ this.props.currency === true ?
+					<div className="currency noselect">
+						&euro;
+					</div>
+					:
+					null
+				}
 				<FieldError {...{ isValid, errorMessage }} />
 			</div>
 		);

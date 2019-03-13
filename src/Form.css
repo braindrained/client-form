@@ -55,6 +55,9 @@
 	text-align: left;
 	height: 24px;
 	font-weight: 500;
+	font-style: normal;
+	font-stretch: normal;
+	letter-spacing: normal;
 }
 .client-form .container-field svg path {
 	fill: #d8d8df;
@@ -65,7 +68,6 @@
 .client-form .container-field .int {
 	fill: rgb(0, 132, 255);
 }
-
 .client-form .button-container {
 	width: 100%;
 	float: right;
@@ -154,8 +156,9 @@
 	cursor: pointer;
 }
 .client-form input[type='radio'] + label {
-	height: 30px;
+	height: 28px;
 	width: 100%;
+	padding-top: 3px;
 }
 .client-form input[type="checkbox"] + label > svg,
 .client-form input[type="radio"] + label > svg {
@@ -202,6 +205,18 @@
 }
 .client-form .container-field .eye .show {
 	fill: none;
+}
+.client-form .container-field .currency {
+	position: absolute;
+	right: 5px;
+	top: 37px;
+	height: 24px;
+	line-height: 24px;
+	width: 24px;
+	text-align: center;
+	font-size: 14px;
+	color: #d8d8df;
+	font-weight: 500;
 }
 
 /* CustomTextAreaTab */
@@ -333,24 +348,6 @@ select::-ms-expand {
 	margin-right: 15px;
 }
 
-/* CustomRadio */
-.client-form .floating {
-	float: left;
-	cursor: pointer;
-	height: 30px;
-	-moz-transition:		background-color 0.3s ease-in-out;
-	-o-transition:			background-color 0.3s ease-in-out;
-	-webkit-transition: background-color 0.3s ease-in-out;
-	transition:				 background-color 0.3s ease-in-out;
-}
-.client-form .floating label {
-		cursor: pointer;
-		text-align: center;
-		padding: 0px 15px;
-		height: 30px;
-		line-height: 30px;
-}
-
 @media screen and (min-width: 560px) {
 	.client-form {
 		padding: 0px 0px 0px 0px;
@@ -375,11 +372,8 @@ select::-ms-expand {
 		height: 30px;
 	}
 
-	.client-form .container-field .eye {
-		position: absolute;
-		right: 5px;
+	.client-form .container-field .eye, .client-form .container-field .currency {
 		top: 27px;
-		cursor: pointer;
 	}
 
 	.client-form .container-field .container-field-tabs .tab-label {

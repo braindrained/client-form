@@ -25,8 +25,8 @@ class App extends React.Component {
 						control: 'label',
 						name: 'label-1',
 						content: 'This is a text only label',
-						style: { lineHeight: '40px', clear: 'both', width: '100%', fontSize: 16, marginBottom: 20 },
-						className: 'noselect'
+						style: { lineHeight: '40px', clear: 'both', margin: '0 auto', fontSize: 16, marginBottom: 20 },
+						className: 'noselect tabTextArea'
 					},
 					{
 						control: 'text',
@@ -51,7 +51,7 @@ class App extends React.Component {
 					},
 					{
 						control: 'text',
-						type: 'number',
+						type: 'text',
 						name: 'age',
 						onlyNumber: true,
 						limitChar: 3
@@ -92,7 +92,7 @@ class App extends React.Component {
 					},
 					{
 						control: 'plusMinus',
-						type: 'number',
+						type: 'text',
 						name: 'roomNum',
 						label: {
 							text: 'N. Locali',
@@ -151,8 +151,8 @@ class App extends React.Component {
 						control: 'label',
 						name: 'label-2',
 						content: el('div', { style: { color: '#fff', background: 'rgb(50, 63, 72)', paddingLeft: 8 } }, 'This is an element based label'),
-						style: { lineHeight: '40px', clear: 'both', width: '100%', fontSize: 16, marginBottom: 20 },
-						className: 'noselect'
+						style: { lineHeight: '40px', clear: 'both', fontSize: 16, margin: '0 auto', marginBottom: 20 },
+						className: 'noselect tabTextArea'
 					},
 					{
 						control: 'textArea',
@@ -172,7 +172,7 @@ class App extends React.Component {
 					},
 					{
 						control: 'text',
-						type: 'number',
+						type: 'text',
 						name: 'currencyField',
 						currency: true,
 						onlyNumber: true,
@@ -246,13 +246,14 @@ class App extends React.Component {
 						value: 0,
 						default: 0,
 						hideRadio: false,
-						style: { width: '-webkit-calc(100% - 20px)', width: '-moz-calc(100% - 20px)', width: 'calc(100% - 20px)' }
+						className: 'tabTextArea'
 					},
 					{
 						control: 'label',
 						name: '',
 						content: 'The below component change is vale depending on the above selection',
-						style: { clear: 'both', width: '100%', lineHeight: '40px' },
+						style: { clear: 'both', padding: '20px 0px 30px', margin: '0 auto', },
+						className: 'tabTextArea'
 					},
 					{
 						control: 'radio',
@@ -261,8 +262,7 @@ class App extends React.Component {
 						value: 0,
 						default: 0,
 						hideRadio: true,
-						style: { width: '100%' },
-						className: 'custom-energy resize-mobile',
+						className: 'custom-energy resize-mobile tabTextArea',
 						hide: true,
 						hideIf: [
 							{ field: 'energyClass', regEx: /^(0|9|10|11)$/ }
