@@ -11,13 +11,11 @@ import CustomLabel from './childrens/CustomLabel';
 import CustomTextAreaTab from './childrens/CustomTextAreaTab';
 import CustomPlusMinus from './childrens/CustomPlusMinus';
 import FakeSelect from './childrens/FakeSelect';
-// flow-disable-next-line
+
 import { sumClasses, isInt } from './helpers/utils';
 import './Form.css';
 
-const el = React.createElement;
-
-const Form = class extends React.Component<any, any> {
+export default class Form extends React.Component<any, any> {
 
 	constructor(props: Object) {
 		super(props);
@@ -29,7 +27,6 @@ const Form = class extends React.Component<any, any> {
 			isSent: null
 		};
 	}
-
 
 	onUpdate(e: Object, hasError: boolean) {
 		const { controls } = this.state;
@@ -231,6 +228,7 @@ const Form = class extends React.Component<any, any> {
 			sendButton && sendButton.disabled ? 'btn-grey' : ''
 		]);
 		const sendButtonValue = sendButton ? (succeed === null ? sendButton.text : message) : null;
+		const el = React.createElement;
 
 		return (
 			<div className={sumClasses(['client-form', formClassName])} style={formStyle}>
@@ -368,6 +366,4 @@ const Form = class extends React.Component<any, any> {
 			</div>
 		);
 	}
-};
-
-export default Form;
+}

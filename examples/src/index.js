@@ -23,7 +23,6 @@ class App extends React.Component {
 				controls: [
 					{
 						control: 'label',
-						name: 'label-1',
 						content: 'This is a text only label',
 						style: { lineHeight: '40px', clear: 'both', margin: '0 auto', fontSize: 16, marginBottom: 20 },
 						className: 'noselect tabTextArea'
@@ -54,7 +53,8 @@ class App extends React.Component {
 						type: 'text',
 						name: 'age',
 						onlyNumber: true,
-						limitChar: 3
+						limitChar: 3,
+						value: 'xyz'
 					},
 					{
 						control: 'select',
@@ -251,7 +251,7 @@ class App extends React.Component {
 					{
 						control: 'label',
 						name: '',
-						content: 'The below component change is vale depending on the above selection',
+						content: 'The below component change its value depending on the above selection',
 						style: { clear: 'both', padding: '20px 0px 30px', margin: '0 auto', },
 						className: 'tabTextArea'
 					},

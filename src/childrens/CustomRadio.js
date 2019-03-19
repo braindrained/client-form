@@ -1,4 +1,4 @@
-              // @flow
+// @flow
 import React from 'react';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
@@ -52,23 +52,25 @@ class CustomRadio extends React.Component<any, any> {
 		return el('div', { className: sumClasses(['container-field', className]), style },
 			el(FieldLabel, { label, name, isRequired, isValid }),
 			el('div', { className: 'float-container' },
-				options.map(item => el('div', { key: `select_${item.name}_${item.value}`, className:
-					hideRadio && item.value === value ?
+				options.map(item => el('div', {
+					key: `select_${item.name}_${item.value}`,
+					className: hideRadio && item.value === value ?
 						`floating ${item.className} ${item.selectedClassName ? item.selectedClassName : 'selected-radio'}`
 						:
 						hideRadio ?
 							`floating ${item.className}`
 							:
-							item.className, style: item.style },
-					el('input', { type: 'radio', name, id: name + item.value, value: item.value, disabled: item.disabled === true, checked: item.value === value, onChange: (e) => { this.onChange(e); } }),
-					el('label', { htmlFor: name + item.value, style: item.labelStyle ? item.labelStyle : {} },
-						hideRadio ?
-							null
-							:
-							el('svg', { width: 24, height: 24, viewBox: '0 0 24 24' },
-								el('circle', { className: 'ext', cx: 12, cy: 12, r: 9, stroke: 'rgb(216, 216, 223)', strokeWidth: 2 }),
-								item.value === value ? el('circle', { className: 'int', cx: 12, cy: 12, r: 4 }) : null),
-						el('div', null, item.label), item.customObject ? item.customObject : null)))),
+							item.className,
+					style: item.style },
+				el('input', { type: 'radio', name, id: name + item.value, value: item.value, disabled: item.disabled === true, checked: item.value === value, onChange: (e) => { this.onChange(e); } }),
+				el('label', { htmlFor: name + item.value, style: item.labelStyle ? item.labelStyle : {} },
+					hideRadio ?
+						null
+						:
+						el('svg', { width: 24, height: 24, viewBox: '0 0 24 24' },
+							el('circle', { className: 'ext', cx: 12, cy: 12, r: 9, stroke: 'rgb(216, 216, 223)', strokeWidth: 2 }),
+							item.value === value ? el('circle', { className: 'int', cx: 12, cy: 12, r: 4 }) : null),
+					el('div', null, item.label), item.customObject ? item.customObject : null)))),
 			el(FieldError, { isValid, errorMessage }));
 	}
 }

@@ -8,8 +8,10 @@ class CustomTextField extends React.Component<any, any> {
 
 	constructor(props: Object) {
 		super(props);
-		const { value, isValid, type, label } = this.props;
-
+		let { value, isValid, type, label, onlyNumber, limitChar } = this.props;
+		value = value === undefined ? '' : value;
+		value = onlyNumber === true && value !== undefined ? value.toString().replace(/\D/g, '') : value;
+		value = limitChar ? value.toString().substring(0, limitChar) : value;
 		this.state = {
 			value: value === undefined ? '' : value,
 			isValid,
@@ -40,7 +42,7 @@ class CustomTextField extends React.Component<any, any> {
 
 	onChange(event: Object) {
 		const { limitChar, onlyNumber, updateOnChange, name, onUpdate } = this.props;
-		const value = limitChar ? event.target.value.substring(0, limitChar) : event.target.value;
+		const value = limitChar ? event.target.value.toString().substring(0, limitChar) : event.target.value;
 		this.setState({
 			value: onlyNumber ? value.replace(/\D/g, '') : value,
 			isValid: true,

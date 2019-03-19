@@ -3,3 +3,5 @@ examples
 .babelrc
 .gitignore
 webpack.config.js
+test
+jest.config.js

@@ -13,7 +13,6 @@ class CustomSelect extends React.Component<any, any> {
 
 		this.state = {
 			options: this.props.options,
-			isValid: this.props.isValid
 		};
 	}
 
@@ -29,7 +28,6 @@ class CustomSelect extends React.Component<any, any> {
 		if (nextProps.options !== this.state.options) {
 			this.setState({
 				options: nextProps.options,
-				isValid: nextProps.isValid
 			});
 
 			this.props.onUpdate({
@@ -43,8 +41,7 @@ class CustomSelect extends React.Component<any, any> {
 
 	render() {
 		const { className, style, label, isRequired, errorMessage, name, value, isValid } = this.props;
-		//const { isValid } = this.state;
-		/* no jsx experiment, cool!!! */
+
 		return el('div', { className: sumClasses(['container-field', className]), style },
 			el(FieldLabel, { label, name, isRequired, isValid }),
 			el('div', { className: 'select-style', style: isValid === false ? { borderColor: '#e4002b' } : {} },
