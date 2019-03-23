@@ -60,7 +60,7 @@ class CustomRadio extends React.Component<any, any> {
 						hideRadio ?
 							`floating ${item.className}`
 							:
-							`${item.className} ${item.value === value && item.selectedClassName ? item.selectedClassName : '' }`,
+							`${sumClasses([item.className, item.value === value ? item.selectedClassName : ''])}`,
 					style: item.style },
 				el('input', { type: 'radio', name, id: name + item.value, value: item.value, disabled: item.disabled === true, checked: item.value === value, onChange: (e) => { this.onChange(e); } }),
 				el('label', { htmlFor: name + item.value, style: item.labelStyle ? item.labelStyle : {} },

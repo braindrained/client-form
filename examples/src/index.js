@@ -111,9 +111,9 @@ class App extends React.Component {
 						name: 'genericRadio',
 						label: { text: 'This is an almost real radio' },
 						options: [
-							{ value: '', label: 'N.i.', style: { width: '100%', float: 'left' } },
-							{ value: true, label: 'Sì', style: { width: '100%', float: 'left' } },
-							{ value: false, label: 'No', style: { width: '100%', float: 'left' } },
+							{ value: '', label: 'N.i.', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
+							{ value: true, label: 'Sì', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
+							{ value: false, label: 'No', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
 						],
 						default: '',
 						value: '',
