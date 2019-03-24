@@ -83,7 +83,7 @@ class CustomTextField extends React.Component<any, any> {
 	render() {
 		const {
 			className, style, label, name, isRequired,
-			errorMessage, placeholder, currency, disabled
+			errorMessage, placeholder, currency, disabled, unit
 		} = this.props;
 		const { isValid, value, type } = this.state;
 
@@ -117,9 +117,9 @@ class CustomTextField extends React.Component<any, any> {
 					</svg>
 					:
 					null }
-				{ this.props.currency === true ?
-					<div className="currency noselect">
-						&euro;
+				{ unit ?
+					<div className="unit noselect">
+						{unit}
 					</div>
 					:
 					null

@@ -70,14 +70,12 @@ class CustomPlusMinus extends React.Component<any, any> {
 				<FieldLabel {...{ label, name, isRequired, isValid }} />
 				<div style={{ float: 'left' }}>
 					<svg {...{
-						width: 30,
-						height: 30,
 						onClick: () => { this.plusMinus('min'); },
 						style: { opacity: this.state.value === 0 ? 0.3 : 1 },
 						className: 'box-shadow noselect'
 					}}>
-						<circle {...{ cx: 15, cy: 15, r: 15, fill: 'rgb(50, 63, 72)' }} />
-						<rect {...{ width: 10, height: 1.5, x: 10, y: 14 }} />
+						<circle {...{ cx: 17, cy: 17, r: 17, fill: 'rgb(50, 63, 72)' }} />
+						<rect {...{ width: 12, height: 1.5, x: 11, y: 16 }} />
 					</svg>
 					<div style={{ float: 'left' }}>
 						<input {...{
@@ -93,15 +91,13 @@ class CustomPlusMinus extends React.Component<any, any> {
 						}} />
 					</div>
 					<svg {...{
-						width: 30,
-						height: 30,
 						onClick: () => { this.plusMinus('plus'); },
 						style: {},
 						className: 'box-shadow noselect'
 					}}>
-						<circle {...{ cx: 15, cy: 15, r: 15, fill: 'rgb(50, 63, 72)' }} />
-						<rect {...{ width: 11, height: 1.5, x: 9.5, y: 14 }} />
-						<rect {...{ width: 1.5, height: 11, x: 14, y: 9.5 }} />
+						<circle {...{ cx: 17, cy: 17, r: 17, fill: 'rgb(50, 63, 72)' }} />
+						<rect {...{ width: 12, height: 1.5, x: 11, y: 16 }} />
+						<rect {...{ width: 1.5, height: 12, x: 16, y: 11 }} />
 					</svg>
 				</div>
 				<FieldError {...{ isValid, errorMessage }} />

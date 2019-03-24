@@ -156,9 +156,8 @@
 	cursor: pointer;
 }
 .client-form input[type='radio'] + label {
-	height: 28px;
 	width: 100%;
-	padding-top: 3px;
+	padding: 4px 0px;
 }
 .client-form input[type="checkbox"] + label > svg,
 .client-form input[type="radio"] + label > svg {
@@ -206,7 +205,7 @@
 .client-form .container-field .eye .show {
 	fill: none;
 }
-.client-form .container-field .currency {
+.client-form .container-field .unit {
 	position: absolute;
 	right: 5px;
 	top: 37px;
@@ -265,8 +264,8 @@
 }
 .client-form .plus-minus svg {
 	float: left;
-	width: 30px;
-	height: 30px;
+	width: 34px;
+	height: 34px;
 	border-radius: 50%;
 	cursor: pointer;
 }
@@ -355,11 +354,14 @@ select::-ms-expand {
 
 	.client-form .container-field {
 		width: 250px;
-		min-height: 73px;
+		min-height: 77px;
 	}
 
 	.client-form .check {
-		padding-top: 27px;
+		padding-top: 22px;
+	}
+	.client-form .check label {
+		padding: 5px 0px;
 	}
 
 	.client-form input[type=email],
@@ -367,13 +369,13 @@ select::-ms-expand {
 	.client-form input[type=password],
 	.client-form input[type=tel],
 	.client-form input[type=text] {
-		max-height: 30px;
-		padding: 0px 8px;
-		height: 30px;
+		padding: 7px 8px;
+		height: 34px;
+		min-height: 34px;
 	}
 
-	.client-form .container-field .eye, .client-form .container-field .currency {
-		top: 27px;
+	.client-form .container-field .eye, .client-form .container-field .unit {
+		top: 29px;
 	}
 
 	.client-form .container-field .container-field-tabs .tab-label {
@@ -384,14 +386,14 @@ select::-ms-expand {
 	}
 
 	.client-form .select-style {
-		height: 30px;
-		line-height: 30px;
+		height: 34px;
+		line-height: 34px;
 	}
 	.client-form .select-style select {
-		height: 30px;
+		height: 34px;
 	}
 	.client-form .select-style svg {
-		top: 3px;
+		top: 4px;
 	}
 
 	.client-form .container-field .fake-cont {

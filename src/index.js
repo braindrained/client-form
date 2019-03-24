@@ -41,6 +41,7 @@ export default class Form extends React.Component<any, any> {
 					item.hideIf.map((v) => {
 						const control = this.state.controls.filter(o => o.name === v.field);
 						if (control.length > 0) {
+							console.log(control[0].value.toString().match(v.regEx));
 							if (control[0].value.toString().match(v.regEx) != null) {
 								hide = true;
 							}
@@ -237,8 +238,8 @@ export default class Form extends React.Component<any, any> {
 						control, hide, name, component, type, onlyNumber, placeholder, label,
 						value, isRequired, isValid, disabled, errorMessage, className, style,
 						updateOnChange, limitChar, currency, options, hideRadio,
-						textBefore, hideCheck, tabs, valueAsObject, text, firstRange,
-						secondRange, rangesStyle, overlayBg, content
+						textBefore, tabs, valueAsObject, text, firstRange,
+						secondRange, rangesStyle, overlayBg, content, unit
 					} = item;
 					/* eslint-disable */
 					switch (control) {
@@ -256,7 +257,7 @@ export default class Form extends React.Component<any, any> {
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								isRequired, isValid, disabled,
 								errorMessage, className, style,
-								updateOnChange, limitChar, currency,
+								updateOnChange, limitChar, currency, unit
 							});
 						case 'plusMinus':
 							if (item.hide) return (null);
@@ -293,7 +294,7 @@ export default class Form extends React.Component<any, any> {
 									key: item.name, name, label, value,
 									onUpdate: (e, h) => { this.onUpdate(e, h); },
 									className, style,
-									textBefore, hideCheck
+									textBefore
 							});
 						case 'radio':
 							if (item.hide) return (null);

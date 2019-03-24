@@ -104,7 +104,6 @@ class App extends React.Component {
 						name: 'thisIsACheckBox',
 						label: { text: 'This is an almost real checkbox' },
 						value: false,
-						hideCheck: false,
 					},
 					{
 						control: 'radio',
@@ -174,8 +173,18 @@ class App extends React.Component {
 						control: 'text',
 						type: 'text',
 						name: 'currencyField',
+						placeholder: '',
 						currency: true,
 						onlyNumber: true,
+						unit: '€'
+					},
+					{
+						control: 'text',
+						type: 'text',
+						name: 'squareMeterField',
+						placeholder: '',
+						onlyNumber: true,
+						unit: 'm²'
 					},
 					{
 						control: 'tabTextArea',
@@ -272,6 +281,37 @@ class App extends React.Component {
 								field: 'energyClass',
 								options: energy
 							},
+						],
+					},
+					{
+						control: 'radio',
+						name: 'contractTypeId',
+						label: { text: 'Contratto' },
+						value: 1,
+						hideRadio: false,
+						options: [
+							{ value: 1, label: 'Affitto', style: { width: 137, float: 'left' }, selectedClassName: 'option-override' },
+							{ value: 2, label: 'Vendita', style: { width: 137, float: 'left' }, selectedClassName: 'option-override' },
+						],
+					},
+					{
+						control: 'check',
+						name: 'hasPurchaseOption',
+						label: { text: `Opzione d'acquisto` },
+						value: false,
+						hide:  false,
+						hideIf: [
+							{ field: 'contractTypeId', regEx: /^2$/ }
+						],
+					},
+					{
+						control: 'check',
+						name: 'isAuction',
+						label: { text: `Opzione d'acquisto` },
+						value: false,
+						hide:  true,
+						hideIf: [
+							{ field: 'contractTypeId', regEx: /^1$/ }
 						],
 					},
 				],
