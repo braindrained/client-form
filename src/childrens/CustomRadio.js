@@ -22,6 +22,7 @@ class CustomRadio extends React.Component<any, any> {
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
 		if (this.props.options !== nextState.options) return true;
+		if (this.props.isValid !== nextProps.isValid) return true;
 		return false;
 	}
 

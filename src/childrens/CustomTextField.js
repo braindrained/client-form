@@ -86,6 +86,7 @@ class CustomTextField extends React.Component<any, any> {
 			errorMessage, placeholder, currency, disabled, unit
 		} = this.props;
 		const { isValid, value, type } = this.state;
+		const inputStyle = type === 'password' || unit !== undefined ? { paddingRight: 30 } : {};
 
 		return (
 			<div className={sumClasses(['container-field', className])} style={style}>
@@ -100,7 +101,7 @@ class CustomTextField extends React.Component<any, any> {
 					onChange: (e) => { this.onChange(e); },
 					onBlur: (e) => { this.onBlur(e); },
 					onFocus: () => { this.onFocus(); },
-					style: isValid === false ? { border: '1px solid #e4002b' } : {}
+					style: Object.assign({}, inputStyle, isValid === false ? { border: '1px solid #e4002b' } : {})
 				}} />
 				{ this.props.type === 'password' ?
 					<svg {...{
