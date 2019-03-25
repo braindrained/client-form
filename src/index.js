@@ -302,7 +302,8 @@ export default class Form extends React.Component<any, any> {
 									key: item.name, name, label, value,
 									onUpdate: (e, h) => { this.onUpdate(e, h); },
 									className, style,
-									options, hideRadio
+									options, hideRadio, errorMessage, isRequired, isValid,
+									default: item.default
 							});
 						case 'label':
 							if (item.hide) return (null);

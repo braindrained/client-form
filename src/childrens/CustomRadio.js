@@ -14,7 +14,7 @@ class CustomRadio extends React.Component<any, any> {
 		const checkValue = value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value;
 
 		this.state = {
-			value: checkValue
+			value: checkValue ? checkValue : this.props.default
 		};
 	}
 
