@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { sumClasses } from '../helpers/utils';
+import { sumClasses, camelToTitle } from '../helpers/utils';
 
 export default class CustomCheckBox extends React.Component<any, any> {
 
@@ -32,8 +32,14 @@ export default class CustomCheckBox extends React.Component<any, any> {
 	}
 
 	render() {
-		const { className, style, label, name } = this.props;
+		const { className, style, label, name, customSvg } = this.props;
 		const { value } = this.state;
+		const svgProps = customSvg ? customSvg.svgProps : { width: 24, height: 24, viewBox: '0 0 24 24' };
+		const forTrue = customSvg ? customSvg.forTrue : <rect {...{ className: 'ext', width: 16, height: 16, rx: 2, ry: 2, x: 4, y: 4, style: { fill: '#fff', strokeWidth: 2, stroke: '#d8d8df', borderRadius: 2 } }} />;
+		const forFalse = customSvg ? customSvg.forFalse : <path {...{
+			className: 'int',
+			d: 'M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'
+		}} />;
 
 		return (
 			<div className={sumClasses(['container-field', className !== undefined ? className : 'check'])} style={style}>
@@ -45,17 +51,14 @@ export default class CustomCheckBox extends React.Component<any, any> {
 					onChange: (e) => { this.onChange(e); }
 				}} />
 				<label htmlFor={name} style={label.style}>
-					<svg {...{ width: 24, height: 24, viewBox: '0 0 24 24' }}>
+					<svg {...svgProps}>
 						{ value !== true ?
-							<rect {...{ className: 'ext', width: 16, height: 16, rx: 2, ry: 2, x: 4, y: 4, style: { fill: '#fff', strokeWidth: 2, stroke: '#d8d8df', borderRadius: 2 } }} />
+							forFalse
 							:
-							<path {...{
-								className: 'int',
-								d: 'M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'
-							}} />
+							forTrue
 						}
 					</svg>
-					<div>{label.text}</div>
+					<div>{camelToTitle(label.text, name)}</div>
 				</label>
 			</div>
 		);

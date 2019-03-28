@@ -28,6 +28,47 @@ class App extends React.Component {
 						className: 'noselect tabTextArea'
 					},
 					{
+						control: 'check',
+						name: 'thisIsACustomCheckBox',
+						label: { text: 'This is an almost real checkbox' },
+						value: false,
+						customSvg: {
+							svgProps: { width: 36, height: 24, viewBox: '0 0 36 24' },
+							forTrue: <React.Fragment>
+							<rect
+								width="30"
+								height="16"
+								rx="8"
+								ry="8"
+								x="4"
+								y="4"
+								style={{ fill: 'rgb(0, 132, 255)', strokeWidth: 2, stroke: 'rgb(0, 132, 255)' }} />
+							<circle
+								cx="26"
+								cy="12"
+								r="7"
+								style={{ fill: 'rgb(255, 255, 255)' }}
+							/>
+							</React.Fragment>,
+							forFalse: <React.Fragment>
+							<rect
+								width="30"
+								height="16"
+								rx="8"
+								ry="8"
+								x="4"
+								y="4"
+								style={{ fill: 'rgb(216, 216, 223)', strokeWidth: 2, stroke: 'rgb(216, 216, 223)' }} />
+							<circle
+								cx="12"
+								cy="12"
+								r="7"
+								style={{ fill: 'rgb(255, 255, 255)' }}
+							/>
+							</React.Fragment>
+						}
+					},
+					{
 						control: 'text',
 						label: {
 							text: 'Nome',
