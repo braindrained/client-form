@@ -227,7 +227,8 @@ export default class Form extends React.Component<any, any> {
 			succeed !== null ? (succeed ? 'btn btn-succeed' : 'btn btn-red') : 'btn',
 			sendButton && sendButton.disabled ? 'btn-grey' : ''
 		]);
-		const sendButtonValue = sendButton ? (succeed === null ? sendButton.text : message) : null;
+		const { hideIfSent } = sendButton;
+		const sendButtonValue = sendButton ? (succeed === null ? (hideIfSent && isSent ? null : sendButton.text) : message) : null;
 		const el = React.createElement;
 
 		return (
@@ -337,7 +338,7 @@ export default class Form extends React.Component<any, any> {
 						<ClickOutHandler onClickOut={() => { this.resetButton(); }}>
 							<button {...{
 								className: sendButtonClass,
-								style: sendButton.style,
+								style: hideIfSent && isSent ? sendButton.sentStyle : sendButton.style,
 								onClick: succeed === null && isSent === null && sendButton.disabled !== true ? () => { this.formIsValid(); } : () => null,
 								type: 'button'
 							}}>
