@@ -361,8 +361,6 @@ class App extends React.Component {
 				}, 'This is a text before button'),
 				sendButton: {
 					text: 'Save changes',
-					hideIfSent: true,
-					sentStyle: { margin: '0 auto', float: 'none', paddingLeft: 40, paddingRight: 0 },
 					style: { margin: '0 auto', float: 'none', paddingLeft: 40, paddingRight: 40 },
 				},
 				afterButton: el('div', {

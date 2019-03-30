@@ -227,7 +227,7 @@ export default class Form extends React.Component<any, any> {
 			succeed !== null ? (succeed ? 'btn btn-succeed' : 'btn btn-red') : 'btn',
 			sendButton && sendButton.disabled ? 'btn-grey' : ''
 		]);
-		const { hideIfSent } = sendButton;
+		const { hideIfSent } = sendButton ? sendButton : {};
 		const sendButtonValue = sendButton ? (succeed === null ? (hideIfSent && isSent ? null : sendButton.text) : message) : null;
 		const el = React.createElement;
 
