@@ -113,11 +113,15 @@
 				-ms-user-select: none; /* Internet Explorer/Edge */
 						user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
+.client-form .btn-sent {
+	padding-left: 40px;
+}
 .client-form .btn:hover {
 		background-color: #161e24;
 		border-color: #161e24;
 }
 .client-form .btn-succeed {
+	padding-left: 40px;
 	background-color: #00c694!important;
 	border: 1px solid #00c694!important;
 	color: #fff!important;
@@ -140,6 +144,7 @@
 	background: #f1f1f1;
 }
 .client-form .btn-red {
+	padding-left: 40px;
 	background: #e4002b;
 }
 .client-form .btn-red:hover {

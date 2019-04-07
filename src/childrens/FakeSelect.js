@@ -5,6 +5,8 @@ import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { sumClasses } from '../helpers/utils';
 
+const el = React.createElement;
+
 class FakeSelect extends React.Component<any, any> {
 
 	constructor(props: Object) {
@@ -53,62 +55,42 @@ class FakeSelect extends React.Component<any, any> {
 		const maxRange = this.props.value.min === '' ? secondRange : secondRange.filter(o => o.value > this.props.value.min || o.value === '');
 		const { isValid } = this.state;
 
-		return (
-			<div className={sumClasses(['container-field', className])} style={style}>
-				<FieldLabel {...{ label, name, isRequired, isValid }} />
-				<ClickOutHandler onClickOut={() => { this.onClick(true); }} style={{ maxHeight: 57 }}>
-					<div {...{
-						className: 'select-style noselect',
-						onClick: () => { this.onClick(false); },
-						style: { zIndex: displaySelect ? 1 : 0, paddingLeft: 8 }
-					}}>
-						{
-							value.min !== '' && value.max !== '' ?
-								`${value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')} -
-								${value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`
-								:
-								value.min !== '' && value.max === '' ?
-									`da ${value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`
-									:
-									value.min === '' && value.max !== '' ?
-										`fino a ${value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`
-										:
-										text
-						}
-						<svg {...{ width: 24, height: 24, viewBox: '0 0 24 24' }}>
-							<polyline {...{ fill: 'none', points: '6,9 12,15 18,9', style: { fill: 'none', stroke: '#d8d8df', strokeWidth: 1 } }} />
-						</svg>
-					</div>
-					<FieldError {...{ isValid, errorMessage }} />
-
-					<div className="fake-cont box-shadow" style={{ width: style.maxWidth, opacity: displaySelect ? '0' : '1', zIndex: displaySelect ? -1 : 1, background: overlayBg }}>
-						<div className="min-max">Min</div>
-						<div className="select-style" style={Object.assign({}, rangesStyle, { marginBottom: 10, float: 'right' })}>
-							<select {...{ name: 'min', id: 'min', value: this.props.value.min, onChange: (o) => { this.onChange(o); } }}>
-								{
-									firstRange.map(item => <option {...{ value: item.value, key: `f_${item.value}` }}>{item.text}</option>)
-								}
-							</select>
-							<svg {...{ width: 24, height: 24, viewBox: '0 0 24 24' }}>
-								<polyline {...{ fill: 'none', points: '6,9 12,15 18,9', style: { fill: 'none', stroke: '#d8d8df', strokeWidth: 1 } }} />
-							</svg>
-						</div>
-						<div className="clear" />
-						<div className="min-max">Max</div>
-						<div className="select-style" style={Object.assign({}, rangesStyle, { marginBottom: 10, float: 'right' })}>
-							<select {...{ name: 'max', id: 'max', value: this.props.value.max, onChange: (o) => { this.onChange(o); } }}>
-								{
-									maxRange.map(item => <option value={item.value} key={`f_${item.value}`}>{item.text}</option>)
-								}
-							</select>
-							<svg {...{ width: 24, height: 24, viewBox: '0 0 24 24' }}>
-								<polyline {...{ fill: 'none', points: '6,9 12,15 18,9', style: { fill: 'none', stroke: '#d8d8df', strokeWidth: 1 } }} />
-							</svg>
-						</div>
-					</div>
-				</ClickOutHandler>
-			</div>
-		);
+		return el('div', { className: sumClasses(['container-field', className]), style },
+			el(FieldLabel, { label, name, isRequired, isValid }),
+			el(ClickOutHandler, { onClickOut: () => { this.onClick(true); }, style: { maxHeight: 57 } },
+				el('div', {
+					className: 'select-style noselect',
+					onClick: () => { this.onClick(false); },
+					style: { zIndex: displaySelect ? 1 : 0, paddingLeft: 8 }
+				},
+				value.min !== '' && value.max !== '' ?
+					`${value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')} -
+					${value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`
+					:
+					value.min !== '' && value.max === '' ?
+						`da ${value.min.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`
+						:
+						value.min === '' && value.max !== '' ?
+							`fino a ${value.max.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`
+							:
+							text,
+				el('svg', { width: 24, height: 24, viewBox: '0 0 24 24' },
+					el('polyline', { fill: 'none', points: '6,9 12,15 18,9', style: { fill: 'none', stroke: '#d8d8df', strokeWidth: 1 } }))),
+				el(FieldError, { isValid, errorMessage }),
+				el('div', { className: 'fake-cont box-shadow', style: { width: style.maxWidth, opacity: displaySelect ? '0' : '1', zIndex: displaySelect ? -1 : 1, background: overlayBg } },
+					el('div', { className: 'min-max' }, 'Min'),
+					el('div', { className: 'select-style', style: Object.assign({}, rangesStyle, { marginBottom: 10, float: 'right' }) },
+						el('select', { name: 'min', id: 'min', value: this.props.value.min, onChange: (o) => { this.onChange(o); } },
+							firstRange.map(item => el('option', { value: item.value, key: `f_${item.value}` }, item.text))),
+						el('svg', { width: 24, height: 24, viewBox: '0 0 24 24' },
+							el('polyline', { fill: 'none', points: '6,9 12,15 18,9', style: { fill: 'none', stroke: '#d8d8df', strokeWidth: 1 } }))),
+					el('div', { className: 'clear' }),
+					el('div', { className: 'min-max' }, 'Max'),
+					el('div', { className: 'select-style', style: Object.assign({}, rangesStyle, { marginBottom: 10, float: 'right' }) },
+						el('select', { name: 'max', id: 'max', value: this.props.value.max, onChange: (o) => { this.onChange(o); } },
+							maxRange.map(item => el('option', { value: item.value, key: `f_${item.value}` }, item.text))),
+						el('svg', { width: 24, height: 24, viewBox: '0 0 24 24' },
+							el('polyline', { fill: 'none', points: '6,9 12,15 18,9', style: { fill: 'none', stroke: '#d8d8df', strokeWidth: 1 } }))))));
 	}
 }
 

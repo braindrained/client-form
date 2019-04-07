@@ -4,6 +4,8 @@ import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { sumClasses } from '../helpers/utils';
 
+const el = React.createElement;
+
 class CustomPlusMinus extends React.Component<any, any> {
 
 	constructor(props: Object) {
@@ -65,44 +67,29 @@ class CustomPlusMinus extends React.Component<any, any> {
 			isValid
 		} = this.props;
 
-		return (
-			<div className={sumClasses(['container-field plus-minus', className])} style={style}>
-				<FieldLabel {...{ label, name, isRequired, isValid }} />
-				<div style={{ float: 'left' }}>
-					<svg {...{
-						onClick: () => { this.plusMinus('min'); },
-						style: { opacity: this.state.value === 0 ? 0.3 : 1 },
-						className: 'box-shadow noselect'
-					}}>
-						<circle {...{ cx: 17, cy: 17, r: 17, fill: 'rgb(50, 63, 72)' }} />
-						<rect {...{ width: 12, height: 1.5, x: 11, y: 16 }} />
-					</svg>
-					<div style={{ float: 'left' }}>
-						<input {...{
-							type,
-							name,
-							id: name,
-							value: this.state.value,
-							disabled,
-							onKeyPress: (e) => { this.handleKeyPress(e); },
-							onChange: (e) => { this.onChange(e); },
-							onBlur: (e) => { this.onBlur(e); },
-							style: { border: 'none', background: 'none', width: 40, textAlign: 'center' }
-						}} />
-					</div>
-					<svg {...{
-						onClick: () => { this.plusMinus('plus'); },
-						style: {},
-						className: 'box-shadow noselect'
-					}}>
-						<circle {...{ cx: 17, cy: 17, r: 17, fill: 'rgb(50, 63, 72)' }} />
-						<rect {...{ width: 12, height: 1.5, x: 11, y: 16 }} />
-						<rect {...{ width: 1.5, height: 12, x: 16, y: 11 }} />
-					</svg>
-				</div>
-				<FieldError {...{ isValid, errorMessage }} />
-			</div>
-		);
+		return el('div', { className: sumClasses(['container-field plus-minus', className]), style },
+			el(FieldLabel, { label, name, isRequired, isValid }),
+			el('div', { style: { float: 'left' } },
+				el('svg', { onClick: () => { this.plusMinus('min'); }, style: { opacity: this.state.value === 0 ? 0.3 : 1 }, className: 'box-shadow noselect' },
+					el('circle', { cx: 17, cy: 17, r: 17, fill: 'rgb(50, 63, 72)' }),
+					el('rect', { width: 12, height: 1.5, x: 11, y: 16 })),
+				el('div', { style: { float: 'left' } },
+					el('input', {
+						type,
+						name,
+						id: name,
+						value: this.state.value,
+						disabled,
+						onKeyPress: (e) => { this.handleKeyPress(e); },
+						onChange: (e) => { this.onChange(e); },
+						onBlur: (e) => { this.onBlur(e); },
+						style: { border: 'none', background: 'none', width: 40, textAlign: 'center' }
+					})),
+				el('svg', { onClick: () => { this.plusMinus('plus'); }, className: 'box-shadow noselect' },
+					el('circle', { cx: 17, cy: 17, r: 17, fill: 'rgb(50, 63, 72)' }),
+					el('rect', { width: 12, height: 1.5, x: 11, y: 16 }),
+					el('rect', { width: 1.5, height: 12, x: 16, y: 11 }))),
+			el(FieldError, { isValid, errorMessage }));
 	}
 }
 

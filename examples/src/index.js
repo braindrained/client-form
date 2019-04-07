@@ -361,7 +361,7 @@ class App extends React.Component {
 				}, 'This is a text before button'),
 				sendButton: {
 					text: 'Save changes',
-					style: { margin: '0 auto', float: 'none', paddingLeft: 40, paddingRight: 40 },
+					style: { margin: '0 auto', float: 'none' },
 				},
 				afterButton: el('div', {
 					style: { clear: 'both', fontSize: 11, lineHeight: '30px', textAlign: 'center' }

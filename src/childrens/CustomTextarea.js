@@ -4,6 +4,8 @@ import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { camelToTitle, sumClasses } from '../helpers/utils';
 
+const el = React.createElement;
+
 class CustomTextarea extends React.Component<any, any> {
 
 	constructor(props: Object) {
@@ -64,26 +66,20 @@ class CustomTextarea extends React.Component<any, any> {
 		const { placeholder, label, className, style, isRequired, name, errorMessage, limitChar } = this.props;
 		const { isValid, value } = this.state;
 
-		return (
-			<div className={sumClasses(['container-field', className])} style={style}>
-				<FieldLabel {...{ label, name, isRequired, isValid }} />
-				<textarea {...{
-					placeholder: camelToTitle(placeholder, name),
-					className: 'large-field',
-					name,
-					id: name,
-					onBlur: (e) => { this.onBlur(e); },
-					onChange: (e) => { this.onChange(e); },
-					value,
-					style: isValid === false ? { border: '1px solid #e4002b' } : {}
-				}} />
-				{ limitChar ?
-					<div className="limit-char noselect">
-						{ value.length }/{limitChar}
-					</div> : null }
-				<FieldError {...{ isValid, errorMessage, style: limitChar ? { paddingRight: 60 } : {} }} />
-			</div>
-		);
+		return el('div', { className: sumClasses(['container-field', className]), style },
+			el(FieldLabel, { label, name, isRequired, isValid }),
+			el('textarea', {
+				placeholder: camelToTitle(placeholder, name),
+				className: 'large-field',
+				name,
+				id: name,
+				onBlur: (e) => { this.onBlur(e); },
+				onChange: (e) => { this.onChange(e); },
+				value,
+				style: isValid === false ? { border: '1px solid #e4002b' } : {}
+			}),
+			limitChar ? el('div', { className: 'limit-char noselect' }, `${value.length}/${limitChar}`) : null,
+			el(FieldError, { isValid, errorMessage, style: limitChar ? { paddingRight: 60 } : {} }));
 	}
 }
 

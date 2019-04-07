@@ -15,6 +15,8 @@ import FakeSelect from './childrens/FakeSelect';
 import { sumClasses, isInt } from './helpers/utils';
 import './Form.css';
 
+const el = React.createElement;
+
 export default class Form extends React.Component<any, any> {
 
 	constructor(props: Object) {
@@ -224,148 +226,134 @@ export default class Form extends React.Component<any, any> {
 		} = this.props;
 		const { controls, succeed, isSent, message } = this.state;
 		const sendButtonClass = sumClasses([
-			succeed !== null ? (succeed ? 'btn btn-succeed' : 'btn btn-red') : 'btn',
+			succeed !== null ? (succeed ? 'btn btn-succeed' : 'btn btn-red') : (isSent ? 'btn btn-sent' : 'btn'),
 			sendButton && sendButton.disabled ? 'btn-grey' : ''
 		]);
-		const { hideIfSent } = sendButton ? sendButton : {};
+		const { hideIfSent } = sendButton !== undefined ? sendButton : {};
 		const sendButtonValue = sendButton ? (succeed === null ? (hideIfSent && isSent ? null : sendButton.text) : message) : null;
-		const el = React.createElement;
 
-		return (
-			<div className={sumClasses(['client-form', formClassName])} style={formStyle}>
-				{ controls.map((item) => {
-					const {
-						control, hide, name, component, type, onlyNumber, placeholder, label,
-						value, isRequired, isValid, disabled, errorMessage, className, style,
-						updateOnChange, limitChar, currency, options, hideRadio,
-						textBefore, tabs, valueAsObject, text, firstRange,
-						secondRange, rangesStyle, overlayBg, content, unit, customSvg
-					} = item;
-					/* eslint-disable */
-					switch (control) {
-						default:
-							return null;
-						case 'external':
-							if (hide) return (null);
-							const itemProps = Object.assign({}, item, { onUpdate: (e, h) => { this.onUpdate(e, h) } });
-							return el(component, itemProps);
-						case 'text':
-							if (hide) return (null);
-							return el(CustomTextField, {
-								key: item.name, name, label, value,
+		return el('div', { className: sumClasses(['client-form', formClassName]), style: formStyle },
+			controls.map((item) => {
+				const {
+					control, hide, name, component, type, onlyNumber, placeholder, label,
+					value, isRequired, isValid, disabled, errorMessage, className, style,
+					updateOnChange, limitChar, currency, options, hideRadio,
+					textBefore, tabs, valueAsObject, text, firstRange,
+					secondRange, rangesStyle, overlayBg, content, unit, customSvg
+				} = item;
+				/* eslint-disable */
+				switch (control) {
+					default:
+						return null;
+					case 'external':
+						if (hide) return (null);
+						const itemProps = Object.assign({}, item, { onUpdate: (e, h) => { this.onUpdate(e, h) } });
+						return el(component, itemProps);
+					case 'text':
+						if (hide) return (null);
+						return el(CustomTextField, {
+							key: item.name, name, label, value,
+							type, onlyNumber, placeholder,
+							onUpdate: (e, h) => { this.onUpdate(e, h); },
+							isRequired, isValid, disabled,
+							errorMessage, className, style,
+							updateOnChange, limitChar, currency, unit
+						});
+					case 'plusMinus':
+						if (item.hide) return (null);
+						return el(CustomPlusMinus, {
+								key: item.name, name, label, value: parseFloat(item.value),
 								type, onlyNumber, placeholder,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								isRequired, isValid, disabled,
 								errorMessage, className, style,
-								updateOnChange, limitChar, currency, unit
-							});
-						case 'plusMinus':
-							if (item.hide) return (null);
-							return el(CustomPlusMinus, {
-									key: item.name, name, label, value: parseFloat(item.value),
-									type, onlyNumber, placeholder,
-									onUpdate: (e, h) => { this.onUpdate(e, h); },
-									isRequired, isValid, disabled,
-									errorMessage, className, style,
-									updateOnChange
-							});
-						case 'textArea':
-							if (item.hide) return (null);
-							return el(CustomTextarea, {
-									key: item.name, name, label, value,
-									placeholder,
-									onUpdate: (e, h) => { this.onUpdate(e, h); },
-									isRequired, isValid, disabled,
-									errorMessage, className, style,
-									updateOnChange, limitChar
-							});
-						case 'select':
-							if (item.hide) return (null);
-							return el(CustomSelect, {
-									key: item.name, name, label, value,
-									onUpdate: (e, h) => { this.onUpdate(e, h); },
-									isRequired, isValid, disabled,
-									errorMessage, className, style,
-									options, default: item.default
-							});
-						case 'check':
-							if (item.hide) return (null);
-							return el(CustomCheckBox, {
-									key: item.name, name, label, value,
-									onUpdate: (e, h) => { this.onUpdate(e, h); },
-									className, style,
-									textBefore, customSvg
-							});
-						case 'radio':
-							if (item.hide) return (null);
-							return el(CustomRadio, {
-									key: item.name, name, label, value,
-									onUpdate: (e, h) => { this.onUpdate(e, h); },
-									className, style,
-									options, hideRadio, errorMessage, isRequired, isValid,
-									default: item.default
-							});
-						case 'label':
-							if (item.hide) return (null);
-							return el(CustomLabel, {
-									key: `${Math.random()}`, content, className, style
-							});
-						case 'tabTextArea':
-							if (item.hide) return (null);
-							return el(CustomTextAreaTab, {
-									key: item.name, name, value, tabs,
-									onUpdate: (e, h) => { this.onUpdate(e, h); },
-									isRequired, isValid, disabled,
-									errorMessage, className, style,
-									valueAsObject, limitChar, label
-							});
-						case 'fakeselect':
-							if (item.hide) return (null);
-							return el(FakeSelect, {
-									key: item.name, name, label, value, text,
-									onUpdate: (e, h) => { this.onUpdate(e, h); },
-									className, style,
-									firstRange, secondRange,
-									rangesStyle, overlayBg
-							});
-					}
-					/* eslint-enable */
-				})}
-				{ beforeButton }
-				{ sendButton ?
-					<div className="button-container" style={buttonContainerStyle}>
-						{/* eslint-disable */}
-						<ClickOutHandler onClickOut={() => { this.resetButton(); }}>
-							<button {...{
-								className: sendButtonClass,
-								style: hideIfSent && isSent ? sendButton.sentStyle : sendButton.style,
-								onClick: succeed === null && isSent === null && sendButton.disabled !== true ? () => { this.formIsValid(); } : () => null,
-								type: 'button'
-							}}>
-								<svg {...{ width: 24, height: 24, viewBox: '0 0 24 24', className: isSent !== false ? 'spin' : '' }}>
-									{ isSent ?
-										<circle {...{ cx: 12, cy: 12, fill: 'none', stroke: '#fff', strokeWidth: 2, r: 11, strokeDasharray: '55,20' }} />
+								updateOnChange
+						});
+					case 'textArea':
+						if (item.hide) return (null);
+						return el(CustomTextarea, {
+								key: item.name, name, label, value,
+								placeholder,
+								onUpdate: (e, h) => { this.onUpdate(e, h); },
+								isRequired, isValid, disabled,
+								errorMessage, className, style,
+								updateOnChange, limitChar
+						});
+					case 'select':
+						if (item.hide) return (null);
+						return el(CustomSelect, {
+								key: item.name, name, label, value,
+								onUpdate: (e, h) => { this.onUpdate(e, h); },
+								isRequired, isValid, disabled,
+								errorMessage, className, style,
+								options, default: item.default
+						});
+					case 'check':
+						if (item.hide) return (null);
+						return el(CustomCheckBox, {
+								key: item.name, name, label, value,
+								onUpdate: (e, h) => { this.onUpdate(e, h); },
+								className, style,
+								textBefore, customSvg
+						});
+					case 'radio':
+						if (item.hide) return (null);
+						return el(CustomRadio, {
+								key: item.name, name, label, value,
+								onUpdate: (e, h) => { this.onUpdate(e, h); },
+								className, style,
+								options, hideRadio, errorMessage, isRequired, isValid,
+								default: item.default
+						});
+					case 'label':
+						if (item.hide) return (null);
+						return el(CustomLabel, {
+								key: `${Math.random()}`, content, className, style
+						});
+					case 'tabTextArea':
+						if (item.hide) return (null);
+						return el(CustomTextAreaTab, {
+								key: item.name, name, value, tabs,
+								onUpdate: (e, h) => { this.onUpdate(e, h); },
+								isRequired, isValid, disabled,
+								errorMessage, className, style,
+								valueAsObject, limitChar, label
+						});
+					case 'fakeselect':
+						if (item.hide) return (null);
+						return el(FakeSelect, {
+								key: item.name, name, label, value, text,
+								onUpdate: (e, h) => { this.onUpdate(e, h); },
+								className, style,
+								firstRange, secondRange,
+								rangesStyle, overlayBg
+						});
+				}
+				/* eslint-enable */
+			}),
+			beforeButton,
+			sendButton ?
+				el('div', { className: 'button-container', style: buttonContainerStyle },
+					el(ClickOutHandler, { onClickOut: () => { this.resetButton(); } },
+						el('button', {
+							className: sendButtonClass,
+							style: hideIfSent && isSent ? sendButton.sentStyle : sendButton.style,
+							onClick: succeed === null && isSent === null && sendButton.disabled !== true ? () => { this.formIsValid(); } : () => null,
+							type: 'button'
+						},
+						el('svg', { width: 24, height: 24, viewBox: '0 0 24 24', className: isSent !== false ? 'spin' : '' },
+							isSent ?
+								el('circle', { cx: 12, cy: 12, fill: 'none', stroke: '#fff', strokeWidth: 2, r: 11, strokeDasharray: '55,20' })
+								:
+								succeed === true ?
+									el('polyline', { fill: 'none', points: '4,12 9,18 21,6', style: { fill: 'none', stroke: '#fff', strokeWidth: 2 } })
+									:
+									succeed === false ?
+										el('path', { fill: '#fff', d: 'M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z' })
 										:
-										succeed === true ?
-											<polyline {...{ fill: 'none', points: '4,12 9,18 21,6', style: { fill: 'none', stroke: '#fff', strokeWidth: 2 } }} />
-											:
-											succeed === false ?
-											<path {...{
-												fill: '#fff',
-												d: 'M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z'
-											}} />
-											:
-											null
-									}
-								</svg>
-								{sendButtonValue}
-							</button>
-						</ClickOutHandler>
-						{/* eslint-enable */}
-					</div>
-					: null }
-				{ afterButton }
-			</div>
-		);
+										null),
+						sendButtonValue)))
+				: null,
+			afterButton);
 	}
 }

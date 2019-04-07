@@ -14,9 +14,9 @@ describe('Form tests', () => {
 	    expect(BaseFormComponent).toMatchSnapshot();
 	});*/
 
-	it('count the controls to be 2', () => {
+	it('count the controls to be 3', () => {
 	    const BaseFormComponent = mount(<BaseForm {...defaultProps} />);
-      expect(BaseFormComponent.props().controls.length).toBe(2);
+      expect(BaseFormComponent.props().controls.length).toBe(3);
 	});
 
 	it('count the controls in props to be equal the controls count in the state', () => {

@@ -11,10 +11,10 @@ class CustomRadio extends React.Component<any, any> {
 	constructor(props: Object) {
 		super(props);
 		const { value } = this.props;
-		const checkValue = value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value;
+		const checkValue = value !== undefined && value !== null ? (value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value) : this.props.default;
 
 		this.state = {
-			value: checkValue ? checkValue : this.props.default
+			value: checkValue
 		};
 	}
 
@@ -28,10 +28,10 @@ class CustomRadio extends React.Component<any, any> {
 
 	componentWillReceiveProps(nextProps: Object) {
 		const { value } = nextProps;
-		const checkValue = value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value;
+		const checkValue = value !== undefined && value !== null ? (value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value) : this.props.default;
 		if (this.state.value !== checkValue) {
 			this.setState({
-				value: checkValue,
+				value: checkValue
 			});
 		}
 	}

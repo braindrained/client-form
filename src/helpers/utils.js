@@ -9,8 +9,6 @@ export const makeId = () => {
 	return text;
 };
 
-export const notEmpty = (val: any) => val !== null && val !== undefined && val !== '';
-
 export const camelToTitle = (str: string, name: string) => str === null || str === undefined ?
 	name.replace(/([a-z\d])([A-Z])/g, '$1  $2')
 		.replace(/([A-Z]+)([A-Z][a-z\d]+)/g, '$1 $2')
