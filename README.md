@@ -9,7 +9,7 @@ or
 ```
 
 #### Developing
-Clone, install dependencies and run the component in the development mode.
+Clone, install dependencies and run the component in development mode.
 ```sh
 > git clone git@github.com:braindrained/client-form.git client-form
 > cd client-form
@@ -17,17 +17,9 @@ Clone, install dependencies and run the component in the development mode.
 > yarn start
 ```
 Open http://localhost:3007 to view it in the browser.
-#### Export the component
-```sh
-> yarn transpile
-> git tag <version>
-> git push origin --tag
-```
-#### Install and Import the component
-Install
-```sh
-> yarn add git+ssh://git@github.com:braindrained/client-form.git#<tag-version>
-```
+
+#### Import the component
+
 Import
 
 `import Form from 'client-form';`
@@ -54,14 +46,4 @@ Use it
 	key: 'randomKey',
 }}/>
 ```
-#### Build to every environment
-Builds the component for production to the `examples/dist` folder.
-```sh
-> yarn build
-```
-Use it
 
-```sh
-<div id="client-form"></div>
-<script type="text/javascript" src="bundle.js"></script>
-```
