@@ -37,13 +37,10 @@ Use it
 		}
 	],
 	sendButton: {
-		text: 'Save', // button value
-		errorText: 'Error saving data', // button value on error
-		succeedText: 'Saved!', // button value on success
-		style: { minWidth: 250, margin: '0 auto', float: 'none' }
+		text: 'Save changes',
+		style: { margin: '0 auto', float: 'none' },
 	},
 	sendForm: (e) => { this.sendForm(e); }, // your function that fetch data
-	key: 'randomKey',
 }}/>
 ```
 
