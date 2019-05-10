@@ -1,12 +1,12 @@
 // @flow
-import React from 'react';
+import { Component, createElement } from 'react';
 import { sumClasses } from '../helpers/utils';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 
-const el = React.createElement;
+const el = createElement;
 
-class CustomTextareaWithTab extends React.Component<any, any> {
+class CustomTextareaWithTab extends Component<any, any> {
 
 	constructor(props: Object) {
 		super(props);
@@ -15,6 +15,14 @@ class CustomTextareaWithTab extends React.Component<any, any> {
 			value: this.props.value,
 			selected: 0,
 		};
+	}
+
+	shouldComponentUpdate(nextProps: Object, nextState: Object) {
+		if (this.props.value !== nextProps.value) return true;
+		if (this.state.value !== nextState.value) return true;
+		if (this.props.isValid !== nextProps.isValid) return true;
+		if (this.state.selected !== nextState.selected) return true;
+		return false;
 	}
 
 	onChange(event: Object) {

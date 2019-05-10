@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { Component, createElement, Fragment } from 'react';
 import { render } from 'react-dom';
 
 import Form from '../../src';
 import { makeId } from '../../src/helpers/utils';
 import { tipologies, priceRanges, energy } from  './var';
 import CustomComp from './CustomComp';
-import './favicon.ico'
+import './favicon.ico';
 
-const el = React.createElement;
+const el = createElement;
 
-class App extends React.Component {
+class App extends Component {
 
 	constructor(props) {
 		super(props);
@@ -17,9 +17,9 @@ class App extends React.Component {
 
 	render() {
 		const prpMail = undefined;
+		const contractTypeId = 1;
 
-		return (
-	    <Form {...{
+		return el(Form, {
 				controls: [
 					{
 						control: 'label',
@@ -29,43 +29,23 @@ class App extends React.Component {
 					},
 					{
 						control: 'check',
-						name: 'thisIsACustomCheckBox',
-						label: { text: 'This is an almost real checkbox' },
+						name: 'fakeCheckBoxWithCustomSvg',
 						value: false,
 						customSvg: {
 							svgProps: { width: 36, height: 24, viewBox: '0 0 36 24' },
-							forTrue: <React.Fragment>
-							<rect
-								width="30"
-								height="16"
-								rx="8"
-								ry="8"
-								x="4"
-								y="4"
-								style={{ fill: 'rgb(0, 132, 255)', strokeWidth: 2, stroke: 'rgb(0, 132, 255)' }} />
-							<circle
-								cx="26"
-								cy="12"
-								r="7"
-								style={{ fill: 'rgb(255, 255, 255)' }}
-							/>
-							</React.Fragment>,
-							forFalse: <React.Fragment>
-							<rect
-								width="30"
-								height="16"
-								rx="8"
-								ry="8"
-								x="4"
-								y="4"
-								style={{ fill: 'rgb(216, 216, 223)', strokeWidth: 2, stroke: 'rgb(216, 216, 223)' }} />
-							<circle
-								cx="12"
-								cy="12"
-								r="7"
-								style={{ fill: 'rgb(255, 255, 255)' }}
-							/>
-							</React.Fragment>
+							forTrue: el(Fragment, {},
+								el('rect', {
+									width: 30, height: 16, rx: 8, ry: 8, x: 4, y: 4,
+									style: { fill: 'rgb(0, 132, 255)', strokeWidth: 2, stroke: 'rgb(0, 132, 255)' }
+								}),
+								el('circle', { cx: 26, cy: 12, r: 7, style: { fill: 'rgb(255, 255, 255)' } })
+							),
+							forFalse: el(Fragment, {},
+								el('rect', {
+									width: 30, height: 16, rx: 8, ry: 8, x: 4, y: 4,
+									style: { fill: 'rgb(216, 216, 223)', strokeWidth: 2, stroke: 'rgb(216, 216, 223)' } }),
+								el('circle', { cx: 12, cy: 12, r: 7, style: { fill: 'rgb(255, 255, 255)' } })
+							)
 						}
 					},
 					{
@@ -78,16 +58,12 @@ class App extends React.Component {
 						type: 'text',
 						name: 'firstName',
 						limitChar: 25,
-						errorMessage: 'Mandatory field',
-						isRequired: true
 					},
 					{
 						control: 'text',
 						type: 'text',
 						name: 'lastName',
 						limitChar: 25,
-						errorMessage: 'Mandatory field',
-						isRequired: true
 					},
 					{
 						control: 'text',
@@ -95,7 +71,7 @@ class App extends React.Component {
 						name: 'age',
 						onlyNumber: true,
 						limitChar: 3,
-						value: 'xyz'
+						value: 4
 					},
 					{
 						control: 'select',
@@ -165,8 +141,6 @@ class App extends React.Component {
 						name: 'password',
 						onlyNumber: false,
 						limitChar: 12,
-						errorMessage: 'Mandatory field',
-						isRequired: true
 					},
 					{
 						control: 'text',
@@ -236,15 +210,13 @@ class App extends React.Component {
 							}
 						},
 						value: [
-							{ name: 'listingDescIt', value: '', isRequired: true, isValid: true, label: 'Italiano', abbr: 'IT', placeholder: 'Inserisci qui la descrizione' },
+							{ name: 'listingDescIt', value: '', isRequired: false, isValid: true, label: 'Italiano', abbr: 'IT', placeholder: 'Inserisci qui la descrizione' },
 							{ name: 'listingDescEn', value: '', isRequired: false, isValid: true, label: 'Inglese', abbr: 'EN', placeholder: 'Descrizione inglese' },
 							{ name: 'listingDescFr', value: '', isRequired: false, isValid: true, label: 'Francese', abbr: 'FR', placeholder: 'Descrizione francese' },
 							{ name: 'listingDescEs', value: '', isRequired: false, isValid: true, label: 'Spagnolo', abbr: 'ES', placeholder: 'Descrizione spagnolo' },
 							{ name: 'listingDescDe', value: '', isRequired: false, isValid: true, label: 'Tedesco', abbr: 'DE', placeholder: 'Descrizione tedesco' }
 						],
 						isValid: true,
-						isRequired: true,
-						errorMessage: 'The italian description is mandatory',
 						className: 'tabTextArea',
 						valueAsObject: true,
 						limitChar: 4000
@@ -255,11 +227,10 @@ class App extends React.Component {
 						name: 'thisIsACustomExternalComponent',
 						key: 'thisIsACustomExternalComponent',
 						value: [
-							{ name: 'firstField', value: '', isRequired: true, isValid: true, placeholder: '\'cause I need a complete customized one', errorMessage: 'Campo obbligatorio' },
+							{ name: 'firstField', value: '', isRequired: false, isValid: true, placeholder: '\'cause I need a complete customized one', errorMessage: 'Campo obbligatorio' },
 							{ name: 'secondFieldWithEmptyPlaceholder', value: '', isRequired: false, isValid: true, placeholder: '', },
 						],
 						isValid: true,
-						isRequired: true,
 						className: 'container-field tabTextArea',
 						style: {
 							background: 'rgb(50, 63, 72)',
@@ -313,7 +284,6 @@ class App extends React.Component {
 						default: 0,
 						hideRadio: true,
 						className: 'custom-energy resize-mobile tabTextArea',
-						hide: true,
 						hideIf: [
 							{ field: 'energyClass', regEx: /^(0|9|10|11)$/ }
 						],
@@ -328,7 +298,7 @@ class App extends React.Component {
 						control: 'radio',
 						name: 'contractTypeId',
 						label: { text: 'Contratto' },
-						value: 1,
+						value: contractTypeId,
 						hideRadio: false,
 						options: [
 							{ value: 1, label: 'Affitto', style: { width: 137, float: 'left' }, selectedClassName: 'option-override' },
@@ -340,7 +310,6 @@ class App extends React.Component {
 						name: 'hasPurchaseOption',
 						label: { text: `Opzione d'acquisto` },
 						value: false,
-						hide:  false,
 						hideIf: [
 							{ field: 'contractTypeId', regEx: /^2$/ }
 						],
@@ -348,9 +317,8 @@ class App extends React.Component {
 					{
 						control: 'check',
 						name: 'isAuction',
-						label: { text: `Opzione d'acquisto` },
+						label: { text: `Asta` },
 						value: false,
-						hide:  true,
 						hideIf: [
 							{ field: 'contractTypeId', regEx: /^1$/ }
 						],
@@ -380,9 +348,8 @@ class App extends React.Component {
 				formStyle: {
 					maxWidth: 540,
 					margin: '0 auto'
-				},
-				noUndefined: false
-			}}/>
+				}
+			}
 		)
 	}
 }

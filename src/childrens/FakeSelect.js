@@ -1,13 +1,13 @@
 // @flow
-import React from 'react';
+import { Component, createElement } from 'react';
 import ClickOutHandler from 'react-onclickout';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { sumClasses } from '../helpers/utils';
 
-const el = React.createElement;
+const el = createElement;
 
-class FakeSelect extends React.Component<any, any> {
+class FakeSelect extends Component<any, any> {
 
 	constructor(props: Object) {
 		super(props);

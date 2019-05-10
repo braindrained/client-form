@@ -1,12 +1,12 @@
 // @flow
-import React from 'react';
+import { Component, createElement } from 'react';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { sumClasses, isInt } from '../helpers/utils';
 
-const el = React.createElement;
+const el = createElement;
 
-class CustomRadio extends React.Component<any, any> {
+class CustomRadio extends Component<any, any> {
 
 	constructor(props: Object) {
 		super(props);
@@ -21,7 +21,7 @@ class CustomRadio extends React.Component<any, any> {
 	shouldComponentUpdate(nextProps: Object, nextState: Object) {
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
-		if (this.props.options !== nextState.options) return true;
+		if (this.props.options !== nextProps.options) return true;
 		if (this.props.isValid !== nextProps.isValid) return true;
 		return false;
 	}

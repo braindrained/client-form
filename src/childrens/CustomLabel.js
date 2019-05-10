@@ -1,7 +1,7 @@
 // @flow
-import React from 'react';
+import { createElement } from 'react';
 
-const el = React.createElement;
+const el = createElement;
 
 const CustomLabel = (props: Object) => {
 	const { style, content, className } = props;

@@ -10,18 +10,6 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
 const isLocal = process.env.LOCAL_MODE;
 
 module.exports = {
-		optimization: {
-			splitChunks: false,
-			minimizer: [
-				new UglifyJsPlugin({
-					uglifyOptions: {
-						compress: true,
-						screw_ie8: true, // eslint-disable-line camelcase
-						warnings: false, // Because uglify reports irrelevant warnings.
-					}
-				})
-			],
-		},
     entry: path.join(__dirname, "examples/src/index.js"),
 		output: {
         path: path.join(__dirname, "examples/dist"),
@@ -56,7 +44,6 @@ module.exports = {
     plugins: isLocal ?
 			[
 				htmlWebpackPlugin,
-				//new BundleAnalyzerPlugin()
 			]
 			:
 			[

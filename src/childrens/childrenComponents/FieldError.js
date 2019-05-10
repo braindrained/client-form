@@ -1,11 +1,11 @@
 // @flow
-import React from 'react';
+import { createElement } from 'react';
 
-const el = React.createElement;
+const el = createElement;
 
-const FieldError = (props: Object) => {
-	const { isValid, errorMessage, style } = props;
-	return el('div', { className: 'validation-error noselect', style }, ` ${isValid === false ? errorMessage : ''}`);
-};
+// flow-disable-next-line
+const FieldError = ({ isValid, errorMessage, style }) => el('div',
+	{ className: 'validation-error noselect', style },
+	` ${isValid === false ? errorMessage : ''}`);
 
 export default FieldError;

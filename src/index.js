@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import { Component, createElement } from 'react';
 import ClickOutHandler from 'react-onclickout';
 
 import CustomTextField from './childrens/CustomTextField';
@@ -12,12 +12,13 @@ import CustomTextAreaTab from './childrens/CustomTextAreaTab';
 import CustomPlusMinus from './childrens/CustomPlusMinus';
 import FakeSelect from './childrens/FakeSelect';
 
-import { sumClasses, isInt } from './helpers/utils';
+import { sumClasses, isInt, hideField } from './helpers/utils';
 import './Form.css';
 
-const el = React.createElement;
+const el = createElement;
+const View = (props: Object) => el('div', props);
 
-export default class Form extends React.Component<any, any> {
+export default class Form extends Component<any, any> {
 
 	constructor(props: Object) {
 		super(props);
@@ -38,20 +39,7 @@ export default class Form extends React.Component<any, any> {
 				item.isValid = !hasError;
 				item.value = e.target.value;
 			} else {
-				if (typeof item.hideIf === 'object') {
-					let hide = false;
-					item.hideIf.map((v) => {
-						const control = this.state.controls.filter(o => o.name === v.field);
-						if (control.length > 0) {
-							if (control[0].value.toString().match(v.regEx) != null) {
-								hide = true;
-							}
-						}
-						return null;
-					});
-					item.value = hide ? '' : item.value;
-					item.hide = hide;
-				}
+				if (typeof item.hideIf === 'object' && hideField(item, controls)) item.value = '';
 				if (item.label && typeof item.label.changeIf === 'object') {
 					item.label.changeIf.map((v) => {
 						const control = this.state.controls.filter(o => o.name === v.field);
@@ -78,7 +66,7 @@ export default class Form extends React.Component<any, any> {
 					item.changeStyleIf.map((v) => {
 						const control = this.state.controls.filter(o => o.name === v.field);
 						if (control.length > 0 && control[0].value !== undefined) {
-							if (control[0].value.toString().match(v.regEx) != null) {
+							if (control[0].value.toString().match(v.regEx) !== null) {
 								item.style = v.altStyle;
 							} else {
 								item.style = v.style;
@@ -232,15 +220,16 @@ export default class Form extends React.Component<any, any> {
 		const { hideIfSent } = sendButton !== undefined ? sendButton : {};
 		const sendButtonValue = sendButton ? (succeed === null ? (hideIfSent && isSent ? null : sendButton.text) : message) : null;
 
-		return el('div', { className: sumClasses(['client-form', formClassName]), style: formStyle },
+		return el(View, { className: sumClasses(['client-form', formClassName]), style: formStyle },
 			controls.map((item) => {
 				const {
-					control, hide, name, component, type, onlyNumber, placeholder, label,
+					control, name, component, type, onlyNumber, placeholder, label,
 					value, isRequired, isValid, disabled, errorMessage, className, style,
 					updateOnChange, limitChar, currency, options, hideRadio,
 					textBefore, tabs, valueAsObject, text, firstRange,
 					secondRange, rangesStyle, overlayBg, content, unit, customSvg
 				} = item;
+				let hide = typeof item.hideIf === 'object' ? hideField(item, controls) : false;
 				/* eslint-disable */
 				switch (control) {
 					default:
@@ -260,7 +249,7 @@ export default class Form extends React.Component<any, any> {
 							updateOnChange, limitChar, currency, unit
 						});
 					case 'plusMinus':
-						if (item.hide) return (null);
+						if (hide) return (null);
 						return el(CustomPlusMinus, {
 								key: item.name, name, label, value: parseFloat(item.value),
 								type, onlyNumber, placeholder,
@@ -270,7 +259,7 @@ export default class Form extends React.Component<any, any> {
 								updateOnChange
 						});
 					case 'textArea':
-						if (item.hide) return (null);
+						if (hide) return (null);
 						return el(CustomTextarea, {
 								key: item.name, name, label, value,
 								placeholder,
@@ -280,7 +269,7 @@ export default class Form extends React.Component<any, any> {
 								updateOnChange, limitChar
 						});
 					case 'select':
-						if (item.hide) return (null);
+						if (hide) return (null);
 						return el(CustomSelect, {
 								key: item.name, name, label, value,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
@@ -289,7 +278,7 @@ export default class Form extends React.Component<any, any> {
 								options, default: item.default
 						});
 					case 'check':
-						if (item.hide) return (null);
+						if (hide) return (null);
 						return el(CustomCheckBox, {
 								key: item.name, name, label, value,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
@@ -297,7 +286,7 @@ export default class Form extends React.Component<any, any> {
 								textBefore, customSvg
 						});
 					case 'radio':
-						if (item.hide) return (null);
+						if (hide) return (null);
 						return el(CustomRadio, {
 								key: item.name, name, label, value,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
@@ -306,12 +295,12 @@ export default class Form extends React.Component<any, any> {
 								default: item.default
 						});
 					case 'label':
-						if (item.hide) return (null);
+						if (hide) return (null);
 						return el(CustomLabel, {
 								key: `${Math.random()}`, content, className, style
 						});
 					case 'tabTextArea':
-						if (item.hide) return (null);
+						if (hide) return (null);
 						return el(CustomTextAreaTab, {
 								key: item.name, name, value, tabs,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
@@ -320,7 +309,7 @@ export default class Form extends React.Component<any, any> {
 								valueAsObject, limitChar, label
 						});
 					case 'fakeselect':
-						if (item.hide) return (null);
+						if (hide) return (null);
 						return el(FakeSelect, {
 								key: item.name, name, label, value, text,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
@@ -333,7 +322,7 @@ export default class Form extends React.Component<any, any> {
 			}),
 			beforeButton,
 			sendButton ?
-				el('div', { className: 'button-container', style: buttonContainerStyle },
+				el(View, { className: 'button-container', style: buttonContainerStyle },
 					el(ClickOutHandler, { onClickOut: () => { this.resetButton(); } },
 						el('button', {
 							className: sendButtonClass,

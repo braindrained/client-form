@@ -1,10 +1,10 @@
 // @flow
-import React from 'react';
+import { Component, createElement } from 'react';
 import { sumClasses, camelToTitle } from '../helpers/utils';
 
-const el = React.createElement;
+const el = createElement;
 
-export default class CustomCheckBox extends React.Component<any, any> {
+export default class CustomCheckBox extends Component<any, any> {
 
 	constructor(props: Object) {
 		super(props);
@@ -52,8 +52,8 @@ export default class CustomCheckBox extends React.Component<any, any> {
 
 		return el('div', { className: sumClasses(['container-field', className !== undefined ? className : 'check']), style },
 			el('input', { type: 'checkbox', name, id: name, checked: value, onChange: (e) => { this.onChange(e); } }),
-			el('label', { htmlFor: name, style: label.style },
+			el('label', { htmlFor: name, style: label && label.style },
 				el('svg', svgProps, value !== true ? forFalse : forTrue),
-				el('div', {}, camelToTitle(label.text, name))));
+				el('div', {}, camelToTitle(label && label.text, name))));
 	}
 }

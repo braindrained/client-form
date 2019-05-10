@@ -1,5 +1,4 @@
 // @flow
-
 export const makeId = () => {
 	let text = '';
 	const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -27,3 +26,13 @@ export const sumClasses = (classes: Array<string>) => {
 
 /* eslint-disable-next-line */
 export const isInt = (value: any) => !isNaN(value) && (x => (x | 0) === x)(parseFloat(value));
+
+export const hideField = (item: Object, controls: Array<Object>) => {
+	let hide = false;
+	item.hideIf.map((v) => {
+		const control = controls.filter(o => o.name === v.field);
+		if (control.length > 0 && control[0].value.toString().match(v.regEx) !== null) hide = true;
+		return null;
+	});
+	return hide;
+};
