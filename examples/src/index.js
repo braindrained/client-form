@@ -252,7 +252,7 @@ class App extends Component {
 						name: 'thisIsACustomExternalComponent',
 						key: 'thisIsACustomExternalComponent',
 						value: [
-							{ name: 'firstField', value: '', isRequired: true, isValid: true, placeholder: '\'cause I need a complete customized one', errorMessage: 'Campo obbligatorio' },
+							{ name: 'firstField', value: '', isRequired: false, isValid: true, placeholder: '\'cause I need a complete customized one', errorMessage: 'Campo obbligatorio' },
 							{ name: 'secondFieldWithEmptyPlaceholder', value: '', isRequired: false, isValid: true, placeholder: '', },
 						],
 						isValid: true,
@@ -271,7 +271,6 @@ class App extends Component {
 						},
 						valueAsObject: true,
 						exclude: false,
-						isRequired: true
 					},
 					{
 						control: 'radio',
@@ -375,7 +374,7 @@ class App extends Component {
 					maxWidth: 540,
 					margin: '0 auto'
 				},
-				excludeHidden: true
+				
 			}
 		)
 	}

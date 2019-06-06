@@ -152,7 +152,7 @@ export default class Form extends Component<any, any> {
 		if (formIsValid) {
 			const formObject = {};
 			const { excludeHidden } = this.props;
-			updatedControls.filter(o => o.control !== 'label' && o.exclude !== true && (excludeHidden && !o.hide)).map((item) => {
+			updatedControls.filter(o => o.control !== 'label' && o.exclude !== true && (excludeHidden === true ? !o.hide : true)).map((item) => {
 				let { value } = item;
 				const { valueAsObject, currency, name } = item;
 				if (typeof value === 'object' && valueAsObject) {
