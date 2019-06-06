@@ -35,11 +35,12 @@ export default class Form extends Component<any, any> {
 		const { controls } = this.state;
 
 		const updatedControls = controls.map((item) => {
+			item.hide = typeof item.hideIf === 'object' ? hideField(item, controls) : false;
 			if (e.target.name === item.name) {
 				item.isValid = !hasError;
 				item.value = e.target.value;
 			} else {
-				if (typeof item.hideIf === 'object' && hideField(item, controls)) item.value = '';
+				if (typeof item.hideIf === 'object' && item.hide) item.value = '';
 				if (item.label && typeof item.label.changeIf === 'object') {
 					item.label.changeIf.map((v) => {
 						const control = this.state.controls.filter(o => o.name === v.field);
@@ -94,6 +95,7 @@ export default class Form extends Component<any, any> {
 
 		const updatedControls = controls.map((item) => {
 			item.isValid = true;
+			item.hide = typeof item.hideIf === 'object' ? hideField(item, controls) : false;
 			if (item.value === null || item.value === undefined) item.value = '';
 			if (item.isRequired && !item.hide) {
 				if (item.control !== 'select' && (item.value === '' || !item.value)) {
@@ -105,7 +107,7 @@ export default class Form extends Component<any, any> {
 				}
 			}
 
-			if (typeof item.value === 'object' && item.valueAsObject) {
+			if (typeof item.value === 'object' && item.valueAsObject && !item.hide) {
 				if (item.value && item.value.filter(o => o.isRequired === true).length > 0) {
 					const updatedValues = item.value.map((itemS) => {
 						if (itemS.isRequired) {
@@ -126,14 +128,14 @@ export default class Form extends Component<any, any> {
 					formIsValid = false;
 				}
 			}
-			if (item.equalTo !== undefined) {
+			if (item.equalTo !== undefined && !item.hide) {
 				const valueToCompare = this.state.controls.filter(o => o.name === item.equalTo)[0].value;
 				if (!(item.value === valueToCompare) || item.value === '') {
 					item.isValid = false;
 					formIsValid = false;
 				}
 			}
-			if (item.greaterThan !== undefined) {
+			if (item.greaterThan !== undefined && !item.hide) {
 				const valueToCompare = this.state.controls.filter(o => o.name === item.greaterThan)[0].value;
 				if (parseFloat(item.value.toString().replace(/\./g, '')) < parseFloat(valueToCompare.toString().replace(/\./g, ''))) {
 					item.isValid = false;
@@ -185,15 +187,14 @@ export default class Form extends Component<any, any> {
 				});
 			});
 		} else {
-			const toBeValidate = o => (o.type !== 'hidden') && (!hideField(o, updatedControls)) && ((o.isRequired && o.isValid === false) || (o.greaterThan && o.isValid === false) || (o.regEx && o.isValid === false) || (o.equalTo && o.isValid === false));
-			let firstRequired = updatedControls.filter(o => toBeValidate(o))[0];
-			if (typeof firstRequired.value === 'object') {
-				const { value } = firstRequired;
+			const toBeValidateFilter = o => o.hide === false && o.type !== 'hidden' && ((o.isRequired && o.isValid === false) || (o.greaterThan && o.isValid === false) || (o.regEx && o.isValid === false) || (o.equalTo && o.isValid === false));
+			let firstRequired = updatedControls.filter(o => toBeValidateFilter(o))[0];
+			if (firstRequired && typeof firstRequired.value === 'object') {
 				/* eslint-disable-next-line */
-				firstRequired = value.filter(o => toBeValidate(o))[0];
+				firstRequired = firstRequired.value.filter(o => toBeValidateFilter(o))[0];
 			}
 			/* eslint-disable-next-line */ /* flow-disable-next-line */
-			document.getElementById(firstRequired.name).focus();
+			if (firstRequired) document.getElementById(firstRequired.name).focus();
 		}
 	}
 
