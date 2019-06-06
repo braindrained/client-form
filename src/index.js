@@ -185,16 +185,15 @@ export default class Form extends Component<any, any> {
 				});
 			});
 		} else {
-			const firstRequired = updatedControls.filter(o => (o.isRequired && !o.isValid) || (o.greaterThan && !o.isValid) || (o.regEx && !o.isValid) || (o.equalTo && !o.isValid))[0];
-
+			const toBeValidate = o => (o.type !== 'hidden') && (!hideField(o, updatedControls)) && ((o.isRequired && o.isValid === false) || (o.greaterThan && o.isValid === false) || (o.regEx && o.isValid === false) || (o.equalTo && o.isValid === false));
+			let firstRequired = updatedControls.filter(o => toBeValidate(o))[0];
 			if (typeof firstRequired.value === 'object') {
-				const subFieldRequired = firstRequired.value.filter(o => (o.isRequired && !o.isValid) || (o.greaterThan && !o.isValid) || (o.regEx && !o.isValid) || (o.equalTo && !o.isValid))[0];
-				/* eslint-disable-next-line */ /* flow-disable-next-line */
-				document.getElementById(subFieldRequired.name).focus();
-			} else {
-				/* eslint-disable-next-line */ /* flow-disable-next-line */
-				document.getElementById(firstRequired.name).focus();
+				const { value } = firstRequired;
+				/* eslint-disable-next-line */
+				firstRequired = value.filter(o => toBeValidate(o))[0];
 			}
+			/* eslint-disable-next-line */ /* flow-disable-next-line */
+			document.getElementById(firstRequired.name).focus();
 		}
 	}
 
@@ -229,7 +228,7 @@ export default class Form extends Component<any, any> {
 					textBefore, tabs, valueAsObject, text, firstRange,
 					secondRange, rangesStyle, overlayBg, content, unit, customSvg
 				} = item;
-				let hide = typeof item.hideIf === 'object' ? hideField(item, controls) : false;
+				const hide = typeof item.hideIf === 'object' ? hideField(item, controls) : false;
 				/* eslint-disable */
 				switch (control) {
 					default:

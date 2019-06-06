@@ -22,6 +22,31 @@ class App extends Component {
 		return el(Form, {
 				controls: [
 					{
+						control: 'text',
+						type: 'hidden',
+						name: 'categoryTypeId',
+						value: 1,
+						className: 'all-width'
+					},
+					{
+						control: 'text',
+						type: 'text',
+						name: 'priceMax',
+						onlyNumber: true,
+						placeholder: '',
+						label: {
+							text: 'Prezzo settimanale alta stagione',
+						},
+						value: '',
+						currency: true,
+						isRequired: true,
+						errorMessage: 'Campo obbligatorio',
+						unit: '€',
+						hideIf: [
+							{ field: 'categoryTypeId', regEx: /^(1|4)$/ }
+						]
+					},
+					{
 						control: 'label',
 						content: 'This is a text only label',
 						style: { lineHeight: '40px', clear: 'both', margin: '0 auto', fontSize: 16, marginBottom: 20 },
@@ -227,7 +252,7 @@ class App extends Component {
 						name: 'thisIsACustomExternalComponent',
 						key: 'thisIsACustomExternalComponent',
 						value: [
-							{ name: 'firstField', value: '', isRequired: false, isValid: true, placeholder: '\'cause I need a complete customized one', errorMessage: 'Campo obbligatorio' },
+							{ name: 'firstField', value: '', isRequired: true, isValid: true, placeholder: '\'cause I need a complete customized one', errorMessage: 'Campo obbligatorio' },
 							{ name: 'secondFieldWithEmptyPlaceholder', value: '', isRequired: false, isValid: true, placeholder: '', },
 						],
 						isValid: true,
@@ -245,7 +270,8 @@ class App extends Component {
 							marginBottom: 15
 						},
 						valueAsObject: true,
-						exclude: false
+						exclude: false,
+						isRequired: true
 					},
 					{
 						control: 'radio',

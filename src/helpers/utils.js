@@ -28,6 +28,7 @@ export const sumClasses = (classes: Array<string>) => {
 export const isInt = (value: any) => !isNaN(value) && (x => (x | 0) === x)(parseFloat(value));
 
 export const hideField = (item: Object, controls: Array<Object>) => {
+	if (!item.hideIf) return false;
 	let hide = false;
 	item.hideIf.map((v) => {
 		const control = controls.filter(o => o.name === v.field);
