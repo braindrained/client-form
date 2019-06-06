@@ -374,7 +374,8 @@ class App extends Component {
 				formStyle: {
 					maxWidth: 540,
 					margin: '0 auto'
-				}
+				},
+				excludeHidden: true
 			}
 		)
 	}

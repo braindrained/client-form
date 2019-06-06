@@ -151,7 +151,8 @@ export default class Form extends Component<any, any> {
 
 		if (formIsValid) {
 			const formObject = {};
-			updatedControls.filter(o => o.control !== 'label' && o.exclude !== true).map((item) => {
+			const { excludeHidden } = this.props;
+			updatedControls.filter(o => o.control !== 'label' && o.exclude !== true && (excludeHidden && !o.hide)).map((item) => {
 				let { value } = item;
 				const { valueAsObject, currency, name } = item;
 				if (typeof value === 'object' && valueAsObject) {
@@ -187,7 +188,7 @@ export default class Form extends Component<any, any> {
 				});
 			});
 		} else {
-			const toBeValidateFilter = o => o.hide === false && o.type !== 'hidden' && ((o.isRequired && o.isValid === false) || (o.greaterThan && o.isValid === false) || (o.regEx && o.isValid === false) || (o.equalTo && o.isValid === false));
+			const toBeValidateFilter = o => !o.hide && o.type !== 'hidden' && ((o.isRequired && o.isValid === false) || (o.greaterThan && o.isValid === false) || (o.regEx && o.isValid === false) || (o.equalTo && o.isValid === false));
 			let firstRequired = updatedControls.filter(o => toBeValidateFilter(o))[0];
 			if (firstRequired && typeof firstRequired.value === 'object') {
 				/* eslint-disable-next-line */
