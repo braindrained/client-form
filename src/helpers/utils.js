@@ -27,12 +27,15 @@ export const sumClasses = (classes: Array<string>) => {
 /* eslint-disable-next-line */
 export const isInt = (value: any) => !isNaN(value) && (x => (x | 0) === x)(parseFloat(value));
 
+export const notEmpty = (val: any) => val !== null && val !== undefined && val !== '';
+
 export const hideField = (item: Object, controls: Array<Object>) => {
 	if (!item.hideIf) return false;
 	let hide = false;
 	item.hideIf.map((v) => {
 		const control = controls.filter(o => o.name === v.field);
-		if (control.length > 0 && control[0].value.toString().match(v.regEx) !== null) hide = true;
+		const controlValue = control[0].value ? control[0].value : '';
+		if (control.length > 0 && controlValue.toString().match(v.regEx) !== null) hide = true;
 		return null;
 	});
 	return hide;

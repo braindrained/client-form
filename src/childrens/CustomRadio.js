@@ -2,7 +2,7 @@
 import { Component, createElement } from 'react';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
-import { sumClasses, isInt } from '../helpers/utils';
+import { sumClasses, isInt, notEmpty } from '../helpers/utils';
 
 const el = createElement;
 
@@ -11,11 +11,9 @@ class CustomRadio extends Component<any, any> {
 	constructor(props: Object) {
 		super(props);
 		const { value } = this.props;
-		const checkValue = value !== undefined && value !== null ? (value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value) : this.props.default;
+		const checkValue = notEmpty(value) ? (value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value) : this.props.default;
 
-		this.state = {
-			value: checkValue
-		};
+		this.state = { value: checkValue };
 	}
 
 	shouldComponentUpdate(nextProps: Object, nextState: Object) {
@@ -28,11 +26,10 @@ class CustomRadio extends Component<any, any> {
 
 	componentWillReceiveProps(nextProps: Object) {
 		const { value } = nextProps;
-		const checkValue = value !== undefined && value !== null ? (value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value) : this.props.default;
+		const checkValue = notEmpty(value) ? (value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value) : this.props.default;
+
 		if (this.state.value !== checkValue) {
-			this.setState({
-				value: checkValue
-			});
+			this.setState({ value: checkValue });
 		}
 	}
 
@@ -40,9 +37,7 @@ class CustomRadio extends Component<any, any> {
 		const { value } = event.target;
 		const checkValue = value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value;
 
-		this.setState({
-			value: checkValue
-		});
+		this.setState({ value: checkValue });
 		this.props.onUpdate(event);
 	}
 

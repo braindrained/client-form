@@ -96,7 +96,6 @@ export default class Form extends Component<any, any> {
 		const updatedControls = controls.map((item) => {
 			item.isValid = true;
 			item.hide = typeof item.hideIf === 'object' ? hideField(item, controls) : false;
-			if (item.value === null || item.value === undefined) item.value = '';
 			if (item.isRequired && !item.hide) {
 				if (item.control !== 'select' && (item.value === '' || !item.value)) {
 					item.isValid = false;
@@ -166,7 +165,7 @@ export default class Form extends Component<any, any> {
 				if (currency && value !== undefined && value !== null && value !== '' && value !== 0 && !isInt(value)) {
 					value = value.replace(/\./g, '');
 				}
-				value = value === undefined ? '' : value.toString() === 'true' ? true : value.toString() === 'false' ? false : value;
+				value = value === undefined ? null : value.toString() === 'true' ? true : value.toString() === 'false' ? false : value;
 				formObject[name] = value;
 				return null;
 			});
