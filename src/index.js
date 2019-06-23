@@ -58,7 +58,8 @@ export default class Form extends Component<any, any> {
 							if (e.target.name === v.field) {
 								item.value = '';
 							}
-							item.options = v.options.filter(o => o.type.indexOf(parseFloat(control[0].value))	!== -1);
+							const controlValue = control[0].value !== '' ? control[0].value : control[0].default;
+							item.options = v.options.filter(o => o.type.indexOf(parseFloat(controlValue))	!== -1);
 						}
 						return null;
 					});
