@@ -102,7 +102,7 @@ class App extends Component {
 						control: 'select',
 						name: 'propertyTypeId',
 						hideRadio: true,
-						options: tipologies.filter(o => o.type.indexOf(parseFloat(1)) !== -1),
+						options: tipologies.filter(o => o.type['categoryTypeId'].indexOf(parseFloat(1)) !== -1),
 						value: '',
 						optionIf: [],
 					},
@@ -304,7 +304,7 @@ class App extends Component {
 					{
 						control: 'radio',
 						name: 'energyClassId',
-						options: energy.filter(o => o.type.indexOf(parseFloat(997)) !== -1),
+						options: energy.filter(o => o.type['energyClass'].indexOf(parseFloat(997)) !== -1),
 						value: 0,
 						default: 0,
 						hideRadio: true,
@@ -374,7 +374,7 @@ class App extends Component {
 					maxWidth: 540,
 					margin: '0 auto'
 				},
-				
+
 			}
 		)
 	}
