@@ -50,17 +50,18 @@ export default class Form extends Component<any, any> {
 					});
 				}
 				if (typeof item.optionIf === 'object') {
-					item.optionIf.map((v) => {
+					let options;
+					item.optionIf.map((v, i) => {
+						if (i === 0) options = v.options;
 						const control = this.state.controls.filter(o => o.name === v.field);
 						if (control.length > 0) {
-							if (e.target.name === v.field) {
-								item.value = '';
-							}
+							if (e.target.name === v.field) item.value = '';
 							const controlValue = control[0].value !== '' ? control[0].value : control[0].default;
-							item.options = v.options.filter(o => o.type.indexOf(parseFloat(controlValue))	!== -1);
+							options = options.filter(o => o.type[v.field].indexOf(parseFloat(controlValue)) !== -1);
 						}
 						return null;
 					});
+					item.options = options;
 				}
 				if (typeof item.changeStyleIf === 'object') {
 					item.changeStyleIf.map((v) => {
