@@ -34,13 +34,11 @@ export default class Form extends Component<any, any> {
 	onUpdate(e: Object, hasError: boolean) {
 		const { controls } = this.state;
 
-		const updatedControls = controls.map((item) => {
-			item.hide = typeof item.hideIf === 'object' ? hideField(item, controls) : false;
+		let updatedControls = controls.map((item) => {
 			if (e.target.name === item.name) {
 				item.isValid = !hasError;
 				item.value = e.target.value;
 			} else {
-				if (typeof item.hideIf === 'object' && item.hide) item.value = '';
 				if (item.label && typeof item.label.changeIf === 'object') {
 					item.label.changeIf.map((v) => {
 						const control = this.state.controls.filter(o => o.name === v.field);
@@ -81,6 +79,12 @@ export default class Form extends Component<any, any> {
 			return item;
 		});
 
+		updatedControls = updatedControls.map((item) => {
+			item.hide = typeof item.hideIf === 'object' ? hideField(item, updatedControls) : false;
+			if (typeof item.hideIf === 'object' && item.hide && item.control !== 'external') item.value = '';
+			return item;
+		});
+
 		this.setState({
 			controls: updatedControls
 		});
@@ -101,7 +105,7 @@ export default class Form extends Component<any, any> {
 				if (item.control !== 'select' && (item.value === '' || !item.value)) {
 					item.isValid = false;
 					formIsValid = false;
-				} else if (item.control === 'select' && (item.value === '0' || item.value === 0 || item.value === '')) {
+				} else if (item.control === 'select' && (item.value === '0' || item.value === 0 || item.value === '' || item.value === ' ')) {
 					item.isValid = false;
 					formIsValid = false;
 				}

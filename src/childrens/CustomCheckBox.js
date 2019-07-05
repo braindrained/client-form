@@ -8,9 +8,11 @@ export default class CustomCheckBox extends Component<any, any> {
 
 	constructor(props: Object) {
 		super(props);
+		const { value, label } = this.props;
 
 		this.state = {
-			value: this.props.value === 'true' || this.props.value === true
+			value: value === 'true' || value === true,
+			labelText: label && label.text
 		};
 	}
 
@@ -18,7 +20,18 @@ export default class CustomCheckBox extends Component<any, any> {
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
 		if (this.props.style !== nextProps.style) return true;
+		if (nextProps.label && this.state.labelText !== nextProps.label.text) return true;
 		return false;
+	}
+
+	componentWillReceiveProps(nextProps: Object) {
+		const { label } = nextProps;
+
+		if (label && this.state.labelText !== label.text) {
+			this.setState({
+				labelText: label && label.text
+			});
+		}
 	}
 
 	onChange(event: Object) {

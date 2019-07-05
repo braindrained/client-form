@@ -10,10 +10,13 @@ class CustomRadio extends Component<any, any> {
 
 	constructor(props: Object) {
 		super(props);
-		const { value } = this.props;
+		const { value, label } = this.props;
 		const checkValue = notEmpty(value) ? (value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value) : this.props.default;
 
-		this.state = { value: checkValue };
+		this.state = {
+			value: checkValue,
+			labelText: label && label.text
+		};
 	}
 
 	shouldComponentUpdate(nextProps: Object, nextState: Object) {
@@ -21,15 +24,21 @@ class CustomRadio extends Component<any, any> {
 		if (this.state.value !== nextState.value) return true;
 		if (this.props.options !== nextProps.options) return true;
 		if (this.props.isValid !== nextProps.isValid) return true;
+		if (nextProps.label && this.state.labelText !== nextProps.label.text) return true;
 		return false;
 	}
 
 	componentWillReceiveProps(nextProps: Object) {
-		const { value } = nextProps;
+		const { name, onUpdate } = this.props;
+		const { value, label } = nextProps;
 		const checkValue = notEmpty(value) ? (value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value) : this.props.default;
 
-		if (this.state.value !== checkValue) {
-			this.setState({ value: checkValue });
+		if (this.state.value !== checkValue || (label && this.state.labelText !== label.text)) {
+			this.setState({
+				value: checkValue,
+				labelText: label && label.text
+			});
+			onUpdate({ target: { name, value: checkValue }}, false);
 		}
 	}
 
@@ -43,7 +52,7 @@ class CustomRadio extends Component<any, any> {
 
 	render() {
 		const { className, style, label, name, hideRadio, options, isRequired, isValid, errorMessage } = this.props;
-		const { value } = this.state;
+		const { value, labelText } = this.state;
 
 		return el('div', { className: sumClasses(['container-field', className]), style },
 			el(FieldLabel, { label, name, isRequired, isValid }),
