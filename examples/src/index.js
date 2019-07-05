@@ -99,14 +99,6 @@ class App extends Component {
 						value: 4
 					},
 					{
-						control: 'select',
-						name: 'propertyTypeId',
-						hideRadio: true,
-						options: tipologies.filter(o => o.type['categoryTypeId'].indexOf(parseFloat(1)) !== -1),
-						value: '',
-						optionIf: [],
-					},
-					{
 						control: 'fakeselect',
 						name: 'priceRange',
 						text: 'Seleziona...',
