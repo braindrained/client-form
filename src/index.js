@@ -27,11 +27,13 @@ export default class Form extends Component<any, any> {
 		this.state = {
 			controls,
 			succeed: null,
-			isSent: null
+			isSent: null,
+			init: true
 		};
 	}
 
 	onUpdate(e: Object, hasError: boolean) {
+		this.setState({ init: false });
 		const { controls } = this.state;
 
 		let updatedControls = controls.map((item) => {
@@ -83,6 +85,7 @@ export default class Form extends Component<any, any> {
 	}
 
 	formIsValid() {
+		this.setState({ init: false });
 		let formIsValid = true;
 		const { controls } = this.state;
 
@@ -201,11 +204,8 @@ export default class Form extends Component<any, any> {
 	}
 
 	render() {
-		const {
-			formClassName, formStyle, sendButton,
-			beforeButton, buttonContainerStyle, afterButton
-		} = this.props;
-		const { controls, succeed, isSent, message } = this.state;
+		const { formClassName, formStyle, sendButton, beforeButton, buttonContainerStyle, afterButton } = this.props;
+		const { controls, succeed, isSent, message, init } = this.state;
 		const sendButtonClass = sumClasses([
 			succeed !== null ? (succeed ? 'btn btn-succeed' : 'btn btn-red') : (isSent ? 'btn btn-sent' : 'btn'),
 			sendButton && sendButton.disabled ? 'btn-grey' : ''
@@ -223,7 +223,7 @@ export default class Form extends Component<any, any> {
 					secondRange, rangesStyle, overlayBg, content, unit, customSvg
 				} = item;
 				const hide = typeof item.hideIf === 'object' ? hideField(item, controls) : false;
-				const options = typeof item.optionIf === 'object' ? optionsIf(item, controls, { target: { name: item.name } }) : item.options;
+				const options = typeof item.optionIf === 'object' && init ? optionsIf(item, controls, { target: { name: item.name } }) : item.options;
 				/* eslint-disable */
 				switch (control) {
 					default:

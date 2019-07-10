@@ -47,15 +47,14 @@ export const hideField = (item: Object, controls: Array<Object>) => {
 	}
 };
 
-export const optionsIf = (item: Object, controls: Array<Object>, e: Object) => {
+export const optionsIf = (item: Object, controls: Array<Object>, el: Object) => {
 	try {
 		let options;
 		item.optionIf.map((v, i) => {
 			if (i === 0) options = v.options;
 			const control = controls.filter(o => o.name === v.field);
-			console.log('control', control);
 			if (control.length > 0) {
-				if (e.target.name === v.field) item.value = '';
+				if (el.target.name === v.field) item.value = '';
 				const controlValue = control[0].value !== '' ? control[0].value : control[0].default;
 				options = options.filter(o => o.type[v.field].indexOf(parseFloat(controlValue)) !== -1);
 			}
