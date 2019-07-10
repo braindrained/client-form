@@ -12,7 +12,7 @@ import CustomTextAreaTab from './childrens/CustomTextAreaTab';
 import CustomPlusMinus from './childrens/CustomPlusMinus';
 import FakeSelect from './childrens/FakeSelect';
 
-import { sumClasses, isInt, hideField } from './helpers/utils';
+import { sumClasses, isInt, hideField, optionsIf } from './helpers/utils';
 import './Form.css';
 
 const el = createElement;
@@ -49,20 +49,7 @@ export default class Form extends Component<any, any> {
 						return null;
 					});
 				}
-				if (typeof item.optionIf === 'object') {
-					let options;
-					item.optionIf.map((v, i) => {
-						if (i === 0) options = v.options;
-						const control = this.state.controls.filter(o => o.name === v.field);
-						if (control.length > 0) {
-							if (e.target.name === v.field) item.value = '';
-							const controlValue = control[0].value !== '' ? control[0].value : control[0].default;
-							options = options.filter(o => o.type[v.field].indexOf(parseFloat(controlValue)) !== -1);
-						}
-						return null;
-					});
-					item.options = options;
-				}
+				if (typeof item.optionIf === 'object') item.options = optionsIf(item, controls, e);
 				if (typeof item.changeStyleIf === 'object') {
 					item.changeStyleIf.map((v) => {
 						const control = this.state.controls.filter(o => o.name === v.field);
@@ -82,7 +69,7 @@ export default class Form extends Component<any, any> {
 
 		updatedControls = updatedControls.map((item) => {
 			item.hide = typeof item.hideIf === 'object' ? hideField(item, updatedControls) : false;
-			if (typeof item.hideIf === 'object' && item.hide && item.control !== 'external') item.value = '';
+			if (typeof item.hideIf === 'object' && item.hide && item.control !== 'external') item.value = item.default;
 			return item;
 		});
 
@@ -231,11 +218,12 @@ export default class Form extends Component<any, any> {
 				const {
 					control, name, component, type, onlyNumber, placeholder, label,
 					value, isRequired, isValid, disabled, errorMessage, className, style,
-					updateOnChange, limitChar, currency, options, hideRadio,
+					updateOnChange, limitChar, currency, hideRadio,
 					textBefore, tabs, valueAsObject, text, firstRange,
 					secondRange, rangesStyle, overlayBg, content, unit, customSvg
 				} = item;
 				const hide = typeof item.hideIf === 'object' ? hideField(item, controls) : false;
+				const options = typeof item.optionIf === 'object' ? optionsIf(item, controls, { target: { name: item.name } }) : item.options;
 				/* eslint-disable */
 				switch (control) {
 					default:
