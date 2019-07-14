@@ -220,7 +220,8 @@ export default class Form extends Component<any, any> {
 					value, isRequired, isValid, disabled, errorMessage, className, style,
 					updateOnChange, limitChar, currency, hideRadio,
 					textBefore, tabs, valueAsObject, text, firstRange,
-					secondRange, rangesStyle, overlayBg, content, unit, customSvg
+					secondRange, rangesStyle, overlayBg, content, unit, customSvg,
+					autoComplete
 				} = item;
 				const hide = typeof item.hideIf === 'object' ? hideField(item, controls) : false;
 				const options = typeof item.optionIf === 'object' && init ? optionsIf(item, controls, { target: { name: item.name } }) : item.options;
@@ -240,7 +241,8 @@ export default class Form extends Component<any, any> {
 							onUpdate: (e, h) => { this.onUpdate(e, h); },
 							isRequired, isValid, disabled,
 							errorMessage, className, style,
-							updateOnChange, limitChar, currency, unit
+							updateOnChange, limitChar, currency, unit,
+							autoComplete
 						});
 					case 'plusMinus':
 						if (hide) return (null);

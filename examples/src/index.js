@@ -44,7 +44,8 @@ class App extends Component {
 						unit: '€',
 						hideIf: [
 							{ field: 'categoryTypeId', regEx: /^(1|4)$/ }
-						]
+						],
+						autoComplete: 'new-password'
 					},
 					{
 						control: 'label',
@@ -83,6 +84,7 @@ class App extends Component {
 						type: 'text',
 						name: 'firstName',
 						limitChar: 25,
+						autoComplete: 'new-password'
 					},
 					{
 						control: 'text',
