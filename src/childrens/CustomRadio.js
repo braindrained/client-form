@@ -56,7 +56,7 @@ class CustomRadio extends Component<any, any> {
 
 		return el('div', { className: sumClasses(['container-field', className]), style },
 			el(FieldLabel, { label, name, isRequired, isValid }),
-			el('div', { className: 'float-container' },
+			el('div', { className: 'float-container', id: name },
 				options.map(item => el('div', {
 					key: `select_${item.name}_${item.value}`,
 					className: hideRadio && item.value === value ?

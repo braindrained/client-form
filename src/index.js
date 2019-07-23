@@ -279,7 +279,8 @@ export default class Form extends Component<any, any> {
 								key: item.name, name, label, value,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								className, style,
-								textBefore, customSvg
+								textBefore, customSvg,
+								default: item.default
 						});
 					case 'radio':
 						if (hide) return (null);

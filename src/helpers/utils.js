@@ -35,9 +35,14 @@ export const hideField = (item: Object, controls: Array<Object>) => {
 		let hide = false;
 		item.hideIf.map((v) => {
 			const control = controls.filter(o => o.name === v.field);
-			let controlValue = control[0].value ? control[0].value : '';
-			controlValue = controlValue === '' ? control[0].default : controlValue;
-			controlValue = controlValue ? controlValue : '';
+			let controlValue = '';
+			if (control[0].control === 'check') {
+				controlValue = control[0].value ? control[0].value : control[0].default;
+			} else {
+				controlValue = control[0].value ? control[0].value : '';
+				controlValue = controlValue === '' ? control[0].default : controlValue;
+				controlValue = controlValue ? controlValue : '';
+			}
 			if (control.length > 0 && controlValue.toString().match(v.regEx) !== null) hide = true;
 			return null;
 		});

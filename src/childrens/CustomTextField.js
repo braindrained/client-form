@@ -12,11 +12,11 @@ class CustomTextField extends Component<any, any> {
 		super(props);
 		const { isValid, type, label, onlyNumber, limitChar } = this.props;
 		let { value } = this.props;
-		value = value === undefined ? '' : value;
+		value = value === undefined || value === null ? '' : value;
 		value = onlyNumber === true && value !== undefined ? value.toString().replace(/\D/g, '') : value;
 		value = limitChar ? value.toString().substring(0, limitChar) : value;
 		this.state = {
-			value: value === undefined ? '' : value,
+			value: value === undefined || value === null ? '' : value,
 			isValid,
 			editing: false,
 			type,
@@ -36,7 +36,7 @@ class CustomTextField extends Component<any, any> {
 	componentWillReceiveProps(nextProps: Object) {
 		if (this.state.value !== nextProps.value || !nextProps.isValid || (nextProps.label && this.state.labelText !== nextProps.label.text)) {
 			this.setState({
-				value: nextProps.value === undefined ? '' : nextProps.value,
+				value: nextProps.value === undefined || nextProps.value === null ? '' : nextProps.value,
 				isValid: nextProps.isValid,
 				labelText: nextProps.label && nextProps.label.text
 			});
