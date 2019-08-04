@@ -161,7 +161,7 @@ export default class Form extends Component<any, any> {
 				if (currency && value !== undefined && value !== null && value !== '' && value !== 0 && !isInt(value)) {
 					value = value.replace(/\./g, '');
 				}
-				value = value === undefined ? null : value.toString() === 'true' ? true : value.toString() === 'false' ? false : value;
+				value = value === undefined || value === null ? null : value.toString() === 'true' ? true : value.toString() === 'false' ? false : value;
 				formObject[name] = value;
 				return null;
 			});
