@@ -31,7 +31,21 @@ class CustomRadio extends Component<any, any> {
 	componentWillReceiveProps(nextProps: Object) {
 		const { name, onUpdate } = this.props;
 		const { value, label } = nextProps;
-		const checkValue = notEmpty(value) ? (value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value) : this.props.default;
+		const checkValue =
+		notEmpty(value) ?
+		(value.toString() === 'true' ?
+			true
+			:
+			value.toString() === 'false' ?
+			false
+			:
+			isInt(value) ?
+			parseInt(value, 10)
+			:
+			value
+		)
+		:
+		this.props.default;
 
 		if (this.state.value !== checkValue || (label && this.state.labelText !== label.text)) {
 			this.setState({

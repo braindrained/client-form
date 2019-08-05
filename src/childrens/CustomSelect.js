@@ -40,12 +40,12 @@ class CustomSelect extends Component<any, any> {
 	}
 
 	render() {
-		const { className, style, label, isRequired, errorMessage, name, value, isValid } = this.props;
+		const { className, style, label, isRequired, errorMessage, name, value, isValid, disabled } = this.props;
 
 		return el('div', { className: sumClasses(['container-field', className]), style },
 			el(FieldLabel, { label, name, isRequired, isValid }),
 			el('div', { className: 'select-style', style: isValid === false ? { borderColor: '#e4002b' } : {} },
-				el('select', { name, id: name, value, onChange: (e) => { this.props.onUpdate(e); } },
+				el('select', { name, id: name, value, onChange: (e) => { this.props.onUpdate(e); }, disabled },
 					this.state.options.map((item, i) => {
 						switch (item.value) {
 						case '0':
