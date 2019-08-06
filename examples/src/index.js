@@ -18,8 +18,10 @@ class App extends Component {
 	render() {
 		const prpMail = undefined;
 		const contractTypeId = 1;
+		console.log('this', this);
 
 		return el(Form, {
+				ref: (node) => { this.myForm = node; },
 				controls: [
 					{
 						control: 'text',

@@ -190,7 +190,8 @@ export default class Form extends Component<any, any> {
 				firstRequired = firstRequired.value.filter(o => toBeValidateFilter(o))[0];
 			}
 			/* eslint-disable-next-line */ /* flow-disable-next-line */
-			if (firstRequired) document.getElementById(firstRequired.name).focus();
+			if (firstRequired) this[firstRequired.name][firstRequired.name].focus();
+			//document.getElementById(firstRequired.name).focus();
 		}
 	}
 
@@ -242,7 +243,8 @@ export default class Form extends Component<any, any> {
 							isRequired, isValid, disabled,
 							errorMessage, className, style,
 							updateOnChange, limitChar, currency, unit,
-							autoComplete
+							autoComplete,
+							ref: (node) => { this[name] = node; }
 						});
 					case 'plusMinus':
 						if (hide) return (null);

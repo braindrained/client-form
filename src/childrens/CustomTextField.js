@@ -1,5 +1,5 @@
 // @flow
-import { Component, createElement, Fragment } from 'react';
+import { Component, createElement, Fragment, createRef } from 'react';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { camelToTitle, sumClasses } from '../helpers/utils';
@@ -105,7 +105,8 @@ class CustomTextField extends Component<any, any> {
 				onBlur: (e) => { this.onBlur(e); },
 				onFocus: () => { this.onFocus(); },
 				style: Object.assign({}, inputStyle, isValid === false ? { border: '1px solid #e4002b' } : {}),
-				autoComplete
+				autoComplete,
+				ref: (node) => { this[name] = node; }
 			}),
 			this.props.type === 'password' ?
 				el('svg', { onClick: () => { this.togglePassword(); }, className: 'eye', width: 24, height: 24, viewBox: '0 0 24 24' },
