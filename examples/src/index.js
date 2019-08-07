@@ -1,4 +1,4 @@
-import React, { Component, createElement, Fragment } from 'react';
+import React, { Component, createElement, Fragment, createRef } from 'react';
 import { render } from 'react-dom';
 
 import Form from '../../src';
@@ -13,15 +13,20 @@ class App extends Component {
 
 	constructor(props) {
 		super(props);
+
+		this.myForm = createRef();
+	}
+
+	componentDidMount() {
+		console.log('this', this.myForm.current);
 	}
 
 	render() {
 		const prpMail = undefined;
 		const contractTypeId = 1;
-		console.log('this', this);
 
 		return el(Form, {
-				ref: (node) => { this.myForm = node; },
+				ref: this.myForm,
 				controls: [
 					{
 						control: 'text',

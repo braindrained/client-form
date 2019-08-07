@@ -1,5 +1,5 @@
 // @flow
-import { Component, createElement } from 'react';
+import { Component, createElement, createRef } from 'react';
 import ClickOutHandler from 'react-onclickout';
 
 import CustomTextField from './childrens/CustomTextField';
@@ -190,7 +190,7 @@ export default class Form extends Component<any, any> {
 				firstRequired = firstRequired.value.filter(o => toBeValidateFilter(o))[0];
 			}
 			/* eslint-disable-next-line */ /* flow-disable-next-line */
-			if (firstRequired) this[firstRequired.name][firstRequired.name].focus();
+			if (firstRequired) this[firstRequired.name].current[firstRequired.name].current.focus()
 			//document.getElementById(firstRequired.name).focus();
 		}
 	}
@@ -226,6 +226,7 @@ export default class Form extends Component<any, any> {
 				} = item;
 				const hide = typeof item.hideIf === 'object' ? hideField(item, controls) : false;
 				const options = typeof item.optionIf === 'object' && init ? optionsIf(item, controls, { target: { name: item.name } }) : item.options;
+				this[name] = createRef();
 				/* eslint-disable */
 				switch (control) {
 					default:
@@ -244,7 +245,7 @@ export default class Form extends Component<any, any> {
 							errorMessage, className, style,
 							updateOnChange, limitChar, currency, unit,
 							autoComplete,
-							ref: (node) => { this[name] = node; }
+							ref: this[name]
 						});
 					case 'plusMinus':
 						if (hide) return (null);

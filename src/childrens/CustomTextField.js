@@ -10,7 +10,7 @@ class CustomTextField extends Component<any, any> {
 
 	constructor(props: Object) {
 		super(props);
-		const { isValid, type, label, onlyNumber, limitChar } = this.props;
+		const { isValid, type, label, onlyNumber, limitChar, name, autoComplete } = this.props;
 		let { value } = this.props;
 		value = value === undefined || value === null ? '' : value;
 		value = onlyNumber === true && value !== undefined ? value.toString().replace(/\D/g, '') : value;
@@ -20,13 +20,17 @@ class CustomTextField extends Component<any, any> {
 			isValid,
 			editing: false,
 			type,
-			labelText: label && label.text
+			labelText: label && label.text,
+			autoComplete
 		};
+
+		this[name] = createRef();
 	}
 
 	shouldComponentUpdate(nextProps: Object, nextState: Object) {
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
+		if (this.state.autoComplete !== nextState.autoComplete) return true;
 		if (this.props.isValid !== nextProps.isValid) return true;
 		if (this.state.type !== nextState.type) return true;
 		if (nextProps.label && this.state.labelText !== nextProps.label.text) return true;
@@ -44,11 +48,12 @@ class CustomTextField extends Component<any, any> {
 	}
 
 	onChange(event: Object) {
-		const { limitChar, onlyNumber, updateOnChange, name, onUpdate } = this.props;
+		const { limitChar, onlyNumber, updateOnChange, name, onUpdate, autoComplete } = this.props;
 		const value = limitChar ? event.target.value.toString().substring(0, limitChar) : event.target.value;
 		this.setState({
 			value: onlyNumber ? value.replace(/\D/g, '') : value,
 			isValid: true,
+			autoComplete: autoComplete
 		});
 		if (updateOnChange === true) {
 			onUpdate({
@@ -87,9 +92,9 @@ class CustomTextField extends Component<any, any> {
 		const {
 			className, style, label, name, isRequired,
 			errorMessage, placeholder, currency, disabled,
-			unit, autoComplete
+			unit
 		} = this.props;
-		const { isValid, value, type } = this.state;
+		const { isValid, value, type, autoComplete } = this.state;
 		const inputStyle = type === 'password' || unit !== undefined ? { paddingRight: 30 } : {};
 
 		return el('div', { className: sumClasses(['container-field', className]), style },
@@ -106,7 +111,7 @@ class CustomTextField extends Component<any, any> {
 				onFocus: () => { this.onFocus(); },
 				style: Object.assign({}, inputStyle, isValid === false ? { border: '1px solid #e4002b' } : {}),
 				autoComplete,
-				ref: (node) => { this[name] = node; }
+				ref: this[name]
 			}),
 			this.props.type === 'password' ?
 				el('svg', { onClick: () => { this.togglePassword(); }, className: 'eye', width: 24, height: 24, viewBox: '0 0 24 24' },
