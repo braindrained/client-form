@@ -39,12 +39,21 @@ export const hideField = (item: Object, controls: Array<Object>) => {
 			if (control[0].control === 'check') {
 				controlValue = control[0].value ? control[0].value : control[0].default;
 			} else {
-				controlValue = control[0].value ? control[0].value : '';
-				controlValue = controlValue === '' ? control[0].default : controlValue;
-				controlValue = controlValue ? controlValue : '';
+				if (control[0].value === 0) {
+					controlValue = control[0].value;
+				} else {
+					controlValue = control[0].value ? control[0].value : '';
+					controlValue = controlValue === '' ? control[0].default : controlValue;
+					controlValue = controlValue ? controlValue : '';
+				}
 			}
-			if (control.length > 0 && controlValue.toString().match(v.regEx) !== null) hide = true;
-			return null;
+			if (v.regEx) {
+				if (control.length > 0 && controlValue.toString().match(v.regEx) !== null) hide = true;
+				return null;
+			} else {
+				if (control.length > 0 && v.values.indexOf(controlValue) !== -1) hide = true;
+				return null;
+			}
 		});
 		return hide;
 	} catch (e) {
