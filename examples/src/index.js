@@ -18,7 +18,7 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		console.log('this', this.myForm.current);
+		//console.log('this', this.myForm.current);
 	}
 
 	render() {

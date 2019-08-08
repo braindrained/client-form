@@ -48,7 +48,7 @@ export const hideField = (item: Object, controls: Array<Object>) => {
 				}
 			}
 			if (v.regEx) {
-				if (control.length > 0 && controlValue.toString().match(v.regEx) !== null) hide = true;
+				if (control.length > 0 && v.regEx.test(controlValue.toString())) hide = true;
 				return null;
 			} else {
 				if (control.length > 0 && v.values.indexOf(controlValue) !== -1) hide = true;
@@ -57,6 +57,7 @@ export const hideField = (item: Object, controls: Array<Object>) => {
 		});
 		return hide;
 	} catch (e) {
+		console.log('hideField error: ', e);
 		return false;
 	}
 };
