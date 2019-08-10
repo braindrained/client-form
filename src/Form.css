@@ -352,6 +352,45 @@ select::-ms-expand {
 	margin-right: 15px;
 }
 
+/* AutoSuggest */
+.client-form .autosuggest {
+  position: relative;
+  svg {
+  	position: absolute;
+  	z-index: 1;
+    top: 36px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+  	@media screen and (min-width: $break-small) {
+      top: 33px;
+    	right: 8px;
+  	}
+    circle {
+      stroke: #96a1b0;
+    }
+  }
+}
+.client-form .autosuggest .autosuggest-suggestions {
+	position: absolute;
+	background: #fff;
+	z-index: 9999;
+	width: 100%;
+	cursor: pointer;
+}
+.client-form .autosuggest .autosuggest-suggestions .autosuggest-suggestion:hover {
+	background: #d8dbdf;
+}
+.client-form .autosuggest .autosuggest-suggestions .autosuggest-suggestion,
+.client-form .autosuggest .autosuggest-suggestions .autosuggest-suggestion-selected {
+	height: 48px;
+	line-height: 48px;
+	padding: 0px 8px;
+}
+.client-form .autosuggest .autosuggest-suggestions .autosuggest-suggestion-selected {
+	background: #d8dbdf;
+}
+
 @media screen and (min-width: 560px) {
 	.client-form {
 		padding: 0px 0px 0px 0px;
@@ -406,5 +445,9 @@ select::-ms-expand {
 	}
 	.client-form .container-field .fake-cont .min-max {
 		line-height: 33px;
+	}
+	.client-form .autosuggest .autosuggest-suggestions .autosuggest-suggestion-selected {
+		height: 40px;
+		line-height: 40px;
 	}
 }

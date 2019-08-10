@@ -11,6 +11,7 @@ import CustomLabel from './childrens/CustomLabel';
 import CustomTextAreaTab from './childrens/CustomTextAreaTab';
 import CustomPlusMinus from './childrens/CustomPlusMinus';
 import FakeSelect from './childrens/FakeSelect';
+import AutoSuggest from './childrens/AutoSuggest';
 
 import { sumClasses, isInt, hideField, optionsIf, output, findFirstRequired } from './helpers/utils';
 import './Form.css';
@@ -83,9 +84,9 @@ export default class Form extends Component<any, any> {
 			if (this.props.updateOnChangeWithValidation) {
 				this.formIsValid();
 			} else {
-				const { excludeHidden } = this.props;
+				const { excludeHidden, updateOnChange } = this.props;
 				const formObject = output(updatedControls, excludeHidden);
-				this.props.updateOnChange(formObject);
+				updateOnChange(e, formObject);
 			}
 		}
 	}
@@ -96,6 +97,7 @@ export default class Form extends Component<any, any> {
 		const { controls } = this.state;
 
 		const updatedControls = controls.map((item) => {
+			if (item.name === 'geolocationEvol') console.log('updatedControls', item);
 			item.isValid = true;
 			item.hide = typeof item.hideIf === 'object' ? hideField(item, controls) : false;
 			if (item.isRequired && !item.hide) {
@@ -203,6 +205,11 @@ export default class Form extends Component<any, any> {
 			} else {
 				this[firstRequired.name].current.focus();
 			}
+			if (this.props.updateOnChange) {
+				const { excludeHidden } = this.props;
+				const formObject = output(updatedControls, excludeHidden);
+				this.props.updateOnChange(formObject);
+			}
 		}
 	}
 
@@ -233,7 +240,7 @@ export default class Form extends Component<any, any> {
 					updateOnChange, limitChar, currency, hideRadio,
 					textBefore, tabs, valueAsObject, text, firstRange,
 					secondRange, rangesStyle, overlayBg, content, unit, customSvg,
-					autoComplete
+					autoComplete, autoSuggestFetch, getValue, cacheResults
 				} = item;
 				const hide = typeof item.hideIf === 'object' ? hideField(item, controls) : false;
 				const options = typeof item.optionIf === 'object' && init ? optionsIf(item, controls, { target: { name: item.name } }) : item.options;
@@ -249,6 +256,18 @@ export default class Form extends Component<any, any> {
 							ref: this[name]
 						});
 						return el(component, itemProps);
+					case 'autosuggest':
+						if (hide) return (null);
+						return el(AutoSuggest, {
+							key: item.name, name, label, value,
+							type, onlyNumber, placeholder,
+							onUpdate: (e, h) => { this.onUpdate(e, h); },
+							isRequired, isValid, disabled,
+							errorMessage, className, style,
+							updateOnChange, limitChar, currency, unit,
+							autoComplete, ref: this[name],
+							autoSuggestFetch, getValue, cacheResults
+						});
 					case 'text':
 						if (hide) return (null);
 						return el(CustomTextField, {

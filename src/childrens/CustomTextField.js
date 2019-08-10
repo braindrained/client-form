@@ -98,7 +98,10 @@ class CustomTextField extends Component<any, any> {
 		const { isValid, value, type, autoComplete } = this.state;
 		const inputStyle = type === 'password' || unit !== undefined ? { paddingRight: 30 } : {};
 
-		return el('div', { className: sumClasses(['container-field', className]), style },
+		return el('div', {
+				className: sumClasses(['container-field', className]),
+				style: Object.assign({}, style, type === 'hidden' ? { display: 'none' } : {})
+			},
 			el(FieldLabel, { label, name, isRequired, isValid }),
 			el('input', {
 				type,
