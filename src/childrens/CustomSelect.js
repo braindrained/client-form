@@ -1,5 +1,5 @@
 // @flow
-import { Component, createElement } from 'react';
+import { Component, createElement, forwardRef } from 'react';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { sumClasses } from '../helpers/utils';
@@ -17,6 +17,7 @@ class CustomSelect extends Component<any, any> {
 	}
 
 	shouldComponentUpdate(nextProps: Object, nextState: Object) {
+		if (this.props.innerRef !== nextProps.innerRef) return true;
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
 		if (this.props.isValid !== nextProps.isValid) return true;
@@ -40,12 +41,12 @@ class CustomSelect extends Component<any, any> {
 	}
 
 	render() {
-		const { className, style, label, isRequired, errorMessage, name, value, isValid, disabled } = this.props;
+		const { className, style, label, isRequired, errorMessage, name, value, isValid, disabled, innerRef } = this.props;
 
 		return el('div', { className: sumClasses(['container-field', className]), style },
 			el(FieldLabel, { label, name, isRequired, isValid }),
 			el('div', { className: 'select-style', style: isValid === false ? { borderColor: '#e4002b' } : {} },
-				el('select', { name, id: name, value, onChange: (e) => { this.props.onUpdate(e); }, disabled },
+				el('select', { name, id: name, value, onChange: (e) => { this.props.onUpdate(e); }, disabled, ref: innerRef },
 					this.state.options.map((item, i) => {
 						switch (item.value) {
 						case '0':
@@ -61,4 +62,8 @@ class CustomSelect extends Component<any, any> {
 	}
 }
 
-export default CustomSelect;
+export default forwardRef((props, ref) =>
+	el(CustomSelect,
+		Object.assign({}, props, { innerRef: ref })
+	)
+);

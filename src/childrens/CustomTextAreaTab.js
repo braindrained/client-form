@@ -1,10 +1,37 @@
 // @flow
-import { Component, createElement } from 'react';
+import { Component, createElement, forwardRef, createRef } from 'react';
 import { sumClasses } from '../helpers/utils';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 
 const el = createElement;
+
+const TextAreaField = forwardRef((props, ref) => (
+	el('div', { key: item.name, style: { width: '100%', float: 'left', display: this.state.selected === i ? 'inline-block' : 'none', position: 'relative' } },
+		el('div', {},
+			el('textarea', {
+				placeholder: value[i].placeholder,
+				className: 'large-field',
+				name: item.name,
+				id: item.name,
+				onChange: (e) => { this.onChange(e); },
+				value: item.value,
+				style: {
+					borderRadius: '0px 2px 2px',
+					height: 200,
+					resize: 'none',
+					border: !isValid ? '1px solid #e4002b' : '1px solid #d8d8df'
+				},
+				rows: 2,
+				cols: 20,
+				ref: this[item.name]
+			})
+		),
+		limitChar ? el('div', {
+			className: 'limit-char noselect'
+		}, `${item.value.length}/${limitChar}`) : null
+	)
+));
 
 class CustomTextareaWithTab extends Component<any, any> {
 
@@ -18,6 +45,7 @@ class CustomTextareaWithTab extends Component<any, any> {
 	}
 
 	shouldComponentUpdate(nextProps: Object, nextState: Object) {
+		if (this.props.innerRef !== nextProps.innerRef) return true;
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
 		if (this.props.isValid !== nextProps.isValid) return true;
@@ -56,9 +84,9 @@ class CustomTextareaWithTab extends Component<any, any> {
 	}
 
 	render() {
-		const { className, style, name, isValid, value, limitChar, errorMessage, label, isRequired } = this.props;
+		const { className, style, name, isValid, value, limitChar, errorMessage, label, isRequired, innerRef } = this.props;
 
-		return el('div', { className: sumClasses(['container-field', className]), style },
+		return el('div', { ref: innerRef, className: sumClasses(['container-field', className]), style },
 			el(FieldLabel, { label, name, isRequired, isValid }),
 			el('div', { className: 'container-field-tabs', id: name },
 				this.state.value.map((item, i) => (
@@ -72,11 +100,16 @@ class CustomTextareaWithTab extends Component<any, any> {
 						onClick: () => { this.selectTab(i); },
 						role: 'button'
 					},
-					el('div', { className: 'noselect' },
-						el('span', { className: 'tab-label' }, item.label),
-						el('span', { className: 'tab-abbr' }, item.abbr)))))),
-			value.map((item, i) => (
-				el('div', { key: item.name, style: { width: '100%', float: 'left', display: this.state.selected === i ? 'inline-block' : 'none', position: 'relative' } },
+						el('div', { className: 'noselect' },
+							el('span', { className: 'tab-label' }, item.label),
+							el('span', { className: 'tab-abbr' }, item.abbr)
+						)
+					)
+				))
+			),
+			value.map((item, i) => {
+				this[item.name] = createRef();
+				return el('div', { key: item.name, style: { width: '100%', float: 'left', display: this.state.selected === i ? 'inline-block' : 'none', position: 'relative' } },
 					el('div', {},
 						el('textarea', {
 							placeholder: value[i].placeholder,
@@ -92,11 +125,20 @@ class CustomTextareaWithTab extends Component<any, any> {
 								border: !isValid ? '1px solid #e4002b' : '1px solid #d8d8df'
 							},
 							rows: 2,
-							cols: 20
-						})),
-					limitChar ? el('div', { className: 'limit-char noselect' }, `${item.value.length}/${limitChar}`) : null))),
-			el(FieldError, { isValid, errorMessage, style: limitChar ? { paddingRight: 60 } : {} }));
+							cols: 20,
+							ref: this[item.name]
+						})
+					),
+					limitChar ? el('div', { className: 'limit-char noselect' }, `${item.value.length}/${limitChar}`) : null
+				)
+			}),
+			el(FieldError, { isValid, errorMessage, style: limitChar ? { paddingRight: 60 } : {} })
+		);
 	}
 }
 
-export default CustomTextareaWithTab;
+export default forwardRef((props, ref) =>
+	el(CustomTextareaWithTab,
+		Object.assign({}, props, { innerRef: ref })
+	)
+);

@@ -18,7 +18,7 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		//console.log('this', this.myForm.current);
+		//console.log('this', this.myForm);
 	}
 
 	render() {
@@ -33,7 +33,6 @@ class App extends Component {
 						type: 'hidden',
 						name: 'categoryTypeId',
 						value: 1,
-						className: 'all-width'
 					},
 					{
 						control: 'text',
@@ -46,12 +45,9 @@ class App extends Component {
 						},
 						value: '',
 						currency: true,
-						isRequired: true,
+						isRequired: false,
 						errorMessage: 'Campo obbligatorio',
 						unit: '€',
-						hideIf: [
-							{ field: 'categoryTypeId', regEx: /^(1|4)$/ }
-						],
 						autoComplete: 'new-password'
 					},
 					{
@@ -132,6 +128,7 @@ class App extends Component {
 						regEx: /(^$|^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$)/i,
 						errorMessage: 'Inserisci un indirizzo mail valido',
 						limitChar: 60,
+						value: 'p.senese@gmail.com'
 					},
 					{
 						control: 'plusMinus',
@@ -236,7 +233,7 @@ class App extends Component {
 							}
 						},
 						value: [
-							{ name: 'listingDescIt', value: '', isRequired: false, isValid: true, label: 'Italiano', abbr: 'IT', placeholder: 'Inserisci qui la descrizione' },
+							{ name: 'listingDescIt', value: '', isRequired: true, isValid: true, label: 'Italiano', abbr: 'IT', placeholder: 'Inserisci qui la descrizione' },
 							{ name: 'listingDescEn', value: '', isRequired: false, isValid: true, label: 'Inglese', abbr: 'EN', placeholder: 'Descrizione inglese' },
 							{ name: 'listingDescFr', value: '', isRequired: false, isValid: true, label: 'Francese', abbr: 'FR', placeholder: 'Descrizione francese' },
 							{ name: 'listingDescEs', value: '', isRequired: false, isValid: true, label: 'Spagnolo', abbr: 'ES', placeholder: 'Descrizione spagnolo' },
@@ -245,7 +242,8 @@ class App extends Component {
 						isValid: true,
 						className: 'tabTextArea',
 						valueAsObject: true,
-						limitChar: 4000
+						limitChar: 4000,
+						errorMessage: 'La descrizione in italiano è obbligatoria'
 					},
 					{
 						control: 'external',
@@ -253,7 +251,7 @@ class App extends Component {
 						name: 'thisIsACustomExternalComponent',
 						key: 'thisIsACustomExternalComponent',
 						value: [
-							{ name: 'firstField', value: '', isRequired: false, isValid: true, placeholder: '\'cause I need a complete customized one', errorMessage: 'Campo obbligatorio' },
+							{ name: 'firstField', value: '', isRequired: true, isValid: true, placeholder: '\'cause I need a complete customized one', errorMessage: 'Campo obbligatorio' },
 							{ name: 'secondFieldWithEmptyPlaceholder', value: '', isRequired: false, isValid: true, placeholder: '', },
 						],
 						isValid: true,
@@ -362,7 +360,7 @@ class App extends Component {
 				}, '(Look in the console for the output object)'),
 				buttonContainerStyle: { textAlign: 'center' },
 				sendForm: (e) => {
-					console.log(e);
+					console.log('sendForm', e);
 					var promise = new Promise((resolve, reject) => {
 			      window.setTimeout(() => {
 			        resolve({ succeed: true, message: 'Saved!' });

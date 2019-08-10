@@ -12,7 +12,7 @@ import CustomTextAreaTab from './childrens/CustomTextAreaTab';
 import CustomPlusMinus from './childrens/CustomPlusMinus';
 import FakeSelect from './childrens/FakeSelect';
 
-import { sumClasses, isInt, hideField, optionsIf } from './helpers/utils';
+import { sumClasses, isInt, hideField, optionsIf, output, findFirstRequired } from './helpers/utils';
 import './Form.css';
 
 const el = createElement;
@@ -80,7 +80,13 @@ export default class Form extends Component<any, any> {
 		});
 
 		if (this.props.updateOnChange) {
-			this.props.updateOnChange(updatedControls);
+			if (this.props.updateOnChangeWithValidation) {
+				this.formIsValid();
+			} else {
+				const { excludeHidden } = this.props;
+				const formObject = output(updatedControls, excludeHidden);
+				this.props.updateOnChange(formObject);
+			}
 		}
 	}
 
@@ -145,53 +151,58 @@ export default class Form extends Component<any, any> {
 		});
 
 		if (formIsValid) {
-			const formObject = {};
 			const { excludeHidden } = this.props;
-			updatedControls.filter(o => o.control !== 'label' && o.exclude !== true && (excludeHidden === true ? !o.hide : true)).map((item) => {
-				let { value } = item;
-				const { valueAsObject, currency, name } = item;
-				if (typeof value === 'object' && valueAsObject) {
-					const valueObject = {};
-					value.map((itemx) => {
-						valueObject[itemx.name] = itemx.value;
-						return null;
-					});
-					value = valueObject;
-				}
-				if (currency && value !== undefined && value !== null && value !== '' && value !== 0 && !isInt(value)) {
-					value = value.replace(/\./g, '');
-				}
-				value = value === undefined || value === null ? null : value.toString() === 'true' ? true : value.toString() === 'false' ? false : value;
-				formObject[name] = value;
-				return null;
-			});
+			const formObject = output(updatedControls, excludeHidden);
 
-			this.setState({
-				isSent: true,
-			});
-			this.props.sendForm(formObject).then((x) => {
+			if (this.props.updateOnChange) {
+				this.props.updateOnChange(formObject);
+			} else {
 				this.setState({
-					isSent: false,
-					succeed: x.succeed,
-					message: x.message
+					isSent: true,
 				});
-			}).catch((x) => {
-				this.setState({
-					isSent: false,
-					succeed: x.succeed,
-					message: x.message
+				this.props.sendForm(formObject).then((x) => {
+					this.setState({
+						isSent: false,
+						succeed: x.succeed,
+						message: x.message
+					});
+				}).catch((x) => {
+					this.setState({
+						isSent: false,
+						succeed: x.succeed,
+						message: x.message
+					});
 				});
-			});
+			}
 		} else {
-			const toBeValidateFilter = o => !o.hide && o.type !== 'hidden' && ((o.isRequired && o.isValid === false) || (o.greaterThan && o.isValid === false) || (o.regEx && o.isValid === false) || (o.equalTo && o.isValid === false));
+			const toBeValidateFilter = o =>
+				!o.hide &&
+				o.type !== 'hidden' &&
+				(
+					(o.isRequired && o.isValid === false) ||
+					(o.greaterThan && o.isValid === false) ||
+					(o.regEx && o.isValid === false) ||
+					(o.equalTo && o.isValid === false) ||
+					(
+						typeof o.value === 'object'  && o.isValid === false &&
+						(
+							o.value.filter(e => e.isRequired && e.isValid === false)
+						)
+					) ||
+					(
+						o.control === 'external'  && o.isValid === false &&
+						(
+							o.value.filter(e => e.isRequired && e.isValid === false)
+						)
+					)
+				);
 			let firstRequired = updatedControls.filter(o => toBeValidateFilter(o))[0];
 			if (firstRequired && typeof firstRequired.value === 'object') {
-				/* eslint-disable-next-line */
-				firstRequired = firstRequired.value.filter(o => toBeValidateFilter(o))[0];
+				const firstRequiredChild = firstRequired.value.filter(o => toBeValidateFilter(o))[0];
+				findFirstRequired(this[firstRequired.name].current, firstRequiredChild.name);
+			} else {
+				this[firstRequired.name].current.focus();
 			}
-			/* eslint-disable-next-line */ /* flow-disable-next-line */
-			if (firstRequired) this[firstRequired.name].current[firstRequired.name].current.focus()
-			//document.getElementById(firstRequired.name).focus();
 		}
 	}
 
@@ -233,7 +244,10 @@ export default class Form extends Component<any, any> {
 						return null;
 					case 'external':
 						if (hide) return (null);
-						const itemProps = Object.assign({}, item, { onUpdate: (e, h) => { this.onUpdate(e, h) } });
+						const itemProps = Object.assign({}, item, {
+							onUpdate: (e, h) => this.onUpdate(e, h),
+							ref: this[name]
+						});
 						return el(component, itemProps);
 					case 'text':
 						if (hide) return (null);
@@ -244,8 +258,7 @@ export default class Form extends Component<any, any> {
 							isRequired, isValid, disabled,
 							errorMessage, className, style,
 							updateOnChange, limitChar, currency, unit,
-							autoComplete,
-							ref: this[name]
+							autoComplete, ref: this[name]
 						});
 					case 'plusMinus':
 						if (hide) return (null);
@@ -255,7 +268,7 @@ export default class Form extends Component<any, any> {
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								isRequired, isValid, disabled,
 								errorMessage, className, style,
-								updateOnChange
+								updateOnChange, ref: this[name]
 						});
 					case 'textArea':
 						if (hide) return (null);
@@ -265,7 +278,7 @@ export default class Form extends Component<any, any> {
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								isRequired, isValid, disabled,
 								errorMessage, className, style,
-								updateOnChange, limitChar
+								updateOnChange, limitChar, ref: this[name]
 						});
 					case 'select':
 						if (hide) return (null);
@@ -274,7 +287,7 @@ export default class Form extends Component<any, any> {
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								isRequired, isValid, disabled,
 								errorMessage, className, style,
-								options, default: item.default
+								options, default: item.default, ref: this[name]
 						});
 					case 'check':
 						if (hide) return (null);
@@ -283,7 +296,7 @@ export default class Form extends Component<any, any> {
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								className, style,
 								textBefore, customSvg,
-								default: item.default
+								default: item.default, ref: this[name]
 						});
 					case 'radio':
 						if (hide) return (null);
@@ -292,7 +305,7 @@ export default class Form extends Component<any, any> {
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								className, style,
 								options, hideRadio, errorMessage, isRequired, isValid,
-								default: item.default
+								default: item.default, ref: this[name]
 						});
 					case 'label':
 						if (hide) return (null);
@@ -306,7 +319,7 @@ export default class Form extends Component<any, any> {
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								isRequired, isValid, disabled,
 								errorMessage, className, style,
-								valueAsObject, limitChar, label
+								valueAsObject, limitChar, label, ref: this[name]
 						});
 					case 'fakeselect':
 						if (hide) return (null);
@@ -315,7 +328,7 @@ export default class Form extends Component<any, any> {
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								className, style,
 								firstRange, secondRange,
-								rangesStyle, overlayBg
+								rangesStyle, overlayBg, ref: this[name]
 						});
 				}
 				/* eslint-enable */

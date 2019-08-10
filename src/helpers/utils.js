@@ -57,7 +57,7 @@ export const hideField = (item: Object, controls: Array<Object>) => {
 		});
 		return hide;
 	} catch (e) {
-		console.log('hideField error: ', e);
+		// console.log('hideField error: ', e);
 		return false;
 	}
 };
@@ -77,7 +77,39 @@ export const optionsIf = (item: Object, controls: Array<Object>, el: Object) => 
 		});
 		return options;
 	} catch (e) {
-		console.log('error', e);
+		// console.log('optionsIf error', e);
 		return item.options;
+	}
+};
+
+export const output = (controls: Array<Object>, excludeHidden: boolean) => {
+	const formObject = {};
+	controls.filter(o => o.control !== 'label' && o.exclude !== true && (excludeHidden === true ? !o.hide : true)).map((item) => {
+		let { value } = item;
+		const { valueAsObject, currency, name } = item;
+		if (typeof value === 'object' && valueAsObject) {
+			const valueObject = {};
+			value.map((itemx) => {
+				valueObject[itemx.name] = itemx.value;
+				return null;
+			});
+			value = valueObject;
+		}
+		if (currency && value !== undefined && value !== null && value !== '' && value !== 0 && !isInt(value)) {
+			value = value.replace(/\./g, '');
+		}
+		value = value === undefined || value === null ? null : value.toString() === 'true' ? true : value.toString() === 'false' ? false : value;
+		formObject[name] = value;
+		return null;
+	});
+	return formObject;
+};
+
+export const findFirstRequired = (element, name) => {
+	if (element.childNodes) {
+		for (let i = 0; i < element.childNodes.length; i++) {
+			if (element.childNodes[i].name === name) element.childNodes[i].focus();
+			findFirstRequired(element.childNodes[i], name);
+		}
 	}
 };

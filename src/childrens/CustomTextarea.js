@@ -1,5 +1,5 @@
 // @flow
-import { Component, createElement } from 'react';
+import { Component, createElement, forwardRef } from 'react';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { camelToTitle, sumClasses } from '../helpers/utils';
@@ -19,6 +19,7 @@ class CustomTextarea extends Component<any, any> {
 	}
 
 	shouldComponentUpdate(nextProps: Object, nextState: Object) {
+		if (this.props.innerRef !== nextProps.innerRef) return true;
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
 		if (this.props.isValid !== nextProps.isValid) return true;
@@ -63,7 +64,7 @@ class CustomTextarea extends Component<any, any> {
 	}
 
 	render() {
-		const { placeholder, label, className, style, isRequired, name, errorMessage, limitChar } = this.props;
+		const { placeholder, label, className, style, isRequired, name, errorMessage, limitChar, innerRef } = this.props;
 		const { isValid, value } = this.state;
 
 		return el('div', { className: sumClasses(['container-field', className]), style },
@@ -76,11 +77,16 @@ class CustomTextarea extends Component<any, any> {
 				onBlur: (e) => { this.onBlur(e); },
 				onChange: (e) => { this.onChange(e); },
 				value,
-				style: isValid === false ? { border: '1px solid #e4002b' } : {}
+				style: isValid === false ? { border: '1px solid #e4002b' } : {},
+				ref: innerRef
 			}),
 			limitChar ? el('div', { className: 'limit-char noselect' }, `${value.length}/${limitChar}`) : null,
 			el(FieldError, { isValid, errorMessage, style: limitChar ? { paddingRight: 60 } : {} }));
 	}
 }
 
-export default CustomTextarea;
+export default forwardRef((props, ref) =>
+	el(CustomTextarea,
+		Object.assign({}, props, { innerRef: ref })
+	)
+);

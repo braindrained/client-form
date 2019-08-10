@@ -1,5 +1,5 @@
 // @flow
-import { Component, createElement } from 'react';
+import { Component, createElement, forwardRef } from 'react';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { sumClasses, isInt, notEmpty } from '../helpers/utils';
@@ -20,6 +20,7 @@ class CustomRadio extends Component<any, any> {
 	}
 
 	shouldComponentUpdate(nextProps: Object, nextState: Object) {
+		if (this.props.innerRef !== nextProps.innerRef) return true;
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
 		if (this.props.options !== nextProps.options) return true;
@@ -65,7 +66,7 @@ class CustomRadio extends Component<any, any> {
 	}
 
 	render() {
-		const { className, style, label, name, hideRadio, options, isRequired, isValid, errorMessage } = this.props;
+		const { className, style, label, name, hideRadio, options, isRequired, isValid, errorMessage, innerRef } = this.props;
 		const { value, labelText } = this.state;
 
 		return el('div', { className: sumClasses(['container-field', className]), style },
@@ -81,7 +82,7 @@ class CustomRadio extends Component<any, any> {
 							:
 							`${sumClasses([item.className, item.value === value ? item.selectedClassName : ''])}`,
 					style: item.style },
-				el('input', { type: 'radio', name, id: name + item.value, value: item.value, disabled: item.disabled === true, checked: item.value === value, onChange: (e) => { this.onChange(e); } }),
+				el('input', { ref: innerRef, type: 'radio', name, id: name + item.value, value: item.value, disabled: item.disabled === true, checked: item.value === value, onChange: (e) => { this.onChange(e); } }),
 				el('label', { htmlFor: name + item.value, style: item.labelStyle ? item.labelStyle : {} },
 					hideRadio ?
 						null
@@ -94,4 +95,8 @@ class CustomRadio extends Component<any, any> {
 	}
 }
 
-export default CustomRadio;
+export default forwardRef((props, ref) =>
+	el(CustomRadio,
+		Object.assign({}, props, { innerRef: ref })
+	)
+);

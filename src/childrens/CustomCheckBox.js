@@ -1,10 +1,10 @@
 // @flow
-import { Component, createElement } from 'react';
+import { Component, createElement, forwardRef } from 'react';
 import { sumClasses, camelToTitle } from '../helpers/utils';
 
 const el = createElement;
 
-export default class CustomCheckBox extends Component<any, any> {
+class CustomCheckBox extends Component<any, any> {
 
 	constructor(props: Object) {
 		super(props);
@@ -17,6 +17,7 @@ export default class CustomCheckBox extends Component<any, any> {
 	}
 
 	shouldComponentUpdate(nextProps: Object, nextState: Object) {
+		if (this.props.innerRef !== nextProps.innerRef) return true;
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
 		if (this.props.style !== nextProps.style) return true;
@@ -47,7 +48,7 @@ export default class CustomCheckBox extends Component<any, any> {
 	}
 
 	render() {
-		const { className, style, label, name, customSvg } = this.props;
+		const { className, style, label, name, customSvg, innerRef } = this.props;
 		const { value } = this.state;
 		const svgProps = customSvg ? customSvg.svgProps : { width: 24, height: 24, viewBox: '0 0 24 24' };
 		const forTrue = customSvg ? customSvg.forTrue : el('path', {
@@ -64,9 +65,15 @@ export default class CustomCheckBox extends Component<any, any> {
 			y: 4 });
 
 		return el('div', { className: sumClasses(['container-field', className !== undefined ? className : 'check']), style },
-			el('input', { type: 'checkbox', name, id: name, checked: value, onChange: (e) => { this.onChange(e); } }),
+			el('input', { ref: innerRef, type: 'checkbox', name, id: name, checked: value, onChange: (e) => { this.onChange(e); } }),
 			el('label', { htmlFor: name, style: label && label.style },
 				el('svg', svgProps, value !== true ? forFalse : forTrue),
 				el('div', {}, camelToTitle(label && label.text, name))));
 	}
 }
+
+export default forwardRef((props, ref) =>
+	el(CustomCheckBox,
+		Object.assign({}, props, { innerRef: ref })
+	)
+);

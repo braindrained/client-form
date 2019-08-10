@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { createRef, forwardRef, createElement } from 'react';
 import FieldLabel from '../../src/childrens/childrenComponents/FieldLabel';
 import FieldError from '../../src/childrens/childrenComponents/FieldError';
+import InputField from './InputField';
+
+const el = createElement;
 
 class CustomComp extends React.Component {
 
@@ -12,6 +15,28 @@ class CustomComp extends React.Component {
 			isValid: this.props.isValid,
 			editing: false,
 		};
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (!nextProps.isValid) {
+			/*const { value } = this.state;
+			const toBeValidateFilter = o =>
+				!o.hide &&
+				o.type !== 'hidden' &&
+				(
+					(o.isRequired && o.isValid === false) ||
+					(o.greaterThan && o.isValid === false) ||
+					(o.regEx && o.isValid === false) ||
+					(o.equalTo && o.isValid === false)
+				);
+			let firstRequired = value.filter(o => toBeValidateFilter(o))[0];
+			console.log('firstRequired.name', firstRequired);
+			this[firstRequired.name].current.focus();*/
+		}
+	}
+
+	componentDidMount() {
+
 	}
 
 	onChange(event: Object) {
@@ -38,28 +63,28 @@ class CustomComp extends React.Component {
 		this.props.onUpdate(eventObject);
 	}
 
+	validate() {
+
+	}
+
 	render() {
-		const { label, name, isRequired, isValid, errorMessage, placeholder, style, className } = this.props;
+		const { label, name, isRequired, isValid, errorMessage, placeholder, style, className, innerRef } = this.props;
 		const { value } = this.state;
 
 		return(
-			<div className={className} style={style}>
+			<div className={className} style={style} ref={innerRef}>
 				<FieldLabel {...{ label, name }} />
 				{ value.map((item) => {
-					return (
-						<div key={`cust_${item.name}`}>
-							<FieldLabel {...{ label: item.label, name: item.name, isRequired: item.isRequired, isValid: item.isRequired === false ? true : isValid }} />
-							<input {...{
-								type: 'text',
-								placeholder: item.placeholder,
-								name: item.name,
-								id: item.name,
-								value: item.value,
-								onChange: (e) => { this.onChange(e); },
-							}} style={{  }}/>
-							<FieldError {...{ isValid: item.isRequired === false ? true : isValid, errorMessage: item.errorMessage }} />
-						</div>
-					)
+					this[item.name] = createRef();
+					return el(InputField,
+							{
+								item,
+								key: `cust_${item.name}`,
+								ref: this[item.name],
+								onChange: e => this.onChange(e),
+								isValid
+							}
+						)
 				})}
 				<div>Its value will be returned in the returned object with other fields.</div>
 			</div>
@@ -67,4 +92,8 @@ class CustomComp extends React.Component {
 	}
 }
 
-export default CustomComp;
+export default forwardRef((props, ref) =>
+	el(CustomComp,
+		Object.assign({}, props, { innerRef: ref })
+	)
+);

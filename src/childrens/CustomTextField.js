@@ -1,5 +1,5 @@
 // @flow
-import { Component, createElement, Fragment, createRef } from 'react';
+import { Component, createElement, Fragment, forwardRef } from 'react';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { camelToTitle, sumClasses } from '../helpers/utils';
@@ -23,11 +23,10 @@ class CustomTextField extends Component<any, any> {
 			labelText: label && label.text,
 			autoComplete
 		};
-
-		this[name] = createRef();
 	}
 
 	shouldComponentUpdate(nextProps: Object, nextState: Object) {
+		if (this.props.innerRef !== nextProps.innerRef) return true;
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
 		if (this.state.autoComplete !== nextState.autoComplete) return true;
@@ -76,8 +75,10 @@ class CustomTextField extends Component<any, any> {
 	}
 
 	onFocus() {
+		const { autoComplete } = this.props;
 		this.setState({
 			editing: true,
+			autoComplete
 		});
 	}
 
@@ -92,7 +93,7 @@ class CustomTextField extends Component<any, any> {
 		const {
 			className, style, label, name, isRequired,
 			errorMessage, placeholder, currency, disabled,
-			unit
+			unit, innerRef
 		} = this.props;
 		const { isValid, value, type, autoComplete } = this.state;
 		const inputStyle = type === 'password' || unit !== undefined ? { paddingRight: 30 } : {};
@@ -111,7 +112,7 @@ class CustomTextField extends Component<any, any> {
 				onFocus: () => { this.onFocus(); },
 				style: Object.assign({}, inputStyle, isValid === false ? { border: '1px solid #e4002b' } : {}),
 				autoComplete,
-				ref: this[name]
+				ref: innerRef
 			}),
 			this.props.type === 'password' ?
 				el('svg', { onClick: () => { this.togglePassword(); }, className: 'eye', width: 24, height: 24, viewBox: '0 0 24 24' },
@@ -128,4 +129,8 @@ class CustomTextField extends Component<any, any> {
 	}
 }
 
-export default CustomTextField;
+export default forwardRef((props, ref) =>
+	el(CustomTextField,
+		Object.assign({}, props, { innerRef: ref })
+	)
+);

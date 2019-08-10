@@ -1,5 +1,5 @@
 // @flow
-import { Component, createElement } from 'react';
+import { Component, createElement, forwardRef } from 'react';
 import ClickOutHandler from 'react-onclickout';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
@@ -19,6 +19,7 @@ class FakeSelect extends Component<any, any> {
 	}
 
 	shouldComponentUpdate(nextProps: Object, nextState: Object) {
+		if (this.props.innerRef !== nextProps.innerRef) return true;
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
 		if (this.state.displaySelect !== nextState.displaySelect) return true;
@@ -50,7 +51,7 @@ class FakeSelect extends Component<any, any> {
 	}
 
 	render() {
-		const { className, style, label, text, firstRange, secondRange, rangesStyle, isRequired, name, errorMessage, overlayBg } = this.props;
+		const { className, style, label, text, firstRange, secondRange, rangesStyle, isRequired, name, errorMessage, overlayBg, innerRef } = this.props;
 		const { displaySelect, value } = this.state;
 		const maxRange = this.props.value.min === '' ? secondRange : secondRange.filter(o => o.value > this.props.value.min || o.value === '');
 		const { isValid } = this.state;
@@ -80,7 +81,7 @@ class FakeSelect extends Component<any, any> {
 				el('div', { className: 'fake-cont box-shadow', style: { width: style.maxWidth, opacity: displaySelect ? '0' : '1', zIndex: displaySelect ? -1 : 1, background: overlayBg } },
 					el('div', { className: 'min-max' }, 'Min'),
 					el('div', { className: 'select-style', style: Object.assign({}, rangesStyle, { marginBottom: 10, float: 'right' }) },
-						el('select', { name: 'min', id: 'min', value: this.props.value.min, onChange: (o) => { this.onChange(o); } },
+						el('select', { ref: innerRef, name: 'min', id: 'min', value: this.props.value.min, onChange: (o) => { this.onChange(o); } },
 							firstRange.map(item => el('option', { value: item.value, key: `f_${item.value}` }, item.text))),
 						el('svg', { width: 24, height: 24, viewBox: '0 0 24 24' },
 							el('polyline', { fill: 'none', points: '6,9 12,15 18,9', style: { fill: 'none', stroke: '#d8d8df', strokeWidth: 1 } }))),
@@ -94,4 +95,8 @@ class FakeSelect extends Component<any, any> {
 	}
 }
 
-export default FakeSelect;
+export default forwardRef((props, ref) =>
+	el(FakeSelect,
+		Object.assign({}, props, { innerRef: ref })
+	)
+);
