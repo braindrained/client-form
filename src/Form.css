@@ -355,21 +355,18 @@ select::-ms-expand {
 /* AutoSuggest */
 .client-form .autosuggest {
   position: relative;
-  svg {
-  	position: absolute;
-  	z-index: 1;
-    top: 36px;
-    right: 10px;
-    width: 24px;
-    height: 24px;
-  	@media screen and (min-width: $break-small) {
-      top: 33px;
-    	right: 8px;
-  	}
-    circle {
-      stroke: #96a1b0;
-    }
-  }
+
+}
+.client-form .autosuggest svg {
+	position: absolute;
+	z-index: 1;
+	top: 36px;
+	right: 10px;
+	width: 24px;
+	height: 24px;
+}
+.client-form .autosuggest svg circle {
+	stroke: #96a1b0;
 }
 .client-form .autosuggest .autosuggest-suggestions {
 	position: absolute;
@@ -449,5 +446,9 @@ select::-ms-expand {
 	.client-form .autosuggest .autosuggest-suggestions .autosuggest-suggestion-selected {
 		height: 40px;
 		line-height: 40px;
+	}
+	.client-form .autosuggest svg {
+		top: 33px;
+		right: 8px;
 	}
 }
