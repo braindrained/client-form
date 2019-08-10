@@ -7,11 +7,15 @@ const el = createElement;
 
 class AutoSuggest extends Component {
 
-  state = {
-    suggestions: [],
-    currentSuggestion: 0,
-    value: this.props.value,
-    isLoading: false
+  constructor(props){
+    super(props);
+    
+    this.state = {
+      suggestions: [],
+      currentSuggestion: 0,
+      value: this.props.value,
+      isLoading: false
+    }
   }
 
   onChange(e) {
