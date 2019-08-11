@@ -26,17 +26,17 @@ class AutoSuggest extends Component {
     if (value.length >= 3 && isLoading === false) {
       this.setState({ isLoading: true, value: { displayValue: value } });
 
-      if (localStorage.getItem(value) !== null) {
+      if (sessionStorage.getItem(value) !== null) {
         this.setState({
           isLoading: false,
-          suggestions: JSON.parse(localStorage.getItem(value))
+          suggestions: JSON.parse(sessionStorage.getItem(value))
         });
       } else {
         const { autoSuggestFetch, cacheResults } = this.props;
         autoSuggestFetch(value).then((response) => {
           const { data, succeed } = response;
           if (succeed) {
-            if (cacheResults) localStorage.setItem(value, JSON.stringify(data));
+            if (cacheResults) sessionStorage.setItem(value, JSON.stringify(data));
             this.setState({
               suggestions: data,
               currentSuggestion: 0,
@@ -48,7 +48,11 @@ class AutoSuggest extends Component {
             });
           }
           setTimeout(() => {
-            this.setState({ isLoading: false });
+            try {
+              this.setState({ isLoading: false });
+            } catch (e) {
+              console.log('setTimeout', e);
+            }
           }, timeOut);
         });
       }
