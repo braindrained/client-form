@@ -82,7 +82,7 @@ export default class Form extends Component<any, any> {
 
 		if (this.props.updateOnChange) {
 			if (this.props.updateOnChangeWithValidation) {
-				this.formIsValid();
+				this.formIsValid(e, 'onUpdate');
 			} else {
 				const { excludeHidden, updateOnChange } = this.props;
 				const formObject = output(updatedControls, excludeHidden);
@@ -91,7 +91,7 @@ export default class Form extends Component<any, any> {
 		}
 	}
 
-	formIsValid() {
+	formIsValid(e, action) {
 		this.setState({ init: false });
 		let formIsValid = true;
 		const { controls } = this.state;
@@ -205,10 +205,10 @@ export default class Form extends Component<any, any> {
 			} else {
 				this[firstRequired.name].current.focus();
 			}
-			if (this.props.updateOnChange) {
+			if (this.props.updateOnChange && action === 'onUpdate') {
 				const { excludeHidden } = this.props;
 				const formObject = output(updatedControls, excludeHidden);
-				this.props.updateOnChange(formObject);
+				this.props.updateOnChange(e, formObject);
 			}
 		}
 	}
@@ -359,7 +359,7 @@ export default class Form extends Component<any, any> {
 						el('button', {
 							className: sendButtonClass,
 							style: hideIfSent && isSent ? sendButton.sentStyle : sendButton.style,
-							onClick: succeed === null && isSent === null && sendButton.disabled !== true ? () => { this.formIsValid(); } : () => null,
+							onClick: succeed === null && isSent === null && sendButton.disabled !== true ? () => { this.formIsValid(null, null); } : () => null,
 							type: 'button'
 						},
 						el('svg', { width: 24, height: 24, viewBox: '0 0 24 24', className: isSent !== false ? 'spin' : '' },
