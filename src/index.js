@@ -156,8 +156,8 @@ export default class Form extends Component<any, any> {
 			const { excludeHidden } = this.props;
 			const formObject = output(updatedControls, excludeHidden);
 
-			if (this.props.updateOnChange) {
-				this.props.updateOnChange(formObject);
+			if (this.props.updateOnChange && action === 'onUpdate') {
+				this.props.updateOnChange(e, formObject);
 			} else {
 				this.setState({
 					isSent: true,
