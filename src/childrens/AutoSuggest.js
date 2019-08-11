@@ -4,7 +4,6 @@ import FieldError from './childrenComponents/FieldError';
 import { camelToTitle, sumClasses } from '../helpers/utils';
 
 const el = createElement;
-let timeOut;
 
 class AutoSuggest extends Component {
 
@@ -48,9 +47,8 @@ class AutoSuggest extends Component {
               currentSuggestion: 0,
             });
           }
-          timeOut = setTimeout(() => {
+          setTimeout(() => {
             this.setState({ isLoading: false });
-            clearTimeout(timeOut);
           }, timeOut);
         });
       }
