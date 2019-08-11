@@ -4,12 +4,13 @@ import FieldError from './childrenComponents/FieldError';
 import { camelToTitle, sumClasses } from '../helpers/utils';
 
 const el = createElement;
+let timeOut;
 
 class AutoSuggest extends Component {
 
   constructor(props){
     super(props);
-    
+
     this.state = {
       suggestions: [],
       currentSuggestion: 0,
@@ -19,10 +20,11 @@ class AutoSuggest extends Component {
   }
 
   onChange(e) {
-    const { name, onUpdate } = this.props;
+    const { isLoading } = this.state;
+    const { name, onUpdate, timeOut } = this.props;
     const { value } = e.target;
 
-    if (value.length >= 3) {
+    if (value.length >= 3 && isLoading === false) {
       this.setState({ isLoading: true, value: { displayValue: value } });
 
       if (localStorage.getItem(value) !== null) {
@@ -34,20 +36,22 @@ class AutoSuggest extends Component {
         const { autoSuggestFetch, cacheResults } = this.props;
         autoSuggestFetch(value).then((response) => {
           const { data, succeed } = response;
-          if (response) {
+          if (succeed) {
             if (cacheResults) localStorage.setItem(value, JSON.stringify(data));
             this.setState({
-              isLoading: false,
               suggestions: data,
-              currentSuggestion: 0
+              currentSuggestion: 0,
             });
           } else {
             this.setState({
-              isLoading: false,
               suggestions: [],
-              currentSuggestion: 0
+              currentSuggestion: 0,
             });
           }
+          timeOut = setTimeout(() => {
+            this.setState({ isLoading: false });
+            clearTimeout(timeOut);
+          }, timeOut);
         });
       }
     } else if (value === '') {
@@ -83,7 +87,7 @@ class AutoSuggest extends Component {
         });
         break;
       case 40:
-        if (currentSuggestion === suggestions.length) break;
+        if (currentSuggestion === suggestions.length - 1) break;
         returnVal = getValue(suggestions[currentSuggestion + 1]);
 
         this.setState({

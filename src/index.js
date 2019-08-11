@@ -240,7 +240,7 @@ export default class Form extends Component<any, any> {
 					updateOnChange, limitChar, currency, hideRadio,
 					textBefore, tabs, valueAsObject, text, firstRange,
 					secondRange, rangesStyle, overlayBg, content, unit, customSvg,
-					autoComplete, autoSuggestFetch, getValue, cacheResults
+					autoComplete, autoSuggestFetch, getValue, cacheResults, timeOut
 				} = item;
 				const hide = typeof item.hideIf === 'object' ? hideField(item, controls) : false;
 				const options = typeof item.optionIf === 'object' && init ? optionsIf(item, controls, { target: { name: item.name } }) : item.options;
@@ -266,7 +266,7 @@ export default class Form extends Component<any, any> {
 							errorMessage, className, style,
 							updateOnChange, limitChar, currency, unit,
 							autoComplete, ref: this[name],
-							autoSuggestFetch, getValue, cacheResults
+							autoSuggestFetch, getValue, cacheResults, timeOut
 						});
 					case 'text':
 						if (hide) return (null);
