@@ -13,7 +13,7 @@ class AutoSuggest extends Component {
     this.state = {
       suggestions: [],
       currentSuggestion: 0,
-      value: this.props.value,
+      value: this.props.value || {},
       isLoading: false
     }
   }

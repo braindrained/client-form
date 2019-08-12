@@ -97,7 +97,6 @@ export default class Form extends Component<any, any> {
 		const { controls } = this.state;
 
 		const updatedControls = controls.map((item) => {
-			if (item.name === 'geolocationEvol') console.log('updatedControls', item);
 			item.isValid = true;
 			item.hide = typeof item.hideIf === 'object' ? hideField(item, controls) : false;
 			if (item.isRequired && !item.hide) {
