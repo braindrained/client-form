@@ -21,12 +21,12 @@ class CustomSelect extends Component<any, any> {
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
 		if (this.props.isValid !== nextProps.isValid) return true;
-		if (this.state.options !== nextProps.options) return true;
+		if (JSON.stringify(this.state.options) !== JSON.stringify(nextProps.options)) return true;
 		return false;
 	}
 
 	componentWillReceiveProps(nextProps: Object) {
-		if (nextProps.options !== this.state.options) {
+		if (JSON.stringify(nextProps.options) !== JSON.stringify(this.state.options)) {
 			this.setState({
 				options: nextProps.options,
 			});

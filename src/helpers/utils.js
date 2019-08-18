@@ -77,8 +77,22 @@ export const optionsIf = (item: Object, controls: Array<Object>, el: Object) => 
 		});
 		return options;
 	} catch (e) {
-		// console.log('optionsIf error', e);
+		console.log('optionsIf error', e);
 		return item.options;
+	}
+};
+
+export const valuesOf = (item: Object, controls: Array<Object>) => {
+	try {
+		item.valueOf.map((v) => {
+			const control = controls.filter(o => o.name === v.field);
+			item[v.propTo] = v.do(control[0][v.propFrom]);
+			return null;
+		});
+		return item;
+	} catch (e) {
+		console.log('valuesOf error', e);
+		return item;
 	}
 };
 

@@ -9,12 +9,14 @@ class AutoSuggest extends Component {
 
   constructor(props){
     super(props);
+    const { value, autoComplete } = this.props;
 
     this.state = {
       suggestions: [],
       currentSuggestion: 0,
-      value: this.props.value || {},
-      isLoading: false
+      value: value || {},
+      isLoading: false,
+      autoComplete
     }
   }
 
@@ -29,7 +31,8 @@ class AutoSuggest extends Component {
       if (sessionStorage.getItem(value) !== null) {
         this.setState({
           isLoading: false,
-          suggestions: JSON.parse(sessionStorage.getItem(value))
+          suggestions: JSON.parse(sessionStorage.getItem(value)),
+          currentSuggestion: 0
         });
       } else {
         const { autoSuggestFetch, cacheResults } = this.props;
@@ -51,16 +54,17 @@ class AutoSuggest extends Component {
             try {
               this.setState({ isLoading: false });
             } catch (e) {
-              console.log('setTimeout', e);
+              console.log('setTimeout error', e);
             }
           }, timeOut);
         });
       }
     } else if (value === '') {
       this.setState({ value: {} });
-      onUpdate({ target: { name: name, value: {} } });
+      // onUpdate({ target: { name: name, value: {} } });
 		} else {
       this.setState({ value: { displayValue: value } });
+      // onUpdate({ target: { name: name, value: {} } });
     }
   }
 
@@ -102,6 +106,11 @@ class AutoSuggest extends Component {
     }
   }
 
+  onFocus(e) {
+    const { autoComplete } = this.props;
+    this.setState({ autoComplete });
+  }
+
   handleClick(item) {
     const { onUpdate, name, getValue } = this.props;
     const returnVal = getValue(item);
@@ -110,8 +119,8 @@ class AutoSuggest extends Component {
   }
 
   render() {
-    const { name, label, isValid, isRequired, errorMessage, placeholder, innerRef, autoComplete, disabled, className, style } = this.props;
-    const { suggestions, currentSuggestion, value, isLoading } = this.state;
+    const { name, label, isValid, isRequired, errorMessage, placeholder, innerRef, disabled, className, style } = this.props;
+    const { suggestions, currentSuggestion, value, isLoading, autoComplete } = this.state;
     const { displayValue } = value;
 
     return el('div', { className: sumClasses(['container-field autosuggest', className]), style },
@@ -119,13 +128,15 @@ class AutoSuggest extends Component {
       el('input', {
         onChange: e => this.onChange(e),
         onKeyDown: e => this.onKeyDown(e),
+        onFocus: e => this.onFocus(e),
         value: displayValue || '',
         placeholder: camelToTitle(placeholder, name),
 				name,
 				id: name,
         disabled,
 				autoComplete,
-				ref: innerRef
+				ref: innerRef,
+        style: isValid === false ? { border: '1px solid #e4002b' } : {}
       }),
       el('div', { className: 'autosuggest-suggestions box-shadow' },
         suggestions.map((item, i) => {
