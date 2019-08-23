@@ -31,27 +31,18 @@ class CustomTextField extends Component<any, any> {
 		if (this.state.value !== nextState.value) return true;
 		if (this.state.autoComplete !== nextState.autoComplete) return true;
 		if (this.props.isValid !== nextProps.isValid) return true;
-		if (this.state.isValid !== nextState.isValid) return true;
 		if (this.state.type !== nextState.type) return true;
 		if (nextProps.label && this.state.labelText !== nextProps.label.text) return true;
-		if (this.state.labelText !== nextState.labelText) return true;
 		return false;
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		const { name, value, isValid, label } = this.props;
-		if (name === 'priceMax') {
-			console.log('componentDidUpdate prevProps', prevProps);
-			console.log('componentDidUpdate prevState', prevState);
-			console.log('componentDidUpdate props', this.props);
-			console.log('componentDidUpdate state', this.state);
-			if (prevProps.value !== value || !isValid || (label && prevProps.label.text !== label.text)) {
-				this.setState({
-					value: value === undefined || value === null ? '' : value,
-					isValid: isValid,
-					labelText: label && label.text
-				});
-			}
+	componentWillReceiveProps(nextProps: Object) {
+		if (this.state.value !== nextProps.value || !nextProps.isValid || (nextProps.label && this.state.labelText !== nextProps.label.text)) {
+			this.setState({
+				value: nextProps.value === undefined || nextProps.value === null ? '' : nextProps.value,
+				isValid: nextProps.isValid,
+				labelText: nextProps.label && nextProps.label.text
+			});
 		}
 	}
 
