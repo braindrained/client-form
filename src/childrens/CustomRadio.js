@@ -81,17 +81,22 @@ class CustomRadio extends Component<any, any> {
 							`floating ${item.className}`
 							:
 							`${sumClasses([item.className, item.value === value ? item.selectedClassName : ''])}`,
-					style: item.style },
-				el('input', { ref: innerRef, type: 'radio', name, id: name + item.value, value: item.value, disabled: item.disabled === true, checked: item.value === value, onChange: (e) => { this.onChange(e); } }),
-				el('label', { htmlFor: name + item.value, style: item.labelStyle ? item.labelStyle : {} },
-					hideRadio ?
-						null
-						:
-						el('svg', { width: 24, height: 24, viewBox: '0 0 24 24' },
-							el('circle', { className: 'ext', cx: 12, cy: 12, r: 9, stroke: 'rgb(216, 216, 223)', strokeWidth: 2 }),
-							item.value === value ? el('circle', { className: 'int', cx: 12, cy: 12, r: 4 }) : null),
-					el('div', null, item.label), item.customObject ? item.customObject : null)))),
-			el(FieldError, { isValid, errorMessage }));
+					style: item.style
+				},
+					el('input', { ref: innerRef, type: 'radio', name, id: name + item.value, value: item.value, disabled: item.disabled === true, checked: item.value === value, onChange: (e) => { this.onChange(e); } }),
+					el('label', { htmlFor: name + item.value, style: item.labelStyle ? item.labelStyle : {} },
+							hideRadio ?
+								null
+								:
+								el('svg', { width: 24, height: 24, viewBox: '0 0 24 24' },
+									el('circle', { className: 'ext', cx: 12, cy: 12, r: 9, stroke: 'rgb(216, 216, 223)', strokeWidth: 2 }),
+									item.value === value ? el('circle', { className: 'int', cx: 12, cy: 12, r: 4 }) : null),
+							el('div', null, item.label), item.customObject ? item.customObject : null
+						)
+				))
+			),
+			el(FieldError, { isValid, errorMessage })
+		);
 	}
 }
 

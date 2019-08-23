@@ -37,6 +37,18 @@ class App extends Component {
 					{
 						control: 'text',
 						type: 'text',
+						name: 'suburb',
+						placeholder: 'Comune',
+						label: {
+							text: 'disable autofill',
+						},
+						value: '',
+						errorMessage: 'Campo obbligatorio',
+						autoComplete: 'new-password'
+					},
+					{
+						control: 'text',
+						type: 'text',
 						name: 'priceMax',
 						onlyNumber: true,
 						placeholder: '',
@@ -45,7 +57,7 @@ class App extends Component {
 						},
 						value: '',
 						currency: true,
-						isRequired: false,
+						isRequired: true,
 						errorMessage: 'Campo obbligatorio',
 						unit: '€',
 						autoComplete: 'new-password'

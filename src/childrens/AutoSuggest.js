@@ -143,6 +143,7 @@ class AutoSuggest extends Component {
           return el('div', {
             key: `sugg_${i}`,
             onClick: () => this.handleClick(item),
+            onTouchEnd: () => this.handleClick(item),
             className: currentSuggestion === i ? 'autosuggest-suggestion-selected' : 'autosuggest-suggestion'
           }, item.displayValue)
         })

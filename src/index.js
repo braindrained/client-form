@@ -27,6 +27,7 @@ export default class Form extends Component<any, any> {
 		const { controls } = this.props;
 
 		const updatedControls = controls.map((item) => {
+			item.isValid = true;
 			if (typeof item.valueOf === 'object') item = valuesOf(item, controls);
 			if (typeof item.optionIf === 'object') item.options = optionsIf(item, controls, { target: { name: item.name } });
 			if (typeof item.hideIf === 'object' && !item.hide) item.hide = hideField(item, controls);

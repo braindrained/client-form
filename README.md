@@ -40,7 +40,17 @@ Use it
 		text: 'Save changes',
 		style: { margin: '0 auto', float: 'none' },
 	},
-	sendForm: (e) => { this.sendForm(e); }, // your function that fetch data
+	sendForm: (e) => {
+		const promise = new Promise((resolve, reject) => {
+			yourFetch({ dataObject: e }).then((x) => {
+				if (x.succeed) {
+					resolve({ succeed: true, message: 'success mesage' });
+				} else {
+					reject({ succeed: false, message: 'error message' });
+				}
+			});
+		});
+		return promise;
+	}
 }}/>
 ```
-
