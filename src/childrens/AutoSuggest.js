@@ -114,6 +114,7 @@ class AutoSuggest extends Component {
   handleClick(item) {
     const { onUpdate, name, getValue } = this.props;
     const returnVal = getValue(item);
+    this.setState({ value: returnVal, suggestions: [], currentSuggestion: -1 });
 
     onUpdate({ target: { name: name, value: returnVal } });
   }
