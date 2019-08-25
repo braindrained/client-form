@@ -17,7 +17,7 @@ class CustomComp extends React.Component {
 		};
 	}
 
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		if (!nextProps.isValid) {
 			/*const { value } = this.state;
 			const toBeValidateFilter = o =>

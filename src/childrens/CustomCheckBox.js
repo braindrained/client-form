@@ -25,7 +25,7 @@ class CustomCheckBox extends Component<any, any> {
 		return false;
 	}
 
-	componentWillReceiveProps(nextProps: Object) {
+	UNSAFE_componentWillReceiveProps(nextProps: Object) {
 		const { label } = nextProps;
 
 		if (label && this.state.labelText !== label.text) {

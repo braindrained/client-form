@@ -29,7 +29,7 @@ class CustomRadio extends Component<any, any> {
 		return false;
 	}
 
-	componentWillReceiveProps(nextProps: Object) {
+	UNSAFE_componentWillReceiveProps(nextProps: Object) {
 		const { name, onUpdate } = this.props;
 		const { value, label } = nextProps;
 		const checkValue =

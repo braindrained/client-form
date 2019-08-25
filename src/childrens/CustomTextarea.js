@@ -26,7 +26,7 @@ class CustomTextarea extends Component<any, any> {
 		return false;
 	}
 
-	componentWillReceiveProps(nextProps: Object) {
+	UNSAFE_componentWillReceiveProps(nextProps: Object) {
 		if (this.state.value !== nextProps.value) {
 			this.setState({
 				value: nextProps.value,

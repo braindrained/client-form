@@ -25,7 +25,7 @@ class CustomSelect extends Component<any, any> {
 		return false;
 	}
 
-	componentWillReceiveProps(nextProps: Object) {
+	UNSAFE_componentWillReceiveProps(nextProps: Object) {
 		if (JSON.stringify(nextProps.options) !== JSON.stringify(this.state.options)) {
 			this.setState({
 				options: nextProps.options,
