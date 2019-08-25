@@ -29,6 +29,7 @@ class CustomTextField extends Component<any, any> {
 		if (this.props.innerRef !== nextProps.innerRef) return true;
 		if (this.props.value !== nextProps.value) return true;
 		if (this.state.value !== nextState.value) return true;
+		if (this.props.isValid !== this.state.isValid) return true;
 		if (this.state.autoComplete !== nextState.autoComplete) return true;
 		if (this.props.isValid !== nextProps.isValid) return true;
 		if (this.props.isValid !== this.state.isValid) return true;
@@ -39,14 +40,9 @@ class CustomTextField extends Component<any, any> {
 
 	componentDidUpdate(prevProps) {
 		const { value, isValid, label } = this.props;
-
-		if (prevProps.value !== value || !isValid || (prevProps.label && prevProps.label.text !== label.text)) {
-			this.setState({
-				value: value === undefined || value === null ? '' : value,
-				isValid: isValid,
-				labelText: label && label.text
-			});
-		}
+		if (prevProps.value !== value) this.setState({ value: value === undefined || value === null ? '' : value });
+		if (prevProps.isValid !== isValid) this.setState({ isValid });
+		if (prevProps.label && prevProps.label.text !== label.text) this.setState({ labelText: label && label.text });
 	}
 
 	/*UNSAFE_componentWillReceiveProps(nextProps: Object) {

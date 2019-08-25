@@ -30,7 +30,7 @@ class CustomTextarea extends Component<any, any> {
 		const { value, isValid } = this.props;
 
 		if (prevProps.value !== value) this.setState({ value });
-		if (!isValid) this.setState({ isValid });
+		if (prevProps.isValid !== isValid) this.setState({ isValid });
 	}
 
 	/*UNSAFE_componentWillReceiveProps(nextProps: Object) {

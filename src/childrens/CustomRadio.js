@@ -47,13 +47,11 @@ class CustomRadio extends Component<any, any> {
 		:
 		this.props.default;
 
-		if (prevProps.value !== value || (prevProps.label && prevProps.label.text !== label.text)) {
-			this.setState({
-				value: checkValue,
-				labelText: label && label.text
-			});
+		if (prevProps.value !== value) {
+			this.setState({ value: checkValue });
 			onUpdate({ target: { name, value: checkValue }}, false);
 		}
+		if (prevProps.label && prevProps.label.text !== label.text) this.setState({ labelText: label && label.text });
 	}
 
 	/*UNSAFE_componentWillReceiveProps(nextProps: Object) {
