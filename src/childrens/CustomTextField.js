@@ -31,6 +31,7 @@ class CustomTextField extends Component<any, any> {
 		if (this.state.value !== nextState.value) return true;
 		if (this.state.autoComplete !== nextState.autoComplete) return true;
 		if (this.props.isValid !== nextProps.isValid) return true;
+		if (this.props.isValid !== this.state.isValid) return true;
 		if (this.state.type !== nextState.type) return true;
 		if (nextProps.label && this.state.labelText !== nextProps.label.text) return true;
 		return false;
