@@ -25,7 +25,12 @@ class CustomCheckBox extends Component<any, any> {
 		return false;
 	}
 
-	UNSAFE_componentWillReceiveProps(nextProps: Object) {
+	componentDidUpdate(prevProps) {
+		const { label } = this.props;
+		if (prevProps.label && prevProps.label.text !== label.text)  this.setState({ labelText: label && label.text });
+	}
+
+	/*UNSAFE_componentWillReceiveProps(nextProps: Object) {
 		const { label } = nextProps;
 
 		if (label && this.state.labelText !== label.text) {
@@ -33,7 +38,7 @@ class CustomCheckBox extends Component<any, any> {
 				labelText: label && label.text
 			});
 		}
-	}
+	}*/
 
 	onChange(event: Object) {
 		this.setState({

@@ -127,3 +127,5 @@ export const findFirstRequired = (element, name) => {
 		}
 	}
 };
+
+export const merge = (a, b, p) => a.filter( aa => ! b.find ( bb => aa[p] === bb[p]) ).concat(b);

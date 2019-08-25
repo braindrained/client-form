@@ -13,12 +13,12 @@ import CustomPlusMinus from './childrens/CustomPlusMinus';
 import FakeSelect from './childrens/FakeSelect';
 import AutoSuggest from './childrens/AutoSuggest';
 
-import { sumClasses, isInt, hideField, optionsIf, output, findFirstRequired, valuesOf } from './helpers/utils';
+import { sumClasses, isInt, hideField, optionsIf, output, findFirstRequired, valuesOf, merge } from './helpers/utils';
 import './Form.css';
 
 const el = createElement;
 const View = (props: Object) => el('div', props);
-const merge = (a, b, p) => a.filter( aa => ! b.find ( bb => aa[p] === bb[p]) ).concat(b);
+
 
 export default class Form extends Component<any, any> {
 

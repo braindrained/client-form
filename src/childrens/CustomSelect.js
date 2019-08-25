@@ -25,7 +25,21 @@ class CustomSelect extends Component<any, any> {
 		return false;
 	}
 
-	UNSAFE_componentWillReceiveProps(nextProps: Object) {
+	componentDidUpdate(prevProps) {
+		const { options, value, name, onUpdate } = this.props;
+
+		if (JSON.stringify(prevProps.options) !== JSON.stringify(options)) {
+			this.setState({ options });
+			onUpdate({
+				target: {
+					name,
+					value
+				}
+			});
+		}
+	}
+
+	/*UNSAFE_componentWillReceiveProps(nextProps: Object) {
 		if (JSON.stringify(nextProps.options) !== JSON.stringify(this.state.options)) {
 			this.setState({
 				options: nextProps.options,
@@ -38,7 +52,7 @@ class CustomSelect extends Component<any, any> {
 				}
 			});
 		}
-	}
+	}*/
 
 	render() {
 		const { className, style, label, isRequired, errorMessage, name, value, isValid, disabled, innerRef } = this.props;

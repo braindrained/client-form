@@ -265,7 +265,9 @@
 	max-width: 250px;
 }
 .client-form .plus-minus input {
-	height: 30px;
+	height: 40px;
+	min-height: 40px;
+	padding: 7px 8px;
 }
 .client-form .plus-minus svg {
 	float: left;

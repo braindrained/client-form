@@ -26,7 +26,14 @@ class CustomTextarea extends Component<any, any> {
 		return false;
 	}
 
-	UNSAFE_componentWillReceiveProps(nextProps: Object) {
+	componentDidUpdate(prevProps) {
+		const { value, isValid } = this.props;
+
+		if (prevProps.value !== value) this.setState({ value });
+		if (!isValid) this.setState({ isValid });
+	}
+
+	/*UNSAFE_componentWillReceiveProps(nextProps: Object) {
 		if (this.state.value !== nextProps.value) {
 			this.setState({
 				value: nextProps.value,
@@ -39,7 +46,7 @@ class CustomTextarea extends Component<any, any> {
 				isValid: nextProps.isValid,
 			});
 		}
-	}
+	}*/
 
 	onChange(event: Object) {
 		const value = this.props.limitChar ? event.target.value.substring(0, this.props.limitChar) : event.target.value;

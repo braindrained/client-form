@@ -36,7 +36,19 @@ class CustomTextField extends Component<any, any> {
 		return false;
 	}
 
-	UNSAFE_componentWillReceiveProps(nextProps: Object) {
+	componentDidUpdate(prevProps) {
+		const { value, isValid, label } = this.props;
+
+		if (prevProps.value !== value || !isValid || (prevProps.label && prevProps.label.text !== label.text)) {
+			this.setState({
+				value: value === undefined || value === null ? '' : value,
+				isValid: isValid,
+				labelText: label && label.text
+			});
+		}
+	}
+
+	/*UNSAFE_componentWillReceiveProps(nextProps: Object) {
 		if (this.state.value !== nextProps.value || !nextProps.isValid || (nextProps.label && this.state.labelText !== nextProps.label.text)) {
 			this.setState({
 				value: nextProps.value === undefined || nextProps.value === null ? '' : nextProps.value,
@@ -44,7 +56,7 @@ class CustomTextField extends Component<any, any> {
 				labelText: nextProps.label && nextProps.label.text
 			});
 		}
-	}
+	}*/
 
 	onChange(event: Object) {
 		const { limitChar, onlyNumber, updateOnChange, name, onUpdate, autoComplete } = this.props;

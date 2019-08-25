@@ -71,7 +71,7 @@ class CustomPlusMinus extends Component<any, any> {
 		return el('div', { className: sumClasses(['container-field plus-minus', className]), style },
 			el(FieldLabel, { label, name, isRequired, isValid }),
 			el('div', { style: { float: 'left' } },
-				el('svg', { onClick: () => { this.plusMinus('min'); }, style: { opacity: this.state.value === 0 ? 0.3 : 1 }, className: 'box-shadow noselect' },
+				el('svg', { onClick: () => { this.plusMinus('min'); }, style: { opacity: this.state.value === 0 ? 0.3 : 1 }, className: 'noselect' },
 					el('circle', { cx: 17, cy: 17, r: 17, fill: 'rgb(50, 63, 72)' }),
 					el('rect', { width: 12, height: 1.5, x: 11, y: 16 })),
 				el('div', { style: { float: 'left' } },
@@ -87,7 +87,7 @@ class CustomPlusMinus extends Component<any, any> {
 						onBlur: (e) => { this.onBlur(e); },
 						style: { border: 'none', background: 'none', width: 40, textAlign: 'center' }
 					})),
-				el('svg', { onClick: () => { this.plusMinus('plus'); }, className: 'box-shadow noselect' },
+				el('svg', { onClick: () => { this.plusMinus('plus'); }, className: 'noselect' },
 					el('circle', { cx: 17, cy: 17, r: 17, fill: 'rgb(50, 63, 72)' }),
 					el('rect', { width: 12, height: 1.5, x: 11, y: 16 }),
 					el('rect', { width: 1.5, height: 12, x: 16, y: 11 }))),

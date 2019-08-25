@@ -29,7 +29,34 @@ class CustomRadio extends Component<any, any> {
 		return false;
 	}
 
-	UNSAFE_componentWillReceiveProps(nextProps: Object) {
+	componentDidUpdate(prevProps) {
+		const { options, value, name, onUpdate, label } = this.props;
+		const checkValue =
+		notEmpty(value) ?
+		(value.toString() === 'true' ?
+			true
+			:
+			value.toString() === 'false' ?
+			false
+			:
+			isInt(value) ?
+			parseInt(value, 10)
+			:
+			value
+		)
+		:
+		this.props.default;
+
+		if (prevProps.value !== value || (prevProps.label && prevProps.label.text !== label.text)) {
+			this.setState({
+				value: checkValue,
+				labelText: label && label.text
+			});
+			onUpdate({ target: { name, value: checkValue }}, false);
+		}
+	}
+
+	/*UNSAFE_componentWillReceiveProps(nextProps: Object) {
 		const { name, onUpdate } = this.props;
 		const { value, label } = nextProps;
 		const checkValue =
@@ -55,7 +82,7 @@ class CustomRadio extends Component<any, any> {
 			});
 			onUpdate({ target: { name, value: checkValue }}, false);
 		}
-	}
+	}*/
 
 	onChange(event: Object) {
 		const { value } = event.target;
