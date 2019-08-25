@@ -125,7 +125,7 @@ export default class Form extends Component<any, any> {
 				} else if (item.control === 'select' && (item.value === '0' || item.value === 0 || item.value === '' || item.value === ' ')) {
 					item.isValid = false;
 					formIsValid = false;
-				} else if (item.control === 'autosuggest' && (item.value.displayValue === '' || !item.value.displayValue)) {
+				} else if (item.control === 'autosuggest' && (!item.value || (item.value && (item.value.displayValue === '' || !item.value.displayValue)))) {
 					item.isValid = false;
 					formIsValid = false;
 				}
