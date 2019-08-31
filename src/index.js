@@ -3,17 +3,6 @@ import { Component, createElement, createRef } from 'react';
 import ClickOutHandler from 'react-onclickout';
 import loadable from '@loadable/component'
 
-const CustomTextField = loadable(() => import('./childrens/CustomTextField'))
-const CustomTextarea = loadable(() => import('./childrens/CustomTextarea'));
-const CustomCheckBox = loadable(() => import('./childrens/CustomCheckBox'));
-const CustomSelect = loadable(() => import('./childrens/CustomSelect'));
-const CustomRadio = loadable(() => import('./childrens/CustomRadio'));
-const CustomLabel = loadable(() => import('./childrens/CustomLabel'));
-const CustomTextAreaTab = loadable(() => import('./childrens/CustomTextAreaTab'));
-const CustomPlusMinus = loadable(() => import('./childrens/CustomPlusMinus'));
-const FakeSelect = loadable(() => import('./childrens/FakeSelect'));
-const AutoSuggest = loadable(() => import('./childrens/AutoSuggest'));
-
 import { sumClasses, hideField, optionsIf, output, findFirstRequired, valuesOf, merge } from './helpers/utils';
 import './Form.css';
 
@@ -263,6 +252,7 @@ export default class Form extends Component<any, any> {
 						return el(component, itemProps);
 					case 'autosuggest':
 						if (hide) return (null);
+						const AutoSuggest = loadable(() => import('./childrens/AutoSuggest'));
 						return el(AutoSuggest, {
 							key: item.name, name, label, value,
 							type, onlyNumber, placeholder,
@@ -275,6 +265,7 @@ export default class Form extends Component<any, any> {
 						});
 					case 'text':
 						if (hide) return (null);
+						const CustomTextField = loadable(() => import('./childrens/CustomTextField'))
 						return el(CustomTextField, {
 							key: item.name, name, label, value,
 							type, onlyNumber, placeholder,
@@ -286,6 +277,7 @@ export default class Form extends Component<any, any> {
 						});
 					case 'plusMinus':
 						if (hide) return (null);
+						const CustomPlusMinus = loadable(() => import('./childrens/CustomPlusMinus'));
 						return el(CustomPlusMinus, {
 								key: item.name, name, label, value: parseFloat(item.value),
 								type, onlyNumber, placeholder,
@@ -296,6 +288,7 @@ export default class Form extends Component<any, any> {
 						});
 					case 'textArea':
 						if (hide) return (null);
+						const CustomTextarea = loadable(() => import('./childrens/CustomTextarea'));
 						return el(CustomTextarea, {
 								key: item.name, name, label, value,
 								placeholder,
@@ -306,6 +299,7 @@ export default class Form extends Component<any, any> {
 						});
 					case 'select':
 						if (hide) return (null);
+						const CustomSelect = loadable(() => import('./childrens/CustomSelect'));
 						return el(CustomSelect, {
 								key: item.name, name, label, value,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
@@ -315,6 +309,7 @@ export default class Form extends Component<any, any> {
 						});
 					case 'check':
 						if (hide) return (null);
+						const CustomCheckBox = loadable(() => import('./childrens/CustomCheckBox'));
 						return el(CustomCheckBox, {
 								key: item.name, name, label, value,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
@@ -324,6 +319,7 @@ export default class Form extends Component<any, any> {
 						});
 					case 'radio':
 						if (hide) return (null);
+						const CustomRadio = loadable(() => import('./childrens/CustomRadio'));
 						return el(CustomRadio, {
 								key: item.name, name, label, value,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
@@ -333,11 +329,13 @@ export default class Form extends Component<any, any> {
 						});
 					case 'label':
 						if (hide) return (null);
+						const CustomLabel = loadable(() => import('./childrens/CustomLabel'));
 						return el(CustomLabel, {
 								key: `${Math.random()}`, content, className, style
 						});
 					case 'tabTextArea':
 						if (hide) return (null);
+						const CustomTextAreaTab = loadable(() => import('./childrens/CustomTextAreaTab'));
 						return el(CustomTextAreaTab, {
 								key: item.name, name, value, tabs,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
@@ -347,6 +345,7 @@ export default class Form extends Component<any, any> {
 						});
 					case 'fakeselect':
 						if (hide) return (null);
+						const FakeSelect = loadable(() => import('./childrens/FakeSelect'));
 						return el(FakeSelect, {
 								key: item.name, name, label, value, text,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
