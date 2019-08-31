@@ -33,31 +33,26 @@ export const hideField = (item: Object, controls: Array<Object>) => {
 	try {
 		if (!item.hideIf) return false;
 		let hide = false;
-		item.hideIf.map((v) => {
+		item.hideIf.map(v => {
 			const control = controls.filter(o => o.name === v.field);
 			let controlValue = '';
 			if (control[0].control === 'check') {
 				controlValue = control[0].value ? control[0].value : control[0].default;
-			} else {
+			} else if (control[0].control !== 'check') {
 				if (control[0].value === 0) {
 					controlValue = control[0].value;
 				} else {
 					controlValue = control[0].value ? control[0].value : '';
 					controlValue = controlValue === '' ? control[0].default : controlValue;
-					controlValue = controlValue ? controlValue : '';
+					controlValue = controlValue || '';
 				}
 			}
-			if (v.regEx) {
-				if (control.length > 0 && v.regEx.test(controlValue.toString())) hide = true;
-				return null;
-			} else {
-				if (control.length > 0 && v.values.indexOf(controlValue) !== -1) hide = true;
-				return null;
-			}
+			if (v.regEx && control.length > 0 && v.regEx.test(controlValue.toString())) hide = true;
+			if (!v.regEx && control.length > 0 && v.values.indexOf(controlValue) !== -1) hide = true;
+			return null;
 		});
 		return hide;
 	} catch (e) {
-		// console.log('hideField error: ', e);
 		return false;
 	}
 };
@@ -84,7 +79,7 @@ export const optionsIf = (item: Object, controls: Array<Object>, el: Object) => 
 
 export const valuesOf = (item: Object, controls: Array<Object>) => {
 	try {
-		item.valueOf.map((v) => {
+		item.valueOf.map(v => {
 			const control = controls.filter(o => o.name === v.field);
 			item[v.propTo] = v.do(control[0][v.propFrom]);
 			return null;
@@ -98,12 +93,12 @@ export const valuesOf = (item: Object, controls: Array<Object>) => {
 
 export const output = (controls: Array<Object>, excludeHidden: boolean) => {
 	const formObject = {};
-	controls.filter(o => o.control !== 'label' && o.exclude !== true && (excludeHidden === true ? !o.hide : true)).map((item) => {
+	controls.filter(o => o.control !== 'label' && o.exclude !== true && (excludeHidden === true ? !o.hide : true)).map(item => {
 		let { value } = item;
 		const { valueAsObject, currency, name } = item;
 		if (typeof value === 'object' && valueAsObject) {
 			const valueObject = {};
-			value.map((itemx) => {
+			value.map(itemx => {
 				valueObject[itemx.name] = itemx.value;
 				return null;
 			});
@@ -128,4 +123,4 @@ export const findFirstRequired = (element, name) => {
 	}
 };
 
-export const merge = (a, b, p) => a.filter( aa => ! b.find ( bb => aa[p] === bb[p]) ).concat(b);
+export const merge = (a, b, p) => a.filter(aa => !b.find(bb => aa[p] === bb[p])).concat(b);

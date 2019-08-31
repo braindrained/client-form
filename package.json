@@ -1,6 +1,6 @@
 {
   "name": "client-form",
-  "version": "0.7.697",
+  "version": "0.7.698",
   "author": "Paolo Senese",
   "description": "A react component to build forms",
   "keywords": [
@@ -72,6 +72,7 @@
     "debug": "npm run build -- --progress --colors --profile --display-modules --display-reasons --display-error-details"
   },
   "dependencies": {
+    "@loadable/component": "^5.10.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-onclickout": "^2.0.8"

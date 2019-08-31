@@ -10,7 +10,7 @@ class CustomTextField extends Component<any, any> {
 
 	constructor(props: Object) {
 		super(props);
-		const { isValid, type, label, onlyNumber, limitChar, name, autoComplete } = this.props;
+		const { isValid, type, label, onlyNumber, limitChar, autoComplete } = this.props;
 		let { value } = this.props;
 		value = value === undefined || value === null ? '' : value;
 		value = onlyNumber === true && value !== undefined ? value.toString().replace(/\D/g, '') : value;
@@ -45,7 +45,8 @@ class CustomTextField extends Component<any, any> {
 		if (prevProps.label && prevProps.label.text !== label.text) this.setState({ labelText: label && label.text });
 	}
 
-	/*UNSAFE_componentWillReceiveProps(nextProps: Object) {
+	/*
+	UNSAFE_componentWillReceiveProps(nextProps: Object) {
 		if (this.state.value !== nextProps.value || !nextProps.isValid || (nextProps.label && this.state.labelText !== nextProps.label.text)) {
 			this.setState({
 				value: nextProps.value === undefined || nextProps.value === null ? '' : nextProps.value,
@@ -53,7 +54,8 @@ class CustomTextField extends Component<any, any> {
 				labelText: nextProps.label && nextProps.label.text
 			});
 		}
-	}*/
+	}
+	*/
 
 	onChange(event: Object) {
 		const { limitChar, onlyNumber, updateOnChange, name, onUpdate, autoComplete } = this.props;
@@ -61,7 +63,7 @@ class CustomTextField extends Component<any, any> {
 		this.setState({
 			value: onlyNumber ? value.replace(/\D/g, '') : value,
 			isValid: true,
-			autoComplete: autoComplete
+			autoComplete
 		});
 		if (updateOnChange === true) {
 			onUpdate({
@@ -107,10 +109,7 @@ class CustomTextField extends Component<any, any> {
 		const { isValid, value, type, autoComplete } = this.state;
 		const inputStyle = type === 'password' || unit !== undefined ? { paddingRight: 30 } : {};
 
-		return el('div', {
-				className: sumClasses(['container-field', className]),
-				style: Object.assign({}, style, type === 'hidden' ? { display: 'none' } : {})
-			},
+		return el('div', { className: sumClasses(['container-field', className]), style: Object.assign({}, style, type === 'hidden' ? { display: 'none' } : {}) },
 			el(FieldLabel, { label, name, isRequired, isValid }),
 			el('input', {
 				type,

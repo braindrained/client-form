@@ -1,24 +1,24 @@
 // @flow
 import { Component, createElement, createRef } from 'react';
 import ClickOutHandler from 'react-onclickout';
+import loadable from '@loadable/component'
 
-import CustomTextField from './childrens/CustomTextField';
-import CustomTextarea from './childrens/CustomTextarea';
-import CustomCheckBox from './childrens/CustomCheckBox';
-import CustomSelect from './childrens/CustomSelect';
-import CustomRadio from './childrens/CustomRadio';
-import CustomLabel from './childrens/CustomLabel';
-import CustomTextAreaTab from './childrens/CustomTextAreaTab';
-import CustomPlusMinus from './childrens/CustomPlusMinus';
-import FakeSelect from './childrens/FakeSelect';
-import AutoSuggest from './childrens/AutoSuggest';
+const CustomTextField = loadable(() => import('./childrens/CustomTextField'))
+const CustomTextarea = loadable(() => import('./childrens/CustomTextarea'));
+const CustomCheckBox = loadable(() => import('./childrens/CustomCheckBox'));
+const CustomSelect = loadable(() => import('./childrens/CustomSelect'));
+const CustomRadio = loadable(() => import('./childrens/CustomRadio'));
+const CustomLabel = loadable(() => import('./childrens/CustomLabel'));
+const CustomTextAreaTab = loadable(() => import('./childrens/CustomTextAreaTab'));
+const CustomPlusMinus = loadable(() => import('./childrens/CustomPlusMinus'));
+const FakeSelect = loadable(() => import('./childrens/FakeSelect'));
+const AutoSuggest = loadable(() => import('./childrens/AutoSuggest'));
 
-import { sumClasses, isInt, hideField, optionsIf, output, findFirstRequired, valuesOf, merge } from './helpers/utils';
+import { sumClasses, hideField, optionsIf, output, findFirstRequired, valuesOf, merge } from './helpers/utils';
 import './Form.css';
 
 const el = createElement;
 const View = (props: Object) => el('div', props);
-
 
 export default class Form extends Component<any, any> {
 
@@ -26,7 +26,7 @@ export default class Form extends Component<any, any> {
 		super(props);
 		const { controls } = this.props;
 
-		const updatedControls = controls.map((item) => {
+		const updatedControls = controls.map(item => {
 			item.isValid = true;
 			if (typeof item.valueOf === 'object') item = valuesOf(item, controls);
 			if (typeof item.optionIf === 'object') item.options = optionsIf(item, controls, { target: { name: item.name } });
@@ -39,21 +39,20 @@ export default class Form extends Component<any, any> {
 			controls: updatedControls,
 			succeed: null,
 			isSent: null,
-			init: true
+			disableButton: false
 		};
 	}
 
-	async onUpdate(e: Object, hasError: boolean) {
-		this.setState({ init: false });
+	async onUpdate(e: Object) {
 		const { controls } = this.state;
 
-		let updatedControls = controls.map((item) => {
+		let updatedControls = controls.map(item => {
 			if (e.target.name === item.name) {
 				item.isValid = true;
 				item.value = e.target.value;
 			} else {
 				if (item.label && typeof item.label.changeIf === 'object') {
-					item.label.changeIf.map((v) => {
+					item.label.changeIf.map(v => {
 						const control = this.state.controls.filter(o => o.name === v.field);
 						if (control.length > 0) {
 							if (item.control !== 'label' && control[0].value) item.label.text = control[0].value.toString().match(v.regEx) != null ? v.ifTrue : v.ifFalse;
@@ -63,7 +62,7 @@ export default class Form extends Component<any, any> {
 					});
 				}
 				if (typeof item.changeStyleIf === 'object') {
-					item.changeStyleIf.map((v) => {
+					item.changeStyleIf.map(v => {
 						const control = this.state.controls.filter(o => o.name === v.field);
 						if (control.length > 0 && control[0].value !== undefined) {
 							if (control[0].value.toString().match(v.regEx) !== null) {
@@ -80,20 +79,20 @@ export default class Form extends Component<any, any> {
 			return item;
 		});
 
-		updatedControls = updatedControls.map((item) => {
+		updatedControls = updatedControls.map(item => {
 			item.hide = typeof item.hideIf === 'object' ? hideField(item, updatedControls) : item.hide;
 			if (typeof item.hideIf === 'object' && item.hide && item.control !== 'external') item.value = item.default;
 			return item;
 		});
 
-		updatedControls = updatedControls.map((item) => {
+		updatedControls = updatedControls.map(item => {
 			if (typeof item.valueOf === 'object') item = valuesOf(item, updatedControls);
 			return item;
 		});
 
 		if (this.props.updateOnChange) {
 			if (this.props.updateOnChangeWithValidation) {
-				this.formIsValid(e, 'onUpdate');
+				this.formIsValid();
 			} else {
 				const { excludeHidden, updateOnChange } = this.props;
 				const formObject = output(updatedControls, excludeHidden);
@@ -109,12 +108,11 @@ export default class Form extends Component<any, any> {
 		});
 	}
 
-	formIsValid(e, action) {
-		this.setState({ init: false });
+	formIsValid() {
 		let formIsValid = true;
 		const { controls } = this.state;
 
-		const validatedControls = controls.map((item) => {
+		const validatedControls = controls.map(item => {
 			item.isValid = true;
 			item.hide = item.hide ? item.hide : typeof item.hideIf === 'object' ? hideField(item, controls) : false;
 			if (typeof item.optionIf === 'object') item.options = optionsIf(item, controls, { target: { name: item.name } });
@@ -132,7 +130,7 @@ export default class Form extends Component<any, any> {
 			}
 			if (typeof item.value === 'object' && item.valueAsObject && !item.hide) {
 				if (item.value && item.value.filter(o => o.isRequired === true).length > 0) {
-					const updatedValues = item.value.map((itemS) => {
+					const updatedValues = item.value.map(itemS => {
 						if (itemS.isRequired) {
 							if (itemS.value === '' || !itemS.value) {
 								itemS.isValid = false;
@@ -183,25 +181,14 @@ export default class Form extends Component<any, any> {
 			const { excludeHidden } = this.props;
 			const formObject = output(updatedControls, excludeHidden);
 
-			this.setState({
-				isSent: true,
-			});
-			this.props.sendForm(formObject).then((x) => {
-				this.setState({
-					isSent: false,
-					succeed: x.succeed,
-					message: x.message
-				});
-			}).catch((x) => {
-				this.setState({
-					isSent: false,
-					succeed: x.succeed,
-					message: x.message
-				});
+			this.setState({ isSent: true });
+			this.props.sendForm(formObject).then(x => {
+				this.setState({ isSent: false, succeed: x.succeed, message: x.message });
+			}).catch(x => {
+				this.setState({ isSent: false, succeed: x.succeed, message: x.message });
 			});
 		} else {
-			const toBeValidateFilter = o =>
-				!o.hide &&
+			const toBeValidateFilter = o => !o.hide &&
 				o.type !== 'hidden' &&
 				(
 					(o.isRequired && o.isValid === false) ||
@@ -209,21 +196,21 @@ export default class Form extends Component<any, any> {
 					(o.regEx && o.isValid === false) ||
 					(o.equalTo && o.isValid === false) ||
 					(
-						typeof o.value === 'object'  && o.isValid === false && o.control !== 'autosuggest' && !o.requiredKey &&
+						typeof o.value === 'object' && o.isValid === false && o.control !== 'autosuggest' && !o.requiredKey &&
 						(
 							o.value.filter(e => e.isRequired && e.isValid === false)
 						)
 					)
 					||
 					(
-						o.control === 'external'  && o.isValid === false && !o.requiredKey &&
+						o.control === 'external' && o.isValid === false && !o.requiredKey &&
 						(
 							o.value.filter(e => e.isRequired && e.isValid === false)
 						)
 					)
 				);
-			let firstRequired = updatedControls.filter(o => toBeValidateFilter(o))[0];
-			if (firstRequired && typeof firstRequired.value === 'object' && firstRequired.control !== 'autosuggest' &&  !firstRequired.requiredKey) {
+			const firstRequired = updatedControls.filter(o => toBeValidateFilter(o))[0];
+			if (firstRequired && typeof firstRequired.value === 'object' && firstRequired.control !== 'autosuggest' && !firstRequired.requiredKey) {
 				const firstRequiredChild = firstRequired.value.filter(o => toBeValidateFilter(o))[0];
 				findFirstRequired(this[firstRequired.name].current, firstRequiredChild.name);
 			} else {
@@ -243,7 +230,7 @@ export default class Form extends Component<any, any> {
 
 	render() {
 		const { formClassName, formStyle, sendButton, beforeButton, buttonContainerStyle, afterButton } = this.props;
-		const { controls, succeed, isSent, message, init } = this.state;
+		const { controls, succeed, isSent, message, disableButton } = this.state;
 		const sendButtonClass = sumClasses([
 			succeed !== null ? (succeed ? 'btn btn-succeed' : 'btn btn-red') : (isSent ? 'btn btn-sent' : 'btn'),
 			sendButton && sendButton.disabled ? 'btn-grey' : ''
@@ -252,7 +239,7 @@ export default class Form extends Component<any, any> {
 		const sendButtonValue = sendButton ? (succeed === null ? (hideIfSent && isSent ? null : sendButton.text) : message) : null;
 
 		return el(View, { className: sumClasses(['client-form', formClassName]), style: formStyle },
-			controls.map((item) => {
+			controls.map(item => {
 				const {
 					control, name, component, type, onlyNumber, placeholder, label,
 					value, isRequired, isValid, disabled, errorMessage, className, style,
@@ -377,8 +364,9 @@ export default class Form extends Component<any, any> {
 						el('button', {
 							className: sendButtonClass,
 							style: hideIfSent && isSent ? sendButton.sentStyle : sendButton.style,
-							onClick: succeed === null && isSent === null && sendButton.disabled !== true ? () => { this.formIsValid(null, null); } : () => null,
-							type: 'button'
+							onClick: succeed === null && isSent === null && sendButton.disabled !== true ? () => { this.formIsValid(); } : () => null,
+							type: 'button',
+							disabled: disableButton
 						},
 						el('svg', { width: 24, height: 24, viewBox: '0 0 24 24', className: isSent !== false ? 'spin' : '' },
 							isSent ?

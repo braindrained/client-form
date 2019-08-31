@@ -55,9 +55,10 @@ module.exports = {
 		    new webpack.NoErrorsPlugin(),
 			],
 		resolve: {
-	      extensions: [".js", ".jsx"]
+	    extensions: [".js", ".jsx"]
 	  },
     devServer: {
-        port: 3007
+      host: '0.0.0.0',
+      port: 3007
     }
 };

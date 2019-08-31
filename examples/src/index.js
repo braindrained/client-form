@@ -46,7 +46,7 @@ class App extends Component {
 						errorMessage: 'Campo obbligatorio',
 						autoComplete: 'new-password'
 					},
-					{
+					/*{
 						control: 'text',
 						type: 'text',
 						name: 'priceMax',
@@ -358,7 +358,7 @@ class App extends Component {
 						hideIf: [
 							{ field: 'contractTypeId', regEx: /^1$/ }
 						],
-					},
+					},*/
 				],
 				beforeButton: el('div', {
 					style: { clear: 'both', fontSize: 11, lineHeight: '30px', textAlign: 'center' }
