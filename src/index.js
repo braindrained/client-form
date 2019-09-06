@@ -12,6 +12,7 @@ import CustomTextAreaTab from './childrens/CustomTextAreaTab';
 import CustomPlusMinus from './childrens/CustomPlusMinus';
 import FakeSelect from './childrens/FakeSelect';
 import AutoSuggest from './childrens/AutoSuggest';
+import CustomListBox from './childrens/CustomListBox';
 
 import { sumClasses, hideField, optionsIf, output, findFirstRequired, valuesOf, merge } from './helpers/utils';
 import './Form.css';
@@ -116,10 +117,10 @@ export default class Form extends Component<any, any> {
 			item.hide = item.hide ? item.hide : typeof item.hideIf === 'object' ? hideField(item, controls) : false;
 			if (typeof item.optionIf === 'object') item.options = optionsIf(item, controls, { target: { name: item.name } });
 			if (item.isRequired && !item.hide) {
-				if (item.control !== 'select' && item.control !== 'autosuggest' && (item.value === '' || !item.value)) {
+				if (item.control !== 'select' && item.control !== 'listbox' && item.control !== 'autosuggest' && (item.value === '' || !item.value)) {
 					item.isValid = false;
 					formIsValid = false;
-				} else if (item.control === 'select' && (item.value === '0' || item.value === 0 || item.value === '' || item.value === ' ')) {
+				} else if ((item.control === 'select' || item.control === 'listbox') && (item.value === '0' || item.value === 0 || item.value === '' || item.value === ' ')) {
 					item.isValid = false;
 					formIsValid = false;
 				} else if (item.control === 'autosuggest' && (!item.value || (item.value && (item.value.displayValue === '' || !item.value.displayValue)))) {
@@ -306,6 +307,15 @@ export default class Form extends Component<any, any> {
 					case 'select':
 						if (hide) return (null);
 						return el(CustomSelect, {
+								key: item.name, name, label, value,
+								onUpdate: (e, h) => { this.onUpdate(e, h); },
+								isRequired, isValid, disabled,
+								errorMessage, className, style,
+								options, default: item.default, ref: this[name]
+						});
+					case 'listbox':
+						if (hide) return (null);
+						return el(CustomListBox, {
 								key: item.name, name, label, value,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								isRequired, isValid, disabled,

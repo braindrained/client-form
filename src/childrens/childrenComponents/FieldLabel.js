@@ -8,7 +8,8 @@ const el = createElement;
 const FieldLabel = ({ label, name, isRequired, isValid }) => el('label', {
 	htmlFor: name,
 	className: sumClasses(['noselect', label && label.className]),
-	style: Object.assign({}, label && label.style ? label.style : {}, isValid === false ? { color: '#e4002b' } : {})
+	style: Object.assign({}, label && label.style ? label.style : {}, isValid === false ? { color: '#e4002b' } : {}),
+	'aria-label': `${camelToTitle(label && label.text, name) + (isRequired ? ' *' : '')}`
 },
 `${camelToTitle(label && label.text, name) + (isRequired ? ' *' : '')}`,
 label && label.object ? label.object : null);

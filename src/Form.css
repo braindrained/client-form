@@ -104,7 +104,6 @@
 	text-decoration: none;
 	transition-duration: 0.2s, 0.2s;
 	transition-timing-function: ease-in, ease-out;
-	outline: none;
 	font-weight: 500;
 	-webkit-touch-callout: none; /* iOS Safari */
 		-webkit-user-select: none; /* Safari */
@@ -316,7 +315,6 @@
 	-moz-appearance: none;
 	width: 100%;
 	cursor: pointer;
-	outline: none;
 	z-index: 1;
 	-webkit-touch-callout: none; /* iOS Safari */
 		-webkit-user-select: none; /* Safari */

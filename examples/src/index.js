@@ -35,6 +35,39 @@ class App extends Component {
 						value: 1,
 					},
 					{
+						control: 'listbox',
+						name: 'myBeautifulListBox',
+						label: { text: 'myBeautifulListBox' },
+						options: [
+							{ value: ' ', label: 'Seleziona...', className: 'first' },
+							{ value: 1, label: 'Assente', className: 'central' },
+							{ value: 2, label: 'Predisposizione', className: 'central' },
+							{ value: 3, label: 'Autonoma', className: 'central' },
+							{ value: 4, label: 'Centralizzata', className: 'central' },
+							{ value: 5, label: 'Cinque', className: 'central' },
+							{ value: 6, label: 'Sei', className: 'central' },
+							{ value: 7, label: 'Sette', className: 'central' },
+						],
+						default: 1,
+						value:	1
+					},
+					{
+						control: 'listbox',
+						name: 'myBeautifulListBox2',
+						options: [
+							{ value: 0, label: 'Zero' },
+							{ value: 1, label: 'Uno' },
+							{ value: 2, label: 'Due' },
+							{ value: 3, label: 'Tre' },
+							{ value: 4, label: 'Quattro' },
+							{ value: 5, label: 'Cinque' },
+							{ value: 6, label: 'Sei' },
+							{ value: 7, label: 'Sette' },
+						],
+						default: 0,
+						disabled: true
+					},
+					{
 						control: 'text',
 						type: 'text',
 						name: 'suburb',

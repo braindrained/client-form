@@ -1,0 +1,59 @@
+[role="listbox"] {
+  min-height: 180px;
+  padding: 0;
+  background: white;
+}
+
+[role="option"] {
+  display: block;
+  padding: 0px 8px;
+  position: relative;
+  line-height: 34px;
+}
+[role="option"]:hover, [role="option"].focused {
+  background: #bde4ff;
+}
+[role="option"].selected {
+  background: rgb(0, 132, 255);
+  color: #fff;
+}
+
+#exp_button {
+  border-radius: 0;
+  text-align: left;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #d8d8df;
+  border-radius: 2px;
+  width: 100%;
+  height: 34px;
+  padding: 7px 8px;
+}
+#exp_button[aria-disabled="true"] {
+  background-color: #f1f1f1;
+  border: 1px solid #f1f1f1;
+}
+
+#exp_button svg {
+  position: absolute;
+	right: 1px;
+	top: 5px;
+	z-index: 1;
+}
+#exp_button[aria-disabled="true"] svg {
+  display: none;
+}
+
+#exp_elem_list {
+  border-top: 0;
+  max-height: 10em;
+  overflow-y: auto;
+  position: absolute;
+  margin: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.hidden {
+  display: none;
+}
