@@ -23,6 +23,11 @@ class CustomListBox extends Component<any, any> {
 		};
 	}
 
+  componentDidUpdate(prevProps) {
+		const { options } = this.props;
+		if (JSON.stringify(prevProps.options) !== JSON.stringify(options)) this.setState({ options });
+	}
+
   handleButtonClick(val) {
     if (this.state.listClassName === '') val = 'hidden';
     this.setState({ listClassName: val, addButtonProps: val === '' ? { 'aria-expanded': 'true' } : {} });
@@ -87,14 +92,16 @@ class CustomListBox extends Component<any, any> {
 
   scrollOnFocus(item, newIndex) {
     const { options } = this.state;
+    const listbox = this.listbox.current;
+    const element = this[`exp_elem_${item.value}`].current;
 
-    if (this['listbox'].current.scrollHeight > this['listbox'].current.clientHeight) {
-      var scrollBottom = this['listbox'].current.clientHeight + this['listbox'].current.scrollTop;
-      var elementBottom = this[`exp_elem_${item.value}`].current.offsetTop + this[`exp_elem_${item.value}`].current.offsetHeight;
+    if (listbox.scrollHeight > listbox.clientHeight) {
+      var scrollBottom = listbox.clientHeight + listbox.scrollTop;
+      var elementBottom = element.offsetTop + element.offsetHeight;
       if (elementBottom > scrollBottom) {
-        this['listbox'].current.scrollTop = elementBottom - this['listbox'].current.clientHeight;
-      } else if (this[`exp_elem_${item.value}`].current.offsetTop < this['listbox'].current.scrollTop) {
-        this['listbox'].current.scrollTop = this[`exp_elem_${item.value}`].current.offsetTop;
+        listbox.scrollTop = elementBottom - listbox.clientHeight;
+      } else if (element.offsetTop < listbox.scrollTop) {
+        listbox.scrollTop = element.offsetTop;
       }
     }
 

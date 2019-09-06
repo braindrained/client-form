@@ -50,7 +50,6 @@ class App extends Component {
 						],
 						default: 1,
 						value:	1,
-						disabled: true
 					},
 					{
 						control: 'listbox',
