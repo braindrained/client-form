@@ -246,7 +246,7 @@ export default class Form extends Component<any, any> {
 					updateOnChange, limitChar, currency, hideRadio,
 					textBefore, tabs, valueAsObject, text, firstRange,
 					secondRange, rangesStyle, overlayBg, content, unit, customSvg,
-					autoComplete, autoSuggestFetch, getValue, cacheResults, timeOut, hide, options
+					autoComplete, autoSuggestFetch, getValue, cacheResults, timeOut, hide, options, minHeight
 				} = item;
 
 				this[name] = createRef();
@@ -320,7 +320,8 @@ export default class Form extends Component<any, any> {
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								isRequired, isValid, disabled,
 								errorMessage, className, style,
-								options, default: item.default, ref: this[name]
+								options, default: item.default, ref: this[name],
+								minHeight
 						});
 					case 'check':
 						if (hide) return (null);

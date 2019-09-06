@@ -49,7 +49,8 @@ class App extends Component {
 							{ value: 7, label: 'Sette', className: 'central' },
 						],
 						default: 1,
-						value:	1
+						value:	1,
+						disabled: true
 					},
 					{
 						control: 'listbox',
@@ -59,13 +60,9 @@ class App extends Component {
 							{ value: 1, label: 'Uno' },
 							{ value: 2, label: 'Due' },
 							{ value: 3, label: 'Tre' },
-							{ value: 4, label: 'Quattro' },
-							{ value: 5, label: 'Cinque' },
-							{ value: 6, label: 'Sei' },
-							{ value: 7, label: 'Sette' },
 						],
 						default: 0,
-						disabled: true
+						minHeight: (34 * 4) + 16
 					},
 					{
 						control: 'text',
