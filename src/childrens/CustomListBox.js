@@ -25,7 +25,7 @@ class CustomListBox extends Component<any, any> {
 
   componentDidUpdate(prevProps) {
 		const { options } = this.props;
-		if (JSON.stringify(prevProps.options) !== JSON.stringify(options)) this.setState({ options });
+		if (JSON.stringify(prevProps.options) !== JSON.stringify(options)) this.setState({ options, currentIndex: 0, currentSelection: options[0] });
 	}
 
   handleButtonClick(val) {
