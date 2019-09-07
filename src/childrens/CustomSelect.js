@@ -56,11 +56,20 @@ class CustomSelect extends Component<any, any> {
 
 	render() {
 		const { className, style, label, isRequired, errorMessage, name, value, isValid, disabled, innerRef } = this.props;
+		const labelId = `lb_select_${name}`;
 
 		return el('div', { className: sumClasses(['container-field', className]), style },
-			el(FieldLabel, { label, name, isRequired, isValid }),
+			el(FieldLabel, { label, name, isRequired, isValid, labelId }),
 			el('div', { className: 'select-style', style: isValid === false ? { borderColor: '#e4002b' } : {} },
-				el('select', { name, id: name, value, onChange: (e) => { this.props.onUpdate(e); }, disabled, ref: innerRef },
+				el('select', {
+					name,
+					id: name,
+					value,
+					onChange: (e) => { this.props.onUpdate(e); },
+					disabled,
+					ref: innerRef,
+					'aria-labelledby': sumClasses([name, labelId]),
+				},
 					this.state.options.map((item, i) => {
 						switch (item.value) {
 						case '0':

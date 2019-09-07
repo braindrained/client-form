@@ -52,6 +52,20 @@ class CustomCheckBox extends Component<any, any> {
 		});
 	}
 
+	handleKeyDown(e: Object) {
+		if (e.keyCode !== 9) {
+			e.preventDefault();
+			const { value } = this.state;
+			this.setState({ value: !value });
+			this.props.onUpdate({
+				target: {
+					name: this.props.name,
+					value: !value
+				}
+			});
+		}
+	}
+
 	render() {
 		const { className, style, label, name, customSvg, innerRef } = this.props;
 		const { value } = this.state;
@@ -68,11 +82,27 @@ class CustomCheckBox extends Component<any, any> {
 			ry: 2,
 			x: 4,
 			y: 4 });
+		const labelId = `ck_label_${name}`;
 
 		return el('div', { className: sumClasses(['container-field', className !== undefined ? className : 'check']), style },
-			el('input', { ref: innerRef, type: 'checkbox', name, id: name, checked: value, onChange: (e) => { this.onChange(e); } }),
-			el('label', { htmlFor: name, style: label && label.style },
-				el('svg', svgProps, value !== true ? forFalse : forTrue),
+			el('input', {
+					ref: innerRef,
+					type: 'checkbox',
+					name,
+					id: name,
+					checked: value,
+					onChange: e => this.onChange(e),
+					'aria-labelledby': labelId
+				}
+			),
+			el('label', {
+				tabIndex: 0,
+				id: labelId,
+				htmlFor: name,
+				style: label && label.style, 'aria-label': camelToTitle(label && label.text, name),
+				onKeyDown: e => this.handleKeyDown(e),
+			},
+				el('svg', { ...svgProps, 'aria-labelledby': labelId }, value !== true ? forFalse : forTrue),
 				el('div', {}, camelToTitle(label && label.text, name))));
 	}
 }

@@ -5,7 +5,8 @@ import { camelToTitle, sumClasses } from '../../helpers/utils';
 const el = createElement;
 
 // flow-disable-next-line
-const FieldLabel = ({ label, name, isRequired, isValid }) => el('label', {
+const FieldLabel = ({ label, name, isRequired, isValid, labelId }) => el('label', {
+	id: labelId,
 	htmlFor: name,
 	className: sumClasses(['noselect', label && label.className]),
 	style: Object.assign({}, label && label.style ? label.style : {}, isValid === false ? { color: '#e4002b' } : {}),

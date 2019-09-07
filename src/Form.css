@@ -218,7 +218,7 @@
 	width: 24px;
 	text-align: center;
 	font-size: 14px;
-	color: #d8d8df;
+	color: #333f48;
 	font-weight: 500;
 }
 
@@ -251,11 +251,11 @@
 	color: #333f48;
 }
 .client-form .container-field .container-field-tabs .container-field-tabs-item-selected {
-	background: #949da2;
+	background: #333f48;
 	color: #fff;
 }
 .client-form .container-field .container-field-tabs .container-field-tabs-item-selected:hover {
-	background: #949da2;
+	background: #333f48;
 	color: #fff;
 }
 
@@ -350,6 +350,7 @@ select::-ms-expand {
 	font-size: 11px;
 	color: rgb(106, 119, 134);
 	margin-right: 15px;
+	width: auto;
 }
 
 /* AutoSuggest */

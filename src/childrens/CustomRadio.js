@@ -1,5 +1,5 @@
 // @flow
-import { Component, createElement, forwardRef } from 'react';
+import { Component, createElement, forwardRef, createRef } from 'react';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { sumClasses, isInt, notEmpty } from '../helpers/utils';
@@ -90,35 +90,64 @@ class CustomRadio extends Component<any, any> {
 		this.props.onUpdate(event);
 	}
 
+	handleKeyDown(e: Object, item: Object) {
+		if (e.keyCode !== 9) {
+			e.preventDefault();
+			const { name, onUpdate } = this.props;
+			const { value } = item;
+			const checkValue = value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value;
+
+			this.setState({ value: checkValue });
+			onUpdate({ target: { name, value: checkValue } });
+		}
+	}
+
 	render() {
 		const { className, style, label, name, hideRadio, options, isRequired, isValid, errorMessage, innerRef } = this.props;
 		const { value, labelText } = this.state;
 
-		return el('div', { className: sumClasses(['container-field', className]), style },
+		return el('div', { ref: innerRef, className: sumClasses(['container-field', className]), style },
 			el(FieldLabel, { label, name, isRequired, isValid }),
 			el('div', { className: 'float-container', id: name },
-				options.map(item => el('div', {
-					key: `select_${item.name}_${item.value}`,
-					className: hideRadio && item.value === value ?
-						`floating ${item.className} ${item.selectedClassName ? item.selectedClassName : 'selected-radio'}`
-						:
-						hideRadio ?
-							`floating ${item.className}`
+				options.map(item => {
+					this[`r_elem_${name}_${item.value}`] = createRef();
+					return el('div', {
+						key: `select_${item.name}_${item.value}`,
+						className: hideRadio && item.value === value ?
+							`floating ${item.className} ${item.selectedClassName ? item.selectedClassName : 'selected-radio'}`
 							:
-							`${sumClasses([item.className, item.value === value ? item.selectedClassName : ''])}`,
-					style: item.style
-				},
-					el('input', { ref: innerRef, type: 'radio', name, id: name + item.value, value: item.value, disabled: item.disabled === true, checked: item.value === value, onChange: (e) => { this.onChange(e); } }),
-					el('label', { htmlFor: name + item.value, style: item.labelStyle ? item.labelStyle : {} },
 							hideRadio ?
-								null
+								`floating ${item.className}`
 								:
-								el('svg', { width: 24, height: 24, viewBox: '0 0 24 24' },
-									el('circle', { className: 'ext', cx: 12, cy: 12, r: 9, stroke: 'rgb(216, 216, 223)', strokeWidth: 2 }),
-									item.value === value ? el('circle', { className: 'int', cx: 12, cy: 12, r: 4 }) : null),
-							el('div', null, item.label), item.customObject ? item.customObject : null
-						)
-				))
+								`${sumClasses([item.className, item.value === value ? item.selectedClassName : ''])}`,
+						style: item.style
+					},
+						el('input', {
+							ref: this[`r_elem_${name}_${item.value}`],
+							type: 'radio',
+							name,
+							id: name + item.value,
+							value: item.value,
+							disabled: item.disabled === true,
+							checked: item.value === value,
+							onChange: e => this.onChange(e),
+						}),
+						el('label', {
+							htmlFor: name + item.value,
+							style: item.labelStyle ? item.labelStyle : {},
+							onKeyDown: e => this.handleKeyDown(e, item),
+							tabIndex: 0
+						},
+								hideRadio ?
+									null
+									:
+									el('svg', { width: 24, height: 24, viewBox: '0 0 24 24' },
+										el('circle', { className: 'ext', cx: 12, cy: 12, r: 9, stroke: 'rgb(216, 216, 223)', strokeWidth: 2 }),
+										item.value === value ? el('circle', { className: 'int', cx: 12, cy: 12, r: 4 }) : null),
+								el('div', null, item.label), item.customObject ? item.customObject : null
+							)
+					)}
+				)
 			),
 			el(FieldError, { isValid, errorMessage })
 		);

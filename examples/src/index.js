@@ -50,18 +50,24 @@ class App extends Component {
 						],
 						default: 1,
 						value:	1,
+						minHeight: (40 * 5) + 16 + 16
 					},
 					{
-						control: 'listbox',
-						name: 'myBeautifulListBox2',
+						control: 'select',
+						name: 'normalselect',
+						label: { text: 'normal select' },
 						options: [
-							{ value: 0, label: 'Zero' },
-							{ value: 1, label: 'Uno' },
-							{ value: 2, label: 'Due' },
-							{ value: 3, label: 'Tre' },
+							{ value: ' ', label: 'Seleziona...', className: 'first' },
+							{ value: 1, label: 'Assente', className: 'central' },
+							{ value: 2, label: 'Predisposizione', className: 'central' },
+							{ value: 3, label: 'Autonoma', className: 'central' },
+							{ value: 4, label: 'Centralizzata', className: 'central' },
+							{ value: 5, label: 'Cinque', className: 'central' },
+							{ value: 6, label: 'Sei', className: 'central' },
+							{ value: 7, label: 'Sette', className: 'central' },
 						],
-						default: 0,
-						minHeight: (34 * 4) + 16
+						default: 1,
+						value:	1,
 					},
 					{
 						control: 'text',
@@ -131,6 +137,18 @@ class App extends Component {
 						autoComplete: 'new-password'
 					},
 					{
+						control: 'listbox',
+						name: 'myBeautifulListBox2',
+						options: [
+							{ value: 0, label: 'Zero' },
+							{ value: 1, label: 'Uno' },
+							{ value: 2, label: 'Due' },
+							{ value: 3, label: 'Tre' },
+						],
+						default: 0,
+						minHeight: (40 * 4) + 16
+					},
+					{
 						control: 'text',
 						type: 'text',
 						name: 'lastName',
@@ -191,12 +209,12 @@ class App extends Component {
 						name: 'genericRadio',
 						label: { text: 'This is an almost real radio' },
 						options: [
-							{ value: '', label: 'N.i.', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
+							{ value: ' ', label: 'N.i.', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
 							{ value: true, label: 'Sì', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
 							{ value: false, label: 'No', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
 						],
-						default: '',
-						value: '',
+						default: ' ',
+						value: ' ',
 						hideRadio: false,
 					},
 					{

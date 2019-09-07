@@ -7,7 +7,15 @@ import FieldError from './childrenComponents/FieldError';
 const el = createElement;
 
 const TextAreaField = forwardRef((props, ref) => (
-	el('div', { key: item.name, style: { width: '100%', float: 'left', display: this.state.selected === i ? 'inline-block' : 'none', position: 'relative' } },
+	el('div', {
+		key: item.name,
+		style: {
+			width: '100%',
+			float: 'left',
+			display: this.state.selected === i ? 'inline-block' : 'none',
+			position: 'relative'
+		}
+	},
 		el('div', {},
 			el('textarea', {
 				placeholder: value[i].placeholder,
@@ -97,10 +105,10 @@ class CustomTextareaWithTab extends Component<any, any> {
 							textAlign: 'left',
 						},
 						className: this.state.selected === i ? 'container-field-tabs-item container-field-tabs-item-selected' : 'container-field-tabs-item',
-						onClick: () => { this.selectTab(i); },
+						onClick: () => this.selectTab(i),
 						role: 'button'
 					},
-						el('div', { className: 'noselect' },
+						el('label', { className: 'noselect', htmlFor: item.name },
 							el('span', { className: 'tab-label' }, item.label),
 							el('span', { className: 'tab-abbr' }, item.abbr)
 						)
@@ -116,7 +124,7 @@ class CustomTextareaWithTab extends Component<any, any> {
 							className: 'large-field',
 							name: item.name,
 							id: item.name,
-							onChange: (e) => { this.onChange(e); },
+							onChange: e => this.onChange(e),
 							value: item.value,
 							style: {
 								borderRadius: '0px 2px 2px',
