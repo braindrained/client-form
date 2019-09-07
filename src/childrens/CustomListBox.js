@@ -19,7 +19,7 @@ class CustomListBox extends Component<any, any> {
 			options: options,
 			listClassName: 'hidden',
 			currentSelection: options.length > 0 ? (value ? options.filter(o => o.value === value)[0] : options.filter(o => o.value === this.props.default)[0]) : {},
-			currentIndex: value ? options.findIndex(o => o.value === value) : 0
+			currentIndex: options.length > 0 ? (value ? options.findIndex(o => o.value === value) : 0) : 0
 		};
 	}
 
@@ -153,10 +153,6 @@ class CustomListBox extends Component<any, any> {
 		onUpdate({ target: { name: name, value: item.value } });
 	}
 
-	handleItemFocus(item, e) {
-		console.log('handleItemFocus', item, e);
-	}
-
 	render() {
 		const { className, style, isRequired, errorMessage, name, value, isValid, disabled, innerRef, minHeight } = this.props;
 		const { listClassName, options, addButtonProps, label, currentSelection, currentIndex } = this.state;
@@ -195,7 +191,7 @@ class CustomListBox extends Component<any, any> {
 						'aria-labelledby': labelId,
 						className: sumClasses(['box-shadow', listClassName]),
 						...(minHeight ? { style: { minHeight } } : {}),
-            ...({ 'aria-activedescendant': `exp_elem_${name}_${options[currentIndex].value}` })
+            ...(options.length > 0 ? { 'aria-activedescendant': `exp_elem_${name}_${options[currentIndex].value}` } : {})
 					},
 						options.map((item, i) => {
 							this[`exp_elem_${name}_${item.value}`] = createRef();
@@ -204,7 +200,6 @@ class CustomListBox extends Component<any, any> {
 								key: `exp_elem_${name}_${item.value}`,
 								id: `exp_elem_${name}_${item.value}`,
 								role: 'option',
-								onFocus: (e) => this.handleItemFocus(item, e),
 								onClick: (e) => this.handleItemClick(item, e),
 								className: sumClasses([i === currentIndex ? 'focused' : '', currentSelection.value === item.value ? 'selected' : '']),
 								...(currentSelection.value === item.value ? { 'aria-selected': 'true' } : {})

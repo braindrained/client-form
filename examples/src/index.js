@@ -48,7 +48,7 @@ class App extends Component {
 							{ value: 6, label: 'Sei', className: 'central' },
 							{ value: 7, label: 'Sette', className: 'central' },
 						],
-						default: 1,
+						default: ' ',
 						value:	1,
 						minHeight: (40 * 5) + 16 + 16
 					},
