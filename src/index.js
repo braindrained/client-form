@@ -246,7 +246,7 @@ export default class Form extends Component<any, any> {
 					updateOnChange, limitChar, currency, hideRadio,
 					textBefore, tabs, valueAsObject, text, firstRange,
 					secondRange, rangesStyle, overlayBg, content, unit, customSvg,
-					autoComplete, autoSuggestFetch, getValue, cacheResults, timeOut, hide, options, minHeight
+					autoComplete, autoSuggestFetch, getValue, cacheResults, timeOut, hide, options, minEl
 				} = item;
 
 				this[name] = createRef();
@@ -321,7 +321,7 @@ export default class Form extends Component<any, any> {
 								isRequired, isValid, disabled,
 								errorMessage, className, style,
 								options, default: item.default, ref: this[name],
-								minHeight
+								minEl
 						});
 					case 'check':
 						if (hide) return (null);

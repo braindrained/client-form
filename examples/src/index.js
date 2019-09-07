@@ -29,6 +29,12 @@ class App extends Component {
 				ref: this.myForm,
 				controls: [
 					{
+						control: 'label',
+						content: 'Form demo page',
+						style: { lineHeight: '40px', clear: 'both', margin: '0 auto', fontSize: 16, marginBottom: 20 },
+						className: 'noselect tabTextArea'
+					},
+					{
 						control: 'text',
 						type: 'hidden',
 						name: 'categoryTypeId',
@@ -36,12 +42,12 @@ class App extends Component {
 					},
 					{
 						control: 'listbox',
-						name: 'myBeautifulListBox',
-						label: { text: 'myBeautifulListBox' },
+						name: 'yourFuckingFashionListbox',
+						label: { text: 'Your Fucking Fashion Listbox With desc' },
 						options: [
 							{ value: ' ', label: 'Seleziona...', className: 'first' },
-							{ value: 1, label: 'Assente', className: 'central' },
-							{ value: 2, label: 'Predisposizione', className: 'central' },
+							{ value: 1, label: 'Assente', className: 'central', addLabel: 'This label is a description' },
+							{ value: 2, label: 'Predisposizione', className: 'central', addLabel: 'This is a very long description that mean nothing but I need it to test the possible length' },
 							{ value: 3, label: 'Autonoma', className: 'central' },
 							{ value: 4, label: 'Centralizzata', className: 'central' },
 							{ value: 5, label: 'Cinque', className: 'central' },
@@ -50,7 +56,7 @@ class App extends Component {
 						],
 						default: ' ',
 						value:	1,
-						minHeight: (40 * 5) + 16 + 16
+						minEl: 5
 					},
 					{
 						control: 'select',
@@ -139,6 +145,7 @@ class App extends Component {
 					{
 						control: 'listbox',
 						name: 'myBeautifulListBox2',
+						label: { text: 'Your Fucking Fashion Listbox' },
 						options: [
 							{ value: 0, label: 'Zero' },
 							{ value: 1, label: 'Uno' },
@@ -146,7 +153,7 @@ class App extends Component {
 							{ value: 3, label: 'Tre' },
 						],
 						default: 0,
-						minHeight: (40 * 4) + 16
+						minEl: 4
 					},
 					{
 						control: 'text',
@@ -334,12 +341,12 @@ class App extends Component {
 						control: 'radio',
 						name: 'thisIsAFakeRadio',
 						options: [
-							{ value: '', label: 'N.i.', className: 'first' },
+							{ value: ' ', label: 'N.i.', className: 'first' },
 							{ value: true, label: 'Sì', className: 'central' },
 							{ value: false, label: 'No', className: 'last' },
 						],
-						default: '',
-						value: '',
+						default: ' ',
+						value: ' ',
 						hideRadio: true,
 						className: 'custom-radio-container',
 					},

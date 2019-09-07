@@ -83,11 +83,14 @@ class CustomRadio extends Component<any, any> {
 	}*/
 
 	onChange(event: Object) {
+		const { name, onUpdate } = this.props;
 		const { value } = event.target;
 		const checkValue = value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value;
 
 		this.setState({ value: checkValue });
-		this.props.onUpdate(event);
+		onUpdate({ target: { name, value: checkValue } });
+
+		this[`r_elem_label_${name}_${value}`].current.blur();
 	}
 
 	handleKeyDown(e: Object, item: Object) {
@@ -99,6 +102,7 @@ class CustomRadio extends Component<any, any> {
 
 			this.setState({ value: checkValue });
 			onUpdate({ target: { name, value: checkValue } });
+			this[`r_elem_label_${name}_${value}`].current.blur();
 		}
 	}
 
@@ -111,6 +115,7 @@ class CustomRadio extends Component<any, any> {
 			el('div', { className: 'float-container', id: name },
 				options.map(item => {
 					this[`r_elem_${name}_${item.value}`] = createRef();
+					this[`r_elem_label_${name}_${item.value}`] = createRef();
 					return el('div', {
 						key: `select_${item.name}_${item.value}`,
 						className: hideRadio && item.value === value ?
@@ -133,6 +138,7 @@ class CustomRadio extends Component<any, any> {
 							onChange: e => this.onChange(e),
 						}),
 						el('label', {
+							ref: this[`r_elem_label_${name}_${item.value}`],
 							htmlFor: name + item.value,
 							style: item.labelStyle ? item.labelStyle : {},
 							onKeyDown: e => this.handleKeyDown(e, item),

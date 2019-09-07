@@ -1,5 +1,5 @@
 // @flow
-import { Component, createElement, forwardRef } from 'react';
+import { Component, createElement, forwardRef, createRef } from 'react';
 import { sumClasses, camelToTitle } from '../helpers/utils';
 
 const el = createElement;
@@ -41,28 +41,22 @@ class CustomCheckBox extends Component<any, any> {
 	}*/
 
 	onChange(event: Object) {
-		this.setState({
-			value: event.target.checked
-		});
-		this.props.onUpdate({
-			target: {
-				name: this.props.name,
-				value: event.target.checked
-			}
-		});
+		const { name, onUpdate } = this.props;
+		this.setState({ value: event.target.checked });
+		onUpdate({ target: { name, value: event.target.checked } });
+
+		this[`ck_label_${name}`].current.blur();
 	}
 
 	handleKeyDown(e: Object) {
 		if (e.keyCode !== 9) {
 			e.preventDefault();
+			const { name, onUpdate } = this.props;
 			const { value } = this.state;
 			this.setState({ value: !value });
-			this.props.onUpdate({
-				target: {
-					name: this.props.name,
-					value: !value
-				}
-			});
+			this.props.onUpdate({ target: { name: this.props.name, value: !value } });
+
+			this[`ck_label_${name}`].current.blur();
 		}
 	}
 
@@ -83,6 +77,7 @@ class CustomCheckBox extends Component<any, any> {
 			x: 4,
 			y: 4 });
 		const labelId = `ck_label_${name}`;
+		this[labelId] = createRef();
 
 		return el('div', { className: sumClasses(['container-field', className !== undefined ? className : 'check']), style },
 			el('input', {
@@ -96,6 +91,7 @@ class CustomCheckBox extends Component<any, any> {
 				}
 			),
 			el('label', {
+				ref: this[`ck_label_${name}`],
 				tabIndex: 0,
 				id: labelId,
 				htmlFor: name,

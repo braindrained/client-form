@@ -3,7 +3,6 @@
   padding: 0;
   background: white;
 }
-
 [role="option"] {
   display: block;
   padding: 0px 16px;
@@ -64,7 +63,6 @@
 
 [id^="lb_list_"] {
   border-top: 0;
-  max-height: 10em;
   overflow-y: auto;
   position: absolute;
   margin: 0;
@@ -106,4 +104,17 @@
   [role="option"] {
     line-height: 34px;
   }
+}
+
+.add-label {
+  position: absolute;
+  top: 28px;
+  line-height: normal;
+  font-size: 9px;
+  width: calc(100% - 30px);
+  white-space: normal;
+}
+
+[role="option"].whith-label {
+  height: 58px;
 }

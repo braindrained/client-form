@@ -1,4 +1,5 @@
 import { Component, createElement, forwardRef, createRef } from 'react';
+import ReactDOM from "react-dom";
 import ClickOutHandler from 'react-onclickout';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
@@ -29,20 +30,23 @@ class CustomListBox extends Component<any, any> {
 	}
 
 	handleButtonClick(e, val) {
-    const { innerRef: { current: { offsetParent } }, minHeight } = this.props;
+    const { innerRef: { current: { offsetParent } }, minEl, options, name } = this.props;
 		const { top, height } = offsetParent.getBoundingClientRect();
-    const listbox = this.listbox.current;
-
-		if (minHeight > (window.innerHeight - (top + height))) {
-      listbox.style.minHeight = `${minHeight}px`;
-			listbox.style.top = `${-minHeight + 22}px`;
-		} else {
-			listbox.style = null;
-      listbox.style.minHeight = `${minHeight}px`;
-    }
 
 		if (this.state.listClassName === '') val = 'hidden';
-		this.setState({ listClassName: val, addButtonProps: val === '' ? { 'aria-expanded': 'true' } : {} });
+		this.setState({ listClassName: val, addButtonProps: val === '' ? { 'aria-expanded': 'true' } : {} }, () => {
+			const listbox = this.listbox.current;
+			const firstChildHeight = listbox.firstChild.offsetHeight;
+			const maxHeight = (minEl * firstChildHeight) + 16;
+
+			if (maxHeight > (window.innerHeight - (top + height))) {
+	      listbox.style.maxHeight = `${maxHeight}px`;
+				listbox.style.top = `${-maxHeight + 22}px`;
+			} else {
+				listbox.style = null;
+	      listbox.style.maxHeight = `${maxHeight}px`;
+	    }
+		});
 	}
 
   handleClickOut(val) {
@@ -154,7 +158,7 @@ class CustomListBox extends Component<any, any> {
 	}
 
 	render() {
-		const { className, style, isRequired, errorMessage, name, value, isValid, disabled, innerRef, minHeight } = this.props;
+		const { className, style, isRequired, errorMessage, name, value, isValid, disabled, innerRef } = this.props;
 		const { listClassName, options, addButtonProps, label, currentSelection, currentIndex } = this.state;
 		const ariaDisabled = { 'aria-disabled': 'true' };
     const labelId = `lb_label_${name}`;
@@ -174,6 +178,7 @@ class CustomListBox extends Component<any, any> {
 						'aria-haspopup': 'listbox',
 						'aria-labelledby': sumClasses([buttonId, labelId]),
 						id: buttonId,
+						style: isValid === false ? { border: '1px solid #e4002b' } : {},
 						disabled,
 						...addButtonProps,
 						...(disabled ? ariaDisabled : {})
@@ -190,7 +195,6 @@ class CustomListBox extends Component<any, any> {
 						role: 'listbox',
 						'aria-labelledby': labelId,
 						className: sumClasses(['box-shadow', listClassName]),
-						...(minHeight ? { style: { minHeight } } : {}),
             ...(options.length > 0 ? { 'aria-activedescendant': `exp_elem_${name}_${options[currentIndex].value}` } : {})
 					},
 						options.map((item, i) => {
@@ -201,9 +205,17 @@ class CustomListBox extends Component<any, any> {
 								id: `exp_elem_${name}_${item.value}`,
 								role: 'option',
 								onClick: (e) => this.handleItemClick(item, e),
-								className: sumClasses([i === currentIndex ? 'focused' : '', currentSelection.value === item.value ? 'selected' : '']),
+								className: sumClasses([
+									i === currentIndex ? 'focused' : '',
+									currentSelection.value === item.value ? 'selected' : '',
+									item.addLabel ? 'whith-label' : '']
+								),
 								...(currentSelection.value === item.value ? { 'aria-selected': 'true' } : {})
-							}, item.label)
+							}, item.label, item.addLabel ?
+								el('div', { className: 'add-label' }, item.addLabel)
+								:
+								null
+							)
 						})
 					)
 				),
