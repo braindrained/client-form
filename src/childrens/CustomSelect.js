@@ -75,6 +75,7 @@ class CustomSelect extends Component<any, any> {
 					value,
 					onChange: e => onUpdate(e),
 					onClick: e => this.handleClick(e),
+					onKeyDown: e => this.handleClick(e),
 					disabled,
 					ref: innerRef,
 					'aria-labelledby': sumClasses([name, labelId]),

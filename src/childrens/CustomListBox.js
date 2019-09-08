@@ -31,25 +31,29 @@ class CustomListBox extends Component<any, any> {
 	}
 
 	handleButtonClick(e, val) {
-    const { innerRef: { current: { offsetParent } }, minEl, options, name } = this.props;
-		const { top, height } = offsetParent.getBoundingClientRect();
-
 		if (this.state.listClassName === '') val = 'hidden';
 		this.setState({ listClassName: val, addButtonProps: val === '' ? { 'aria-expanded': 'true' } : {} }, () => {
 			try {
-				const listbox = this.listbox.current;
-				const firstChildHeight = listbox.firstChild.offsetHeight;
-				const maxHeight = ((minEl ? minEl : options.length) * firstChildHeight) + 16;
-
-				if (maxHeight > (window.innerHeight - (top + height))) {
-					this.setState({ listboxStyle: { style: { maxHeight, top: `${-maxHeight + 22}px` } } })
-				} else {
-					this.setState({ listboxStyle: { style: { maxHeight } } })
-		    }
+				this.adjustHeight();
 			} catch (e) {
 				console.log('error', e);
 			}
 		});
+	}
+
+	adjustHeight() {
+		const { innerRef: { current: { offsetParent } }, minEl, options, name } = this.props;
+		const { top, height } = offsetParent.getBoundingClientRect();
+
+		const listbox = this.listbox.current;
+		const firstChildHeight = listbox.firstChild.offsetHeight;
+		const maxHeight = ((minEl ? minEl : options.length) * firstChildHeight) + 16;
+
+		if (maxHeight > (window.innerHeight - (top + height))) {
+			this.setState({ listboxStyle: { style: { maxHeight, top: `${-maxHeight + 22}px` } } })
+		} else {
+			this.setState({ listboxStyle: { style: { maxHeight } } })
+		}
 	}
 
   handleClickOut(val) {
@@ -58,18 +62,22 @@ class CustomListBox extends Component<any, any> {
   }
 
 	handleButtonKeyDown(e) {
+		const keyCode = e.which || e.keyCode;
     let currentItem = null;
     const { name, onUpdate } = this.props;
     const { options, currentSelection, currentIndex, listClassName } = this.state;
 
-		if (e.keyCode !== 9) {
+		if (keyCode !== 9) {
 			e.preventDefault();
 
 			if (listClassName === 'hidden') {
-				this.setState({ listClassName: '', addButtonProps: { 'aria-expanded': 'true' } });
+				this.setState({ listClassName: '', addButtonProps: { 'aria-expanded': 'true' } }, () => {
+					this.adjustHeight();
+				});
 			}
 
-			switch (e.keyCode) {
+			switch (keyCode) {
+				case 32:
 				case 13:
 					const selected = options[currentIndex];
 					this.setSelected(currentIndex);
