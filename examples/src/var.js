@@ -58,7 +58,7 @@ export const tipologies = [
 ];
 
 export const energy = [
-	{ value: 0, label: 'Non indicata', type: { energyClass: [0] }, selectedClassName: 'option-override' },
+	{ value: 0, label: 'I do not know', type: { energyClass: [0] }, selectedClassName: 'option-override' },
 	{ value: 997, label: 'DL 192 del 19/08/05', type: { energyClass: [0] }, selectedClassName: 'option-override' },
 	{ value: 1, label: 'A+', type: { energyClass: [997] }, className: 'aplus', selectedClassName: 'aplus-sel' },
 	{ value: 2, label: 'A', type: { energyClass: [997] }, className: 'a', selectedClassName: 'a-sel' },
@@ -79,9 +79,9 @@ export const energy = [
 	{ value: 19, label: 'E', type: { energyClass: [998] }, className: 'e', selectedClassName: 'e-sel' },
 	{ value: 20, label: 'F', type: { energyClass: [998] }, className: 'f', selectedClassName: 'f-sel' },
 	{ value: 21, label: 'G', type: { energyClass: [998] }, className: 'g', selectedClassName: 'g-sel' },
-	{ value: 11, label: 'Non Classificabile', type: { energyClass: [0] }, selectedClassName: 'option-override' },
-	{ value: 9, label: 'Esente', type: { energyClass: [0] }, selectedClassName: 'option-override' },
-	{ value: 10, label: 'In fase di richiesta', type: { energyClass: [0] }, selectedClassName: 'option-override' },
+	{ value: 11, label: 'Not classifiable', type: { energyClass: [0] }, selectedClassName: 'option-override' },
+	{ value: 9, label: 'Not necessary', type: { energyClass: [0] }, selectedClassName: 'option-override' },
+	{ value: 10, label: 'At the request stage', type: { energyClass: [0] }, selectedClassName: 'option-override' },
 ];
 
 export const heatingtype = [

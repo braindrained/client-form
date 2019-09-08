@@ -1,5 +1,4 @@
 [role="listbox"] {
-  min-height: 180px;
   padding: 0;
   background: white;
 }
@@ -13,7 +12,7 @@
   text-overflow: ellipsis;
   cursor: pointer;
 }
-[role="option"]:hover, [role="option"].focused {
+[role="option"]:hover span, [role="option"].focused span {
   text-decoration: underline;
 }
 [role="option"].selected {
@@ -26,6 +25,9 @@
   text-decoration: none;
   padding: 0px 8px;
   border-radius: 3px;
+}
+[role="option"].selected span {
+  text-decoration: none;
 }
 
 [id^="lb_button_"] {
@@ -107,14 +109,18 @@
 }
 
 .add-label {
-  position: absolute;
-  top: 28px;
+  clear: both;
+  position: relative;
   line-height: normal;
   font-size: 9px;
-  width: calc(100% - 30px);
+  width: 100%;
   white-space: normal;
+  top: -8px;
 }
 
 [role="option"].whith-label {
-  height: 58px;
+  height: auto;
+}
+.add-label:hover {
+  text-decoration: none!important;
 }

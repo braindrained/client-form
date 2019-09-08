@@ -13,6 +13,7 @@ class CustomSelect extends Component<any, any> {
 
 		this.state = {
 			options: this.props.options,
+			addSelectProps: null
 		};
 	}
 
@@ -22,6 +23,7 @@ class CustomSelect extends Component<any, any> {
 		if (this.state.value !== nextState.value) return true;
 		if (this.props.isValid !== nextProps.isValid) return true;
 		if (JSON.stringify(this.state.options) !== JSON.stringify(nextProps.options)) return true;
+		if (this.state.addSelectProps !== nextProps.addSelectProps) return true;
 		return false;
 	}
 
@@ -54,8 +56,14 @@ class CustomSelect extends Component<any, any> {
 		}
 	}*/
 
+	handleClick(e) {
+		const { addSelectProps } = this.state;
+		this.setState({ addSelectProps: addSelectProps ? null : { 'aria-expanded': 'true' } });
+	}
+
 	render() {
-		const { className, style, label, isRequired, errorMessage, name, value, isValid, disabled, innerRef } = this.props;
+		const { className, style, label, isRequired, errorMessage, name, value, isValid, disabled, innerRef, onUpdate } = this.props;
+		const { addSelectProps } = this.state;
 		const labelId = `lb_select_${name}`;
 
 		return el('div', { className: sumClasses(['container-field', className]), style },
@@ -65,10 +73,12 @@ class CustomSelect extends Component<any, any> {
 					name,
 					id: name,
 					value,
-					onChange: (e) => { this.props.onUpdate(e); },
+					onChange: e => onUpdate(e),
+					onClick: e => this.handleClick(e),
 					disabled,
 					ref: innerRef,
 					'aria-labelledby': sumClasses([name, labelId]),
+					...addSelectProps
 				},
 					this.state.options.map((item, i) => {
 						switch (item.value) {

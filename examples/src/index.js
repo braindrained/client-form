@@ -43,49 +43,38 @@ class App extends Component {
 					{
 						control: 'listbox',
 						name: 'yourFuckingFashionListbox',
-						label: { text: 'Your Fucking Fashion Listbox With desc' },
+						label: { text: 'A Fashion Listbox With desc' },
 						options: [
-							{ value: ' ', label: 'Seleziona...', className: 'first' },
-							{ value: 1, label: 'Assente', className: 'central', addLabel: 'This label is a description' },
-							{ value: 2, label: 'Predisposizione', className: 'central', addLabel: 'This is a very long description that mean nothing but I need it to test the possible length' },
-							{ value: 3, label: 'Autonoma', className: 'central' },
-							{ value: 4, label: 'Centralizzata', className: 'central' },
-							{ value: 5, label: 'Cinque', className: 'central' },
-							{ value: 6, label: 'Sei', className: 'central' },
-							{ value: 7, label: 'Sette', className: 'central' },
+							{ value: ' ', label: 'Select something...', className: 'first' },
+							{ value: 1, label: 'First option', className: 'central', addLabel: `I describe you what you're selecting 'cause you're too stupid to understand just the label` },
+							{ value: 2, label: 'Second option', className: 'central', addLabel: 'This is a very long description that mean nothing but I need it to test the possible length of the description of the option of this beautiful fancy listbox that make your eyes shine' },
+							{ value: 3, label: 'Third option', className: 'central' },
+							{ value: 4, label: 'Fourth option', className: 'central' },
+							{ value: 5, label: 'Fifth option', className: 'central' },
+							{ value: 6, label: 'Sixth option', className: 'central' },
+							{ value: 7, label: 'Seventh option', className: 'central' },
 						],
 						default: ' ',
-						value:	1,
-						minEl: 5
+						value:	' ',
+						minEl: 7,
+						isRequired: true
 					},
 					{
 						control: 'select',
-						name: 'normalselect',
-						label: { text: 'normal select' },
+						name: 'aNormalSelect',
+						//label: { text: 'normal select' },
 						options: [
-							{ value: ' ', label: 'Seleziona...', className: 'first' },
-							{ value: 1, label: 'Assente', className: 'central' },
-							{ value: 2, label: 'Predisposizione', className: 'central' },
-							{ value: 3, label: 'Autonoma', className: 'central' },
-							{ value: 4, label: 'Centralizzata', className: 'central' },
-							{ value: 5, label: 'Cinque', className: 'central' },
-							{ value: 6, label: 'Sei', className: 'central' },
-							{ value: 7, label: 'Sette', className: 'central' },
+							{ value: ' ', label: 'Select something...', className: 'first' },
+							{ value: 1, label: 'First option', className: 'central' },
+							{ value: 2, label: 'Second option', className: 'central' },
+							{ value: 3, label: 'Third option', className: 'central' },
+							{ value: 4, label: 'Fourth option', className: 'central' },
+							{ value: 5, label: 'Fifth option', className: 'central' },
+							{ value: 6, label: 'Sixth option', className: 'central' },
+							{ value: 7, label: 'Seventh option', className: 'central' },
 						],
-						default: 1,
-						value:	1,
-					},
-					{
-						control: 'text',
-						type: 'text',
-						name: 'suburb',
-						placeholder: 'Comune',
-						label: {
-							text: 'disable autofill',
-						},
-						value: '',
-						errorMessage: 'Campo obbligatorio',
-						autoComplete: 'new-password'
+						default: ' ',
+						value:	' ',
 					},
 					{
 						control: 'text',
@@ -94,12 +83,12 @@ class App extends Component {
 						onlyNumber: true,
 						placeholder: '',
 						label: {
-							text: 'Prezzo settimanale alta stagione',
+							text: 'Price',
 						},
 						value: '',
 						currency: true,
 						isRequired: true,
-						errorMessage: 'Campo obbligatorio',
+						errorMessage: 'Mandatory field',
 						unit: '€',
 						autoComplete: 'new-password'
 					},
@@ -144,16 +133,15 @@ class App extends Component {
 					},
 					{
 						control: 'listbox',
-						name: 'myBeautifulListBox2',
-						label: { text: 'Your Fucking Fashion Listbox' },
+						name: 'yourFuckingFashionListboxWhitoutDesc',
+						label: { text: 'A Fashion Listbox Whitout Desc' },
 						options: [
-							{ value: 0, label: 'Zero' },
-							{ value: 1, label: 'Uno' },
-							{ value: 2, label: 'Due' },
-							{ value: 3, label: 'Tre' },
+							{ value: 0, label: 'Select something...' },
+							{ value: 1, label: 'First option', className: 'central' },
+							{ value: 2, label: 'Second option', className: 'central' },
+							{ value: 3, label: 'Third option', className: 'central' },
 						],
-						default: 0,
-						minEl: 4
+						default: 0
 					},
 					{
 						control: 'text',
@@ -172,7 +160,7 @@ class App extends Component {
 					{
 						control: 'fakeselect',
 						name: 'priceRange',
-						text: 'Seleziona...',
+						text: 'Select something...',
 						label: {
 							text: 'Fake select min/max'
 						},
@@ -192,18 +180,15 @@ class App extends Component {
 							text: 'Indirizzo Email',
 						},
 						regEx: /(^$|^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$)/i,
-						errorMessage: 'Inserisci un indirizzo mail valido',
+						errorMessage: 'Enter a valid e-mail address please',
 						limitChar: 60,
-						value: 'p.senese@gmail.com'
 					},
 					{
 						control: 'plusMinus',
 						type: 'text',
 						name: 'roomNum',
-						label: {
-							text: 'N. Locali',
-						},
-						value: 0,
+						label: { text: 'Room number' },
+						value: 0
 					},
 					{
 						control: 'check',
@@ -216,8 +201,8 @@ class App extends Component {
 						name: 'genericRadio',
 						label: { text: 'This is an almost real radio' },
 						options: [
-							{ value: ' ', label: 'N.i.', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
-							{ value: true, label: 'Sì', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
+							{ value: ' ', label: '--', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
+							{ value: true, label: 'Yes', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
 							{ value: false, label: 'No', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
 						],
 						default: ' ',
@@ -238,7 +223,7 @@ class App extends Component {
 						onlyNumber: false,
 						limitChar: 12,
 						equalTo: 'password',
-						errorMessage: 'Must be equal',
+						errorMessage: 'Password must be equal',
 					},
 					{
 						control: 'text',
@@ -299,17 +284,17 @@ class App extends Component {
 							}
 						},
 						value: [
-							{ name: 'listingDescIt', value: '', isRequired: true, isValid: true, label: 'Italiano', abbr: 'IT', placeholder: 'Inserisci qui la descrizione' },
-							{ name: 'listingDescEn', value: '', isRequired: false, isValid: true, label: 'Inglese', abbr: 'EN', placeholder: 'Descrizione inglese' },
-							{ name: 'listingDescFr', value: '', isRequired: false, isValid: true, label: 'Francese', abbr: 'FR', placeholder: 'Descrizione francese' },
-							{ name: 'listingDescEs', value: '', isRequired: false, isValid: true, label: 'Spagnolo', abbr: 'ES', placeholder: 'Descrizione spagnolo' },
-							{ name: 'listingDescDe', value: '', isRequired: false, isValid: true, label: 'Tedesco', abbr: 'DE', placeholder: 'Descrizione tedesco' }
+							{ name: 'listingDescIt', value: '', isRequired: true, isValid: true, label: 'Spaghetti', abbr: 'IT', placeholder: 'Italian description' },
+							{ name: 'listingDescEn', value: '', isRequired: false, isValid: true, label: 'Chips & Fish', abbr: 'EN', placeholder: 'English description' },
+							{ name: 'listingDescFr', value: '', isRequired: false, isValid: true, label: 'Baguettes', abbr: 'FR', placeholder: 'French description' },
+							{ name: 'listingDescEs', value: '', isRequired: false, isValid: true, label: 'Paella', abbr: 'ES', placeholder: 'Spanish description' },
+							{ name: 'listingDescDe', value: '', isRequired: false, isValid: true, label: 'Würstel', abbr: 'DE', placeholder: 'German description' }
 						],
 						isValid: true,
 						className: 'tabTextArea',
 						valueAsObject: true,
 						limitChar: 4000,
-						errorMessage: 'La descrizione in italiano è obbligatoria'
+						errorMessage: 'Italian description is mandatory'
 					},
 					{
 						control: 'external',
@@ -317,7 +302,7 @@ class App extends Component {
 						name: 'thisIsACustomExternalComponent',
 						key: 'thisIsACustomExternalComponent',
 						value: [
-							{ name: 'firstField', value: '', isRequired: true, isValid: true, placeholder: '\'cause I need a complete customized one', errorMessage: 'Campo obbligatorio' },
+							{ name: 'firstField', value: '', isRequired: true, isValid: true, placeholder: '\'cause I need a complete customized one', errorMessage: 'Mandatory field' },
 							{ name: 'secondFieldWithEmptyPlaceholder', value: '', isRequired: false, isValid: true, placeholder: '', },
 						],
 						isValid: true,
@@ -341,8 +326,8 @@ class App extends Component {
 						control: 'radio',
 						name: 'thisIsAFakeRadio',
 						options: [
-							{ value: ' ', label: 'N.i.', className: 'first' },
-							{ value: true, label: 'Sì', className: 'central' },
+							{ value: ' ', label: '--', className: 'first' },
+							{ value: true, label: 'Yes', className: 'central' },
 							{ value: false, label: 'No', className: 'last' },
 						],
 						default: ' ',
@@ -362,7 +347,7 @@ class App extends Component {
 					{
 						control: 'label',
 						name: '',
-						content: 'The below component change its value depending on the above selection',
+						content: 'The below component appear and change its value depending on the above selection',
 						style: { clear: 'both', padding: '20px 0px 30px', margin: '0 auto', },
 						className: 'tabTextArea'
 					},
@@ -391,27 +376,27 @@ class App extends Component {
 						value: contractTypeId,
 						hideRadio: false,
 						options: [
-							{ value: 1, label: 'Affitto', style: { width: 137, float: 'left' }, selectedClassName: 'option-override' },
-							{ value: 2, label: 'Vendita', style: { width: 137, float: 'left' }, selectedClassName: 'option-override' },
+							{ value: 1, label: 'Buy', style: { width: 137, float: 'left' }, selectedClassName: 'option-override' },
+							{ value: 2, label: 'Rent', style: { width: 137, float: 'left' }, selectedClassName: 'option-override' },
 						],
 					},
 					{
 						control: 'check',
 						name: 'hasPurchaseOption',
-						label: { text: `Opzione d'acquisto` },
+						//label: { text: 'This appear if the previuos selection is Rent' },
 						value: false,
 						hideIf: [
-							{ field: 'contractTypeId', regEx: /^2$/ }
+							{ field: 'contractTypeId', regEx: /^1$/ }
 						],
 					},
 					{
 						control: 'check',
 						name: 'isAuction',
-						label: { text: `Asta` },
+						//label: { text: `Asta` },
 						value: false,
 						hideIf: [
-							{ field: 'contractTypeId', regEx: /^1$/ }
-						],
+							{ field: 'contractTypeId', regEx: /^2$/ }
+						]
 					},
 				],
 				beforeButton: el('div', {

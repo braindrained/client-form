@@ -436,6 +436,11 @@ select::-ms-expand {
 	}
 	.client-form .select-style svg {
 		top: 4px;
+		transition-duration: 0.2s, 0.2s;
+		transition-timing-function: ease-in, ease-out;
+	}
+	.client-form .select-style select[aria-expanded="true"] + svg {
+	  transform: rotate(180deg);
 	}
 
 	.client-form .container-field .fake-cont {

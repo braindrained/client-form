@@ -37,7 +37,7 @@ class CustomListBox extends Component<any, any> {
 		this.setState({ listClassName: val, addButtonProps: val === '' ? { 'aria-expanded': 'true' } : {} }, () => {
 			const listbox = this.listbox.current;
 			const firstChildHeight = listbox.firstChild.offsetHeight;
-			const maxHeight = (minEl * firstChildHeight) + 16;
+			const maxHeight = ((minEl ? minEl : options.length) * firstChildHeight) + 16;
 
 			if (maxHeight > (window.innerHeight - (top + height))) {
 	      listbox.style.maxHeight = `${maxHeight}px`;
@@ -211,10 +211,9 @@ class CustomListBox extends Component<any, any> {
 									item.addLabel ? 'whith-label' : '']
 								),
 								...(currentSelection.value === item.value ? { 'aria-selected': 'true' } : {})
-							}, item.label, item.addLabel ?
-								el('div', { className: 'add-label' }, item.addLabel)
-								:
-								null
+							},
+								el('span', {}, item.label),
+								item.addLabel ? el('div', { className: 'add-label' }, item.addLabel) : null
 							)
 						})
 					)
