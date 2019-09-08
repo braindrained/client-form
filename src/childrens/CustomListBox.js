@@ -20,7 +20,8 @@ class CustomListBox extends Component<any, any> {
 			options: options,
 			listClassName: 'hidden',
 			currentSelection: options.length > 0 ? (value ? options.filter(o => o.value === value)[0] : options.filter(o => o.value === this.props.default)[0]) : {},
-			currentIndex: options.length > 0 ? (value ? options.findIndex(o => o.value === value) : 0) : 0
+			currentIndex: options.length > 0 ? (value ? options.findIndex(o => o.value === value) : 0) : 0,
+			listboxStyle: {}
 		};
 	}
 
@@ -35,17 +36,19 @@ class CustomListBox extends Component<any, any> {
 
 		if (this.state.listClassName === '') val = 'hidden';
 		this.setState({ listClassName: val, addButtonProps: val === '' ? { 'aria-expanded': 'true' } : {} }, () => {
-			const listbox = this.listbox.current;
-			const firstChildHeight = listbox.firstChild.offsetHeight;
-			const maxHeight = ((minEl ? minEl : options.length) * firstChildHeight) + 16;
+			try {
+				const listbox = this.listbox.current;
+				const firstChildHeight = listbox.firstChild.offsetHeight;
+				const maxHeight = ((minEl ? minEl : options.length) * firstChildHeight) + 16;
 
-			if (maxHeight > (window.innerHeight - (top + height))) {
-	      listbox.style.maxHeight = `${maxHeight}px`;
-				listbox.style.top = `${-maxHeight + 22}px`;
-			} else {
-				listbox.style = null;
-	      listbox.style.maxHeight = `${maxHeight}px`;
-	    }
+				if (maxHeight > (window.innerHeight - (top + height))) {
+					this.setState({ listboxStyle: { style: { maxHeight, top: `${-maxHeight + 22}px` } } })
+				} else {
+					this.setState({ listboxStyle: { style: { maxHeight } } })
+		    }
+			} catch (e) {
+				console.log('error', e);
+			}
 		});
 	}
 
@@ -159,7 +162,7 @@ class CustomListBox extends Component<any, any> {
 
 	render() {
 		const { className, style, isRequired, errorMessage, name, value, isValid, disabled, innerRef } = this.props;
-		const { listClassName, options, addButtonProps, label, currentSelection, currentIndex } = this.state;
+		const { listClassName, options, addButtonProps, label, currentSelection, currentIndex, listboxStyle } = this.state;
 		const ariaDisabled = { 'aria-disabled': 'true' };
     const labelId = `lb_label_${name}`;
     const buttonId = `lb_button_${name}`;
@@ -195,7 +198,8 @@ class CustomListBox extends Component<any, any> {
 						role: 'listbox',
 						'aria-labelledby': labelId,
 						className: sumClasses(['box-shadow', listClassName]),
-            ...(options.length > 0 ? { 'aria-activedescendant': `exp_elem_${name}_${options[currentIndex].value}` } : {})
+            ...(options.length > 0 ? { 'aria-activedescendant': `exp_elem_${name}_${options[currentIndex].value}` } : {}),
+						...listboxStyle
 					},
 						options.map((item, i) => {
 							this[`exp_elem_${name}_${item.value}`] = createRef();
