@@ -10,6 +10,7 @@ import './CustomListBox.css';
 const el = createElement;
 
 class CustomListBox extends Component<any, any> {
+
 	constructor(props: Object) {
 		super(props);
 		const { label, options, value } = this.props;
@@ -234,6 +235,7 @@ class CustomListBox extends Component<any, any> {
 			)
 		)
 	}
+	
 }
 
 export default forwardRef((props, ref) =>

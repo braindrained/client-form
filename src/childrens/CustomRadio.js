@@ -31,21 +31,7 @@ class CustomRadio extends Component<any, any> {
 
 	componentDidUpdate(prevProps) {
 		const { options, value, name, onUpdate, label } = this.props;
-		const checkValue =
-		notEmpty(value) ?
-		(value.toString() === 'true' ?
-			true
-			:
-			value.toString() === 'false' ?
-			false
-			:
-			isInt(value) ?
-			parseInt(value, 10)
-			:
-			value
-		)
-		:
-		this.props.default;
+		const checkValue = notEmpty(value) ? (value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value) : this.props.default;
 
 		if (prevProps.value !== value) {
 			this.setState({ value: checkValue });
@@ -54,38 +40,10 @@ class CustomRadio extends Component<any, any> {
 		if (prevProps.label && prevProps.label.text !== label.text) this.setState({ labelText: label && label.text });
 	}
 
-	/*UNSAFE_componentWillReceiveProps(nextProps: Object) {
-		const { name, onUpdate } = this.props;
-		const { value, label } = nextProps;
-		const checkValue =
-		notEmpty(value) ?
-		(value.toString() === 'true' ?
-			true
-			:
-			value.toString() === 'false' ?
-			false
-			:
-			isInt(value) ?
-			parseInt(value, 10)
-			:
-			value
-		)
-		:
-		this.props.default;
-
-		if (this.state.value !== checkValue || (label && this.state.labelText !== label.text)) {
-			this.setState({
-				value: checkValue,
-				labelText: label && label.text
-			});
-			onUpdate({ target: { name, value: checkValue }}, false);
-		}
-	}*/
-
 	onChange(event: Object) {
 		const { name, onUpdate } = this.props;
 		const { value } = event.target;
-		const checkValue = value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value;
+		const checkValue = this.getValue(value);
 
 		this.setState({ value: checkValue });
 		onUpdate({ target: { name, value: checkValue } });
@@ -94,16 +52,52 @@ class CustomRadio extends Component<any, any> {
 	}
 
 	handleKeyDown(e: Object, item: Object) {
-		if (e.keyCode !== 9) {
-			e.preventDefault();
-			const { name, onUpdate } = this.props;
-			const { value } = item;
-			const checkValue = value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value;
+		const keyCode = e.which || e.keyCode;
 
-			this.setState({ value: checkValue });
-			onUpdate({ target: { name, value: checkValue } });
-			this[`r_elem_label_${name}_${value}`].current.blur();
+		if (keyCode !== 9) {
+			e.preventDefault();
+			const { name, onUpdate, options } = this.props;
+			const { value } = item;
+			let checkValue = this.getValue(value);
+			const currentIndex = options.findIndex(o => o.value === value);
+			let newIndex = 0;
+			let newValue = value;
+
+			switch (keyCode) {
+				case 13:
+				case 32:
+					this.setState({ value: checkValue });
+					onUpdate({ target: { name, value: checkValue } });
+					this[`r_elem_label_${name}_${newValue}`].current.blur();
+					break;
+				case 37:
+				case 38:
+					newIndex = currentIndex === 0 ? options.length - 1 : currentIndex - 1;
+					newValue = options[newIndex].value;
+					checkValue = this.getValue(newValue);
+
+					this.setState({ value: checkValue });
+					onUpdate({ target: { name, value: checkValue } });
+					this[`r_elem_label_${name}_${newValue}`].current.focus();
+					break;
+				case 39:
+				case 40:
+					newIndex = currentIndex === options.length - 1 ? 0 : currentIndex + 1;
+					newValue = options[newIndex].value;
+					checkValue = this.getValue(newValue);
+
+					this.setState({ value: checkValue });
+					onUpdate({ target: { name, value: checkValue } });
+					this[`r_elem_label_${name}_${newValue}`].current.focus();
+					break;
+				default:
+					break;
+			}
 		}
+	}
+
+	getValue(value) {
+		return value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value;
 	}
 
 	render() {
