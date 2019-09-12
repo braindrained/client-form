@@ -127,6 +127,7 @@ class AutoSuggest extends Component {
 		return el('div', { className: sumClasses(['container-field autosuggest', className]), style },
 			el(FieldLabel, { label, name, isRequired, isValid }),
 			el('input', {
+				type: 'text',
 				onChange: e => this.onChange(e),
 				onKeyDown: e => this.onKeyDown(e),
 				onFocus: e => this.onFocus(e),
