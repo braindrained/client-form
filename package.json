@@ -1,6 +1,6 @@
 {
   "name": "client-form",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "author": "Paolo Senese",
   "description": "A react component to build forms",
   "keywords": [

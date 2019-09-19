@@ -35,20 +35,22 @@ export const hideField = (item: Object, controls: Array<Object>) => {
 		let hide = false;
 		item.hideIf.map(v => {
 			const control = controls.filter(o => o.name === v.field);
-			let controlValue = '';
-			if (control[0].control === 'check') {
-				controlValue = control[0].value ? control[0].value : control[0].default;
-			} else if (control[0].control !== 'check') {
-				if (control[0].value === 0) {
-					controlValue = control[0].value;
-				} else {
-					controlValue = control[0].value ? control[0].value : '';
-					controlValue = controlValue === '' ? control[0].default : controlValue;
-					controlValue = controlValue || '';
+			if (!control[0].hide) {
+				let controlValue = '';
+				if (control[0].control === 'check') {
+					controlValue = control[0].value ? control[0].value : control[0].default;
+				} else if (control[0].control !== 'check') {
+					if (control[0].value === 0) {
+						controlValue = control[0].value;
+					} else {
+						controlValue = control[0].value ? control[0].value : '';
+						controlValue = controlValue === '' ? control[0].default : controlValue;
+						controlValue = controlValue || '';
+					}
 				}
+				if (v.regEx && control.length > 0 && v.regEx.test(controlValue.toString())) hide = true;
+				if (!v.regEx && control.length > 0 && v.values.indexOf(controlValue) !== -1) hide = true;
 			}
-			if (v.regEx && control.length > 0 && v.regEx.test(controlValue.toString())) hide = true;
-			if (!v.regEx && control.length > 0 && v.values.indexOf(controlValue) !== -1) hide = true;
 			return null;
 		});
 		return hide;
@@ -61,7 +63,11 @@ export const optionsIf = (item: Object, controls: Array<Object>, el: Object) => 
 	try {
 		let options;
 		item.optionIf.map((v, i) => {
-			if (i === 0) options = v.options;
+			if (i === 0) {
+				options = v.options;
+			} else if (i !== 0 && item.optionIfCondition && item.optionIfCondition === 'or') {
+				options = v.options;
+			}
 			const control = controls.filter(o => o.name === v.field);
 			if (control.length > 0) {
 				if (el.target.name === v.field) item.value = '';
