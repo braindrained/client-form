@@ -57,7 +57,8 @@ class App extends Component {
 						default: ' ',
 						value:	' ',
 						minEl: 7,
-						isRequired: true
+						isRequired: true,
+						errorMessage: 'Mandatory field',
 					},
 					{
 						control: 'select',

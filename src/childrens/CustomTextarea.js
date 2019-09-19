@@ -84,7 +84,7 @@ class CustomTextarea extends Component<any, any> {
 				onBlur: (e) => { this.onBlur(e); },
 				onChange: (e) => { this.onChange(e); },
 				value,
-				style: isValid === false ? { border: '1px solid #e4002b' } : {},
+			  className: isValid === false ? 'input-error' : '',
 				ref: innerRef
 			}),
 			limitChar ? el('div', { className: 'limit-char noselect' }, `${value.length}/${limitChar}`) : null,

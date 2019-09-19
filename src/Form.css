@@ -59,6 +59,15 @@
 	font-stretch: normal;
 	letter-spacing: normal;
 }
+.client-form .container-field .label-error {
+	color: #e4002b;
+}
+.client-form .container-field .input-error {
+	border: 1px solid #e4002b;
+}
+.client-form .container-field .textarea-tab {
+	border: 1px solid #d8d8df;
+}
 .client-form .container-field svg path {
 	fill: #d8d8df;
 }

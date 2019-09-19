@@ -68,7 +68,7 @@ class CustomSelect extends Component<any, any> {
 
 		return el('div', { className: sumClasses(['container-field', className]), style },
 			el(FieldLabel, { label, name, isRequired, isValid, labelId }),
-			el('div', { className: 'select-style', style: isValid === false ? { borderColor: '#e4002b' } : {} },
+			el('div', { className: sumClasses(['select-style', isValid === false ? 'input-error' : '']) },
 				el('select', {
 					name,
 					id: name,

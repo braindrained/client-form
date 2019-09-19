@@ -138,7 +138,7 @@ class AutoSuggest extends Component {
 				disabled,
 				autoComplete,
 				ref: innerRef,
-				style: isValid === false ? { border: '1px solid #e4002b' } : {}
+				className: isValid === false ? 'input-error' : ''
 			}),
 			el('div', { className: 'autosuggest-suggestions box-shadow' },
 				suggestions.map((item, i) => {

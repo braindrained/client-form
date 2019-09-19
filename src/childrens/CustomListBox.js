@@ -190,7 +190,7 @@ class CustomListBox extends Component<any, any> {
 						'aria-haspopup': 'listbox',
 						'aria-labelledby': sumClasses([buttonId, labelId]),
 						id: buttonId,
-						style: isValid === false ? { border: '1px solid #e4002b' } : {},
+						className: isValid === false ? 'input-error' : '',
 						disabled,
 						...addButtonProps,
 						...(disabled ? ariaDisabled : {})
@@ -235,7 +235,7 @@ class CustomListBox extends Component<any, any> {
 			)
 		)
 	}
-	
+
 }
 
 export default forwardRef((props, ref) =>

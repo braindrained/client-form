@@ -19,7 +19,7 @@ const TextAreaField = forwardRef((props, ref) => (
 		el('div', {},
 			el('textarea', {
 				placeholder: value[i].placeholder,
-				className: 'large-field',
+				className: sumClasses(['large-field', !isValid ? 'input-error' : 'textarea-tab']),
 				name: item.name,
 				id: item.name,
 				onChange: (e) => { this.onChange(e); },
@@ -28,7 +28,6 @@ const TextAreaField = forwardRef((props, ref) => (
 					borderRadius: '0px 2px 2px',
 					height: 200,
 					resize: 'none',
-					border: !isValid ? '1px solid #e4002b' : '1px solid #d8d8df'
 				},
 				rows: 2,
 				cols: 20,
@@ -121,7 +120,7 @@ class CustomTextareaWithTab extends Component<any, any> {
 					el('div', {},
 						el('textarea', {
 							placeholder: value[i].placeholder,
-							className: 'large-field',
+							className: sumClasses(['large-field', !isValid ? 'input-error' : 'textarea-tab']),
 							name: item.name,
 							id: item.name,
 							onChange: e => this.onChange(e),
@@ -130,7 +129,6 @@ class CustomTextareaWithTab extends Component<any, any> {
 								borderRadius: '0px 2px 2px',
 								height: 200,
 								resize: 'none',
-								border: !isValid ? '1px solid #e4002b' : '1px solid #d8d8df'
 							},
 							rows: 2,
 							cols: 20,

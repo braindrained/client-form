@@ -121,9 +121,10 @@ class CustomTextField extends Component<any, any> {
 				onChange: (e) => { this.onChange(e); },
 				onBlur: (e) => { this.onBlur(e); },
 				onFocus: () => { this.onFocus(); },
-				style: Object.assign({}, inputStyle, isValid === false ? { border: '1px solid #e4002b' } : {}),
+				style: inputStyle,
 				autoComplete,
-				ref: innerRef
+				ref: innerRef,
+				className: isValid === false ? 'input-error' : ''
 			}),
 			this.props.type === 'password' ?
 				el('svg', { onClick: () => { this.togglePassword(); }, className: 'eye', width: 24, height: 24, viewBox: '0 0 24 24' },
