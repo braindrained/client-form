@@ -286,9 +286,9 @@ class App extends Component {
 						},
 						value: [
 							{ name: 'listingDescIt', value: '', isRequired: true, isValid: true, label: 'Spaghetti', abbr: 'IT', placeholder: 'Italian description' },
-							{ name: 'listingDescEn', value: '', isRequired: false, isValid: true, label: 'Chips & Fish', abbr: 'EN', placeholder: 'English description' },
+							{ name: 'listingDescEn', value: '', isRequired: false, isValid: true, label: 'Fish & Chips', abbr: 'EN', placeholder: 'English description' },
 							{ name: 'listingDescFr', value: '', isRequired: false, isValid: true, label: 'Baguettes', abbr: 'FR', placeholder: 'French description' },
-							{ name: 'listingDescEs', value: '', isRequired: false, isValid: true, label: 'Paella', abbr: 'ES', placeholder: 'Spanish description' },
+							{ name: 'listingDescEs', value: '', isRequired: false, isValid: true, label: 'Tapas', abbr: 'ES', placeholder: 'Spanish description' },
 							{ name: 'listingDescDe', value: '', isRequired: false, isValid: true, label: 'Würstel', abbr: 'DE', placeholder: 'German description' }
 						],
 						isValid: true,

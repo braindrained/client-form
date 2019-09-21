@@ -7,7 +7,6 @@ import { camelToTitle, sumClasses } from '../helpers/utils';
 const el = createElement
 const areEqual = (prevProps, nextProps) => {
 	if (prevProps.isValid !== nextProps.isValid || prevProps.value !== nextProps.value || (prevProps.label && prevProps.label.text !== nextProps.label.text)) {
-		console.log('is different!', prevProps.name);
 		return false;
 	}
 	return true;
