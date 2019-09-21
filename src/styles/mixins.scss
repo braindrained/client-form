@@ -1,0 +1,45 @@
+@mixin calc($property, $expression) {
+  #{$property}: -moz-calc(#{$expression});
+  #{$property}: -webkit-calc(#{$expression});
+  #{$property}: calc(#{$expression});
+}
+
+@mixin animation($keyframes, $properties) {
+  -webkit-animation: $keyframes $properties;
+  -moz-animation: $keyframes $properties;
+  -o-animation: $keyframes $properties;
+  animation: $keyframes $properties;
+}
+
+@mixin noselect() {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @-o-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@mixin truncateText() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -96,7 +96,5 @@ class CustomPlusMinus extends Component<any, any> {
 }
 
 export default forwardRef((props, ref) =>
-	el(CustomPlusMinus,
-		Object.assign({}, props, { innerRef: ref })
-	)
+	el(CustomPlusMinus, { innerRef: ref, ...props })
 );

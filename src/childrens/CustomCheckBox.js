@@ -30,16 +30,6 @@ class CustomCheckBox extends Component<any, any> {
 		if (prevProps.label && prevProps.label.text !== label.text)  this.setState({ labelText: label && label.text });
 	}
 
-	/*UNSAFE_componentWillReceiveProps(nextProps: Object) {
-		const { label } = nextProps;
-
-		if (label && this.state.labelText !== label.text) {
-			this.setState({
-				labelText: label && label.text
-			});
-		}
-	}*/
-
 	onChange(event: Object) {
 		const { name, onUpdate } = this.props;
 		this.setState({ value: event.target.checked });
@@ -104,7 +94,5 @@ class CustomCheckBox extends Component<any, any> {
 }
 
 export default forwardRef((props, ref) =>
-	el(CustomCheckBox,
-		Object.assign({}, props, { innerRef: ref })
-	)
+	el(CustomCheckBox, { innerRef: ref, ...props })
 );

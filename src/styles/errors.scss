@@ -1,0 +1,14 @@
+@mixin errors() {
+  .label-error {
+    color: #e4002b;
+  }
+  .validation-error {
+    color: #e4002b;
+    font-size: 11px;
+    display: block;
+    clear: both;
+    min-height: 19px;
+    text-align: right;
+    line-height: 19px;
+  }
+}

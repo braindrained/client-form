@@ -1,0 +1,26 @@
+@mixin plus-minus() {
+  .plus-minus {
+		max-width: 250px;
+		input {
+			height: 40px;
+			min-height: 40px;
+			padding: 7px 8px;
+		}
+		svg {
+			float: left;
+			width: 34px;
+			height: 34px;
+			border-radius: 50%;
+			cursor: pointer;
+			&:first-child {
+				margin-right: 30px;
+			}
+			&:last-child {
+				margin-left: 30px;
+			}
+			path, rect {
+				fill: #fff;
+			}
+		}
+	}
+}

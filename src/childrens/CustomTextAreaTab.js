@@ -144,7 +144,5 @@ class CustomTextareaWithTab extends Component<any, any> {
 }
 
 export default forwardRef((props, ref) =>
-	el(CustomTextareaWithTab,
-		Object.assign({}, props, { innerRef: ref })
-	)
+	el(CustomTextareaWithTab, { innerRef: ref, ...props })
 );

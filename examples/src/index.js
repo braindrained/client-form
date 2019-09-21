@@ -123,10 +123,10 @@ class App extends Component {
 					{
 						control: 'text',
 						label: {
-							text: 'Nome',
+							text: 'Name',
 							className: 'label-class'
 						},
-						placeholder: 'Nome',
+						placeholder: 'Name',
 						type: 'text',
 						name: 'firstName',
 						limitChar: 25,

@@ -95,4 +95,6 @@ class FakeSelect extends Component<any, any> {
 	}
 }
 
-export default forwardRef((props, ref) => el(FakeSelect, { ...props, innerRef: ref }));
+export default forwardRef((props, ref) =>
+	el(FakeSelect, { innerRef: ref, ...props })
+);

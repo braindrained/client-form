@@ -97,7 +97,5 @@ class CustomSelect extends Component<any, any> {
 }
 
 export default forwardRef((props, ref) =>
-	el(CustomSelect,
-		Object.assign({}, props, { innerRef: ref })
-	)
+	el(CustomSelect, { innerRef: ref, ...props })
 );

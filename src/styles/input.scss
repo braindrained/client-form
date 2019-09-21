@@ -1,0 +1,48 @@
+@mixin input() {
+  input {
+    &[type='radio'], &[type='checkbox'] {
+      display: none;
+    }
+    &[type="checkbox"] + label, &[type='radio'] + label {
+      display: inline-block;
+      cursor: pointer;
+    }
+    &[type='radio'] + label {
+      width: 100%;
+      padding: 4px 0px;
+    }
+    &[type="checkbox"] + label > svg, &[type="radio"] + label > svg {
+      float: left;
+    }
+    &[type="checkbox"] + label > div, &[type="radio"] + label > div {
+      width: auto;
+      height: 24px;
+      line-height: 24px;
+      padding-left: 5px;
+      cursor: pointer;
+      float: left;
+      white-space: nowrap;
+    }
+    &[type=email], &[type=number], &[type=password], &[type=tel], &[type=text] {
+      border: 1px solid #d8d8df;
+      padding: 15px 8px;
+      border-radius: 2px;
+      color: #333f48;
+      background-color: #fff;
+      line-height: 13px;
+      box-sizing: border-box;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      width: 100%;
+      transition: border .5s ease;
+      @media screen and (min-width: 560px) {
+        padding: 7px 8px;
+				height: 34px;
+				min-height: 34px;
+      }
+    }
+    &.input-error {
+      border: 1px solid #e4002b;
+    }
+  }
+}

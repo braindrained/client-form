@@ -159,7 +159,5 @@ class AutoSuggest extends Component {
 }
 
 export default forwardRef((props, ref) =>
-	el(AutoSuggest,
-		Object.assign({}, props, { innerRef: ref })
-	)
+	el(AutoSuggest, { innerRef: ref, ...props })
 );

@@ -1,0 +1,45 @@
+@mixin autosuggest() {
+  .autosuggest {
+    position: relative;
+    svg {
+      position: absolute;
+      z-index: 1;
+      top: 36px;
+      right: 10px;
+      width: 24px;
+      height: 24px;
+      @media screen and (min-width: 560px) {
+        top: 33px;
+				right: 8px;
+      }
+      circle {
+        stroke: #96a1b0;
+      }
+    }
+    .autosuggest-suggestions {
+      position: absolute;
+      background: #fff;
+      z-index: 9999;
+      width: 100%;
+      cursor: pointer;
+      .autosuggest-suggestion {
+        &:hover {
+          background: #d8dbdf;
+        }
+        height: 48px;
+        line-height: 48px;
+        padding: 0px 8px;
+      }
+      .autosuggest-suggestion-selected {
+        height: 48px;
+        line-height: 48px;
+        padding: 0px 8px;
+        background: #d8dbdf;
+        @media screen and (min-width: 560px) {
+          height: 40px;
+  				line-height: 40px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+@mixin container-field-tabs() {
+  .container-field-tabs {
+    width: 100%;
+    clear: both;
+    float: left;
+    .tab-label {
+      display: none;
+      @media screen and (min-width: 560px) {
+        display: block;
+      }
+    }
+    .tab-abbr {
+      display: block;
+      @media screen and (min-width: 560px) {
+        display: none;
+      }
+    }
+    .container-field-tabs-item {
+      transition-duration: 0.2s, 0.2s;
+      transition-timing-function: ease-in, ease-out;
+      cursor: pointer;
+      background: #f1f1f1;
+      height: 30px;
+      line-height: 30px;
+      float: left;
+      margin-right: 2px;
+      padding: 0px 10px;
+      color: #333f48;
+      &:hover {
+        background: #d8d8df;
+        color: #333f48;
+      }
+    }
+    .container-field-tabs-item-selected {
+      background: #333f48;
+      color: #fff;
+      &:hover {
+        background: #333f48;
+        color: #fff;
+      }
+    }
+  }
+}

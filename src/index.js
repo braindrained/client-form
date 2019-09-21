@@ -15,7 +15,7 @@ import AutoSuggest from './childrens/AutoSuggest';
 import CustomListBox from './childrens/CustomListBox';
 
 import { sumClasses, hideField, optionsIf, output, findFirstRequired, valuesOf, merge } from './helpers/utils';
-import './Form.css';
+import './styles/index.scss';
 
 const el = createElement;
 const View = (props: Object) => el('div', props);
@@ -32,6 +32,8 @@ export default class Form extends Component<any, any> {
 			if (typeof item.optionIf === 'object') item.options = optionsIf(item, controls, { target: { name: item.name } });
 			if (typeof item.hideIf === 'object' && !item.hide) item.hide = hideField(item, controls);
 			if (typeof item.hideIf === 'object' && item.hide && item.control !== 'external') item.value = item.default;
+			//item.ref = this[name] = createRef();
+			this[item.name] = createRef();
 			return item;
 		});
 
@@ -42,6 +44,8 @@ export default class Form extends Component<any, any> {
 			disableButton: false
 		};
 	}
+
+	componentDidMount
 
 	async onUpdate(e: Object) {
 		const { controls } = this.state;
@@ -249,7 +253,6 @@ export default class Form extends Component<any, any> {
 					autoComplete, autoSuggestFetch, getValue, cacheResults, timeOut, hide, options, minEl
 				} = item;
 
-				this[name] = createRef();
 				/* eslint-disable */
 				switch (control) {
 					default:

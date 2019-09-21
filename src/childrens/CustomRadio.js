@@ -155,7 +155,5 @@ class CustomRadio extends Component<any, any> {
 }
 
 export default forwardRef((props, ref) =>
-	el(CustomRadio,
-		Object.assign({}, props, { innerRef: ref })
-	)
+	el(CustomRadio, { innerRef: ref, ...props })
 );

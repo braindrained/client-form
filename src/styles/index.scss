@@ -1,0 +1,197 @@
+@import "mixins";
+@import "input";
+@import "errors";
+@import "textarea";
+@import "container-field-tabs";
+@import "plus-minus";
+@import "select-style";
+@import "fake-cont";
+@import "autosuggest";
+@import "listbox";
+
+.client-form {
+	text-align: left;
+	display: block;
+	margin: 0 auto;
+	color: #333f48;
+	font-size: 13px;
+	@media screen and (min-width: 560px) {
+		padding: 0px 0px 0px 0px;
+	}
+	.box-shadow {
+		box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.01), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+		border-radius: 2px;
+	}
+	.clear {
+		clear: both;
+		width: 100%;
+	}
+	.hide {
+		display: none;
+	}
+
+	.noselect, img, label {
+		@include noselect();
+	}
+	.container-field {
+		float: left;
+		position: relative;
+		width: -webkit-calc(100% - 20px);
+		width: -moz-calc(100% - 20px);
+		width: calc(100% - 20px);
+		min-height: 90px;
+		margin: 0px 10px;
+		@media screen and (min-width: 560px) {
+			width: 250px;
+			min-height: 77px;
+		}
+		label:first-child {
+			width: 100%;
+			float: left;
+			clear: both;
+			text-align: left;
+			height: 24px;
+			font-weight: 500;
+			font-style: normal;
+			font-stretch: normal;
+			letter-spacing: normal;
+		}
+		@include input();
+		@include textarea();
+		@include container-field-tabs();
+		@include fake-cont();
+		svg path {
+			fill: #d8d8df;
+		}
+		.ext {
+			fill: #fff;
+		}
+		.int {
+			fill: rgb(0, 132, 255);
+		}
+		.eye, .unit {
+			position: absolute;
+			right: 5px;
+			top: 37px;
+			@media screen and (min-width: 560px) {
+				top: 29px;
+			}
+		}
+		.eye {
+			cursor: pointer;
+			.show {
+				fill: none;
+			}
+		}
+		.unit {
+			height: 24px;
+			line-height: 24px;
+			width: 24px;
+			text-align: center;
+			font-size: 14px;
+			color: #333f48;
+			font-weight: 500;
+		}
+		.limit-char {
+			text-align: right;
+			position: absolute;
+			width: 100%;
+		}
+		@include errors();
+	}
+	@include plus-minus();
+	@include select-style();
+	@include listbox();
+	.check {
+		padding-top: 23px;
+		@media screen and (min-width: 560px) {
+			padding-top: 22px;
+			label {
+				padding: 5px 0px;
+			}
+		}
+	}
+
+	@include autosuggest();
+	.button-container {
+		width: 100%;
+		float: right;
+		position: relative;
+		svg {
+			background: none;
+			position: absolute;
+			left: 8px;
+			top: 8px;
+		}
+		.spin {
+			@include animation(spin, 1s linear infinite);
+		}
+	}
+	.btn {
+		position: relative;
+		float: left;
+		background: #323f48;
+		margin: 0px 0px 0px 0px;
+		padding: 0px 10px;
+		height: 40px;
+		font-size: 14px;
+		color: #fff;
+		cursor: pointer;
+		line-height: 40px;
+		border: none;
+		border-radius: 2px;
+		text-align: center;
+		text-decoration: none;
+		transition-duration: 0.2s, 0.2s;
+		transition-timing-function: ease-in, ease-out;
+		font-weight: 500;
+	}
+	.btn-sent {
+		padding-left: 40px;
+	}
+	.btn:hover {
+		background-color: #161e24;
+		border-color: #161e24;
+	}
+	.btn-succeed {
+		padding-left: 40px;
+		background-color: #00c694 !important;
+		border: 1px solid #00c694 !important;
+		color: #fff !important;
+	}
+	.btn-white {
+		background-color: #fff !important;
+		border: 1px solid #323f48 !important;
+		color: #323f48 !important;
+		&:hover {
+			background-color: #fff !important;
+			border: 1px solid #323f48 !important;
+			color: #323f48 !important;
+		}
+	}
+	.btn-grey {
+		background: #f1f1f1;
+		color: #323f48 !important;
+		&:hover {
+			background: #f1f1f1;
+		}
+	}
+	.btn-red {
+		padding-left: 40px;
+		background: #e4002b;
+		&:hover {
+			background-color: #a30000;
+			border-color: #a30000;
+		}
+	}
+}
+
+@-moz-keyframes spin {
+	100% { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+	100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+	100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}

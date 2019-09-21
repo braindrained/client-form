@@ -93,7 +93,5 @@ class CustomTextarea extends Component<any, any> {
 }
 
 export default forwardRef((props, ref) =>
-	el(CustomTextarea,
-		Object.assign({}, props, { innerRef: ref })
-	)
+	el(CustomTextarea, { innerRef: ref, ...props })
 );

@@ -5,8 +5,6 @@ import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { sumClasses } from '../helpers/utils';
 
-import './CustomListBox.css';
-
 const el = createElement;
 
 class CustomListBox extends Component<any, any> {
@@ -178,7 +176,7 @@ class CustomListBox extends Component<any, any> {
     const listId = `lb_list_${name}`;
 		this['listbox'] = createRef();
 
-		return el('div', { className: sumClasses(['container-field', className]), style },
+		return el('div', { className: sumClasses(['container-field listbox', className]), style },
 			el(ClickOutHandler, { onClickOut: () => this.handleClickOut('hidden') },
 				el(FieldLabel, { label, name: buttonId, isRequired, isValid, labelId }),
 				el('div', { className: 'exp_wrapper' },
@@ -190,7 +188,7 @@ class CustomListBox extends Component<any, any> {
 						'aria-haspopup': 'listbox',
 						'aria-labelledby': sumClasses([buttonId, labelId]),
 						id: buttonId,
-						className: isValid === false ? 'input-error' : '',
+						className: !isValid ? 'input-error' : '',
 						disabled,
 						...addButtonProps,
 						...(disabled ? ariaDisabled : {})
@@ -239,7 +237,5 @@ class CustomListBox extends Component<any, any> {
 }
 
 export default forwardRef((props, ref) =>
-	el(CustomListBox,
-		Object.assign({}, props, { innerRef: ref })
-	)
+	el(CustomListBox, { innerRef: ref, ...props })
 );
