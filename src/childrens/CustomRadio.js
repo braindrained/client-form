@@ -6,11 +6,15 @@ import { sumClasses, isInt, notEmpty } from '../helpers/utils';
 
 const el = createElement;
 const areEqual = (prevProps, nextProps) => {
-	if (prevProps.value !== nextProps.value ||
-		prevProps.options !== nextProps.options ||
-		prevProps.isValid !== nextProps.isValid ||
-		(prevProps.label && prevProps.label.text !== nextProps.label.text)) {
-		return false;
+	try {
+		if (prevProps.value !== nextProps.value ||
+			prevProps.options !== nextProps.options ||
+			prevProps.isValid !== nextProps.isValid ||
+			(prevProps.label && prevProps.label.text !== nextProps.label.text)) {
+			return false;
+		}
+	} catch (e) {
+		return true;
 	}
 	return true;
 };

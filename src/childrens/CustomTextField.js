@@ -6,11 +6,15 @@ import { camelToTitle, sumClasses } from '../helpers/utils';
 
 const el = createElement
 const areEqual = (prevProps, nextProps) => {
-	if (
-		prevProps.isValid !== nextProps.isValid ||
-		prevProps.value !== nextProps.value ||
-		(prevProps.label && prevProps.innerRef.current.labels[0].innerText !== nextProps.label.text)) {
-		return false;
+	try {
+		if (
+			prevProps.isValid !== nextProps.isValid ||
+			prevProps.value !== nextProps.value ||
+			(prevProps.label && prevProps.innerRef.current.labels[0].innerText !== nextProps.label.text)) {
+			return false;
+		}
+	} catch (e) {
+		return true;
 	}
 	return true;
 };

@@ -4,10 +4,14 @@ import { sumClasses, camelToTitle } from '../helpers/utils';
 
 const el = createElement;
 const areEqual = (prevProps, nextProps) => {
-	if (prevProps.value !== nextProps.value ||
-		prevProps.style !== nextProps.style ||
-		(prevProps.label && prevProps.label.text !== nextProps.label.text)) {
-		return false;
+	try {
+		if (prevProps.value !== nextProps.value ||
+			prevProps.style !== nextProps.style ||
+			(prevProps.label && prevProps.label.text !== nextProps.label.text)) {
+			return false;
+		}
+	} catch (e) {
+		return true;
 	}
 	return true;
 };

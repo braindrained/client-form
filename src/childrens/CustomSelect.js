@@ -6,14 +6,18 @@ import { sumClasses } from '../helpers/utils';
 
 const el = createElement;
 const areEqual = (prevProps, nextProps) => {
-	if (
-		prevProps.isValid !== nextProps.isValid ||
-		prevProps.value !== nextProps.value ||
-		prevProps.addSelectProps !== nextProps.addSelectProps ||
-		prevProps.options !== nextProps.options ||
-		(prevProps.label && prevProps.label.text !== nextProps.label.text)
-	) {
-		return false;
+	try {
+		if (
+			prevProps.isValid !== nextProps.isValid ||
+			prevProps.value !== nextProps.value ||
+			prevProps.addSelectProps !== nextProps.addSelectProps ||
+			prevProps.options !== nextProps.options ||
+			(prevProps.label && prevProps.label.text !== nextProps.label.text)
+		) {
+			return false;
+		}
+	} catch (e) {
+		return true;
 	}
 	return true;
 };
