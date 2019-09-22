@@ -1,94 +1,60 @@
 // @flow
-import { Component, createElement, forwardRef, createRef } from 'react';
+import { Component, createElement, forwardRef, createRef, memo } from 'react';
 import FieldLabel from './childrenComponents/FieldLabel';
 import FieldError from './childrenComponents/FieldError';
 import { sumClasses, isInt, notEmpty } from '../helpers/utils';
 
 const el = createElement;
-
-class CustomRadio extends Component<any, any> {
-
-	constructor(props: Object) {
-		super(props);
-		const { value, label } = this.props;
-		const checkValue = notEmpty(value) ? (value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value) : this.props.default;
-
-		this.state = {
-			value: checkValue,
-			labelText: label && label.text
-		};
-	}
-
-	shouldComponentUpdate(nextProps: Object, nextState: Object) {
-		if (this.props.innerRef !== nextProps.innerRef) return true;
-		if (this.props.value !== nextProps.value) return true;
-		if (this.state.value !== nextState.value) return true;
-		if (this.props.options !== nextProps.options) return true;
-		if (this.props.isValid !== nextProps.isValid) return true;
-		if (nextProps.label && this.state.labelText !== nextProps.label.text) return true;
+const areEqual = (prevProps, nextProps) => {
+	if (prevProps.value !== nextProps.value ||
+		prevProps.options !== nextProps.options ||
+		prevProps.isValid !== nextProps.isValid ||
+		(prevProps.label && prevProps.label.text !== nextProps.label.text)) {
 		return false;
 	}
+	return true;
+};
 
-	componentDidUpdate(prevProps) {
-		const { options, value, name, onUpdate, label } = this.props;
-		const checkValue = notEmpty(value) ? (value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value) : this.props.default;
+const CustomRadio = memo(props => {
+	const { value, className, style, label, name, hideRadio, options, isRequired, isValid, errorMessage, innerRef, onUpdate } = props;
+	const checkValue = notEmpty(value) ? (value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value) : props.default;
+	const currentIndex = options.findIndex(o => o.value === value);
+	const labelId = `radio_label_${name}`;
 
-		if (prevProps.value !== value) {
-			this.setState({ value: checkValue });
-			onUpdate({ target: { name, value: checkValue }}, false);
-		}
-		if (prevProps.label && prevProps.label.text !== label.text) this.setState({ labelText: label && label.text });
-	}
-
-	onChange(event: Object) {
-		const { name, onUpdate } = this.props;
+	const onChange = (event: Object) => {
 		const { value } = event.target;
-		const checkValue = this.getValue(value);
-
-		this.setState({ value: checkValue });
+		const checkValue = getValue(value);
 		onUpdate({ target: { name, value: checkValue } });
-
-		this[`r_elem_label_${name}_${value}`].current.blur();
 	}
 
-	handleKeyDown(e: Object, item: Object) {
+	const handleKeyDown = (e: Object, item: Object) => {
 		const keyCode = e.which || e.keyCode;
 
-		if (keyCode !== 9) {
+		if (keyCode !== 9 && (keyCode === 13 || keyCode === 32 || keyCode === 37 || keyCode === 38 || keyCode === 39 || keyCode === 40)) {
 			e.preventDefault();
-			const { name, onUpdate, options } = this.props;
 			const { value } = item;
-			let checkValue = this.getValue(value);
-			const currentIndex = options.findIndex(o => o.value === value);
+			let checkValue = getValue(value);
 			let newIndex = 0;
 			let newValue = value;
 
 			switch (keyCode) {
 				case 13:
 				case 32:
-					this.setState({ value: checkValue });
 					onUpdate({ target: { name, value: checkValue } });
-					this[`r_elem_label_${name}_${newValue}`].current.blur();
 					break;
 				case 37:
 				case 38:
 					newIndex = currentIndex === 0 ? options.length - 1 : currentIndex - 1;
 					newValue = options[newIndex].value;
-					checkValue = this.getValue(newValue);
-
-					this.setState({ value: checkValue });
+					checkValue = getValue(newValue);
 					onUpdate({ target: { name, value: checkValue } });
-					this[`r_elem_label_${name}_${newValue}`].current.focus();
 					break;
 				case 39:
 				case 40:
 					newIndex = currentIndex === options.length - 1 ? 0 : currentIndex + 1;
 					newValue = options[newIndex].value;
-					checkValue = this.getValue(newValue);
-
-					this.setState({ value: checkValue });
+					checkValue = getValue(newValue);
 					onUpdate({ target: { name, value: checkValue } });
-					this[`r_elem_label_${name}_${newValue}`].current.focus();
 					break;
 				default:
 					break;
@@ -96,63 +62,63 @@ class CustomRadio extends Component<any, any> {
 		}
 	}
 
-	getValue(value) {
-		return value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value;
+	const getValue = (value) => {
+		return notEmpty(value) ? (value.toString() === 'true' ? true : value.toString() === 'false' ? false : isInt(value) ? parseInt(value, 10) : value) : props.default;
 	}
 
-	render() {
-		const { className, style, label, name, hideRadio, options, isRequired, isValid, errorMessage, innerRef } = this.props;
-		const { value, labelText } = this.state;
-
-		return el('div', { ref: innerRef, className: sumClasses(['container-field', className]), style },
-			el(FieldLabel, { label, name, isRequired, isValid }),
-			el('div', { className: 'float-container', id: name },
-				options.map(item => {
-					this[`r_elem_${name}_${item.value}`] = createRef();
-					this[`r_elem_label_${name}_${item.value}`] = createRef();
-					return el('div', {
-						key: `select_${item.name}_${item.value}`,
-						className: hideRadio && item.value === value ?
-							`floating ${item.className} ${item.selectedClassName ? item.selectedClassName : 'selected-radio'}`
+	return el('div', {
+		ref: innerRef,
+		className: sumClasses(['container-field', className]),
+		style,
+		role: 'radiogroup',
+		'aria-labelledby': labelId
+	},
+		el(FieldLabel, { label, name, isRequired, isValid, labelId }),
+		el('div', { className: 'float-container', id: name },
+			options.map((item, i) => {
+				return el('div', {
+					key: `select_${item.name}_${item.value}`,
+					className: hideRadio && item.value === value ?
+						`floating ${item.className} ${item.selectedClassName ? item.selectedClassName : 'selected-radio'}`
+						:
+						hideRadio ?
+							`floating ${item.className}`
 							:
-							hideRadio ?
-								`floating ${item.className}`
-								:
-								`${sumClasses([item.className, item.value === value ? item.selectedClassName : ''])}`,
-						style: item.style
+							`${sumClasses([item.className, item.value === value ? item.selectedClassName : ''])}`,
+					style: item.style
+				},
+					el('input', {
+						type: 'radio',
+						name,
+						id: name + item.value,
+						value: item.value,
+						disabled: item.disabled === true,
+						checked: item.value === value,
+						onChange: e => onChange(e),
+						'aria-labelledby': `label_${name}_${item.value}`,
+						...(item.value === value ? { 'aria-checked': true } : { 'aria-checked': false })
+					}),
+					el('label', {
+						id: `label_${name}_${item.value}`,
+						htmlFor: name + item.value,
+						style: item.labelStyle ? item.labelStyle : {},
+						onKeyDown: e => handleKeyDown(e, item),
+						tabIndex: i === 0 ? 0 : -1,
 					},
-						el('input', {
-							ref: this[`r_elem_${name}_${item.value}`],
-							type: 'radio',
-							name,
-							id: name + item.value,
-							value: item.value,
-							disabled: item.disabled === true,
-							checked: item.value === value,
-							onChange: e => this.onChange(e),
-						}),
-						el('label', {
-							ref: this[`r_elem_label_${name}_${item.value}`],
-							htmlFor: name + item.value,
-							style: item.labelStyle ? item.labelStyle : {},
-							onKeyDown: e => this.handleKeyDown(e, item),
-							tabIndex: 0
-						},
-								hideRadio ?
-									null
-									:
-									el('svg', { width: 24, height: 24, viewBox: '0 0 24 24' },
-										el('circle', { className: 'ext', cx: 12, cy: 12, r: 9, stroke: 'rgb(216, 216, 223)', strokeWidth: 2 }),
-										item.value === value ? el('circle', { className: 'int', cx: 12, cy: 12, r: 4 }) : null),
-								el('div', null, item.label), item.customObject ? item.customObject : null
-							)
-					)}
-				)
-			),
-			el(FieldError, { isValid, errorMessage })
-		);
-	}
-}
+							hideRadio ?
+								null
+								:
+								el('svg', { width: 24, height: 24, viewBox: '0 0 24 24' },
+									el('circle', { className: 'ext', cx: 12, cy: 12, r: 9, stroke: '#96a1b0', strokeWidth: 1 }),
+									item.value === value ? el('circle', { className: 'int', cx: 12, cy: 12, r: 4 }) : null),
+							el('div', null, item.label), item.customObject ? item.customObject : null
+						)
+				)}
+			)
+		),
+		el(FieldError, { isValid, errorMessage })
+	);
+}, areEqual);
 
 export default forwardRef((props, ref) =>
 	el(CustomRadio, { innerRef: ref, ...props })

@@ -5,7 +5,7 @@
     line-height: 48px;
     width: 100%;
     display: inline-block;
-    border: 1px solid #d8d8df;
+    border: 1px solid #96a1b0;
     border-radius: 2px;
     position: relative;
     z-index: 1;
@@ -22,6 +22,7 @@
       font-size: 13px;
     }
     select {
+      position: absolute;
       padding: 0px 26px 0px 8px;
       border: 0;
       background: transparent;

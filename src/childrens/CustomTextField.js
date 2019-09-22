@@ -6,7 +6,10 @@ import { camelToTitle, sumClasses } from '../helpers/utils';
 
 const el = createElement
 const areEqual = (prevProps, nextProps) => {
-	if (prevProps.isValid !== nextProps.isValid || prevProps.value !== nextProps.value || (prevProps.label && prevProps.label.text !== nextProps.label.text)) {
+	if (
+		prevProps.isValid !== nextProps.isValid ||
+		prevProps.value !== nextProps.value ||
+		(prevProps.label && prevProps.innerRef.current.labels[0].innerText !== nextProps.label.text)) {
 		return false;
 	}
 	return true;
@@ -18,7 +21,7 @@ const CustomTextField = memo(props => {
 	let startValue = value === undefined || value === null ? '' : value;
 	startValue = onlyNumber === true && startValue !== undefined ? startValue.toString().replace(/\D/g, '') : startValue;
 	startValue = limitChar ? startValue.toString().substring(0, limitChar) : startValue;
-	const inputStyle = type === 'password' || unit !== undefined ? { paddingRight: 30 } : {};
+	const inputStyle = type === 'password' || unit !== undefined ? { paddingRight: 32 } : {};
 	const [stateVal, setValue] = useState(startValue);
 	const [editing, setEditing] = useState(false);
 	const [stateType, setType] = useState(type);

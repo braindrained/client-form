@@ -41,6 +41,42 @@ class App extends Component {
 						value: 1,
 					},
 					{
+						control: 'radio',
+						name: 'genericRadio',
+						label: { text: 'This is an almost real radio' },
+						options: [
+							{ value: undefined, label: '--', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
+							{ value: true, label: 'Yes', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
+							{ value: false, label: 'No', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
+						],
+						default: undefined,
+						hideRadio: false,
+					},
+					{
+						control: 'text',
+						type: 'text',
+						name: 'priceMax',
+						onlyNumber: true,
+						placeholder: '',
+						label: {
+							text: 'Price',
+							changeIf: [
+								{
+									field: 'genericRadio',
+									regEx: /^true$/,
+									ifTrue: 'Weekly price',
+									ifFalse: 'Price'
+								}
+							]
+						},
+						value: '',
+						currency: true,
+						isRequired: true,
+						errorMessage: 'Mandatory field',
+						unit: '€',
+						autoComplete: 'new-password'
+					},
+					{
 						control: 'listbox',
 						name: 'yourFuckingFashionListbox',
 						label: { text: 'A Fashion Listbox With desc' },
@@ -76,22 +112,6 @@ class App extends Component {
 						],
 						default: ' ',
 						value:	' ',
-					},
-					{
-						control: 'text',
-						type: 'text',
-						name: 'priceMax',
-						onlyNumber: true,
-						placeholder: '',
-						label: {
-							text: 'Price',
-						},
-						value: '',
-						currency: true,
-						isRequired: true,
-						errorMessage: 'Mandatory field',
-						unit: '€',
-						autoComplete: 'new-password'
 					},
 					{
 						control: 'label',
@@ -158,7 +178,7 @@ class App extends Component {
 						limitChar: 3,
 						value: 4
 					},
-					{
+					/*{
 						control: 'fakeselect',
 						name: 'priceRange',
 						text: 'Select something...',
@@ -171,7 +191,7 @@ class App extends Component {
 						firstRange: priceRanges,
 						secondRange: priceRanges,
 						overlayBg: '#fff'
-					},
+					},*/
 					{
 						control: 'text',
 						type: 'text',
@@ -196,19 +216,6 @@ class App extends Component {
 						name: 'thisIsACheckBox',
 						label: { text: 'This is an almost real checkbox' },
 						value: false,
-					},
-					{
-						control: 'radio',
-						name: 'genericRadio',
-						label: { text: 'This is an almost real radio' },
-						options: [
-							{ value: ' ', label: '--', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
-							{ value: true, label: 'Yes', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
-							{ value: false, label: 'No', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
-						],
-						default: ' ',
-						value: ' ',
-						hideRadio: false,
 					},
 					{
 						control: 'text',
@@ -425,7 +432,6 @@ class App extends Component {
 					maxWidth: 540,
 					margin: '0 auto'
 				},
-
 			}
 		)
 	}

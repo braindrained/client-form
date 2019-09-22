@@ -14,7 +14,7 @@ import FakeSelect from './childrens/FakeSelect';
 import AutoSuggest from './childrens/AutoSuggest';
 import CustomListBox from './childrens/CustomListBox';
 
-import { sumClasses, hideField, optionsIf, output, findFirstRequired, valuesOf, merge } from './helpers/utils';
+import { sumClasses, hideField, optionsIf, output, findFirstRequired, valuesOf, merge, notEmpty } from './helpers/utils';
 import './styles/index.scss';
 
 const el = createElement;
@@ -32,7 +32,6 @@ export default class Form extends Component<any, any> {
 			if (typeof item.optionIf === 'object') item.options = optionsIf(item, controls, { target: { name: item.name } });
 			if (typeof item.hideIf === 'object' && !item.hide) item.hide = hideField(item, controls);
 			if (typeof item.hideIf === 'object' && item.hide && item.control !== 'external') item.value = item.default;
-			//item.ref = this[name] = createRef();
 			this[item.name] = createRef();
 			return item;
 		});
@@ -44,8 +43,6 @@ export default class Form extends Component<any, any> {
 			disableButton: false
 		};
 	}
-
-	componentDidMount
 
 	async onUpdate(e: Object) {
 		const { controls } = this.state;
@@ -59,8 +56,9 @@ export default class Form extends Component<any, any> {
 					item.label.changeIf.map(v => {
 						const control = this.state.controls.filter(o => o.name === v.field);
 						if (control.length > 0) {
-							if (item.control !== 'label' && control[0].value) item.label.text = control[0].value.toString().match(v.regEx) != null ? v.ifTrue : v.ifFalse;
-							if (item.control === 'label' && control[0].value) item.content = control[0].value.toString().match(v.regEx) != null ? v.ifTrue : v.ifFalse;
+							const checkValue = notEmpty(control[0].value) ? control[0].value.toString() : 'undefined';
+							if (item.control !== 'label') item.label.text = checkValue.match(v.regEx) !== null ? v.ifTrue : v.ifFalse;
+							if (item.control === 'label') item.content = checkValue.match(v.regEx) != null ? v.ifTrue : v.ifFalse;
 						}
 						return null;
 					});

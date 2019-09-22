@@ -60,43 +60,6 @@
 		@include textarea();
 		@include container-field-tabs();
 		@include fake-cont();
-		svg path {
-			fill: #d8d8df;
-		}
-		.ext {
-			fill: #fff;
-		}
-		.int {
-			fill: rgb(0, 132, 255);
-		}
-		.eye, .unit {
-			position: absolute;
-			right: 5px;
-			top: 37px;
-			@media screen and (min-width: 560px) {
-				top: 29px;
-			}
-		}
-		.eye {
-			cursor: pointer;
-			.show {
-				fill: none;
-			}
-		}
-		.unit {
-			height: 24px;
-			line-height: 24px;
-			width: 24px;
-			text-align: center;
-			font-size: 14px;
-			color: #333f48;
-			font-weight: 500;
-		}
-		.limit-char {
-			text-align: right;
-			position: absolute;
-			width: 100%;
-		}
 		@include errors();
 	}
 	@include plus-minus();

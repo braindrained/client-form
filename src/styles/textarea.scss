@@ -1,6 +1,6 @@
 @mixin textarea() {
   textarea {
-		border: 1px solid #d8d8df;
+		border: 1px solid #96a1b0;
 		padding: 15px 8px;
 		border-radius: 2px;
 		color: #333f48;
@@ -13,6 +13,6 @@
 		transition: border .5s ease;
 	}
   .textarea-tab {
-    border: 1px solid #d8d8df;
+    border: 1px solid #96a1b0;
   }
 }

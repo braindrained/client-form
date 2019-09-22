@@ -1,7 +1,10 @@
 @mixin input() {
   input {
     &[type='radio'], &[type='checkbox'] {
-      display: none;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
     }
     &[type="checkbox"] + label, &[type='radio'] + label {
       display: inline-block;
@@ -24,7 +27,7 @@
       white-space: nowrap;
     }
     &[type=email], &[type=number], &[type=password], &[type=tel], &[type=text] {
-      border: 1px solid #d8d8df;
+      border: 1px solid #96a1b0;
       padding: 15px 8px;
       border-radius: 2px;
       color: #333f48;
@@ -44,5 +47,40 @@
     &.input-error {
       border: 1px solid #e4002b;
     }
+  }
+  .ext {
+    fill: #fff;
+  }
+  .int {
+    fill: rgb(0, 132, 255);
+  }
+  .eye, .unit {
+    position: absolute;
+    right: 5px;
+    top: 37px;
+    @media screen and (min-width: 560px) {
+      top: 29px;
+    }
+  }
+  .eye {
+    right: 8px;
+    cursor: pointer;
+    .show {
+      fill: none;
+    }
+  }
+  .unit {
+    height: 24px;
+    line-height: 24px;
+    width: 24px;
+    text-align: center;
+    font-size: 14px;
+    color: #333f48;
+    font-weight: 500;
+  }
+  .limit-char {
+    text-align: right;
+    position: absolute;
+    width: 100%;
   }
 }
