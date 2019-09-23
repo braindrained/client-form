@@ -36,9 +36,7 @@
 	.container-field {
 		float: left;
 		position: relative;
-		width: -webkit-calc(100% - 20px);
-		width: -moz-calc(100% - 20px);
-		width: calc(100% - 20px);
+		@include calc(width, '100% - 20px');
 		min-height: 90px;
 		margin: 0px 10px;
 		@media screen and (min-width: 560px) {

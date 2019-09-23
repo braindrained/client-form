@@ -45,7 +45,7 @@ class App extends Component {
 						name: 'genericRadio',
 						label: { text: 'This is an almost real radio' },
 						options: [
-							{ value: undefined, label: '--', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
+							{ value: undefined, label: 'Maybe', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
 							{ value: true, label: 'Yes', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
 							{ value: false, label: 'No', style: { width: '100%', float: 'left' }, selectedClassName: 'selected-class' },
 						],

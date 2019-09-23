@@ -21,9 +21,7 @@
       &.selected {
         box-shadow: 0 2px 9px 0 #96a1b0;
         background-color: #ffffff;
-        width: -moz-calc(100% - 14px);
-        width: -webkit-calc(100% - 14px);
-        width: calc(100% - 14px);
+        @include calc(width, '100% - 14px');
         margin: 0 auto;
         text-decoration: none;
         padding: 0px 8px;
