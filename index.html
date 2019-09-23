@@ -11,15 +11,29 @@
 		<link rel="icon" href="favicon.ico" />
 		<style>
 			body, html {
-				padding: 0;
+				padding: 36px 0 0 0;
 				margin: 0;
+        font-family: Helvetica;
 			}
+      header {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #24292e;
+        z-index: 2147483638;
+        color: #fff;
+        text-transform: capitalize;
+        text-align: center;
+        height: 56px;
+        line-height: 56px;
+      }
 
 			* {
 			    box-sizing: border-box;
 			    margin: 0;
 			    padding: 0;
-			    font-family: 'Open Sans', sans-serif;
 			}
 			.tabTextArea {
 				width: -webkit-calc(100% - 20px);
@@ -268,6 +282,10 @@
   </head>
   <body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
-		<div id="client-form"></div>
+    <header>
+      This is the demo page of client-form
+    </header>
+		<main id="client-form"></main>
+    <footer></footer>
 	<script type="text/javascript" src="bundle.js"></script></body>
 </html>
