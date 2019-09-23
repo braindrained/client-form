@@ -63,11 +63,7 @@ export const optionsIf = (item: Object, controls: Array<Object>, el: Object) => 
 	try {
 		let options;
 		item.optionIf.map((v, i) => {
-			if (i === 0) {
-				options = v.options;
-			} else if (i !== 0 && item.optionIfCondition && item.optionIfCondition === 'or') {
-				options = v.options;
-			}
+			if (i === 0) options = v.options;
 			const control = controls.filter(o => o.name === v.field);
 			if (control.length > 0) {
 				if (el.target.name === v.field) item.value = '';

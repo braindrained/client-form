@@ -26,24 +26,12 @@ const CustomTextField = memo(props => {
 	startValue = onlyNumber === true && startValue !== undefined ? startValue.toString().replace(/\D/g, '') : startValue;
 	startValue = limitChar ? startValue.toString().substring(0, limitChar) : startValue;
 	const inputStyle = type === 'password' || unit !== undefined ? { paddingRight: 32 } : {};
-	const [stateVal, setValue] = useState(startValue);
-	const [editing, setEditing] = useState(false);
 	const [stateType, setType] = useState(type);
 
 	const onChange = (event: Object) => {
 		let newValue = limitChar ? event.target.value.toString().substring(0, limitChar) : event.target.value;
 		newValue = onlyNumber ? newValue.replace(/\D/g, '') : newValue;
-		setValue(newValue);
-		if (updateOnChange) onUpdate({ target: { name, value: newValue }});
-	}
-
-	const onBlur = (event: Object) => {
-		if (editing && value !== stateVal) onUpdate(event);
-		setEditing(false);
-	}
-
-	const onFocus = () => {
-		setEditing(true);
+		onUpdate({ target: { name, value: newValue }});
 	}
 
 	const togglePassword = () => {
@@ -61,7 +49,7 @@ const CustomTextField = memo(props => {
 			placeholder: camelToTitle(placeholder, name),
 			name,
 			id: name,
-			value: currency ? stateVal.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : stateVal,
+			value: currency ? startValue.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : startValue,
 			disabled,
 			onChange: e => onChange(e),
 			onFocus: () => onFocus(),

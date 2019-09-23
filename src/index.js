@@ -379,18 +379,21 @@ export default class Form extends Component<any, any> {
 							type: 'button',
 							disabled: disableButton
 						},
-						el('svg', { width: 24, height: 24, viewBox: '0 0 24 24', className: isSent !== false ? 'spin' : '' },
-							isSent ?
-								el('circle', { cx: 12, cy: 12, fill: 'none', stroke: '#fff', strokeWidth: 2, r: 11, strokeDasharray: '55,20' })
-								:
-								succeed === true ?
-									el('polyline', { fill: 'none', points: '4,12 9,18 21,6', style: { fill: 'none', stroke: '#fff', strokeWidth: 2 } })
+							el('svg', { width: 24, height: 24, viewBox: '0 0 24 24', className: isSent !== false ? 'spin' : '' },
+								isSent ?
+									el('circle', { cx: 12, cy: 12, fill: 'none', stroke: '#fff', strokeWidth: 2, r: 11, strokeDasharray: '55,20' })
 									:
-									succeed === false ?
-										el('path', { fill: '#fff', d: 'M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z' })
+									succeed === true ?
+										el('polyline', { fill: 'none', points: '4,12 9,18 21,6', style: { fill: 'none', stroke: '#fff', strokeWidth: 2 } })
 										:
-										null),
-						sendButtonValue)))
+										succeed === false ?
+											el('path', { fill: '#fff', d: 'M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z' })
+											:
+											null),
+								sendButtonValue
+						)
+					)
+				)
 				: null,
 			afterButton);
 	}
