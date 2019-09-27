@@ -46,7 +46,7 @@ class CustomListBox extends Component<any, any> {
 
 		const listbox = this.listbox.current;
 		const firstChildHeight = listbox.firstChild.offsetHeight;
-		const maxHeight = ((minEl ? minEl : options.length) * firstChildHeight) + 16;
+		const maxHeight = ((minEl ? minEl : options.length) * firstChildHeight) + 17;
 
 		if (maxHeight > (window.innerHeight - (top + height))) {
 			this.setState({ listboxStyle: { style: { maxHeight, top: `${-maxHeight + 22}px` } } })

@@ -1,6 +1,6 @@
 {
 	"name": "client-form",
-	"version": "0.9.0",
+	"version": "0.9.1",
 	"author": "Paolo Senese",
 	"description": "A react component to build forms",
 	"keywords": [
@@ -16,6 +16,8 @@
 		"url": "git://github.com/braindrained/client-form"
 	},
 	"peerDependencies": {
+		"react": "^16.9.0",
+		"react-dom": "^16.9.0",
 		"react-onclickout": "^2.0.8"
 	},
 	"devDependencies": {
@@ -34,6 +36,7 @@
 		"babel-polyfill": "^6.26.0",
 		"babel-preset-minify": "^0.5.1",
 		"babel-runtime": "^6.26.0",
+		"core-js": "^3.2.1",
 		"css-loader": "^3.2.0",
 		"enzyme": "^3.10.0",
 		"enzyme-adapter-react-16": "^1.14.0",
@@ -50,7 +53,9 @@
 		"identity-obj-proxy": "^3.0.0",
 		"jest": "^24.9.0",
 		"node-sass": "^4.12.0",
-		"postcss-loader": "^3.0.0",
+		"react": "^16.9.0",
+		"react-dom": "^16.9.0",
+		"react-onclickout": "^2.0.8",
 		"react-test-renderer": "^16.9.0",
 		"sass-loader": "^8.0.0",
 		"style-loader": "^1.0.0",
@@ -63,7 +68,7 @@
 	"scripts": {
 		"start": "webpack-dev-server --mode development",
 		"transpile": "babel src -d dist --copy-files",
-		"build": "webpack --mode production",
+		"build": "webpack --mode production --env=prod",
 		"prepublishOnly": "npm run transpile",
 		"deploy": "gh-pages -d examples/dist",
 		"publish-demo": "npm run build && npm run deploy",
@@ -71,10 +76,5 @@
 		"check-code": "eslint src && flow --show-all-errors",
 		"test": "jest",
 		"debug": "npm run build -- --progress --colors --profile --display-modules --display-reasons --display-error-details"
-	},
-	"dependencies": {
-		"react": "^16.9.0",
-		"react-dom": "^16.9.0",
-		"react-onclickout": "^2.0.8"
 	}
 }

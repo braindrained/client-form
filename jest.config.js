@@ -8,6 +8,6 @@ module.exports = {
 		'jsx'
 	],
 	moduleNameMapper: {
-		'\\.(css|less)$': 'identity-obj-proxy'
+		'\\.(css|scss)$': 'identity-obj-proxy'
 	}
 };

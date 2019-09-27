@@ -41,7 +41,6 @@ const CustomTextField = memo(props => {
 	return el('div', {
 		className: sumClasses(['container-field', className]),
 		style: Object.assign({}, style, type === 'hidden' ? { display: 'none' } : {}),
-		onBlur: e => onBlur(e),
 	},
 		el(FieldLabel, { label, name, isRequired, isValid }),
 		el('input', {
@@ -52,7 +51,6 @@ const CustomTextField = memo(props => {
 			value: currency ? startValue.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.') : startValue,
 			disabled,
 			onChange: e => onChange(e),
-			onFocus: () => onFocus(),
 			style: inputStyle,
 			autoComplete,
 			ref: innerRef,

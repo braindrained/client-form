@@ -6,40 +6,6 @@ import FieldError from './childrenComponents/FieldError';
 
 const el = createElement;
 
-const TextAreaField = forwardRef((props, ref) => (
-	el('div', {
-		key: item.name,
-		style: {
-			width: '100%',
-			float: 'left',
-			display: this.state.selected === i ? 'inline-block' : 'none',
-			position: 'relative'
-		}
-	},
-		el('div', {},
-			el('textarea', {
-				placeholder: value[i].placeholder,
-				className: sumClasses(['large-field', !isValid ? 'input-error' : 'textarea-tab']),
-				name: item.name,
-				id: item.name,
-				onChange: (e) => { this.onChange(e); },
-				value: item.value,
-				style: {
-					borderRadius: '0px 2px 2px',
-					height: 200,
-					resize: 'none',
-				},
-				rows: 2,
-				cols: 20,
-				ref: this[item.name]
-			})
-		),
-		limitChar ? el('div', {
-			className: 'limit-char noselect'
-		}, `${item.value.length}/${limitChar}`) : null
-	)
-));
-
 class CustomTextareaWithTab extends Component<any, any> {
 
 	constructor(props: Object) {
