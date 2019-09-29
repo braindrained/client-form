@@ -6,6 +6,9 @@
       height: 1px;
       opacity: 0;
     }
+    &[type='radio']:disabled + label {
+      opacity: 0.5;
+    }
     &[type="checkbox"] + label, &[type='radio'] + label {
       display: inline-block;
       cursor: pointer;

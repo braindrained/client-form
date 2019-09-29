@@ -35,7 +35,6 @@ const CustomCheckBox = memo(props => {
 		y: 4 });
 	const labelId = `ck_label_${name}`;
 
-
 	const onChange = (event: Object) => {
 		onUpdate({ target: { name, value: event.target.checked } });
 		innerRef.current.labels[0].blur();
@@ -49,7 +48,6 @@ const CustomCheckBox = memo(props => {
 			case 39:
 				e.preventDefault();
 				onUpdate({ target: { name, value: !value } });
-				innerRef.current.labels[0].blur();
 				break;
 			default:
 				break;
@@ -63,6 +61,7 @@ const CustomCheckBox = memo(props => {
 				name,
 				id: name,
 				checked: value,
+				tabIndex: -1,
 				onChange: e => onChange(e),
 				'aria-labelledby': labelId
 			}

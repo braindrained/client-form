@@ -16,9 +16,11 @@ console.log('isDev', isDev);
 			path: path.join(__dirname, "examples/dist"),
 			filename: "bundle.js"
 		} : {
-			path: path.join(__dirname, './build'),
+			path: path.join(__dirname, "examples/dist"),
+			filename: "bundle.js"
+			/*path: path.join(__dirname, './build'),
 			filename: 'clientForm.js',
-			library: 'clientForm',
+			library: 'clientForm',*/
 		},
 		module: {
 			rules: [
@@ -51,6 +53,7 @@ console.log('isDev', isDev);
 			]
 			:
 			[
+				htmlWebpackPlugin,
 				new webpack.LoaderOptionsPlugin({
 					minimize: true,
 					debug: false,
@@ -60,8 +63,8 @@ console.log('isDev', isDev);
 			extensions: [".js", ".jsx"]
 		},
 		externals: isDev ? {} : {
-			react: 'React',
-			'react-dom' : 'ReactDOM'
+			/*react: 'React',
+			'react-dom' : 'ReactDOM'*/
 		},
 		devServer: {
 			host: '0.0.0.0',

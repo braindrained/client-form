@@ -40,6 +40,7 @@ const CustomRadio = memo(props => {
 			let checkValue = getValue(value);
 			let newIndex = 0;
 			let newValue = value;
+			let disabled = false;
 
 			switch (keyCode) {
 				case 13:
@@ -50,6 +51,8 @@ const CustomRadio = memo(props => {
 				case 38:
 					newIndex = currentIndex === 0 ? options.length - 1 : currentIndex - 1;
 					newValue = options[newIndex].value;
+					disabled = options[newIndex].disabled;
+					if (disabled) break;
 					checkValue = getValue(newValue);
 					onUpdate({ target: { name, value: checkValue } });
 					break;
@@ -57,6 +60,8 @@ const CustomRadio = memo(props => {
 				case 40:
 					newIndex = currentIndex === options.length - 1 ? 0 : currentIndex + 1;
 					newValue = options[newIndex].value;
+					disabled = options[newIndex].disabled;
+					if (disabled) break;
 					checkValue = getValue(newValue);
 					onUpdate({ target: { name, value: checkValue } });
 					break;
@@ -99,6 +104,7 @@ const CustomRadio = memo(props => {
 						disabled: item.disabled === true,
 						checked: item.value === value,
 						onChange: e => onChange(e),
+						tabIndex: -1,
 						'aria-labelledby': `label_${name}_${item.value}`,
 						...(item.value === value ? { 'aria-checked': true } : { 'aria-checked': false })
 					}),

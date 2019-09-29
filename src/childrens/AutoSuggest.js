@@ -61,10 +61,8 @@ class AutoSuggest extends Component {
 			}
 		} else if (value === '') {
 			this.setState({ value: {} });
-			// onUpdate({ target: { name: name, value: {} } });
 		} else {
 			this.setState({ value: { displayValue: value } });
-			// onUpdate({ target: { name: name, value: {} } });
 		}
 	}
 

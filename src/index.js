@@ -24,7 +24,7 @@ export default class Form extends Component<any, any> {
 
 	constructor(props: Object) {
 		super(props);
-		const { controls } = this.props;
+		const { controls, sendButton } = this.props;
 
 		const updatedControls = controls.map(item => {
 			item.isValid = true;
@@ -40,7 +40,7 @@ export default class Form extends Component<any, any> {
 			controls: updatedControls,
 			succeed: null,
 			isSent: null,
-			disableButton: false
+			disableButton: sendButton.disabled
 		};
 	}
 
@@ -235,7 +235,7 @@ export default class Form extends Component<any, any> {
 		const { controls, succeed, isSent, message, disableButton } = this.state;
 		const sendButtonClass = sumClasses([
 			succeed !== null ? (succeed ? 'btn btn-succeed' : 'btn btn-red') : (isSent ? 'btn btn-sent' : 'btn'),
-			sendButton && sendButton.disabled ? 'btn-grey' : ''
+			sendButton && sendButton.disabled ? 'btn-disabled' : ''
 		]);
 		const { hideIfSent } = sendButton !== undefined ? sendButton : {};
 		const sendButtonValue = sendButton ? (succeed === null ? (hideIfSent && isSent ? null : sendButton.text) : message) : null;

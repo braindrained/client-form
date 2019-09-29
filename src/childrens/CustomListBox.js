@@ -41,17 +41,34 @@ class CustomListBox extends Component<any, any> {
 	}
 
 	adjustHeight() {
-		const { innerRef: { current: { offsetParent } }, minEl, options, name } = this.props;
+		const { innerRef: { current: { offsetParent } }, minEl, options, name, innerRef } = this.props;
 		const { top, height } = offsetParent.getBoundingClientRect();
 
 		const listbox = this.listbox.current;
 		const firstChildHeight = listbox.firstChild.offsetHeight;
-		const maxHeight = ((minEl ? minEl : options.length) * firstChildHeight) + 17;
+		const maxHeight = ((minEl ? minEl : options.length) * firstChildHeight) + 18;
 
 		if (maxHeight > (window.innerHeight - (top + height))) {
-			this.setState({ listboxStyle: { style: { maxHeight, top: `${-maxHeight + 22}px` } } })
+			this.setState({
+				listboxStyle: {
+					style: {
+						maxHeight,
+						top: `${-maxHeight + 25}px`,
+						boxShadow: 'unset',
+						borderRadius: '3px 3px 0 0'
+					}
+				}
+			})
 		} else {
-			this.setState({ listboxStyle: { style: { maxHeight } } })
+			this.setState({
+				listboxStyle: {
+					style: {
+						maxHeight,
+						top: `${innerRef.current.offsetHeight + 23}px`,
+						borderRadius: '0 0 3px 3px'
+					}
+				}
+			})
 		}
 	}
 
@@ -65,8 +82,9 @@ class CustomListBox extends Component<any, any> {
     let currentItem = null;
     const { name, onUpdate } = this.props;
     const { options, currentSelection, currentIndex, listClassName } = this.state;
+		const handledKeys = [13, 27, 32, 35, 36, 38, 40];
 
-		if (keyCode !== 9) {
+		if (handledKeys.indexOf(keyCode) !== -1) {
 			e.preventDefault();
 
 			if (listClassName === 'hidden') {
@@ -103,14 +121,24 @@ class CustomListBox extends Component<any, any> {
 					this.setState({ currentIndex: 0 });
 					break;
 				case 38:
-					if (currentIndex === 0) break;
+					if (currentIndex === 0) {
+						currentItem = options[options.length - 1];
+						this.scrollOnFocus(currentItem, options.length - 1);
+						this.setState({ currentIndex: options.length - 1 });
+						break;
+					}
 
 					currentItem = options[currentIndex - 1];
 					this.scrollOnFocus(currentItem, currentIndex - 1);
 					this.setState({ currentIndex: currentIndex - 1 });
 					break;
 				case 40:
-					if (currentIndex === options.length - 1) break;
+					if (currentIndex === options.length - 1) {
+						currentItem = options[0];
+						this.scrollOnFocus(currentItem, 0);
+						this.setState({ currentIndex: 0 });
+						break;
+					}
 
 					currentItem = options[currentIndex + 1];
 					this.scrollOnFocus(currentItem, currentIndex + 1);
@@ -188,7 +216,7 @@ class CustomListBox extends Component<any, any> {
 						'aria-haspopup': 'listbox',
 						'aria-labelledby': sumClasses([buttonId, labelId]),
 						id: buttonId,
-						className: !isValid ? 'input-error' : '',
+						className: sumClasses([!isValid ? 'input-error' : '', value === this.props.default ? 'input-default' : '']),
 						disabled,
 						...addButtonProps,
 						...(disabled ? ariaDisabled : {})
@@ -201,10 +229,10 @@ class CustomListBox extends Component<any, any> {
 					el('ul', {
 						ref: this['listbox'],
 						id: listId,
-						tabIndex: '-1',
+						tabIndex: -1,
 						role: 'listbox',
 						'aria-labelledby': labelId,
-						className: sumClasses(['box-shadow', listClassName]),
+						className: sumClasses(['listbox-box-shadow', listClassName]),
             ...(options.length > 0 ? { 'aria-activedescendant': `exp_elem_${name}_${options[currentIndex].value}` } : {}),
 						...listboxStyle
 					},
