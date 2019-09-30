@@ -9,9 +9,9 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
 
 const buildConfig = args => {
 	const isDev = args !== 'prod';
-console.log('isDev', isDev);
+
 	return {
-		entry: isDev ? path.join(__dirname, "examples/src/index.js") : path.join(__dirname, "src/index.js"),
+		entry: isDev ? path.join(__dirname, "examples/src/index.js") : path.join(__dirname, "examples/src/index.js"),
 		output: isDev ? {
 			path: path.join(__dirname, "examples/dist"),
 			filename: "bundle.js"

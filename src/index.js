@@ -40,7 +40,7 @@ export default class Form extends Component<any, any> {
 			controls: updatedControls,
 			succeed: null,
 			isSent: null,
-			disableButton: sendButton.disabled
+			disableButton: sendButton && sendButton.disabled
 		};
 	}
 
