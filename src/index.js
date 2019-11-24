@@ -242,131 +242,55 @@ export default class Form extends Component<any, any> {
 
 		return el(View, { className: sumClasses(['client-form', formClassName]), style: formStyle },
 			controls.map(item => {
-				const {
-					control, name, component, type, onlyNumber, placeholder, label,
-					value, isRequired, isValid, disabled, errorMessage, className, style,
-					updateOnChange, limitChar, currency, hideRadio,
-					textBefore, tabs, valueAsObject, text, firstRange,
-					secondRange, rangesStyle, overlayBg, content, unit, customSvg,
-					autoComplete, autoSuggestFetch, getValue, cacheResults, timeOut, hide, options, minEl
-				} = item;
+				const { control, name, component, hide } = item;
 
-				/* eslint-disable */
+				if (hide) return (null);
+				const itemProps = Object.assign({}, item, {
+					onUpdate: (e) => this.onUpdate(e),
+					ref: this[name]
+				});
+				let loadComponent = null;
 				switch (control) {
 					default:
-						return null;
+						break;
 					case 'external':
-						if (hide) return (null);
-						const itemProps = Object.assign({}, item, {
-							onUpdate: (e, h) => this.onUpdate(e, h),
-							ref: this[name]
-						});
-						return el(component, itemProps);
+						loadComponent = component;
+						break;
 					case 'autosuggest':
-						if (hide) return (null);
-						return el(AutoSuggest, {
-							key: item.name, name, label, value,
-							type, onlyNumber, placeholder,
-							onUpdate: (e, h) => { this.onUpdate(e, h); },
-							isRequired, isValid, disabled,
-							errorMessage, className, style,
-							updateOnChange, limitChar, currency, unit,
-							autoComplete, ref: this[name],
-							autoSuggestFetch, getValue, cacheResults, timeOut
-						});
+						loadComponent = AutoSuggest;
+						break;
 					case 'text':
-						if (hide) return (null);
-						return el(CustomTextField, {
-							key: item.name, name, label, value,
-							type, onlyNumber, placeholder,
-							onUpdate: (e, h) => { this.onUpdate(e, h); },
-							isRequired, isValid, disabled,
-							errorMessage, className, style,
-							updateOnChange, limitChar, currency, unit,
-							autoComplete, ref: this[name]
-						});
+						loadComponent = CustomTextField;
+						break;
 					case 'plusMinus':
-						if (hide) return (null);
-						return el(CustomPlusMinus, {
-								key: item.name, name, label, value: parseFloat(item.value),
-								type, onlyNumber, placeholder,
-								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								isRequired, isValid, disabled,
-								errorMessage, className, style,
-								updateOnChange, ref: this[name]
-						});
+						loadComponent = CustomPlusMinus;
+						break;
 					case 'textArea':
-						if (hide) return (null);
-						return el(CustomTextarea, {
-								key: item.name, name, label, value,
-								placeholder,
-								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								isRequired, isValid, disabled,
-								errorMessage, className, style,
-								updateOnChange, limitChar, ref: this[name]
-						});
+						loadComponent = CustomTextarea;
+						break;
 					case 'select':
-						if (hide) return (null);
-						return el(CustomSelect, {
-								key: item.name, name, label, value,
-								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								isRequired, isValid, disabled,
-								errorMessage, className, style,
-								options, default: item.default, ref: this[name]
-						});
+						loadComponent = CustomSelect;
+						break;
 					case 'listbox':
-						if (hide) return (null);
-						return el(CustomListBox, {
-								key: item.name, name, label, value,
-								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								isRequired, isValid, disabled,
-								errorMessage, className, style,
-								options, default: item.default, ref: this[name],
-								minEl
-						});
+						loadComponent = CustomListBox;
+						break;
 					case 'check':
-						if (hide) return (null);
-						return el(CustomCheckBox, {
-								key: item.name, name, label, value,
-								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								className, style,
-								textBefore, customSvg,
-								default: item.default, ref: this[name]
-						});
+						loadComponent = CustomCheckBox;
+						break;
 					case 'radio':
-						if (hide) return (null);
-						return el(CustomRadio, {
-								key: item.name, name, label, value,
-								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								className, style,
-								options, hideRadio, errorMessage, isRequired, isValid,
-								default: item.default, ref: this[name]
-						});
+						loadComponent = CustomRadio;
+						break;
 					case 'label':
-						if (hide) return (null);
-						return el(CustomLabel, {
-								key: `${Math.random()}`, content, className, style
-						});
+						loadComponent = CustomLabel;
+						break;
 					case 'tabTextArea':
-						if (hide) return (null);
-						return el(CustomTextAreaTab, {
-								key: item.name, name, value, tabs,
-								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								isRequired, isValid, disabled,
-								errorMessage, className, style,
-								valueAsObject, limitChar, label, ref: this[name]
-						});
+						loadComponent = CustomTextAreaTab;
+						break;
 					case 'fakeselect':
-						if (hide) return (null);
-						return el(FakeSelect, {
-								key: item.name, name, label, value, text,
-								onUpdate: (e, h) => { this.onUpdate(e, h); },
-								className, style,
-								firstRange, secondRange,
-								rangesStyle, overlayBg, ref: this[name]
-						});
+						loadComponent = FakeSelect;
+						break;
 				}
-				/* eslint-enable */
+				return el(loadComponent, itemProps);
 			}),
 			beforeButton,
 			sendButton ?
