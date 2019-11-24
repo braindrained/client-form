@@ -1,6 +1,6 @@
 import React, { Component, createElement, Fragment, forwardRef } from 'react';
-import FieldLabel from './childrenComponents/FieldLabel';
-import FieldError from './childrenComponents/FieldError';
+import FieldLabel from './common/FieldLabel';
+import FieldError from './common/FieldError';
 import { camelToTitle, sumClasses } from '../helpers/utils';
 
 const el = createElement;

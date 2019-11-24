@@ -1,6 +1,6 @@
 import { Component, createElement, Fragment, forwardRef } from 'react';
-import FieldLabel from '../../src/childrens/childrenComponents/FieldLabel';
-import FieldError from '../../src/childrens/childrenComponents/FieldError';
+import FieldLabel from '../../src/childrens/common/FieldLabel';
+import FieldError from '../../src/childrens/common/FieldError';
 
 const el = createElement;
 

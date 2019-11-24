@@ -1,7 +1,7 @@
 // @flow
 import { Component, createElement, forwardRef, useState, memo } from 'react';
-import FieldLabel from './childrenComponents/FieldLabel';
-import FieldError from './childrenComponents/FieldError';
+import FieldLabel from './common/FieldLabel';
+import FieldError from './common/FieldError';
 import { sumClasses } from '../helpers/utils';
 
 const el = createElement;

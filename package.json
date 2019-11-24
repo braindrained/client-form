@@ -1,6 +1,6 @@
 {
 	"name": "client-form",
-	"version": "0.9.3",
+	"version": "0.9.4",
 	"author": "Paolo Senese",
 	"description": "A react component to build forms",
 	"keywords": [
@@ -76,5 +76,6 @@
 		"check-code": "eslint src && flow --show-all-errors",
 		"test": "jest",
 		"debug": "npm run build -- --progress --colors --profile --display-modules --display-reasons --display-error-details"
-	}
+	},
+	"dependencies": {}
 }

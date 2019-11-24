@@ -1,28 +1,12 @@
 // @flow
 import { Component, createElement, forwardRef, memo, useState } from 'react';
-import FieldLabel from './childrenComponents/FieldLabel';
-import FieldError from './childrenComponents/FieldError';
+import FieldLabel from './common/FieldLabel';
+import FieldError from './common/FieldError';
 import { sumClasses } from '../helpers/utils';
 
 const el = createElement;
-const areEqual = (prevProps, nextProps) => {
-	try {
-		if (
-			prevProps.isValid !== nextProps.isValid ||
-			prevProps.value !== nextProps.value ||
-			prevProps.addSelectProps !== nextProps.addSelectProps ||
-			prevProps.options !== nextProps.options ||
-			(prevProps.label && prevProps.label.text !== nextProps.label.text)
-		) {
-			return false;
-		}
-	} catch (e) {
-		return true;
-	}
-	return true;
-};
 
-const CustomSelect = memo(props => {
+const Select = memo(props => {
 	const { className, style, label, isRequired, errorMessage, name, value, isValid, disabled, innerRef, onUpdate, addSelectProps, options } = props;
 	const labelId = `lb_select_${name}`;
 	const [selectProps, setSelectProps] = useState(null);
@@ -61,8 +45,14 @@ const CustomSelect = memo(props => {
 				el('rect', { fill: '#fff', width: 24, height: 24, x: 0, y: 0 }),
 				el('polyline', { fill: 'none', points: '6,9 12,15 18,9', style: { fill: 'none', stroke: '#96a1b0', strokeWidth: 1 } }))),
 		el(FieldError, { isValid, errorMessage }));
-}, areEqual);
+	}, (prevProps, nextProps) => 
+		prevProps.isValid !== nextProps.isValid ||
+		prevProps.value !== nextProps.value ||
+		prevProps.addSelectProps !== nextProps.addSelectProps ||
+		prevProps.options !== nextProps.options ||
+		(prevProps.label && prevProps.label.text !== nextProps.label.text) ? false : true
+);
 
 export default forwardRef((props, ref) =>
-	el(CustomSelect, { innerRef: ref, ...props })
+	el(Select, { innerRef: ref, ...props })
 );

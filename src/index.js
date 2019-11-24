@@ -2,17 +2,17 @@
 import { Component, createElement, createRef } from 'react';
 import ClickOutHandler from 'react-onclickout';
 
-import CustomTextField from './childrens/CustomTextField';
-import CustomTextarea from './childrens/CustomTextarea';
+import Input from './childrens/input';
+import Textarea from './childrens/Textarea';
 import CustomCheckBox from './childrens/CustomCheckBox';
-import CustomSelect from './childrens/CustomSelect';
+import Select from './childrens/Select';
 import CustomRadio from './childrens/CustomRadio';
 import CustomLabel from './childrens/CustomLabel';
-import CustomTextAreaTab from './childrens/CustomTextAreaTab';
+import TextareaWithTab from './childrens/TextareaWithTab';
 import CustomPlusMinus from './childrens/CustomPlusMinus';
-import FakeSelect from './childrens/FakeSelect';
+import FakeSelect from './childrens/fakeselect';
 import AutoSuggest from './childrens/AutoSuggest';
-import CustomListBox from './childrens/CustomListBox';
+import ListBox from './childrens/listbox';
 
 import { sumClasses, hideField, optionsIf, output, findFirstRequired, valuesOf, merge, notEmpty } from './helpers/utils';
 import './styles/index.scss';
@@ -276,7 +276,7 @@ export default class Form extends Component<any, any> {
 						});
 					case 'text':
 						if (hide) return (null);
-						return el(CustomTextField, {
+						return el(Input, {
 							key: item.name, name, label, value,
 							type, onlyNumber, placeholder,
 							onUpdate: (e, h) => { this.onUpdate(e, h); },
@@ -297,7 +297,7 @@ export default class Form extends Component<any, any> {
 						});
 					case 'textArea':
 						if (hide) return (null);
-						return el(CustomTextarea, {
+						return el(Textarea, {
 								key: item.name, name, label, value,
 								placeholder,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
@@ -307,7 +307,7 @@ export default class Form extends Component<any, any> {
 						});
 					case 'select':
 						if (hide) return (null);
-						return el(CustomSelect, {
+						return el(Select, {
 								key: item.name, name, label, value,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								isRequired, isValid, disabled,
@@ -316,7 +316,7 @@ export default class Form extends Component<any, any> {
 						});
 					case 'listbox':
 						if (hide) return (null);
-						return el(CustomListBox, {
+						return el(ListBox, {
 								key: item.name, name, label, value,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								isRequired, isValid, disabled,
@@ -349,7 +349,7 @@ export default class Form extends Component<any, any> {
 						});
 					case 'tabTextArea':
 						if (hide) return (null);
-						return el(CustomTextAreaTab, {
+						return el(TextareaWithTab, {
 								key: item.name, name, value, tabs,
 								onUpdate: (e, h) => { this.onUpdate(e, h); },
 								isRequired, isValid, disabled,
