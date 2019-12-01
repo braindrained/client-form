@@ -2,27 +2,15 @@
 import { Component, createElement, createRef } from 'react';
 import ClickOutHandler from 'react-onclickout';
 
-import CustomTextField from './childrens/CustomTextField';
-import CustomTextarea from './childrens/CustomTextarea';
-import CustomCheckBox from './childrens/CustomCheckBox';
-import CustomSelect from './childrens/CustomSelect';
-import CustomRadio from './childrens/CustomRadio';
-import CustomLabel from './childrens/CustomLabel';
-import CustomTextAreaTab from './childrens/CustomTextAreaTab';
-import CustomPlusMinus from './childrens/CustomPlusMinus';
-import FakeSelect from './childrens/FakeSelect';
-import AutoSuggest from './childrens/AutoSuggest';
-import CustomListBox from './childrens/CustomListBox';
-
 import { sumClasses, hideField, optionsIf, output, findFirstRequired, valuesOf, merge, notEmpty } from './helpers/utils';
+import switchComponent from './helpers/switchComponents';
 import './styles/index.scss';
 
 const el = createElement;
-const View = (props: Object) => el('div', props);
 
-export default class Form extends Component<any, any> {
+export default class Form extends Component {
 
-	constructor(props: Object) {
+	constructor(props) {
 		super(props);
 		const { controls, sendButton } = this.props;
 
@@ -44,7 +32,7 @@ export default class Form extends Component<any, any> {
 		};
 	}
 
-	async onUpdate(e: Object) {
+	async onUpdate(e) {
 		const { controls } = this.state;
 
 		let updatedControls = controls.map(item => {
@@ -240,61 +228,21 @@ export default class Form extends Component<any, any> {
 		const { hideIfSent } = sendButton !== undefined ? sendButton : {};
 		const sendButtonValue = sendButton ? (succeed === null ? (hideIfSent && isSent ? null : sendButton.text) : message) : null;
 
-		return el(View, { className: sumClasses(['client-form', formClassName]), style: formStyle },
+		return el('div', { className: sumClasses(['client-form', formClassName]), style: formStyle },
 			controls.map(item => {
 				const { control, name, component, hide } = item;
 
 				if (hide) return (null);
-				const itemProps = Object.assign({}, item, {
+				return el(switchComponent(control, component), {
+					...item,
 					onUpdate: (e) => this.onUpdate(e),
-					ref: this[name]
+					ref: this[name],
+					key: name || Math.random()
 				});
-				let loadComponent = null;
-				switch (control) {
-					default:
-						break;
-					case 'external':
-						loadComponent = component;
-						break;
-					case 'autosuggest':
-						loadComponent = AutoSuggest;
-						break;
-					case 'text':
-						loadComponent = CustomTextField;
-						break;
-					case 'plusMinus':
-						loadComponent = CustomPlusMinus;
-						break;
-					case 'textArea':
-						loadComponent = CustomTextarea;
-						break;
-					case 'select':
-						loadComponent = CustomSelect;
-						break;
-					case 'listbox':
-						loadComponent = CustomListBox;
-						break;
-					case 'check':
-						loadComponent = CustomCheckBox;
-						break;
-					case 'radio':
-						loadComponent = CustomRadio;
-						break;
-					case 'label':
-						loadComponent = CustomLabel;
-						break;
-					case 'tabTextArea':
-						loadComponent = CustomTextAreaTab;
-						break;
-					case 'fakeselect':
-						loadComponent = FakeSelect;
-						break;
-				}
-				return el(loadComponent, itemProps);
 			}),
 			beforeButton,
 			sendButton ?
-				el(View, { className: 'button-container', style: buttonContainerStyle },
+				el('div', { className: 'button-container', style: buttonContainerStyle },
 					el(ClickOutHandler, { onClickOut: () => { this.resetButton(); } },
 						el('button', {
 							className: sendButtonClass,

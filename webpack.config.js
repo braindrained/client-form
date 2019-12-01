@@ -18,9 +18,6 @@ const buildConfig = args => {
 		} : {
 			path: path.join(__dirname, "examples/dist"),
 			filename: "bundle.js"
-			/*path: path.join(__dirname, './build'),
-			filename: 'clientForm.js',
-			library: 'clientForm',*/
 		},
 		module: {
 			rules: [

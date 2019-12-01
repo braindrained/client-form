@@ -179,7 +179,7 @@ class App extends Component {
 					limitChar: 3,
 					value: 4
 				},
-				/*{
+				{
 					control: 'fakeselect',
 					name: 'priceRange',
 					text: 'Select something...',
@@ -192,7 +192,7 @@ class App extends Component {
 					firstRange: priceRanges,
 					secondRange: priceRanges,
 					overlayBg: '#fff'
-				},*/
+				},
 				{
 					control: 'text',
 					type: 'text',

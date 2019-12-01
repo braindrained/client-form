@@ -1,6 +1,5 @@
 import React, { createRef, forwardRef, createElement } from 'react';
-import FieldLabel from '../../src/childrens/childrenComponents/FieldLabel';
-import FieldError from '../../src/childrens/childrenComponents/FieldError';
+import FieldLabel from '../../src/childrens/common/FieldLabel';
 import InputField from './InputField';
 
 const el = createElement;
